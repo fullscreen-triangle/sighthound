@@ -1,0 +1,850 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gpxdata="http://www.cluetrust.com/XML/GPXDATA/1/0" xmlns="http://www.topografix.com/GPX/1/0" xsi:schemaLocation="http://www.topografix.com/GPX/1/0 http://www.topografix.com/GPX/1/0/gpx.xsd http://www.cluetrust.com/XML/GPXDATA/1/0 http://www.cluetrust.com/Schemas/gpxdata10.xsd" creator="Coros Wearables">
+  <metadata>
+    <time>2022-04-27T15:44:53Z</time>
+    <link href="https://www.coros.com">COROS</link>
+  </metadata>
+  <trk>
+    <name>Puchheim Run</name>
+    <type>running</type>
+    <trkseg>
+      <trkpt lat="48.1831170" lon="11.3568550">
+        <ele>512</ele>
+        <time>2022-04-27T15:44:55Z</time>
+        <extensions>
+          <heartrate>120</heartrate>
+          <distance>0</distance>
+          <cadence>94</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1831285" lon="11.3568600">
+        <ele>512</ele>
+        <time>2022-04-27T15:44:56Z</time>
+        <extensions>
+          <heartrate>120</heartrate>
+          <distance>0</distance>
+          <cadence>94</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1831400" lon="11.3568650">
+        <ele>512</ele>
+        <time>2022-04-27T15:44:57Z</time>
+        <extensions>
+          <heartrate>119</heartrate>
+          <distance>0</distance>
+          <cadence>94</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1831620" lon="11.3568640">
+        <ele>512</ele>
+        <time>2022-04-27T15:44:58Z</time>
+        <extensions>
+          <heartrate>119</heartrate>
+          <distance>6</distance>
+          <cadence>94</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1831840" lon="11.3568630">
+        <ele>512</ele>
+        <time>2022-04-27T15:44:59Z</time>
+        <extensions>
+          <heartrate>118</heartrate>
+          <distance>12</distance>
+          <cadence>94</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1832245" lon="11.3568495">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:00Z</time>
+        <extensions>
+          <heartrate>118</heartrate>
+          <distance>16</distance>
+          <cadence>94</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1832650" lon="11.3568360">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:01Z</time>
+        <extensions>
+          <heartrate>118</heartrate>
+          <distance>21</distance>
+          <cadence>94</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1833025" lon="11.3568075">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:02Z</time>
+        <extensions>
+          <heartrate>120</heartrate>
+          <distance>26</distance>
+          <cadence>95</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1833400" lon="11.3567790">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:03Z</time>
+        <extensions>
+          <heartrate>120</heartrate>
+          <distance>30</distance>
+          <cadence>95</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1833725" lon="11.3567390">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:04Z</time>
+        <extensions>
+          <heartrate>122</heartrate>
+          <distance>35</distance>
+          <cadence>96</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1834050" lon="11.3566990">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:05Z</time>
+        <extensions>
+          <heartrate>122</heartrate>
+          <distance>40</distance>
+          <cadence>98</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1834325" lon="11.3566440">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:06Z</time>
+        <extensions>
+          <heartrate>124</heartrate>
+          <distance>46</distance>
+          <cadence>99</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1834600" lon="11.3565890">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:07Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>51</distance>
+          <cadence>100</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1834780" lon="11.3565200">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:08Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>56</distance>
+          <cadence>100</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1834960" lon="11.3564510">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:09Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>62</distance>
+          <cadence>100</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1835020" lon="11.3563805">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:10Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>67</distance>
+          <cadence>99</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1835080" lon="11.3563100">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:11Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>72</distance>
+          <cadence>97</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1835040" lon="11.3562450">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:12Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>77</distance>
+          <cadence>97</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1835000" lon="11.3561800">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:13Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>82</distance>
+          <cadence>98</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1834840" lon="11.3561170">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:14Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>87</distance>
+          <cadence>97</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1834680" lon="11.3560540">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:15Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>92</distance>
+          <cadence>97</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1834395" lon="11.3559990">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:16Z</time>
+        <extensions>
+          <heartrate>126</heartrate>
+          <distance>97</distance>
+          <cadence>96</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1834110" lon="11.3559440">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:17Z</time>
+        <extensions>
+          <heartrate>126</heartrate>
+          <distance>102</distance>
+          <cadence>95</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1833765" lon="11.3559035">
+        <ele>513</ele>
+        <time>2022-04-27T15:45:18Z</time>
+        <extensions>
+          <heartrate>126</heartrate>
+          <distance>106</distance>
+          <cadence>95</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1833420" lon="11.3558630">
+        <ele>513</ele>
+        <time>2022-04-27T15:45:19Z</time>
+        <extensions>
+          <heartrate>125</heartrate>
+          <distance>111</distance>
+          <cadence>95</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1833080" lon="11.3558345">
+        <ele>513</ele>
+        <time>2022-04-27T15:45:20Z</time>
+        <extensions>
+          <heartrate>127</heartrate>
+          <distance>115</distance>
+          <cadence>94</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1832740" lon="11.3558060">
+        <ele>513</ele>
+        <time>2022-04-27T15:45:21Z</time>
+        <extensions>
+          <heartrate>129</heartrate>
+          <distance>119</distance>
+          <cadence>93</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1832425" lon="11.3557830">
+        <ele>513</ele>
+        <time>2022-04-27T15:45:22Z</time>
+        <extensions>
+          <heartrate>131</heartrate>
+          <distance>123</distance>
+          <cadence>92</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1832110" lon="11.3557600">
+        <ele>513</ele>
+        <time>2022-04-27T15:45:23Z</time>
+        <extensions>
+          <heartrate>131</heartrate>
+          <distance>127</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1831780" lon="11.3557350">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:24Z</time>
+        <extensions>
+          <heartrate>133</heartrate>
+          <distance>132</distance>
+          <cadence>92</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1831450" lon="11.3557100">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:25Z</time>
+        <extensions>
+          <heartrate>133</heartrate>
+          <distance>136</distance>
+          <cadence>92</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1831095" lon="11.3556780">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:26Z</time>
+        <extensions>
+          <heartrate>134</heartrate>
+          <distance>141</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1830740" lon="11.3556460">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:27Z</time>
+        <extensions>
+          <heartrate>134</heartrate>
+          <distance>146</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1830360" lon="11.3556080">
+        <ele>512</ele>
+        <time>2022-04-27T15:45:28Z</time>
+        <extensions>
+          <heartrate>134</heartrate>
+          <distance>151</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1829980" lon="11.3555700">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:29Z</time>
+        <extensions>
+          <heartrate>134</heartrate>
+          <distance>156</distance>
+          <cadence>92</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1829595" lon="11.3555260">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:30Z</time>
+        <extensions>
+          <heartrate>134</heartrate>
+          <distance>162</distance>
+          <cadence>92</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1829210" lon="11.3554820">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:31Z</time>
+        <extensions>
+          <heartrate>134</heartrate>
+          <distance>167</distance>
+          <cadence>92</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1828830" lon="11.3554355">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:32Z</time>
+        <extensions>
+          <heartrate>136</heartrate>
+          <distance>172</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1828450" lon="11.3553890">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:33Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>178</distance>
+          <cadence>90</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1828075" lon="11.3553460">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:34Z</time>
+        <extensions>
+          <heartrate>139</heartrate>
+          <distance>183</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1827700" lon="11.3553030">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:35Z</time>
+        <extensions>
+          <heartrate>139</heartrate>
+          <distance>188</distance>
+          <cadence>92</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1827340" lon="11.3552680">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:36Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>192</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1826980" lon="11.3552330">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:37Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>197</distance>
+          <cadence>90</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1826655" lon="11.3552090">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:38Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>200</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1826330" lon="11.3551850">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:39Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>204</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1826035" lon="11.3551740">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:40Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>208</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1825740" lon="11.3551630">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:41Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>211</distance>
+          <cadence>92</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1825475" lon="11.3551620">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:42Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>214</distance>
+          <cadence>90</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1825210" lon="11.3551610">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:43Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>216</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1824965" lon="11.3551730">
+        <ele>510</ele>
+        <time>2022-04-27T15:45:44Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>220</distance>
+          <cadence>90</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1824720" lon="11.3551850">
+        <ele>510</ele>
+        <time>2022-04-27T15:45:45Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>223</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1824450" lon="11.3552150">
+        <ele>510</ele>
+        <time>2022-04-27T15:45:46Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>227</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1824180" lon="11.3552450">
+        <ele>510</ele>
+        <time>2022-04-27T15:45:47Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>231</distance>
+          <cadence>91</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823900" lon="11.3552890">
+        <ele>510</ele>
+        <time>2022-04-27T15:45:48Z</time>
+        <extensions>
+          <heartrate>141</heartrate>
+          <distance>236</distance>
+          <cadence>90</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823620" lon="11.3553330">
+        <ele>510</ele>
+        <time>2022-04-27T15:45:49Z</time>
+        <extensions>
+          <heartrate>141</heartrate>
+          <distance>241</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823350" lon="11.3553900">
+        <ele>510</ele>
+        <time>2022-04-27T15:45:50Z</time>
+        <extensions>
+          <heartrate>141</heartrate>
+          <distance>246</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823080" lon="11.3554470">
+        <ele>510</ele>
+        <time>2022-04-27T15:45:51Z</time>
+        <extensions>
+          <heartrate>141</heartrate>
+          <distance>251</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822855" lon="11.3555055">
+        <ele>510</ele>
+        <time>2022-04-27T15:45:52Z</time>
+        <extensions>
+          <heartrate>141</heartrate>
+          <distance>256</distance>
+          <cadence>90</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822630" lon="11.3555640">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:53Z</time>
+        <extensions>
+          <heartrate>141</heartrate>
+          <distance>261</distance>
+          <cadence>90</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822510" lon="11.3556220">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:54Z</time>
+        <extensions>
+          <heartrate>141</heartrate>
+          <distance>266</distance>
+          <cadence>90</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822390" lon="11.3556800">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:55Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>270</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822395" lon="11.3557400">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:56Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>274</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822400" lon="11.3558000">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:57Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>279</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822490" lon="11.3558585">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:58Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>283</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822580" lon="11.3559170">
+        <ele>511</ele>
+        <time>2022-04-27T15:45:59Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>287</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822725" lon="11.3559700">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:00Z</time>
+        <extensions>
+          <heartrate>140</heartrate>
+          <distance>291</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1822870" lon="11.3560230">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:01Z</time>
+        <extensions>
+          <heartrate>139</heartrate>
+          <distance>295</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823030" lon="11.3560665">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:02Z</time>
+        <extensions>
+          <heartrate>139</heartrate>
+          <distance>298</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823190" lon="11.3561100">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:03Z</time>
+        <extensions>
+          <heartrate>139</heartrate>
+          <distance>302</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823370" lon="11.3561450">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:04Z</time>
+        <extensions>
+          <heartrate>139</heartrate>
+          <distance>306</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823550" lon="11.3561800">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:05Z</time>
+        <extensions>
+          <heartrate>139</heartrate>
+          <distance>309</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823770" lon="11.3562075">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:06Z</time>
+        <extensions>
+          <heartrate>138</heartrate>
+          <distance>312</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1823990" lon="11.3562350">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:07Z</time>
+        <extensions>
+          <heartrate>138</heartrate>
+          <distance>315</distance>
+          <cadence>87</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1824250" lon="11.3562585">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:08Z</time>
+        <extensions>
+          <heartrate>138</heartrate>
+          <distance>318</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1824510" lon="11.3562820">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:09Z</time>
+        <extensions>
+          <heartrate>138</heartrate>
+          <distance>322</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1824780" lon="11.3563035">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:10Z</time>
+        <extensions>
+          <heartrate>138</heartrate>
+          <distance>326</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1825050" lon="11.3563250">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:11Z</time>
+        <extensions>
+          <heartrate>138</heartrate>
+          <distance>329</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1825320" lon="11.3563460">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:12Z</time>
+        <extensions>
+          <heartrate>138</heartrate>
+          <distance>332</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1825590" lon="11.3563670">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:13Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>336</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1825860" lon="11.3563865">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:14Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>339</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1826130" lon="11.3564060">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:15Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>342</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1826410" lon="11.3564270">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:16Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>346</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1826690" lon="11.3564480">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:17Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>350</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1827000" lon="11.3564705">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:18Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>354</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1827310" lon="11.3564930">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:19Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>358</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1827640" lon="11.3565175">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:20Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>362</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1827970" lon="11.3565420">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:21Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>366</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1828310" lon="11.3565680">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:22Z</time>
+        <extensions>
+          <heartrate>137</heartrate>
+          <distance>370</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1828650" lon="11.3565940">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:23Z</time>
+        <extensions>
+          <heartrate>136</heartrate>
+          <distance>374</distance>
+          <cadence>88</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1828985" lon="11.3566205">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:24Z</time>
+        <extensions>
+          <heartrate>136</heartrate>
+          <distance>378</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1829320" lon="11.3566470">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:25Z</time>
+        <extensions>
+          <heartrate>136</heartrate>
+          <distance>383</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1830085" lon="11.3567050">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:26Z</time>
+        <extensions>
+          <heartrate>136</heartrate>
+          <distance>387</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+      <trkpt lat="48.1830850" lon="11.3567630">
+        <ele>511</ele>
+        <time>2022-04-27T15:46:27Z</time>
+        <extensions>
+          <heartrate>136</heartrate>
+          <distance>387</distance>
+          <cadence>89</cadence>
+        </extensions>
+      </trkpt>
+    </trkseg>
+  </trk>
+</gpx>
