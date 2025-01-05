@@ -1,22 +1,74 @@
+import os
 from data_processing import combine_files
 from dynamic_filtering import dynamic_kalman_filter
-from triangulation import get_cell_tower_data, triangulate_position
+from triangulation import get_cell_tower_data, triangulate_position, validate_parameters
 from weather import get_weather
 from optimal_path import get_optimal_path
 from dubins_path import calculate_dubins_path
 from czml_generator import generate_czml, save_czml
 from visualization import plot_gps_trace, save_map, save_to_json
-import os
 
 
 def full_pipeline(file_paths, mapbox_api_key, weather_api_key, cell_api_key, lat, lon, radius=1000):
+    """
+    Full pipeline to process GPS data and save results.
+
+    Args:
+        file_paths (list): Paths to GPS data files.
+        mapbox_api_key (str): Mapbox API key for optimal path calculations.
+        weather_api_key (str): OpenWeather API key for weather data.
+        cell_api_key (str): OpenCellID API key for triangulation.
+        lat (float): Latitude for initial triangulation.
+        lon (float): Longitude for initial triangulation.
+        radius (int): Radius for cell tower data search (default is 1000 meters).
+
+    Returns:
+        tuple: Processed data and results.
+    """
     # Step 1: Combine and smooth GPS data
     combined_data = combine_files(file_paths)
     smoothed_data = dynamic_kalman_filter(combined_data)
 
-    # Step 2: Triangulate position using cell towers
-    cell_tower_data = get_cell_tower_data(cell_api_key, lat, lon, radius)
-    triangulated_position = triangulate_position(cell_tower_data)
+    # Step 2: Fetch cell tower data and triangulate position
+    # Step 2: Fetch cell tower data and triangulate position
+    try:
+        cell_tower_params = [
+            {
+                "lat": lat,
+                "lon": lon,
+                "mcc": 262,
+                "mnc": 1,
+                "lac": 7033,
+                "cellid": 12345,
+                "rating": 50,
+                "direction": 90.0,
+                "speed": 10.0,
+                "act": "LTE",
+                "ta": 5
+            },
+            {
+                "lat": lat + 0.001,
+                "lon": lon + 0.001,
+                "mcc": 262,
+                "mnc": 1,
+                "lac": 7033,
+                "cellid": 12346,
+                "rating": 30,
+                "direction": 180.0,
+                "speed": 15.0,
+                "act": "LTE",
+                "ta": 3
+            }
+        ]
+
+        # Validate parameters and fetch triangulation data
+        validated_data = [validate_parameters(params) for params in cell_tower_params]
+        cell_tower_data = [get_cell_tower_data(cell_api_key, params) for params in validated_data]
+        triangulated_position = triangulate_position(cell_tower_data)
+
+    except Exception as e:
+        print(f"Triangulation failed: {e}")
+        triangulated_position = None
 
     # Step 3: Fetch weather data
     weather_data = get_weather(weather_api_key, lat, lon)
@@ -32,10 +84,10 @@ def full_pipeline(file_paths, mapbox_api_key, weather_api_key, cell_api_key, lat
 
     # Step 6: Generate CZML for visualization
     czml = generate_czml(smoothed_data, triangulated_position)
-    save_czml(czml, "../public/activity.czml")
+    save_czml(czml, "../public/merged_activity.czml")
 
     # Step 7: Save and visualize results
-    save_to_json(smoothed_data.to_dict("records"), "../public/smoothed_data.json")
+    save_to_json(smoothed_data.to_dict("records"), "../public/merged_data.json")
     plot_gps_trace(smoothed_data, optimal_path, dubins_path, save_path="../public/gps_trace_plot.png")
 
     return smoothed_data, triangulated_position, weather_data, optimal_path, dubins_path

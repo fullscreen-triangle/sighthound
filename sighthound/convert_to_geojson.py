@@ -54,8 +54,8 @@ if __name__ == "__main__":
     current_directory = os.path.dirname(os.path.abspath(__file__))
 
     # Input and output file names
-    input_file = os.path.join(current_directory, "smoothed_data.json")
-    output_file = os.path.join(current_directory, "puchheim_sighthound.geojson")
+    input_file = os.path.join(current_directory, "merged_data.json")
+    output_file = os.path.join(current_directory, "puchheim_triangulated_sighthound.geojson")
 
     # Convert the JSON file to GeoJSON
     convert_to_geojson(input_file, output_file)
