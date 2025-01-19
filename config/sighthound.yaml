@@ -1,0 +1,79 @@
+# Logging configuration
+logging_level: INFO
+
+# Triangulation settings
+triangulation:
+  confidence_threshold: 0.6
+  max_distance: 100
+  min_points: 3
+  optimization_method: 'Nelder-Mead'
+  max_iterations: 1000
+
+# Cell tower triangulation settings
+cell_triangulation:
+  token: "pk.8edd3b757a4aa195ef5f4adc2aaef381"
+  min_towers: 3
+  max_tower_distance_km: 5
+  signal_strength_threshold: -100
+  cache_duration_hours: 24
+  cache_path: "cache/cell_towers"
+  weight_factors:
+    signal_strength: 0.6
+    distance: 0.4
+  base_url: "https://opencellid.org"
+  max_retries: 3
+  retry_delay: 1.0
+  timeout: 10.0
+
+# Weather integration settings
+weather:
+  openweather_api_key: "ae9af9bb6224315e875922b1e22261b5"
+  update_interval: 30
+  cache_duration: 24
+  cache_path: "cache/weather"
+  parameters:
+    - temperature
+    - feels_like
+    - temp_min
+    - temp_max
+    - pressure
+    - humidity
+    - wind_speed
+    - wind_deg
+    - wind_gust
+    - clouds
+    - rain_1h
+    - rain_3h
+    - snow_1h
+    - snow_3h
+    - visibility
+    - weather_main
+    - weather_description
+    - weather_icon
+
+# Output settings
+output:
+  formats:
+    - csv
+    - czml
+  czml_options:
+    path_color: [255, 0, 0, 255]
+    path_width: 3
+    trail_time: 1000000
+
+# Parser settings
+parsers:
+  gpx:
+    parse_extensions: true
+    include_elevation: true
+  fit:
+    include_heart_rate: true
+    include_cadence: true
+  tcx:
+    include_heart_rate: true
+    include_power: true
+  kml:
+    parse_extended_data: true
+
+
+# Logging configuration

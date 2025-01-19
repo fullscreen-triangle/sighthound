@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="sighthound",
+    name="core",
     version="1.0.0",
     description="A Python package for fusing GPS data, triangulation, and generating probability density functions.",
     author="Your Name",

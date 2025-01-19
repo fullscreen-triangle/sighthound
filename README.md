@@ -1,5 +1,9 @@
 # Sighthound
 
+- plans 
+   - add detailed geographic data to sighthound (soil, atmosphere, vegetation, cesium classification) and time correction
+
+
 Sighthound is a python package that applies line-of-sight principles in reconstructing high resolution geolocation data from the combined output of all inter and intra vendor 
 activity annotation files from consumer grade and commercially available wearable activity tracking smart watches. 
 It fuses data from multiple sources, applies dynamic filtering, triangulates positions, calculates optimal and Dubin's paths, and provides structured JSON outputs. Built for researchers and analysts, it leverages mathematical models and geospatial techniques for accurate and meaningful results.
