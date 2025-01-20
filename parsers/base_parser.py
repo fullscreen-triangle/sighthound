@@ -18,6 +18,19 @@ class BaseParser(ABC):
         if self.df is None:
             raise ValueError("DataFrame not initialized. Call _read_file first.")
 
+        # Standardize column names
+        column_mapping = {
+            'time': 'timestamp',
+            'ele': 'elevation'
+        }
+        self.df = self.df.rename(columns=column_mapping)
+
+        # Ensure required columns exist
+        required_columns = ['timestamp', 'latitude', 'longitude']
+        missing_columns = [col for col in required_columns if col not in self.df.columns]
+        if missing_columns:
+            raise ValueError(f"Missing required columns: {missing_columns}")
+
         self.df = self._calculate_distances()
         return self.df
 

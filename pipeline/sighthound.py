@@ -54,6 +54,11 @@ class Pipeline:
         else:
             self.cell_triangulator = None
 
+    def _standardize_timestamp(self, df: pd.DataFrame) -> pd.DataFrame:
+        if 'timestamp' in df.columns:
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+        return df
+
     def run(self):
         print(f"Starting pipeline execution. Input folder: {self.input_folder}")
 
@@ -76,15 +81,26 @@ class Pipeline:
             print(f"Pipeline execution failed: {str(e)}")
             raise
 
+    def _validate_trajectory(self, trajectory: pd.DataFrame, filename: str) -> bool:
+        required_columns = ['timestamp', 'latitude', 'longitude']
+        missing_columns = [col for col in required_columns if col not in trajectory.columns]
+
+        if missing_columns:
+            print(f"File {filename} is missing required columns: {missing_columns}")
+            return False
+        return True
+
     def _load_input_files(self) -> List[pd.DataFrame]:
         trajectories = []
         for file_path in self.input_folder.glob('*.*'):
             if file_path.suffix.lower() in self.parsers:
                 try:
                     parser = self.parsers[file_path.suffix.lower()]
-                    trajectory = parser.parse(file_path)
-                    trajectories.append(trajectory)
-                    print(f"Successfully parsed {file_path}")
+                    trajectory = parser.parse(str(file_path))
+                    trajectory = self._standardize_timestamp(trajectory)
+                    if self._validate_trajectory(trajectory, file_path):
+                        trajectories.append(trajectory)
+                        print(f"Successfully parsed {file_path}")
                 except Exception as e:
                     print(f"Failed to parse {file_path}: {str(e)}")
         return trajectories
@@ -175,16 +191,22 @@ class Pipeline:
     def _save_geojson(self, df: pd.DataFrame, output_path: Path):
         features = []
         for _, row in df.iterrows():
+            # Convert timestamp to ISO format string
+            properties = {}
+            for key, value in row.items():
+                if key not in ['latitude', 'longitude']:
+                    if isinstance(value, pd.Timestamp):
+                        properties[key] = value.isoformat()
+                    else:
+                        properties[key] = value
+
             feature = {
                 "type": "Feature",
                 "geometry": {
                     "type": "Point",
                     "coordinates": [row['longitude'], row['latitude']]
                 },
-                "properties": {
-                    key: value for key, value in row.items()
-                    if key not in ['latitude', 'longitude']
-                }
+                "properties": properties
             }
             features.append(feature)
 

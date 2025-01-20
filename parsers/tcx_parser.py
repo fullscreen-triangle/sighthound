@@ -25,7 +25,7 @@ class TCXParser(BaseParser):
                     'latitude': float(lat.text),
                     'longitude': float(lon.text),
                     'elevation': float(ele.text) if ele is not None else None,
-                    'time': datetime.strptime(time, '%Y-%m-%dT%H:%M:%SZ')
+                    'time': datetime.strptime(time, '%Y-%m-%dT%H:%M:%S.%fZ')
                 })
 
         self.df = pd.DataFrame(data)

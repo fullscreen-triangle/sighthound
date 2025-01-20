@@ -23,7 +23,8 @@ class KMLParser(BaseParser):
                     'latitude': lat,
                     'longitude': lon,
                     'elevation': ele,
-                    'time': None
+                    'timestamp': pd.Timestamp.now()  # Or extract from metadata if available
                 })
 
         self.df = pd.DataFrame(data)
+
