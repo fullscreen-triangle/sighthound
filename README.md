@@ -129,7 +129,7 @@ $$
 
 Where:
 
-$$w_i = \frac{1}{\text{Signal Strength}_i} \text{ for each tower } i$$
+$$ w_i = \frac{1}{\text{Signal Strength}_i} \text{ for each tower } i$$
 
 #### Tower Weight Distribution
 
@@ -156,17 +156,17 @@ The optimal path is computed using external routing APIs (e.g., Mapbox). The sho
 
 #### **Dijkstra's Algorithm**
 
-$$
-\text{dist}[v] = \min(\text{dist}[u] + w(u, v))
-$$
+
+$$\text{dist}[v] = \min(\text{dist}[u] + w(u, v))$$
+
 
 Where:
 
-- $$
-  ( \text{dist}[v] ): Shortest distance to vertex ( v )$$.
+- 
+  $$( \text{dist}[v] ): Shortest distance to vertex ( v )$$.
 
-- $$
-  ( w(u, v) ): Weight of the edge from ( u ) to ( v )$$.
+- 
+  $$( w(u, v) ): Weight of the edge from ( u ) to ( v )$$.
 
 
 #### **A***:
@@ -179,11 +179,11 @@ $$
 
 Where:
 
-- $$
-  ( g(v) ): Cost from start to ( v )$$.
+- 
+  $$( g(v) ): Cost from start to ( v )$$.
 
-- $$
-  ( h(v) ): Heuristic estimate of cost to goal$$.
+- 
+  $$( h(v) ): Heuristic estimate of cost to goal$$.
  
 
 ---
@@ -195,13 +195,13 @@ Dubin's path calculates the shortest path for vehicles or humans with turning co
 #### **Types of Dubin's Paths**
 
 1. **Left-Straight-Left (LSL)**:
-   $$
-   \text{Path} = R \cdot (\theta_1 + \pi) + L + R \cdot (\theta_2 + \pi)
-   $$
+   
+   $$\text{Path} = R \cdot (\theta_1 + \pi) + L + R \cdot (\theta_2 + \pi)$$
+   
 2. **Right-Straight-Right (RSR)**:
-   $$
-   \text{Path} = R \cdot (\theta_1) + L + R \cdot (\theta_2)
-   $$
+   
+   $$\text{Path} = R \cdot (\theta_1) + L + R \cdot (\theta_2)$$
+   
 
 Where:
 
@@ -212,9 +212,9 @@ $$
 : Turning radius.
 
 - $$
-  ( L ): Length of the straight segment$$.
+  ( L ): Length of the straight segment $$.
 - $$
-  ( \theta_1, \theta_2 ): Angular changes$$.
+  ( \theta_1, \theta_2 ): Angular changes $$.
  
 
 ---
