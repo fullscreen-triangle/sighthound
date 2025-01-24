@@ -205,16 +205,15 @@ Dubin's path calculates the shortest path for vehicles or humans with turning co
 
 Where:
 
-$$
-( R )
-$$
+
+$$( R )$$
 
 : Turning radius.
 
-- $$
-  ( L ): Length of the straight segment $$.
-- $$
-  ( \theta_1, \theta_2 ): Angular changes $$.
+- 
+  $( L )$: Length of the straight segment
+- 
+  $( \theta_1, \theta_2 )$: Angular changes 
  
 
 ---
