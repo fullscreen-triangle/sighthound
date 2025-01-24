@@ -3,12 +3,39 @@ from typing import Tuple
 
 
 class CoordinateConverter:
-    """
-    Convert between GPS coordinates and local Cartesian coordinates
-    """
+    """Enhanced coordinate conversion with error handling and additional transformations"""
 
     def __init__(self):
         self.EARTH_RADIUS = 6371000  # meters
+        self.WGS84_A = 6378137.0  # WGS84 semi-major axis
+        self.WGS84_B = 6356752.314245  # WGS84 semi-minor axis
+
+    def gps_to_ecef(self, lat: float, lon: float, alt: float = 0) -> Tuple[float, float, float]:
+        """Convert GPS coordinates to ECEF (Earth-Centered, Earth-Fixed)"""
+        lat_rad = np.radians(lat)
+        lon_rad = np.radians(lon)
+        
+        N = self.WGS84_A / np.sqrt(1 - 0.00669438 * np.sin(lat_rad)**2)
+        
+        x = (N + alt) * np.cos(lat_rad) * np.cos(lon_rad)
+        y = (N + alt) * np.cos(lat_rad) * np.sin(lon_rad)
+        z = (0.99330562 * N + alt) * np.sin(lat_rad)
+        
+        return x, y, z
+
+    def ecef_to_gps(self, x: float, y: float, z: float) -> Tuple[float, float, float]:
+        """Convert ECEF coordinates to GPS"""
+        p = np.sqrt(x**2 + y**2)
+        theta = np.arctan2(z * self.WGS84_A, p * self.WGS84_B)
+        
+        lat = np.arctan2(
+            z + 0.00669438 * self.WGS84_B * np.sin(theta)**3,
+            p - 0.00669438 * self.WGS84_A * np.cos(theta)**3
+        )
+        lon = np.arctan2(y, x)
+        alt = p / np.cos(lat) - self.WGS84_A / np.sqrt(1 - 0.00669438 * np.sin(lat)**2)
+        
+        return np.degrees(lat), np.degrees(lon), alt
 
     def gps_to_local(
             self,

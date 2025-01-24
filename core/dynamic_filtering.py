@@ -12,6 +12,8 @@ class KalmanConfig:
     measurement_noise: float = 1e-2
     initial_state_covariance: float = 100.0
     dt: float = 1.0  # Time step
+    confidence_weight: float = 0.5  # Added for confidence weighting
+    min_confidence: float = 0.6  # Added to match data fusion
 
 
 class GPSKalmanFilter:
@@ -83,29 +85,38 @@ class GPSKalmanFilter:
 
     def filter_trajectory(self, data: pd.DataFrame) -> pd.DataFrame:
         """
-        Filter a complete GPS trajectory
-
+        Filter a complete GPS trajectory with confidence handling
+        
         Args:
-            data: DataFrame with latitude and longitude columns
-
-        Returns:
-            DataFrame with filtered positions
+            data: DataFrame with latitude, longitude and optional confidence columns
         """
         self.reset()
         filtered_positions = []
-
+        
         for _, row in data.iterrows():
+            # Adjust measurement noise based on confidence if available
+            if 'confidence' in row:
+                confidence_factor = max(row.confidence, self.config.min_confidence)
+                self.kf.R = np.eye(2) * (self.config.measurement_noise / confidence_factor)
+            
             measurement = np.array([row.longitude, row.latitude])
             self.update(measurement)
             state = self.get_state()[0]
-            filtered_positions.append({
+            
+            position = {
                 'timestamp': row.timestamp,
                 'longitude': state[0],
                 'latitude': state[2],
                 'velocity_x': state[1],
                 'velocity_y': state[3]
-            })
-
+            }
+            
+            # Preserve confidence if it exists
+            if 'confidence' in row:
+                position['confidence'] = row.confidence
+                
+            filtered_positions.append(position)
+            
         return pd.DataFrame(filtered_positions)
 
     def get_velocity(self) -> Tuple[float, float]:

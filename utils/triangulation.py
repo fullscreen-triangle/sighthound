@@ -9,10 +9,12 @@ from dataclasses import dataclass
 class TriangulationConfig:
     """Configuration for triangulation"""
     min_points: int = 3
-    max_distance: float = 100  # Using max_distance to match YAML
+    max_distance: float = 100  # meters
     confidence_threshold: float = 0.6
     optimization_method: str = 'Nelder-Mead'
     max_iterations: int = 1000
+    weight_decay: float = 0.1  # Added for distance-based weight decay
+    min_confidence: float = 0.3  # Minimum confidence for any triangulation
 
 
 class TrajectoryTriangulator:
@@ -29,14 +31,7 @@ class TrajectoryTriangulator:
             weights: Optional[List[float]] = None
     ) -> pd.DataFrame:
         """
-        Triangulate positions from multiple trajectories
-
-        Args:
-            trajectories: List of DataFrames with GPS data
-            weights: Optional weights for each trajectory
-
-        Returns:
-            DataFrame with triangulated positions
+        Enhanced triangulation with confidence scoring and weight decay
         """
         if weights is None:
             weights = [1.0] * len(trajectories)
@@ -49,18 +44,42 @@ class TrajectoryTriangulator:
         for timestamp, group in aligned_data.groupby('timestamp'):
             points = []
             point_weights = []
+            point_confidences = []
 
             for i, traj in enumerate(trajectories):
                 mask = (traj['timestamp'] == timestamp)
                 if mask.any():
-                    points.append([
+                    point = [
                         traj.loc[mask, 'latitude'].iloc[0],
                         traj.loc[mask, 'longitude'].iloc[0]
-                    ])
-                    point_weights.append(weights[i])
+                    ]
+                    points.append(point)
+                    
+                    # Get confidence if available, else use weight
+                    confidence = (
+                        traj.loc[mask, 'confidence'].iloc[0]
+                        if 'confidence' in traj.columns
+                        else weights[i]
+                    )
+                    point_confidences.append(confidence)
+                    
+                    # Apply distance-based weight decay
+                    weight = weights[i] * np.exp(
+                        -self.config.weight_decay * 
+                        self._haversine_distance(
+                            point[0], point[1],
+                            np.mean([p[0] for p in points]),
+                            np.mean([p[1] for p in points])
+                        )
+                    )
+                    point_weights.append(weight)
 
             if len(points) >= self.config.min_points:
-                position = self._triangulate_single_position(points, point_weights)
+                position = self._triangulate_single_position(
+                    points, 
+                    point_weights,
+                    point_confidences
+                )
                 position['timestamp'] = timestamp
                 triangulated_positions.append(position)
 
@@ -93,7 +112,8 @@ class TrajectoryTriangulator:
     def _triangulate_single_position(
             self,
             points: List[List[float]],
-            weights: List[float]
+            weights: List[float],
+            confidences: List[float]
     ) -> Dict[str, float]:
         """
         Triangulate single position from multiple points
@@ -101,12 +121,14 @@ class TrajectoryTriangulator:
         Args:
             points: List of [lat, lon] points
             weights: Weight for each point
+            confidences: Confidence for each point
 
         Returns:
             Dictionary with triangulated position
         """
         points = np.array(points)
         weights = np.array(weights)
+        confidences = np.array(confidences)
 
         # Initial guess (weighted average)
         initial_guess = np.average(points, weights=weights, axis=0)

@@ -1,6 +1,7 @@
 from fitparse import FitFile
 import pandas as pd
 from .base_parser import BaseParser
+from typing import Dict
 
 
 class FITParser(BaseParser):
@@ -24,3 +25,12 @@ class FITParser(BaseParser):
                 data.append(point)
 
         self.df = pd.DataFrame(data)
+
+    def _extract_metadata(self) -> Dict:
+        """Extract FIT-specific metadata"""
+        return {
+            'format': 'FIT',
+            'device_info': self._get_device_info(),
+            'activity_type': self._get_activity_type(),
+            'data_points': len(self.df) if self.df is not None else 0
+        }

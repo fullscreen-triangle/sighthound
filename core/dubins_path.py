@@ -11,6 +11,8 @@ class DubinsConfig:
     turning_radius: float = 30.0  # meters
     step_size: float = 1.0  # meters
     max_path_length: float = 1000.0  # meters
+    confidence_threshold: float = 0.6  # Added for integration
+    interpolation_method: str = 'cubic'  # Added to match data fusion
 
 
 class DubinsPathCalculator:
@@ -25,18 +27,23 @@ class DubinsPathCalculator:
     def calculate_path(
             self,
             start_point: Tuple[float, float, float],
-            end_point: Tuple[float, float, float]
+            end_point: Tuple[float, float, float],
+            confidence: Optional[float] = None
     ) -> List[Tuple[float, float]]:
         """
-        Calculate Dubins path between two points
-
+        Calculate Dubins path between two points with confidence consideration
+        
         Args:
             start_point: (latitude, longitude, heading) of start point
             end_point: (latitude, longitude, heading) of end point
-
-        Returns:
-            List of (latitude, longitude) points along the path
+            confidence: Optional confidence score for path calculation
         """
+        # Adjust turning radius based on confidence if provided
+        if confidence is not None:
+            adjusted_radius = self.config.turning_radius * (1 + (1 - confidence))
+        else:
+            adjusted_radius = self.config.turning_radius
+            
         # Convert to local coordinates
         start_local = self.converter.gps_to_local(
             start_point[0],
@@ -58,7 +65,7 @@ class DubinsPathCalculator:
         path = dubins.shortest_path(
             start_config,
             end_config,
-            self.config.turning_radius
+            adjusted_radius
         )
 
         # Sample points along the path

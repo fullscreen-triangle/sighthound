@@ -1,10 +1,12 @@
 import folium
 import plotly.express as px
 import plotly.graph_objects as go
-from typing import List, Optional, Dict, Any
+from typing import List, Optional, Dict, Any, Tuple
 import pandas as pd
 import numpy as np
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from datetime import datetime
+import branca.colormap as cm
 
 
 @dataclass
@@ -16,31 +18,46 @@ class PlotConfig:
     point_size: int = 5
     opacity: float = 0.8
     zoom_start: int = 13
+    confidence_colors: Dict[str, str] = field(default_factory=lambda: {
+        'high': '#00ff00',
+        'medium': '#ffff00',
+        'low': '#ff0000'
+    })
+    timeline_height: int = 150
+    show_confidence: bool = True
+    show_metrics: bool = True
+    show_weather: bool = True
+    show_satellites: bool = True
 
 
 class ActivityVisualizer:
-    """
-    Visualization tools for GPS trajectories and metrics
-    """
+    """Enhanced visualization tools for GPS trajectories and metrics"""
 
     def __init__(self, config: Optional[PlotConfig] = None):
         self.config = config or PlotConfig()
+        self._setup_colormaps()
+
+    def _setup_colormaps(self):
+        """Initialize colormaps for different metrics"""
+        self.confidence_colormap = cm.LinearColormap(
+            colors=['red', 'yellow', 'green'],
+            vmin=0, vmax=1,
+            caption='Confidence Score'
+        )
+        
+        self.speed_colormap = cm.LinearColormap(
+            colors=['blue', 'yellow', 'red'],
+            vmin=0, vmax=30,  # adjust based on activity type
+            caption='Speed (km/h)'
+        )
 
     def create_map(
             self,
             trajectory: pd.DataFrame,
-            additional_layers: Optional[List[Dict[str, Any]]] = None
+            additional_layers: Optional[List[Dict[str, Any]]] = None,
+            confidence_scores: Optional[Dict[str, float]] = None
     ) -> folium.Map:
-        """
-        Create interactive map visualization
-
-        Args:
-            trajectory: DataFrame with lat/lon coordinates
-            additional_layers: List of dicts with additional visualization data
-
-        Returns:
-            Folium map object
-        """
+        """Create enhanced interactive map visualization"""
         # Create base map
         center_lat = trajectory['latitude'].mean()
         center_lon = trajectory['longitude'].mean()
@@ -51,45 +68,215 @@ class ActivityVisualizer:
             tiles=self.config.map_style
         )
 
-        # Add main trajectory
-        points = list(zip(trajectory['latitude'], trajectory['longitude']))
-        folium.PolyLine(
-            points,
-            weight=self.config.line_width,
-            color=self.config.line_color,
-            opacity=self.config.opacity
-        ).add_to(m)
+        # Add confidence-colored trajectory
+        if self.config.show_confidence and 'confidence' in trajectory.columns:
+            self._add_confidence_trajectory(m, trajectory)
+        else:
+            self._add_simple_trajectory(m, trajectory)
 
-        # Add probability heatmap if available
-        if 'probability' in trajectory.columns:
-            self._add_probability_heatmap(m, trajectory)
+        # Add metric visualizations
+        if self.config.show_metrics:
+            self._add_metric_layers(m, trajectory)
+
+        # Add weather overlay if available
+        if self.config.show_weather and 'weather_condition' in trajectory.columns:
+            self._add_weather_layer(m, trajectory)
+
+        # Add satellite positions if available
+        if self.config.show_satellites and 'satellite_count' in trajectory.columns:
+            self._add_satellite_layer(m, trajectory)
 
         # Add additional layers
         if additional_layers:
             for layer in additional_layers:
                 self._add_layer(m, layer)
 
+        # Add time slider
+        if 'timestamp' in trajectory.columns:
+            self._add_time_slider(m, trajectory)
+
         return m
 
-    def _add_probability_heatmap(
+    def _add_confidence_trajectory(self, map_obj: folium.Map, data: pd.DataFrame):
+        """Add trajectory colored by confidence scores"""
+        for i in range(len(data) - 1):
+            confidence = data.iloc[i]['confidence']
+            color = self.confidence_colormap(confidence)
+            
+            points = [
+                [data.iloc[i]['latitude'], data.iloc[i]['longitude']],
+                [data.iloc[i + 1]['latitude'], data.iloc[i + 1]['longitude']]
+            ]
+            
+            folium.PolyLine(
+                points,
+                weight=self.config.line_width,
+                color=color,
+                opacity=self.config.opacity
+            ).add_to(map_obj)
+
+    def _add_metric_layers(self, map_obj: folium.Map, data: pd.DataFrame):
+        """Add visualization layers for various metrics"""
+        metric_layers = folium.FeatureGroup(name='Metrics')
+        
+        if 'speed' in data.columns:
+            speed_points = []
+            for _, row in data.iterrows():
+                speed_points.append([
+                    row['latitude'],
+                    row['longitude'],
+                    row['speed']
+                ])
+            
+            folium.HeatMap(
+                speed_points,
+                name='Speed Heatmap',
+                min_opacity=0.2,
+                radius=15,
+                blur=10,
+                max_zoom=1,
+            ).add_to(metric_layers)
+
+        metric_layers.add_to(map_obj)
+
+    def _add_weather_layer(self, map_obj: folium.Map, data: pd.DataFrame):
+        """Add weather condition overlay"""
+        weather_layers = folium.FeatureGroup(name='Weather')
+        
+        # Add weather icons at regular intervals
+        step = len(data) // 10  # Show ~10 weather points
+        for i in range(0, len(data), step):
+            row = data.iloc[i]
+            folium.Marker(
+                [row['latitude'], row['longitude']],
+                popup=f"Weather: {row['weather_condition']}",
+                icon=folium.Icon(icon='cloud')
+            ).add_to(weather_layers)
+
+        weather_layers.add_to(map_obj)
+
+    def _add_satellite_layer(self, map_obj: folium.Map, data: pd.DataFrame):
+        """Add satellite coverage visualization"""
+        satellite_layers = folium.FeatureGroup(name='Satellites')
+        
+        for _, row in data.iterrows():
+            folium.Circle(
+                [row['latitude'], row['longitude']],
+                radius=row['satellite_count'] * 5,
+                color='blue',
+                fill=True,
+                popup=f"Satellites: {row['satellite_count']}"
+            ).add_to(satellite_layers)
+
+        satellite_layers.add_to(map_obj)
+
+    def _add_time_slider(self, map_obj: folium.Map, data: pd.DataFrame):
+        """Add interactive time slider"""
+        times = data['timestamp'].dt.strftime('%Y-%m-%d %H:%M:%S').tolist()
+        
+        slider_html = self._create_time_slider_html(times)
+        map_obj.get_root().html.add_child(folium.Element(slider_html))
+
+    def create_metric_plots(
             self,
-            map_obj: folium.Map,
-            data: pd.DataFrame
-    ):
-        """Add probability heatmap to map"""
-        points = list(zip(
-            data['latitude'],
-            data['longitude'],
-            data['probability']
+            data: pd.DataFrame,
+            metrics: List[str]
+    ) -> Dict[str, go.Figure]:
+        """Create enhanced interactive metric plots"""
+        plots = {}
+
+        for metric in metrics:
+            if metric in data.columns:
+                fig = self._create_single_metric_plot(data, metric)
+                plots[metric] = fig
+
+        return plots
+
+    def _create_single_metric_plot(
+            self,
+            data: pd.DataFrame,
+            metric: str
+    ) -> go.Figure:
+        """Create an enhanced plot for a single metric"""
+        fig = go.Figure()
+
+        # Add main metric line
+        fig.add_trace(go.Scatter(
+            x=data['timestamp'],
+            y=data[metric],
+            name=metric.capitalize(),
+            line=dict(color=self.config.line_color)
         ))
 
-        folium.HeatMap(
-            points,
-            min_opacity=0.2,
-            radius=15,
-            blur=10,
-            max_zoom=1,
-        ).add_to(map_obj)
+        # Add confidence bands if available
+        if 'confidence' in data.columns:
+            self._add_confidence_bands(fig, data, metric)
+
+        # Add weather annotations if available
+        if 'weather_condition' in data.columns:
+            self._add_weather_annotations(fig, data)
+
+        # Customize layout
+        fig.update_layout(
+            title=f'{metric.capitalize()} vs Time',
+            xaxis_title='Time',
+            yaxis_title=metric.capitalize(),
+            hovermode='x unified'
+        )
+
+        return fig
+
+    def _add_confidence_bands(
+            self,
+            fig: go.Figure,
+            data: pd.DataFrame,
+            metric: str
+    ):
+        """Add confidence bands to metric plot"""
+        std_dev = data[metric].std()
+        
+        fig.add_trace(go.Scatter(
+            x=data['timestamp'],
+            y=data[metric] + std_dev * data['confidence'],
+            fill=None,
+            mode='lines',
+            line_color='rgba(0,100,80,0.2)',
+            name='Upper Bound'
+        ))
+        
+        fig.add_trace(go.Scatter(
+            x=data['timestamp'],
+            y=data[metric] - std_dev * data['confidence'],
+            fill='tonexty',
+            mode='lines',
+            line_color='rgba(0,100,80,0.2)',
+            name='Lower Bound'
+        ))
+
+    def _add_weather_annotations(
+            self,
+            fig: go.Figure,
+            data: pd.DataFrame
+    ):
+        """Add weather condition annotations to plot"""
+        step = len(data) // 10  # Show ~10 weather annotations
+        
+        for i in range(0, len(data), step):
+            row = data.iloc[i]
+            fig.add_annotation(
+                x=row['timestamp'],
+                y=fig.data[0].y.max(),
+                text=row['weather_condition'],
+                showarrow=True,
+                arrowhead=1
+            )
+
+    @staticmethod
+    def _create_time_slider_html(times: List[str]) -> str:
+        """Create HTML/JavaScript for time slider"""
+        # Implementation of time slider HTML/JS code
+        # This would return the HTML string for the time slider
+        pass
 
     def _add_layer(
             self,
@@ -113,62 +300,6 @@ class ActivityVisualizer:
                 popup=layer_data.get('popup', ''),
                 icon=folium.Icon(color=layer_data.get('color', 'red'))
             ).add_to(map_obj)
-
-    def create_metric_plots(
-            self,
-            data: pd.DataFrame,
-            metrics: List[str]
-    ) -> Dict[str, go.Figure]:
-        """
-        Create interactive plots for various metrics
-
-        Args:
-            data: DataFrame with metrics
-            metrics: List of metric names to plot
-
-        Returns:
-            Dictionary of metric names to plotly figures
-        """
-        plots = {}
-
-        for metric in metrics:
-            if metric in data.columns:
-                fig = px.line(
-                    data,
-                    x='timestamp' if 'timestamp' in data.columns else data.index,
-                    y=metric,
-                    title=f'{metric.capitalize()} vs Time'
-                )
-
-                # Add probability bands if available
-                if 'probability' in data.columns:
-                    self._add_probability_bands(fig, data, metric)
-
-                plots[metric] = fig
-
-        return plots
-
-    def _add_probability_bands(
-            self,
-            fig: go.Figure,
-            data: pd.DataFrame,
-            metric: str
-    ):
-        """Add probability confidence bands to plot"""
-        prob_threshold = 0.68  # 1 sigma
-
-        high_prob_mask = data['probability'] >= prob_threshold
-
-        fig.add_trace(
-            go.Scatter(
-                x=data.index,
-                y=data[metric].where(high_prob_mask),
-                fill=None,
-                mode='lines',
-                line_color='rgba(0,100,80,0.2)',
-                name=f'High Probability {metric}'
-            )
-        )
 
     def create_dashboard(
             self,

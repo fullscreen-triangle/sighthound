@@ -12,6 +12,10 @@ class PDFConfig:
     kernel_function: str = 'gaussian'
     min_probability: float = 1e-10
     max_probability: float = 1.0
+    temporal_weight: float = 0.3  # Added for temporal importance
+    spatial_weight: float = 0.4   # Added for spatial importance
+    metric_weight: float = 0.3    # Added for additional metrics
+    confidence_threshold: float = 0.6  # Minimum confidence for inclusion
 
 
 class ProbabilityDensityCalculator:
@@ -28,40 +32,50 @@ class ProbabilityDensityCalculator:
             additional_metrics: Optional[List[str]] = None
     ) -> pd.DataFrame:
         """
-        Calculate PDF for trajectory considering multiple dimensions
+        Calculate PDF for trajectory considering multiple dimensions and confidence
 
         Args:
             trajectory: DataFrame with GPS and other metrics
             additional_metrics: List of additional columns to consider
 
         Returns:
-            DataFrame with PDF values
+            DataFrame with PDF values and confidence scores
         """
         pdf_data = trajectory.copy()
+        
+        # Filter by confidence if available
+        if 'confidence' in pdf_data.columns:
+            pdf_data = pdf_data[
+                pdf_data['confidence'] >= self.config.confidence_threshold
+            ]
 
-        # Basic position PDF
-        position_pdf = self._calculate_spatial_pdf(
+        # Calculate weighted components
+        spatial_pdf = self._calculate_spatial_pdf(
             pdf_data['latitude'].values,
             pdf_data['longitude'].values
-        )
+        ) * self.config.spatial_weight
 
-        # Temporal PDF if timestamp exists
+        temporal_pdf = np.ones(len(pdf_data))
         if 'timestamp' in pdf_data.columns:
             temporal_pdf = self._calculate_temporal_pdf(
                 pdf_data['timestamp'].values
-            )
-            position_pdf *= temporal_pdf
+            ) * self.config.temporal_weight
 
-        # Additional metrics PDF
+        metric_pdf = np.ones(len(pdf_data))
         if additional_metrics:
             metric_pdf = self._calculate_metric_pdf(
                 pdf_data[additional_metrics].values
-            )
-            position_pdf *= metric_pdf
+            ) * self.config.metric_weight
 
-        # Normalize probabilities
-        pdf_data['probability'] = self._normalize_probability(position_pdf)
+        # Combine PDFs with weights
+        combined_pdf = (spatial_pdf + temporal_pdf + metric_pdf) / \
+                      (self.config.spatial_weight + 
+                       self.config.temporal_weight + 
+                       self.config.metric_weight)
 
+        # Normalize and add to dataframe
+        pdf_data['probability'] = self._normalize_probability(combined_pdf)
+        
         return pdf_data
 
     def _calculate_spatial_pdf(

@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Dict
 from dataclasses import dataclass
 from scipy.optimize import minimize
 from concurrent.futures import ThreadPoolExecutor
@@ -16,6 +16,8 @@ class OptimizerConfig:
     tolerance: float = 1e-6
     smoothing_factor: float = 0.5
     n_workers: int = 4
+    min_confidence: float = 0.6  # Added for integration with data fusion
+    output_format: str = 'pandas'  # Added to match data fusion output
 
 
 class PathOptimizer:
@@ -30,25 +32,29 @@ class PathOptimizer:
 
     def optimize_trajectory(self, trajectory: pd.DataFrame) -> pd.DataFrame:
         """
-        Optimize a GPS trajectory
+        Optimize a GPS trajectory with confidence scores
 
         Args:
             trajectory: DataFrame with timestamp, latitude, longitude columns
-
-        Returns:
-            Optimized trajectory DataFrame
+            and optional confidence scores
         """
-        # First apply Kalman filtering
+        # First apply Kalman filtering with confidence weighting
         filtered_traj = self.kalman_filter.filter_trajectory(trajectory)
-
-        # Then optimize path segments
+        
+        # Then optimize path segments with confidence consideration
         optimized_points = self._optimize_path_segments(filtered_traj)
-
-        # Create final trajectory
-        return self._create_optimized_trajectory(
+        
+        # Create final trajectory with confidence scores
+        result = self._create_optimized_trajectory(
             original_traj=trajectory,
             optimized_points=optimized_points
         )
+        
+        # Add confidence scores if not present
+        if 'confidence' not in result.columns:
+            result['confidence'] = 1.0
+            
+        return result
 
     def _optimize_path_segments(
             self,

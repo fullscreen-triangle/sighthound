@@ -20,6 +20,9 @@ class CellTriangulationConfig:
         "signal_strength": 0.6,
         "distance": 0.4
     })
+    confidence_threshold: float = 0.6  # Added for confidence scoring
+    min_signal_strength: float = -120  # dBm
+    max_signal_strength: float = -50   # dBm
     base_url: str = "https://opencellid.org"
     max_retries: int = 3
     retry_delay: float = 1.0
@@ -145,41 +148,41 @@ class CellDataTriangulator:
 
         return []
 
-    def triangulate_position(self, lat: float, lon: float, radius_km: float = 5) -> Optional[Dict[str, float]]:
+    def triangulate_position(self, lat: float, lon: float, radius_km: float = 5) -> Optional[Dict[str, Any]]:
         """
-        Triangulate position using nearby cell towers
-
+        Enhanced triangulation with confidence scoring
+        
         Args:
             lat: Approximate latitude
             lon: Approximate longitude
             radius_km: Search radius in kilometers
         """
-        lat_offset = radius_km / 111.32
-        lon_offset = radius_km / (111.32 * np.cos(np.radians(lat)))
-        bbox = (
-            lat - lat_offset,
-            lon - lon_offset,
-            lat + lat_offset,
-            lon + lon_offset
-        )
-
+        bbox = self._calculate_bbox(lat, lon, radius_km)
+        
         all_towers = []
+        tower_confidences = []
+        
         for radio in ['LTE', 'UMTS', 'GSM']:
             towers = self._get_area_towers(bbox, radio)
-            all_towers.extend(towers)
+            for tower in towers:
+                confidence = self._calculate_tower_confidence(tower)
+                if confidence >= self.config.confidence_threshold:
+                    all_towers.append(tower)
+                    tower_confidences.append(confidence)
 
         if len(all_towers) < self.config.min_towers:
             return None
 
         positions = np.array([[t.lat, t.lon] for t in all_towers])
         weights = np.array([
-            self._calculate_weight(t.averageSignalStrength, t.range)
-            for t in all_towers
+            self._calculate_weight(t.averageSignalStrength, t.range) * conf
+            for t, conf in zip(all_towers, tower_confidences)
         ])
 
         weights = weights / np.sum(weights)
         weighted_position = np.average(positions, weights=weights, axis=0)
-
+        
+        # Calculate position confidence
         distances = self._haversine_distances(
             weighted_position[0],
             weighted_position[1],
@@ -187,12 +190,47 @@ class CellDataTriangulator:
             positions[:, 1]
         )
         accuracy = np.average(distances, weights=weights)
+        position_confidence = self._calculate_position_confidence(
+            accuracy, 
+            len(all_towers),
+            np.mean(tower_confidences)
+        )
 
-        if accuracy > self.config.max_tower_distance_km * 1000:
+        if position_confidence < self.config.confidence_threshold:
             return None
 
         return {
             'latitude': float(weighted_position[0]),
             'longitude': float(weighted_position[1]),
-            'accuracy': float(accuracy)
+            'accuracy': float(accuracy),
+            'confidence': float(position_confidence),
+            'num_towers': len(all_towers),
+            'tower_types': self._get_tower_type_distribution(all_towers)
         }
+
+    def _calculate_tower_confidence(self, tower: CellTowerInfo) -> float:
+        """Calculate confidence score for a single tower"""
+        # Signal strength confidence
+        signal_range = self.config.max_signal_strength - self.config.min_signal_strength
+        signal_conf = (tower.averageSignalStrength - self.config.min_signal_strength) / signal_range
+        signal_conf = np.clip(signal_conf, 0, 1)
+        
+        # Sample size confidence
+        sample_conf = min(tower.samples / 1000, 1)
+        
+        # Range confidence
+        range_conf = 1 - (min(tower.range, 5000) / 5000)
+        
+        return 0.4 * signal_conf + 0.3 * sample_conf + 0.3 * range_conf
+
+    def _calculate_position_confidence(
+            self, 
+            accuracy: float, 
+            num_towers: int,
+            avg_tower_confidence: float
+    ) -> float:
+        """Calculate overall position confidence"""
+        accuracy_conf = 1 - min(accuracy / (self.config.max_tower_distance_km * 1000), 1)
+        tower_count_conf = min(num_towers / 10, 1)  # Max confidence at 10 towers
+        
+        return 0.4 * accuracy_conf + 0.3 * tower_count_conf + 0.3 * avg_tower_confidence

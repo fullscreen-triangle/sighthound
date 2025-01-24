@@ -1,5 +1,26 @@
 # Logging configuration
-logging_level: INFO
+logging:
+  level: INFO
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  file: 'logs/sighthound.log'
+  data_fusion_report: 'logs/fusion_report.json'
+
+# Progressive fusion settings
+progressive_fusion:
+  enabled: true
+  min_sources: 1  # Allow fusion with just one source
+  fallback_order:
+    - gps
+    - cell
+    - weather
+    - satellite
+  confidence_thresholds:
+    gps: 0.7
+    cell: 0.5
+    weather: 0.4
+    satellite: 0.4
+  save_intermediate: true
+  intermediate_path: "intermediate_results"
 
 # Triangulation settings
 triangulation:
@@ -11,8 +32,8 @@ triangulation:
 
 # Cell tower triangulation settings
 cell_triangulation:
-  token: "pk.8edd3b757a4aa195ef5f4adc2aaef381"
-  min_towers: 3
+  api_key: "pk.8edd3b757a4aa195ef5f4adc2aaef381"  # Changed from token
+  min_towers: 2  # Reduced from 3 for more lenient fusion
   max_tower_distance_km: 5
   signal_strength_threshold: -100
   cache_duration_hours: 24
@@ -20,60 +41,71 @@ cell_triangulation:
   weight_factors:
     signal_strength: 0.6
     distance: 0.4
-  base_url: "https://opencellid.org"
+  api_url: "https://opencellid.org/cell/get"  # Added explicit API endpoint
   max_retries: 3
   retry_delay: 1.0
   timeout: 10.0
 
 # Weather integration settings
 weather:
-  openweather_api_key: "ae9af9bb6224315e875922b1e22261b5"
-  update_interval: 30
-  cache_duration: 24
+  api_key: "ae9af9bb6224315e875922b1e22261b5"  # Changed from openweather_api_key
+  update_interval_minutes: 30  # Changed to be explicit
+  cache_duration_hours: 24
   cache_path: "cache/weather"
-  parameters:
+  api_url: "https://api.openweathermap.org/data/2.5/weather"
+  required_parameters:  # Split into required and optional
     - temperature
+    - humidity
+    - wind_speed
+  optional_parameters:  # These won't cause failure if missing
     - feels_like
     - temp_min
     - temp_max
     - pressure
-    - humidity
-    - wind_speed
     - wind_deg
     - wind_gust
     - clouds
     - rain_1h
-    - rain_3h
-    - snow_1h
-    - snow_3h
     - visibility
-    - weather_main
-    - weather_description
-    - weather_icon
 
 # Output settings
 output:
   formats:
-    - csv
     - czml
+    - geojson
+  save_failed_parses: true  # Save problematic files for inspection
+  failed_parses_path: "failed_parses"
   czml_options:
     path_color: [255, 0, 0, 255]
     path_width: 3
     trail_time: 1000000
+  geojson_options:
+    simplify_tolerance: 0.0001
+    include_properties: true
+    style:
+      color: "#FF0000"
+      weight: 3
+      opacity: 0.8
 
 # Parser settings
 parsers:
+  fallback_order:  # Try these formats in order
+    - gpx
+    - fit
+    - tcx
+    - kml
   gpx:
     parse_extensions: true
     include_elevation: true
+    required_fields: ['time', 'lat', 'lon']
   fit:
     include_heart_rate: true
     include_cadence: true
+    required_fields: ['timestamp', 'position_lat', 'position_long']
   tcx:
     include_heart_rate: true
     include_power: true
+    required_fields: ['Time', 'LatitudeDegrees', 'LongitudeDegrees']
   kml:
     parse_extended_data: true
-
-
-# Logging configuration
+    required_fields: ['when', 'coordinates']
