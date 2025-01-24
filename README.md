@@ -164,10 +164,10 @@ Where:
 
 - $$
   ( \text{dist}[v] ): Shortest distance to vertex ( v )$$.
-  $$
+
 - $$
   ( w(u, v) ): Weight of the edge from ( u ) to ( v )$$.
-  $$
+
 
 #### **A***:
 
@@ -181,10 +181,10 @@ Where:
 
 - $$
   ( g(v) ): Cost from start to ( v )$$.
-  $$
+
 - $$
   ( h(v) ): Heuristic estimate of cost to goal$$.
-  $$
+ 
 
 ---
 
@@ -213,10 +213,9 @@ $$
 
 - $$
   ( L ): Length of the straight segment$$.
-  $$
 - $$
   ( \theta_1, \theta_2 ): Angular changes$$.
-  $$
+ 
 
 ---
 
