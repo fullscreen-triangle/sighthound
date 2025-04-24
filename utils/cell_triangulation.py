@@ -1,10 +1,14 @@
 import numpy as np
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Tuple, Union, Callable
 from dataclasses import dataclass, field
 import requests
 import time
 import logging
 from cachetools import TTLCache
+import pandas as pd
+from concurrent.futures import ThreadPoolExecutor
+from utils.parallel import ParallelProcessor, ParallelConfig
+from tqdm import tqdm
 
 
 @dataclass
@@ -27,6 +31,13 @@ class CellTriangulationConfig:
     max_retries: int = 3
     retry_delay: float = 1.0
     timeout: float = 10.0
+    # Parallel processing settings
+    use_parallel: bool = True
+    n_workers: int = 4
+    batch_size: int = 50
+    chunk_size: int = 100
+    progress_reporting: bool = True
+    memory_optimization: bool = True
 
 
 @dataclass
@@ -49,6 +60,19 @@ class CellDataTriangulator:
         self.config = config
         self.cache = TTLCache(maxsize=1000, ttl=self.config.cache_duration_hours * 3600)
         self.session = requests.Session()
+        
+        # Initialize parallel processor if enabled
+        if self.config.use_parallel:
+            parallel_config = ParallelConfig(
+                n_workers=self.config.n_workers,
+                chunk_size=self.config.chunk_size,
+                batch_size=self.config.batch_size,
+                show_progress=self.config.progress_reporting,
+                use_processes=False,  # Use threads for IO-bound operations
+                progress_desc="Cell triangulation"
+            )
+            self.parallel_processor = ParallelProcessor(parallel_config)
+        self.logger = logging.getLogger(__name__)
 
     def _haversine_distances(self, lat1: float, lon1: float, lat2: np.ndarray, lon2: np.ndarray) -> np.ndarray:
         """
@@ -147,6 +171,25 @@ class CellDataTriangulator:
                 time.sleep(self.config.retry_delay)
 
         return []
+    
+    def _calculate_bbox(self, lat: float, lon: float, radius_km: float) -> Tuple[float, float, float, float]:
+        """
+        Calculate a bounding box around a point
+        
+        Args:
+            lat: Latitude of center point
+            lon: Longitude of center point
+            radius_km: Radius in kilometers
+            
+        Returns:
+            Tuple of (latmin, lonmin, latmax, lonmax)
+        """
+        # Rough approximation: 1 degree of latitude is about 111 km
+        # 1 degree of longitude is about 111 * cos(latitude) km
+        lat_delta = radius_km / 111.0
+        lon_delta = radius_km / (111.0 * np.cos(np.radians(lat)))
+        
+        return (lat - lat_delta, lon - lon_delta, lat + lat_delta, lon + lon_delta)
 
     def triangulate_position(self, lat: float, lon: float, radius_km: float = 5) -> Optional[Dict[str, Any]]:
         """
@@ -207,6 +250,97 @@ class CellDataTriangulator:
             'num_towers': len(all_towers),
             'tower_types': self._get_tower_type_distribution(all_towers)
         }
+    
+    def batch_triangulate(self, 
+                         locations: List[Tuple[float, float]], 
+                         radius_km: float = 5,
+                         progress_callback: Optional[Callable[[float], None]] = None) -> List[Optional[Dict[str, Any]]]:
+        """
+        Triangulate multiple positions in batch
+        
+        Args:
+            locations: List of (lat, lon) tuples
+            radius_km: Search radius in kilometers
+            progress_callback: Optional callback for progress reporting
+            
+        Returns:
+            List of triangulation results
+        """
+        if not locations:
+            return []
+            
+        self.logger.info(f"Batch triangulating {len(locations)} locations")
+        
+        if self.config.use_parallel:
+            # Define the work function
+            def process_location(loc_tuple):
+                lat, lon = loc_tuple
+                return self.triangulate_position(lat, lon, radius_km)
+            
+            # Process in parallel batches
+            results = self.parallel_processor.batch_map(
+                lambda batch: [process_location(loc) for loc in batch],
+                locations
+            )
+            
+            # Report progress if callback provided
+            if progress_callback:
+                progress_callback(1.0)
+                
+            return results
+        else:
+            # Sequential processing
+            results = []
+            for i, (lat, lon) in enumerate(tqdm(locations, disable=not self.config.progress_reporting)):
+                result = self.triangulate_position(lat, lon, radius_km)
+                results.append(result)
+                
+                # Report progress if callback provided
+                if progress_callback:
+                    progress = (i + 1) / len(locations)
+                    progress_callback(progress)
+                    
+            return results
+    
+    def triangulate_trajectory(self, 
+                              trajectory: pd.DataFrame, 
+                              radius_km: float = 5) -> pd.DataFrame:
+        """
+        Triangulate an entire trajectory
+        
+        Args:
+            trajectory: DataFrame with lat/lon positions
+            radius_km: Search radius in kilometers
+            
+        Returns:
+            DataFrame with triangulated positions
+        """
+        if trajectory.empty:
+            return pd.DataFrame()
+            
+        # Extract lat/lon pairs
+        locations = list(zip(trajectory['latitude'], trajectory['longitude']))
+        
+        # Get timestamps
+        timestamps = trajectory['timestamp'].tolist()
+        
+        # Triangulate in batch
+        results = self.batch_triangulate(locations, radius_km)
+        
+        # Create output DataFrame
+        output_data = []
+        for i, result in enumerate(results):
+            if result is not None:
+                output_data.append({
+                    'timestamp': timestamps[i],
+                    'latitude': result['latitude'],
+                    'longitude': result['longitude'],
+                    'accuracy': result['accuracy'],
+                    'confidence': result['confidence'],
+                    'num_towers': result['num_towers']
+                })
+                
+        return pd.DataFrame(output_data)
 
     def _calculate_tower_confidence(self, tower: CellTowerInfo) -> float:
         """Calculate confidence score for a single tower"""
@@ -234,3 +368,20 @@ class CellDataTriangulator:
         tower_count_conf = min(num_towers / 10, 1)  # Max confidence at 10 towers
         
         return 0.4 * accuracy_conf + 0.3 * tower_count_conf + 0.3 * avg_tower_confidence
+        
+    def _get_tower_type_distribution(self, towers: List[CellTowerInfo]) -> Dict[str, int]:
+        """
+        Get distribution of tower types
+        
+        Args:
+            towers: List of tower objects
+            
+        Returns:
+            Dictionary of radio type to count
+        """
+        distribution = {}
+        for tower in towers:
+            if tower.radio not in distribution:
+                distribution[tower.radio] = 0
+            distribution[tower.radio] += 1
+        return distribution

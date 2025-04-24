@@ -1,4 +1,11 @@
-# Sighthound
+<h1 align="center">Sighthound</h1>
+<p align="center"><em>"No activity goes unnoticed"</em></p>
+
+<p align="center">
+  <img src="logo_converted.jpg" alt="Zangalewa Logo">
+</p>
+
+
 
 [![Python Version](https://img.shields.io/pypi/pyversions/science-platform.svg)](https://pypi.org/project/science-platform/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)

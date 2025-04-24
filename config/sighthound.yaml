@@ -29,6 +29,9 @@ triangulation:
   min_points: 3
   optimization_method: 'Nelder-Mead'
   max_iterations: 1000
+  enable_cell_tower_data: true
+  max_distance_km: 5.0
+  min_signal_strength_dbm: -95
 
 # Cell tower triangulation settings
 cell_triangulation:
@@ -109,3 +112,32 @@ parsers:
   kml:
     parse_extended_data: true
     required_fields: ['when', 'coordinates']
+
+# Path optimization settings
+path_optimization:
+  algorithm: "a_star"  # Options: dijkstra, a_star
+  consider_elevation: true
+  smoothing_factor: 0.3
+  
+# Dubins path settings
+dubins_path:
+  turning_radius_m: 10.0
+  step_size_m: 1.0
+  
+# Export settings
+export:
+  include_metadata: true
+  include_quality_metrics: true
+  include_confidence_scores: true
+  
+# Error message settings
+error_messages:
+  verbosity_level: 2  # 0: minimal, 1: basic, 2: detailed
+  include_troubleshooting_tips: true
+  
+# Web interface settings
+web_interface:
+  auto_open_browser: true
+  default_port: 8000
+  default_visualization: "map"  # Options: map, heatmap, timeline
+  theme: "light"  # Options: light, dark
