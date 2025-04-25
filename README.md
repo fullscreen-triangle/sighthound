@@ -1,5 +1,5 @@
 <h1 align="center">Sighthound</h1>
-<p align="center"><em>"No activity goes unnoticed"</em></p>
+<p align="center"><em>" I have seen all the things that are done under the sun"</em></p>
 
 <p align="center">
   <img src="logo_converted.jpg" alt="Zangalewa Logo">
@@ -236,12 +236,105 @@ cd sighthound
 pip install -r requirements.txt
 ```
 
-## 6. Output Formats
+## Usage and Interfaces
+
+Sighthound offers multiple interfaces for different user needs and workflows:
+
+### Command-Line Interface
+
+Process geolocation data directly from the terminal with comprehensive argument parsing:
+
+```bash
+# Basic usage with default parameters
+sighthound process --input path/to/data.gpx --output results/
+
+# Advanced usage with processing options
+sighthound process --input path/to/data.gpx --output results/ --filter kalman --interpolate --format geojson
+
+# Get help on available commands
+sighthound --help
+```
+
+The CLI provides real-time progress indicators for long-running operations, ensuring you stay informed about processing status.
+
+### Web Interface
+
+For visual exploration of results, Sighthound includes a web interface:
+
+```bash
+# Start the web interface on default port (8080)
+sighthound serve
+
+# Specify a custom port
+sighthound serve --port 9000
+```
+
+The web interface features:
+- Interactive map visualization
+- Trajectory comparison tools
+- Quality metrics display
+- Customizable visualization templates for common analysis scenarios
+
+### API Integration
+
+For integration with other systems, Sighthound provides a RESTful API:
+
+```python
+import requests
+
+# Example API call to process a file
+response = requests.post(
+    'http://localhost:8080/api/process',
+    files={'data': open('path/to/data.gpx', 'rb')},
+    data={'filter_type': 'kalman', 'output_format': 'geojson'}
+)
+
+# Get the results
+result = response.json()
+```
+
+### Dashboard
+
+Monitor processing status through the built-in dashboard:
+
+```bash
+# Launch the dashboard
+sighthound dashboard
+
+# Access through browser at http://localhost:8081
+```
+
+The dashboard provides:
+- Real-time processing status
+- Resource utilization metrics
+- Job queue management
+- Error monitoring and alerts
+
+### Error Handling
+
+All interfaces provide improved error messages with context-specific guidance:
+
+```
+ERROR: Unable to parse GPX file (line 42, column 7)
+  - XML validation error: Missing closing tag for <trkpt>
+  - Suggestion: Check file format or try the --repair flag
+```
+
+Configuration validation provides immediate feedback on parameter errors:
+
+```
+CONFIG ERROR: Invalid parameter 'kalmen_filter'
+  - Did you mean 'kalman_filter'?
+  - See documentation at: https://docs.sighthound.dev/config
+```
+
+## Output Formats
 
 The framework supports multiple output formats:
 - CSV with enhanced trajectory data
 - CZML for visualization in Cesium
 - GeoJSON for web mapping applications
+- Popular GIS formats (Shapefile, KML, GeoPackage)
 
 Each output includes:
 - Enhanced position data
@@ -249,7 +342,19 @@ Each output includes:
 - Source attribution
 - Quality scores
 
-## 7. Performance Metrics
+Export options are configurable through all interfaces:
+
+```bash
+# CLI export example
+sighthound export --input processed_data.json --format shapefile --output gis_data/
+
+# API export example
+curl -X POST http://localhost:8080/api/export \
+  -H "Content-Type: application/json" \
+  -d '{"data": "processed_data.json", "format": "kml"}'
+```
+
+## Performance Metrics
 
 The system's performance is evaluated using:
 
@@ -264,14 +369,32 @@ The system's performance is evaluated using:
    ```
    Where C is confidence and E is error.
 
-## 8. Future Work
+## Documentation
+
+Comprehensive documentation is available:
+
+- **User Guide**: Step-by-step instructions for common workflows
+- **API Reference**: Complete documentation of all public interfaces
+- **Configuration Guide**: Detailed explanation of all configuration options
+- **Troubleshooting Guide**: Solutions for common issues
+
+Access documentation through:
+```bash
+# Open documentation in browser
+sighthound docs
+
+# Get specific help
+sighthound docs --topic configuration
+```
+
+## Future Work
 
 - Implementation of machine learning-based confidence scoring
 - Support for additional data sources
 - Real-time processing capabilities
 - Enhanced error modeling and propagation
 
-## 9. References
+## References
 
 [1] Bähr, S., Haas, G. C., Keusch, F., Kreuter, F., & Trappmann, M. (2022). Missing Data and Other Measurement Quality Issues in Mobile Geolocation Sensor Data. *Survey Research Methods*, 16(1), 63-74. https://doi.org/10.18148/srm/2022.v16i1.7497
 
