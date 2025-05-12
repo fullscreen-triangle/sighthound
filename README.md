@@ -354,6 +354,48 @@ curl -X POST http://localhost:8080/api/export \
   -d '{"data": "processed_data.json", "format": "kml"}'
 ```
 
+## Visualizations
+
+Sighthound produces high-fidelity visualizations that illustrate the power of its geolocation processing capabilities.
+
+### 3D Path Reconstruction
+
+The following visualization demonstrates Sighthound's ability to reconstruct human movement paths with high precision through 3D modeling:
+
+<p align="center">
+  <img src="public/geo_simulation_start.gif" alt="3D Reconstruction Initialization" width="600">
+  <br>
+  <em>Initialization of 3D human movement path reconstruction</em>
+</p>
+
+<p align="center">
+  <img src="public/geo_simulation.gif" alt="3D Path Reconstruction" width="600">
+  <br>
+  <em>Full 3D reconstruction of a running path with animated human model</em>
+</p>
+
+The 3D visualizations above show:
+- Initial path determination based on raw GPS data
+- Smoothed trajectory through Kalman filtering
+- Human model accurately positioned along the optimized path
+- Real-time movement simulation based on calculated velocities and accelerations
+
+### Geospatial Data Processing
+
+<p align="center">
+  <img src="public/gps_trace_plot.png" alt="GPS Trace Plot" width="600">
+  <br>
+  <em>GPS trace visualization with triangulated position improvements</em>
+</p>
+
+Sighthound's processing pipeline creates various geospatial outputs:
+
+- **GeoJSON:** Detailed position data with timestamps and quality metrics (`public/puchheim_triangulated_sighthound.geojson`)
+- **JSON:** Processed trajectory data with multi-source fusion (`public/merged_data.json`, `public/smoothed_data.json`)
+- **CZML:** Time-dynamic visualization for Cesium (`public/merged_activity.czml`, `public/activity.czml`)
+
+The outputs can be directly loaded into GIS software, web mapping applications, or visualization tools to analyze movement patterns, optimize routes, or identify areas of interest.
+
 ## Performance Metrics
 
 The system's performance is evaluated using:
