@@ -1,0 +1,20 @@
+[package]
+name = "sighthound-filtering"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "sighthound_filtering"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true
+numpy.workspace = true
+ndarray.workspace = true
+nalgebra.workspace = true
+rayon.workspace = true
+serde.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+mimalloc.workspace = true
+sighthound-core = { path = "../sighthound-core" } 

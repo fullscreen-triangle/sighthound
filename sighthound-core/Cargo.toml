@@ -1,0 +1,27 @@
+[package]
+name = "sighthound-core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "sighthound_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true
+numpy.workspace = true
+ndarray.workspace = true
+rayon.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+num-traits.workspace = true
+geo.workspace = true
+geo-types.workspace = true
+mimalloc.workspace = true
+crossbeam.workspace = true
+dashmap.workspace = true
+parking_lot.workspace = true
+
+ 
