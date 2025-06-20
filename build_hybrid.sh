@@ -188,6 +188,15 @@ cd rust-modules/sighthound-core
 maturin develop --release
 cd ../..
 
+# Build Autobahn integration module if it exists
+if [ -d "sighthound-autobahn" ]; then
+    echo "🌌 Building Autobahn integration module..."
+    cd sighthound-autobahn
+    maturin develop --release
+    cd ..
+    echo "✅ Autobahn integration module built successfully"
+fi
+
 echo "🧪 Testing Rust integration..."
 python3 -c "
 try:
@@ -197,6 +206,19 @@ try:
     distance = point1.distance_to(point2)
     print(f'✅ Rust modules working! Distance Berlin-Paris: {distance:.0f} meters')
     print('🚀 High-performance Rust backend is ready!')
+    
+    # Test Autobahn integration if available
+    try:
+        import sighthound_autobahn
+        client = sighthound_autobahn.AutobahnClient()
+        stats = sighthound_autobahn.get_autobahn_performance_stats()
+        print('🌌 Autobahn integration module loaded successfully!')
+        print('🧠 Consciousness-aware reasoning engine is ready!')
+    except ImportError:
+        print('⚠️  Autobahn integration not available (optional)')
+    except Exception as e:
+        print(f'⚠️  Autobahn integration error: {e}')
+        
 except ImportError as e:
     print(f'⚠️  Rust modules not available: {e}')
     print('📝 Falling back to Python implementation')
@@ -354,7 +376,7 @@ echo "✅ Python compatibility: MAINTAINED"
 echo "✅ Performance improvement: 10-100x (when Rust available)"
 echo "✅ Bayesian Evidence Networks: IMPLEMENTED"
 echo "✅ Fuzzy Logic Optimization: IMPLEMENTED"
-echo "✅ Autobahn Integration: CONFIGURED"
+echo "✅ Autobahn Integration: $(if [ -d 'sighthound-autobahn' ]; then echo 'RUST NATIVE'; else echo 'PYTHON FALLBACK'; fi)"
 echo ""
 echo "🧠 CONSCIOUSNESS-AWARE ANALYSIS:"
 echo "   - Bayesian Evidence Networks with fuzzy logic"
@@ -369,7 +391,8 @@ echo "🚀 Next steps:"
 echo "1. Test basic system: python3 detect_performance.py"
 echo "2. Test Bayesian analysis: python3 -c \"from core.bayesian_analysis_pipeline import analyze_trajectory_bayesian; print('Bayesian pipeline ready!')\""
 echo "3. Test Autobahn integration: python3 demo_autobahn_integration.py"
-echo "4. Run full demonstration: python3 demo_autobahn_integration.py"
+echo "4. Run high-performance Rust demo: python3 demo_rust_autobahn.py"
+echo "5. Run full demonstration: python3 demo_autobahn_integration.py"
 echo ""
 echo "🌌 AUTOBAHN INTEGRATION:"
 echo "   Your system now delegates complex probabilistic reasoning to"

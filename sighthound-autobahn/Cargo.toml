@@ -1,0 +1,59 @@
+[package]
+name = "sighthound-autobahn"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "sighthound_autobahn"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true
+numpy.workspace = true
+ndarray.workspace = true
+nalgebra.workspace = true
+rayon.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+mimalloc.workspace = true
+dashmap.workspace = true
+crossbeam.workspace = true
+sighthound-core = { path = "../sighthound-core" }
+sighthound-bayesian = { path = "../sighthound-bayesian" }
+sighthound-fuzzy = { path = "../sighthound-fuzzy" }
+
+[dependencies.tokio]
+version = "1.0"
+features = ["full"]
+
+[dependencies.reqwest]
+version = "0.11"
+features = ["json", "stream"]
+
+[dependencies.uuid]
+version = "1.0"
+features = ["v4", "serde"]
+
+[dependencies.chrono]
+version = "0.4"
+features = ["serde"]
+
+[dependencies.futures]
+version = "0.3"
+
+[dependencies.async-trait]
+version = "0.1"
+
+[dependencies.tracing]
+version = "0.1"
+
+[dependencies.tracing-subscriber]
+version = "0.3"
+
+[dependencies.config]
+version = "0.13"
+
+[dependencies.once_cell]
+version = "1.0" 
