@@ -21,11 +21,31 @@ try:
     import sighthound_geometry
     import sighthound_optimization
     import sighthound_fusion
+    import sighthound_bayesian
+    import sighthound_fuzzy
     RUST_AVAILABLE = True
     logger.info("Rust modules loaded successfully - using high-performance implementation")
 except ImportError as e:
     RUST_AVAILABLE = False
     logger.warning(f"Rust modules not available: {e}. Falling back to Python implementation")
+
+# Individual module availability tracking
+BAYESIAN_AVAILABLE = False
+FUZZY_AVAILABLE = False
+
+try:
+    import sighthound_bayesian
+    BAYESIAN_AVAILABLE = True
+    logger.info("✅ Rust Bayesian evidence network module loaded successfully")
+except ImportError as e:
+    logger.warning(f"⚠️  Rust Bayesian module not available: {e}")
+
+try:
+    import sighthound_fuzzy  
+    FUZZY_AVAILABLE = True
+    logger.info("✅ Rust fuzzy optimization module loaded successfully")
+except ImportError as e:
+    logger.warning(f"⚠️  Rust fuzzy module not available: {e}")
 
 @dataclass
 class RustGpsPoint:
@@ -381,7 +401,28 @@ def get_rust_status() -> Dict[str, Any]:
         "rust_available": RUST_AVAILABLE,
         "modules_loaded": [],
         "fallback_active": not RUST_AVAILABLE,
-        "performance_benefits": "10-100x speedup" if RUST_AVAILABLE else "Not available"
+        "performance_benefits": "10-100x speedup" if RUST_AVAILABLE else "Not available",
+        "bayesian_available": BAYESIAN_AVAILABLE,
+        "fuzzy_available": FUZZY_AVAILABLE
+    }
+
+def sighthound_bayesian_available() -> bool:
+    """Check if Rust Bayesian evidence network module is available"""
+    return BAYESIAN_AVAILABLE
+
+def sighthound_fuzzy_available() -> bool:
+    """Check if Rust fuzzy optimization module is available"""
+    return FUZZY_AVAILABLE
+
+def get_rust_capabilities() -> Dict[str, bool]:
+    """Get detailed capabilities of available Rust modules"""
+    return {
+        'core': RUST_AVAILABLE,
+        'filtering': RUST_AVAILABLE,
+        'triangulation': RUST_AVAILABLE,
+        'bayesian_network': BAYESIAN_AVAILABLE,
+        'fuzzy_optimization': FUZZY_AVAILABLE,
+        'hybrid_pipeline': BAYESIAN_AVAILABLE and FUZZY_AVAILABLE
     }
 
 # Convenience functions for easy usage

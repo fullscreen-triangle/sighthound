@@ -5,7 +5,9 @@ members = [
     "sighthound-triangulation",
     "sighthound-geometry",
     "sighthound-optimization",
-    "sighthound-fusion"
+    "sighthound-fusion",
+    "sighthound-bayesian",
+    "sighthound-fuzzy"
 ]
 
 [workspace.dependencies]

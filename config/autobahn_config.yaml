@@ -1,0 +1,274 @@
+# Autobahn Integration Configuration for Sighthound
+# Consciousness-aware probabilistic reasoning engine settings
+
+autobahn:
+  # Connection settings
+  connection:
+    endpoint: "http://localhost:8080/api/v1"
+    binary_path: "../autobahn/target/release/autobahn"
+    use_local_binary: true
+    timeout_seconds: 30
+    max_retries: 3
+    
+  # Default reasoning parameters
+  reasoning:
+    default_metabolic_mode: "mammalian"  # flight, cold_blooded, mammalian, anaerobic
+    default_hierarchy_level: "biological"  # planck, quantum, molecular, cellular, biological, cognitive, social, cosmic
+    consciousness_threshold: 0.7
+    atp_budget_per_query: 150.0
+    coherence_threshold: 0.85
+    target_entropy: 2.2
+    immune_sensitivity: 0.8
+    
+  # Biological intelligence settings
+  biological:
+    membrane_coherence_threshold: 0.8
+    ion_channel_optimization: true
+    fire_light_coupling: true
+    optimal_wavelength_nm: 650
+    temperature_k: 310.15  # Human body temperature
+    
+  # Consciousness emergence parameters
+  consciousness:
+    integrated_information_threshold: 0.5  # Φ (phi) threshold
+    global_workspace_activation: 0.6
+    self_awareness_threshold: 0.7
+    metacognition_threshold: 0.6
+    qualia_generation: true
+    dual_illusion_maintenance: true  # Agency + Persistence illusions
+    
+  # Fire circle communication settings
+  fire_circle:
+    communication_complexity_multiplier: 79.0  # 79-fold increase from baseline
+    temporal_coordination_threshold: 0.8
+    sedentary_period_optimization: true
+    non_action_communication: true
+    abstract_conceptualization: true
+    
+  # Behavioral intelligence parameters
+  behavioral:
+    gorilla_paradigm_validation: true
+    phenotypic_expression_tracking: true
+    fire_circle_teaching_environments: true
+    cultural_transmission_modeling: true
+    epigenetic_mechanism_simulation: true
+    
+  # Dual-proximity signaling
+  dual_proximity:
+    death_proximity_signaling: true
+    life_proximity_signaling: true
+    mortality_risk_assessment: true
+    vitality_detection: true
+    leadership_hierarchy_modeling: true
+    reproductive_strategy_analysis: true
+    
+  # Circle graph governance
+  governance:
+    optimal_entropy_bits: 2.3
+    clustering_coefficient_target: 0.84
+    path_length_target: 1.6
+    efficiency_target: 0.73
+    network_optimization: true
+    
+  # Credibility assessment (BCEM)
+  credibility:
+    beauty_credibility_efficiency_model: true
+    attractiveness_influence_factor: 0.3
+    social_function_optimization: true
+    contextual_expectation_weighting: 0.7
+    truth_inversion_detection: true
+    
+  # Temporal determinism
+  temporal:
+    predetermined_event_detection: true
+    categorical_completion_tracking: true
+    mathematical_structure_navigation: true
+    recognition_space_mapping: true
+    
+  # Thermodynamic optimization
+  thermodynamic:
+    entropy_maximization: true
+    evil_efficiency_incompatibility_check: true
+    moral_category_dissolution: true
+    efficiency_optimization: true
+
+# Task-specific configurations
+reasoning_tasks:
+  probabilistic_inference:
+    metabolic_mode: "mammalian"
+    hierarchy_level: "biological"
+    atp_budget: 200.0
+    consciousness_required: true
+    
+  uncertainty_quantification:
+    metabolic_mode: "cold_blooded"  # Energy efficient for sustained analysis
+    hierarchy_level: "cognitive"
+    atp_budget: 100.0
+    consciousness_required: false
+    
+  belief_propagation:
+    metabolic_mode: "mammalian"
+    hierarchy_level: "biological"
+    atp_budget: 150.0
+    consciousness_required: true
+    
+  evidence_fusion:
+    metabolic_mode: "flight"  # High energy for complex fusion
+    hierarchy_level: "biological"
+    atp_budget: 250.0
+    consciousness_required: true
+    
+  consciousness_assessment:
+    metabolic_mode: "mammalian"
+    hierarchy_level: "cognitive"
+    atp_budget: 300.0
+    consciousness_required: true
+    phi_calculation_required: true
+    
+  credibility_evaluation:
+    metabolic_mode: "mammalian"
+    hierarchy_level: "social"
+    atp_budget: 120.0
+    consciousness_required: true
+    beauty_credibility_model: true
+    
+  threat_assessment:
+    metabolic_mode: "flight"  # High energy for immune response
+    hierarchy_level: "biological"
+    atp_budget: 180.0
+    consciousness_required: false
+    immune_system_activation: true
+    
+  anomaly_detection:
+    metabolic_mode: "cold_blooded"  # Sustained monitoring
+    hierarchy_level: "biological"
+    atp_budget: 80.0
+    consciousness_required: false
+    
+  causal_reasoning:
+    metabolic_mode: "mammalian"
+    hierarchy_level: "cognitive"
+    atp_budget: 200.0
+    consciousness_required: true
+    temporal_determinism: true
+    
+  temporal_reasoning:
+    metabolic_mode: "mammalian"
+    hierarchy_level: "cosmic"
+    atp_budget: 250.0
+    consciousness_required: true
+    categorical_predeterminism: true
+    
+  pattern_recognition:
+    metabolic_mode: "cold_blooded"
+    hierarchy_level: "biological"
+    atp_budget: 90.0
+    consciousness_required: false
+    
+  decision_making:
+    metabolic_mode: "mammalian"
+    hierarchy_level: "cognitive"
+    atp_budget: 220.0
+    consciousness_required: true
+    dual_illusion_maintenance: true
+    
+  knowledge_integration:
+    metabolic_mode: "mammalian"
+    hierarchy_level: "social"
+    atp_budget: 180.0
+    consciousness_required: true
+    fire_circle_communication: true
+
+# Integration settings with Sighthound
+sighthound_integration:
+  # When to delegate to Autobahn
+  delegation_triggers:
+    low_confidence_threshold: 0.5  # Delegate when Sighthound confidence < 0.5
+    high_uncertainty_threshold: 0.8  # Delegate when uncertainty > 0.8
+    complex_reasoning_required: true  # Always delegate complex reasoning
+    consciousness_assessment_requested: true
+    
+  # Result integration
+  result_fusion:
+    sighthound_weight: 0.6  # Weight for Sighthound results
+    autobahn_weight: 0.4   # Weight for Autobahn results
+    consciousness_bonus: 0.1  # Bonus for consciousness-aware results
+    biological_intelligence_bonus: 0.05
+    
+  # Quality thresholds
+  quality_control:
+    minimum_combined_quality: 0.6
+    minimum_consciousness_level: 0.5
+    maximum_atp_consumption: 500.0
+    threat_level_escalation: "medium"  # Escalate if threat >= medium
+    
+  # Fallback behavior
+  fallback:
+    enable_python_fallback: true
+    fallback_quality_penalty: 0.3
+    log_fallback_events: true
+    retry_failed_queries: true
+    max_fallback_retries: 2
+
+# Logging and monitoring
+monitoring:
+  log_level: "INFO"
+  log_autobahn_queries: true
+  log_consciousness_levels: true
+  log_atp_consumption: true
+  log_biological_intelligence: true
+  log_threat_assessments: true
+  
+  # Performance monitoring
+  performance_tracking:
+    track_response_times: true
+    track_quality_scores: true
+    track_consciousness_emergence: true
+    track_biological_intelligence_activation: true
+    generate_performance_reports: true
+    
+  # Alerting
+  alerts:
+    low_consciousness_threshold: 0.3
+    high_atp_consumption_threshold: 400.0
+    threat_level_alert: "high"
+    biological_intelligence_failure_alert: true
+
+# Development and testing
+development:
+  mock_autobahn_responses: false
+  test_consciousness_emergence: true
+  validate_biological_intelligence: true
+  test_fire_circle_communication: true
+  test_dual_proximity_signaling: true
+  benchmark_performance: true
+  
+  # Test scenarios
+  test_scenarios:
+    - name: "basic_trajectory_analysis"
+      description: "Simple GPS trajectory with good quality data"
+      expected_consciousness_level: 0.7
+      expected_quality_score: 0.8
+      
+    - name: "noisy_trajectory_analysis"  
+      description: "GPS trajectory with high uncertainty and noise"
+      expected_consciousness_level: 0.5
+      expected_quality_score: 0.6
+      delegation_expected: true
+      
+    - name: "complex_reasoning_required"
+      description: "Trajectory requiring advanced probabilistic reasoning"
+      expected_consciousness_level: 0.8
+      expected_quality_score: 0.9
+      high_atp_consumption_expected: true
+      
+    - name: "threat_detection_scenario"
+      description: "Trajectory with potential adversarial patterns"
+      threat_assessment_required: true
+      immune_system_activation_expected: true
+      
+    - name: "consciousness_emergence_test"
+      description: "Test for consciousness emergence during analysis"
+      consciousness_threshold: 0.9
+      phi_calculation_required: true
+      biological_intelligence_required: true 

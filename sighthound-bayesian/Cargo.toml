@@ -1,0 +1,41 @@
+[package]
+name = "sighthound-bayesian"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "sighthound_bayesian"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true
+numpy.workspace = true
+ndarray.workspace = true
+nalgebra.workspace = true
+rayon.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+mimalloc.workspace = true
+dashmap.workspace = true
+crossbeam.workspace = true
+sighthound-core = { path = "../sighthound-core" }
+
+[dependencies.petgraph]
+version = "0.6"
+features = ["serde-1"]
+
+[dependencies.optimization]
+version = "0.2"
+
+[dependencies.rand]
+version = "0.8"
+features = ["std_rng"]
+
+[dependencies.statrs]
+version = "0.16"
+
+[dependencies.argmin]
+version = "0.8"
+features = ["serde1"] 
