@@ -1,0 +1,28 @@
+[package]
+name = "sighthound-triangulation"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "sighthound_triangulation"
+crate-type = ["cdylib"]
+
+[dependencies]
+pyo3.workspace = true
+numpy.workspace = true
+ndarray.workspace = true
+nalgebra.workspace = true
+rayon.workspace = true
+serde.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+rstar.workspace = true
+kiddo.workspace = true
+mimalloc.workspace = true
+dashmap.workspace = true
+crossbeam.workspace = true
+sighthound-core = { path = "../sighthound-core" }
+
+[dependencies.rand]
+version = "0.8"
+features = ["std_rng"] 
