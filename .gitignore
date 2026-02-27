@@ -24,6 +24,11 @@ wheels/
 venv/
 ENV/
 
+# Environment variables and secrets
+.env
+*.env
+!.env.example
+
 # IDE
 .idea/
 .vscode/

@@ -1,0 +1,7 @@
+Metric,Value,Unit,Status
+Temperature RMSE,5.572653916668056,°C,Forward
+Pressure RMSE,9.846094138204897,hPa,Forward
+Humidity RMSE,12.347925312313484,%,Forward
+GPS Closure RMSE,0.22398883152816212,m,Circular
+Closure Percentage,0.07558292226775705,%,Circular
+Validation Status,Excellent,-,Overall

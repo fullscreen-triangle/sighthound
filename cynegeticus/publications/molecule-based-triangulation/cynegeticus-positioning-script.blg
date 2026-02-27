@@ -1,0 +1,80 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: cynegeticus-positioning-script.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
+I found no \bibdata command---while reading file cynegeticus-positioning-script.aux
+Warning--I didn't find a database entry for "parkinson1996gps"
+Warning--I didn't find a database entry for "kaplan2005gps"
+Warning--I didn't find a database entry for "hofmann2012gps"
+Warning--I didn't find a database entry for "gps2020constellation"
+Warning--I didn't find a database entry for "groves2013gps"
+Warning--I didn't find a database entry for "langley1999dilution"
+Warning--I didn't find a database entry for "humphreys2008gps"
+Warning--I didn't find a database entry for "trenberth2005mass"
+Warning--I didn't find a database entry for "wallace2006atmospheric"
+Warning--I didn't find a database entry for "landau1980statistical"
+Warning--I didn't find a database entry for "reif1965fundamentals"
+Warning--I didn't find a database entry for "codata2018"
+Warning--I didn't find a database entry for "rudin1976principles"
+Warning--I didn't find a database entry for "chenciner2007hill"
+Warning--I didn't find a database entry for "hales2005proof"
+Warning--I didn't find a database entry for "bentley1975kdtree"
+Warning--I didn't find a database entry for "herzberg1945molecular"
+Warning--I didn't find a database entry for "atkins2010molecular"
+Warning--I didn't find a database entry for "kinetic1954chapman"
+Warning--I didn't find a database entry for "press2007numerical"
+Warning--I didn't find a database entry for "nocedal2006numerical"
+Warning--I didn't find a database entry for "griewank2008auto"
+Warning--I didn't find a database entry for "aho2006compilers"
+Warning--I didn't find a database entry for "rtk2004"
+Warning--I didn't find a database entry for "titterton2004strapdown"
+Warning--I didn't find a database entry for "indoor2017wifi"
+Warning--I didn't find a database entry for "uwb2009"
+Warning--I didn't find a database entry for "measures1992laser"
+Warning--I didn't find a database entry for "doviak1993doppler"
+Warning--I didn't find a database entry for "coecke2010quantum"
+Warning--I didn't find a database entry for "baez1996higher"
+Warning--I didn't find a database entry for "kitaev2006anyons"
+You've used 0 entries,
+            2118 wiz_defined-function locations,
+            528 strings with 4560 characters,
+and the built_in function-call counts, 18 in all, are:
+= -- 0
+> -- 0
+< -- 0
++ -- 0
+- -- 0
+* -- 2
+:= -- 7
+add.period$ -- 0
+call.type$ -- 0
+change.case$ -- 0
+chr.to.int$ -- 0
+cite$ -- 0
+duplicate$ -- 0
+empty$ -- 1
+format.name$ -- 0
+if$ -- 1
+int.to.chr$ -- 0
+int.to.str$ -- 0
+missing$ -- 0
+newline$ -- 3
+num.names$ -- 0
+pop$ -- 0
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 1
+stack$ -- 0
+substring$ -- 0
+swap$ -- 0
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 0
+while$ -- 0
+width$ -- 0
+write$ -- 2
+(There was 1 error message)

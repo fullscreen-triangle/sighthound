@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480">
+    <defs>
+        <style> .box{fill:#fff;stroke:#111;stroke-width:2} .title{font:700 20px sans-serif;
+            fill:#111} .label{font:16px sans-serif; fill:#111} .arrow{stroke:#111; stroke-width:2;
+            marker-end:url(#arr)} .dashed{stroke-dasharray:6 6} </style>
+        <marker id="arr" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L10,3 L0,6 Z" fill="#111" />
+        </marker>
+    </defs>
+    <text x="500" y="36" text-anchor="middle" class="title">Module Interaction</text>
+
+    <!-- Parsers -->
+    <rect x="60" y="80" width="220" height="70" rx="8" class="box" />
+    <text x="170" y="122" text-anchor="middle" class="label">Parsers</text> <!-- Dynamic Filtering -->
+    <rect x="380" y="80" width="240" height="70" rx="8" class="box" />
+    <text x="500" y="122" text-anchor="middle" class="label">Core Dynamic Filtering</text> <!-- Rust
+    Modules cluster -->
+    <rect x="700" y="60" width="240" height="110" rx="10" class="box" />
+    <text x="820" y="95" text-anchor="middle" class="label">Rust Modules</text>
+    <text x="820" y="120" text-anchor="middle" class="label">Filtering • Triangulation • Inference</text> <!--
+    Utils -->
+    <rect x="380" y="200" width="240" height="60" rx="8" class="box" />
+    <text x="500" y="238" text-anchor="middle" class="label">Utils (shared)</text> <!--
+    Visualizations -->
+    <rect x="380" y="340" width="240" height="70" rx="8" class="box" />
+    <text x="500" y="382" text-anchor="middle" class="label">Visualizations</text> <!-- Arrows -->
+    <line x1="280" y1="115" x2="380" y2="115" class="arrow" />
+    <line x1="620" y1="115" x2="700" y2="115" class="arrow" />
+    <line x1="500" y1="150" x2="500" y2="200" class="arrow" />
+    <line x1="500" y1="260" x2="500" y2="340" class="arrow" /> <!-- Utils support dashed -->
+    <line x1="500" y1="230" x2="820" y2="170" class="arrow dashed" />
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340">
+    <defs>
+        <style> .box{fill:#fff;stroke:#111;stroke-width:2} .label{font:16px sans-serif; fill:#111}
+            .title{font:700 20px sans-serif; fill:#111} .arrow{stroke:#111; stroke-width:2;
+            marker-end:url(#a)} .small{font:14px sans-serif; fill:#111} </style>
+        <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L10,3 L0,6 Z" fill="#111" />
+        </marker>
+    </defs>
+    <text x="600" y="30" text-anchor="middle" class="title">Temporal-Orbital Triangulation Pipeline</text>
+
+    <!-- Stages -->
+    <rect x="40" y="90" width="150" height="70" rx="8" class="box" />
+    <text x="115" y="122" text-anchor="middle" class="label">Sources</text>
+    <text x="115" y="142" text-anchor="middle" class="small">Sat, 5G, WiFi, etc.</text>
+    <rect x="220" y="90" width="150" height="70" rx="8" class="box" />
+    <text x="295" y="122" text-anchor="middle" class="label">Parsers</text>
+    <rect x="400" y="90" width="150" height="70" rx="8" class="box" />
+    <text x="475" y="122" text-anchor="middle" class="label">Kalman</text>
+    <rect x="580" y="90" width="170" height="70" rx="8" class="box" />
+    <text x="665" y="122" text-anchor="middle" class="label">Triangulation</text>
+    <rect x="780" y="90" width="180" height="70" rx="8" class="box" />
+    <text x="870" y="122" text-anchor="middle" class="label">Bayesian + Fuzzy</text>
+    <rect x="980" y="90" width="170" height="70" rx="8" class="box" />
+    <text x="1065" y="122" text-anchor="middle" class="label">Meta-Cognition</text> <!-- Arrows -->
+    <line x1="190" y1="125" x2="220" y2="125" class="arrow" />
+    <line x1="370" y1="125" x2="400" y2="125" class="arrow" />
+    <line x1="550" y1="125" x2="580" y2="125" class="arrow" />
+    <line x1="750" y1="125" x2="780" y2="125" class="arrow" />
+    <line x1="960" y1="125" x2="980" y2="125" class="arrow" /> <!-- Outputs -->
+    <rect x="400" y="220" width="400" height="80" rx="10" class="box" />
+    <text x="600" y="255" text-anchor="middle" class="label">Outputs</text>
+    <text x="600" y="278" text-anchor="middle" class="small">GeoJSON • CZML • CSV • JSON</text> <!--
+    Down arrow from Consciousness to Outputs -->
+    <line x1="1065" y1="160" x2="600" y2="220" class="arrow" />
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520">
+    <defs>
+        <style> .earth{fill:#f7f7f7; stroke:#111; stroke-width:2} .sat{fill:#fff; stroke:#111;
+            stroke-width:2} .rx{fill:#fff; stroke:#111; stroke-width:2} .label{font:14px sans-serif;
+            fill:#111} .title{font:700 20px sans-serif; fill:#111} .los{stroke:#111; stroke-width:2;
+            stroke-dasharray:6 6} .future{stroke:#111; stroke-width:2; stroke-dasharray:2 8}
+            .arrow{stroke:#111; stroke-width:2; marker-end:url(#a)} </style>
+        <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L10,3 L0,6 Z" fill="#111" />
+        </marker>
+    </defs>
+    <text x="500" y="30" text-anchor="middle" class="title">Line-of-Sight and Orbital Prediction</text>
+
+    <!-- Earth/ground -->
+    <ellipse cx="500" cy="380" rx="380" ry="60" class="earth" />
+    <text x="500" y="450" text-anchor="middle" class="label">Earth Surface (Receiver at center)</text> <!--
+    Receiver -->
+    <circle cx="500" cy="360" r="12" class="rx" />
+    <text x="500" y="345" text-anchor="middle" class="label">Receiver</text> <!-- Satellites -->
+    <rect x="140" y="120" width="70" height="30" rx="4" class="sat" />
+    <text x="175" y="115" text-anchor="middle" class="label">Sat A</text>
+    <rect x="460" y="80" width="70" height="30" rx="4" class="sat" />
+    <text x="495" y="75" text-anchor="middle" class="label">Sat B</text>
+    <rect x="780" y="140" width="70" height="30" rx="4" class="sat" />
+    <text x="815" y="135" text-anchor="middle" class="label">Sat C</text> <!-- LOS dashed lines -->
+    <line x1="175" y1="150" x2="500" y2="360" class="los" />
+    <line x1="495" y1="110" x2="500" y2="360" class="los" />
+    <line x1="815" y1="170" x2="500" y2="360" class="los" /> <!-- Orbital arcs (future positions) -->
+    <circle cx="175" cy="150" r="90" fill="none" class="future" />
+    <circle cx="495" cy="110" r="100" fill="none" class="future" />
+    <circle cx="815" cy="170" r="95" fill="none" class="future" /> <!-- Future position markers -->
+    <circle cx="235" cy="210" r="6" fill="#111" />
+    <text x="240" y="230" class="label">A(t+Δ)</text>
+    <circle cx="585" cy="145" r="6" fill="#111" />
+    <text x="590" y="165" class="label">B(t+Δ)</text>
+    <circle cx="880" cy="200" r="6" fill="#111" />
+    <text x="885" y="220" class="label">C(t+Δ)</text>
+</svg>

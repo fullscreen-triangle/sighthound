@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+    <defs>
+        <style> .box{fill:#fff;stroke:#111;stroke-width:2} .label{font:16px sans-serif; fill:#111}
+            .title{font:700 20px sans-serif; fill:#111} .arrow{stroke:#111; stroke-width:2;
+            marker-end:url(#a)} </style>
+        <marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L10,3 L0,6 Z" fill="#111" />
+        </marker>
+    </defs>
+    <text x="450" y="36" text-anchor="middle" class="title">Kalman Filtering Cycle (Quality-Aware)</text>
+
+    <rect x="80" y="120" width="200" height="70" rx="8" class="box" />
+    <text x="180" y="162" text-anchor="middle" class="label">Previous State</text>
+    <rect x="340" y="120" width="200" height="70" rx="8" class="box" />
+    <text x="440" y="162" text-anchor="middle" class="label">Predict</text>
+    <rect x="600" y="120" width="200" height="70" rx="8" class="box" />
+    <text x="700" y="162" text-anchor="middle" class="label">Update</text>
+    <rect x="340" y="300" width="200" height="70" rx="8" class="box" />
+    <text x="440" y="342" text-anchor="middle" class="label">Measurement</text>
+    <rect x="340" y="420" width="200" height="70" rx="8" class="box" />
+    <text x="440" y="462" text-anchor="middle" class="label">New State</text> <!-- Flow -->
+    <line x1="280" y1="155" x2="340" y2="155" class="arrow" />
+    <line x1="540" y1="155" x2="600" y2="155" class="arrow" /> <!-- Measurement to Update -->
+    <line x1="440" y1="300" x2="440" y2="190" class="arrow" />
+    <line x1="440" y1="190" x2="600" y2="190" class="arrow" /> <!-- Update to New State -->
+    <line x1="700" y1="190" x2="440" y2="420" class="arrow" /> <!-- Loop back -->
+    <line x1="340" y1="455" x2="180" y2="455" class="arrow" />
+    <line x1="180" y1="455" x2="180" y2="190" class="arrow" />
+</svg>

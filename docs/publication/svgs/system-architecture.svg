@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+    <defs>
+        <style> .box{fill:#fff;stroke:#111;stroke-width:2} .label{font:16px sans-serif; fill:#111}
+            .title{font:700 22px sans-serif; fill:#111} .arrow{stroke:#111; stroke-width:2;
+            marker-end:url(#m)} .ctrl{stroke:#555; stroke-width:2; stroke-dasharray:6 6;
+            marker-end:url(#m)} .lane{fill:none; stroke:#bbb; stroke-width:1} </style>
+        <marker id="m" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+            <path d="M0,0 L10,3 L0,6 Z" fill="#111" />
+        </marker>
+    </defs>
+    <text x="600" y="40" text-anchor="middle" class="title">Sighthound Architecture</text>
+
+    <!-- Swimlanes -->
+    <line x1="20" y1="70" x2="1180" y2="70" class="lane" />
+    <text x="30" y="65" class="label">User</text>
+    <line x1="20" y1="150" x2="1180" y2="150" class="lane" />
+    <text x="30" y="145" class="label">Orchestration</text>
+    <line x1="20" y1="250" x2="1180" y2="250" class="lane" />
+    <text x="30" y="245" class="label">Core Modules (Rust)</text>
+    <line x1="20" y1="430" x2="1180" y2="430" class="lane" />
+    <text x="30" y="425" class="label">Outputs</text> <!-- User -->
+    <rect x="60" y="85" width="220" height="50" rx="8" class="box" />
+    <text x="170" y="115" text-anchor="middle" class="label">CLI / API</text> <!-- Orchestrator -->
+    <rect x="420" y="165" width="300" height="60" rx="8" class="box" />
+    <text x="570" y="200" text-anchor="middle" class="label">Python Orchestrator</text>
+    <line x1="280" y1="110" x2="420" y2="195" class="arrow" /> <!-- Fallback -->
+    <rect x="60" y="170" width="220" height="50" rx="8" class="box" />
+    <text x="170" y="200" text-anchor="middle" class="label">Python Fallbacks</text>
+    <line x1="420" y1="195" x2="280" y2="195" class="ctrl" /> <!-- Core Modules -->
+    <rect x="120" y="280" width="220" height="60" rx="8" class="box" />
+    <text x="230" y="318" text-anchor="middle" class="label">Filtering</text>
+    <rect x="370" y="280" width="220" height="60" rx="8" class="box" />
+    <text x="480" y="318" text-anchor="middle" class="label">Triangulation</text>
+    <rect x="620" y="280" width="220" height="60" rx="8" class="box" />
+    <text x="730" y="318" text-anchor="middle" class="label">Bayesian + Fuzzy</text>
+    <rect x="870" y="280" width="220" height="60" rx="8" class="box" />
+    <text x="980" y="318" text-anchor="middle" class="label">Autobahn Integration</text> <!--
+    Orchestrator to modules -->
+    <line x1="570" y1="225" x2="230" y2="280" class="arrow" />
+    <line x1="570" y1="225" x2="480" y2="280" class="arrow" />
+    <line x1="570" y1="225" x2="730" y2="280" class="arrow" />
+    <line x1="570" y1="225" x2="980" y2="280" class="arrow" /> <!-- Outputs -->
+    <rect x="200" y="460" width="800" height="120" rx="10" class="box" />
+    <text x="600" y="495" text-anchor="middle" class="label">Output Generators</text>
+    <text x="600" y="520" text-anchor="middle" class="label">GeoJSON CZML CSV JSON</text> <!-- Module
+    to Outputs -->
+    <line x1="230" y1="340" x2="600" y2="460" class="arrow" />
+    <line x1="480" y1="340" x2="600" y2="460" class="arrow" />
+    <line x1="730" y1="340" x2="600" y2="460" class="arrow" />
+    <line x1="980" y1="340" x2="600" y2="460" class="arrow" />
+</svg>

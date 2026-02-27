@@ -1,0 +1,4919 @@
+{
+  "metadata": {
+    "validation_date": "2026-02-27T04:47:33.615613",
+    "geojson_source": "c:/Users/kundai/Documents/geosciences/sighthound/cynegeticus/public/comprehensive_gps_multiprecision_20251013_053445.geojson",
+    "location": "48.183\u00b0N, 11.357\u00b0E",
+    "method": "trajectory_completion_circular_validation"
+  },
+  "results": {
+    "original_gps": {
+      "watch1": [
+        {
+          "lon": 11.356855044783922,
+          "lat": 48.18311696071889,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 0,
+          "velocity_ms": 0.0,
+          "original_lat": 48.183117,
+          "original_lon": 11.356855,
+          "refined_lat": 48.18311696071889,
+          "refined_lon": 11.356855044783922
+        },
+        {
+          "lon": 11.356860012495508,
+          "lat": 48.18312866596203,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 1,
+          "velocity_ms": 1.331388992629126,
+          "original_lat": 48.1831285,
+          "original_lon": 11.35686,
+          "refined_lat": 48.18312866596203,
+          "refined_lon": 11.356860012495508
+        },
+        {
+          "lon": 11.356865024470945,
+          "lat": 48.18314001048643,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 2,
+          "velocity_ms": 1.3313889695097811,
+          "original_lat": 48.18314,
+          "original_lon": 11.356865,
+          "refined_lat": 48.18314001048643,
+          "refined_lon": 11.356865024470945
+        },
+        {
+          "lon": 11.356863882917374,
+          "lat": 48.183162027751095,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 3,
+          "velocity_ms": 2.4474115959644216,
+          "original_lat": 48.183162,
+          "original_lon": 11.356864,
+          "refined_lat": 48.183162027751095,
+          "refined_lon": 11.356863882917374
+        },
+        {
+          "lon": 11.356862996233364,
+          "lat": 48.183183815813194,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 4,
+          "velocity_ms": 2.4474115942067747,
+          "original_lat": 48.183184,
+          "original_lon": 11.356863,
+          "refined_lat": 48.183183815813194,
+          "refined_lon": 11.356862996233364
+        },
+        {
+          "lon": 11.356849500606414,
+          "lat": 48.18322450747086,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 5,
+          "velocity_ms": 4.613277018513802,
+          "original_lat": 48.1832245,
+          "original_lon": 11.3568495,
+          "refined_lat": 48.18322450747086,
+          "refined_lon": 11.356849500606414
+        },
+        {
+          "lon": 11.35683607464172,
+          "lat": 48.18326510569542,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 6,
+          "velocity_ms": 4.613276846143004,
+          "original_lat": 48.183265,
+          "original_lon": 11.356836,
+          "refined_lat": 48.18326510569542,
+          "refined_lon": 11.35683607464172
+        },
+        {
+          "lon": 11.356807521393067,
+          "lat": 48.18330260432125,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 7,
+          "velocity_ms": 4.67460639882667,
+          "original_lat": 48.1833025,
+          "original_lon": 11.3568075,
+          "refined_lat": 48.18330260432125,
+          "refined_lon": 11.356807521393067
+        },
+        {
+          "lon": 11.356778885836912,
+          "lat": 48.18333981816437,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 8,
+          "velocity_ms": 4.674605699455952,
+          "original_lat": 48.18334,
+          "original_lon": 11.356779,
+          "refined_lat": 48.18333981816437,
+          "refined_lon": 11.356778885836912
+        },
+        {
+          "lon": 11.356739095740936,
+          "lat": 48.183372444119136,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 9,
+          "velocity_ms": 4.674866349268921,
+          "original_lat": 48.1833725,
+          "original_lon": 11.356739,
+          "refined_lat": 48.183372444119136,
+          "refined_lon": 11.356739095740936
+        },
+        {
+          "lon": 11.356698983212596,
+          "lat": 48.18340504695872,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 10,
+          "velocity_ms": 4.674865157004219,
+          "original_lat": 48.183405,
+          "original_lon": 11.356699,
+          "refined_lat": 48.18340504695872,
+          "refined_lon": 11.356698983212596
+        },
+        {
+          "lon": 11.356644104675045,
+          "lat": 48.18343245029538,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 11,
+          "velocity_ms": 5.096832962745325,
+          "original_lat": 48.1834325,
+          "original_lon": 11.356644,
+          "refined_lat": 48.18343245029538,
+          "refined_lon": 11.356644104675045
+        },
+        {
+          "lon": 11.356588920054104,
+          "lat": 48.18345996602291,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 12,
+          "velocity_ms": 5.096831211964112,
+          "original_lat": 48.18346,
+          "original_lon": 11.356589,
+          "refined_lat": 48.18345996602291,
+          "refined_lon": 11.356588920054104
+        },
+        {
+          "lon": 11.35651990165076,
+          "lat": 48.18347792240152,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 13,
+          "velocity_ms": 5.493201946238313,
+          "original_lat": 48.183478,
+          "original_lon": 11.35652,
+          "refined_lat": 48.18347792240152,
+          "refined_lon": 11.35651990165076
+        },
+        {
+          "lon": 11.356450929041205,
+          "lat": 48.183495985006935,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 14,
+          "velocity_ms": 5.4932002730291805,
+          "original_lat": 48.183496,
+          "original_lon": 11.356451,
+          "refined_lat": 48.183495985006935,
+          "refined_lon": 11.356450929041205
+        },
+        {
+          "lon": 11.356380461609259,
+          "lat": 48.183502088175686,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 15,
+          "velocity_ms": 5.2692004911139065,
+          "original_lat": 48.183502,
+          "original_lon": 11.3563805,
+          "refined_lat": 48.183502088175686,
+          "refined_lon": 11.356380461609259
+        },
+        {
+          "lon": 11.35631014637041,
+          "lat": 48.183507972163596,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 16,
+          "velocity_ms": 5.269199884316853,
+          "original_lat": 48.183508,
+          "original_lon": 11.35631,
+          "refined_lat": 48.183507972163596,
+          "refined_lon": 11.35631014637041
+        },
+        {
+          "lon": 11.356245074284432,
+          "lat": 48.183503910519065,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 17,
+          "velocity_ms": 4.839510069895319,
+          "original_lat": 48.183504,
+          "original_lon": 11.356245,
+          "refined_lat": 48.183503910519065,
+          "refined_lon": 11.356245074284432
+        },
+        {
+          "lon": 11.356179968186126,
+          "lat": 48.18349996652212,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 18,
+          "velocity_ms": 4.839510444160296,
+          "original_lat": 48.1835,
+          "original_lon": 11.35618,
+          "refined_lat": 48.18349996652212,
+          "refined_lon": 11.356179968186126
+        },
+        {
+          "lon": 11.35611697606231,
+          "lat": 48.18348391328009,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 19,
+          "velocity_ms": 4.9981177741128855,
+          "original_lat": 48.183484,
+          "original_lon": 11.356117,
+          "refined_lat": 48.18348391328009,
+          "refined_lon": 11.35611697606231
+        },
+        {
+          "lon": 11.356053901912302,
+          "lat": 48.18346796318931,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 20,
+          "velocity_ms": 4.9981191364531945,
+          "original_lat": 48.183468,
+          "original_lon": 11.356054,
+          "refined_lat": 48.18346796318931,
+          "refined_lon": 11.356053901912302
+        },
+        {
+          "lon": 11.355999049933597,
+          "lat": 48.183439524620084,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 21,
+          "velocity_ms": 5.164308762696987,
+          "original_lat": 48.1834395,
+          "original_lon": 11.355999,
+          "refined_lat": 48.183439524620084,
+          "refined_lon": 11.355999049933597
+        },
+        {
+          "lon": 11.35594402569675,
+          "lat": 48.183410915840795,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 22,
+          "velocity_ms": 5.16431055294651,
+          "original_lat": 48.183411,
+          "original_lon": 11.355944,
+          "refined_lat": 48.183410915840795,
+          "refined_lon": 11.35594402569675
+        },
+        {
+          "lon": 11.355903498811193,
+          "lat": 48.183376573329255,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 23,
+          "velocity_ms": 4.871593003567583,
+          "original_lat": 48.1833765,
+          "original_lon": 11.3559035,
+          "refined_lat": 48.183376573329255,
+          "refined_lon": 11.355903498811193
+        },
+        {
+          "lon": 11.3558629818161,
+          "lat": 48.18334215286081,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 24,
+          "velocity_ms": 4.871594249277355,
+          "original_lat": 48.183342,
+          "original_lon": 11.355863,
+          "refined_lat": 48.18334215286081,
+          "refined_lon": 11.3558629818161
+        },
+        {
+          "lon": 11.355834398453528,
+          "lat": 48.183307909713335,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 25,
+          "velocity_ms": 4.331023989012962,
+          "original_lat": 48.183308,
+          "original_lon": 11.3558345,
+          "refined_lat": 48.183307909713335,
+          "refined_lon": 11.355834398453528
+        },
+        {
+          "lon": 11.355805939683092,
+          "lat": 48.18327401837399,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 26,
+          "velocity_ms": 4.33102467215528,
+          "original_lat": 48.183274,
+          "original_lon": 11.355806,
+          "refined_lat": 48.18327401837399,
+          "refined_lon": 11.355805939683092
+        },
+        {
+          "lon": 11.35578308033203,
+          "lat": 48.18324248555928,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 27,
+          "velocity_ms": 3.8956648336753967,
+          "original_lat": 48.1832425,
+          "original_lon": 11.355783,
+          "refined_lat": 48.18324248555928,
+          "refined_lon": 11.35578308033203
+        },
+        {
+          "lon": 11.35576000812579,
+          "lat": 48.18321098058534,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 28,
+          "velocity_ms": 3.8956652924188746,
+          "original_lat": 48.183211,
+          "original_lon": 11.35576,
+          "refined_lat": 48.18321098058534,
+          "refined_lon": 11.35576000812579
+        },
+        {
+          "lon": 11.355735055181198,
+          "lat": 48.18317807006883,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 29,
+          "velocity_ms": 4.1109775588020865,
+          "original_lat": 48.183178,
+          "original_lon": 11.355735,
+          "refined_lat": 48.18317807006883,
+          "refined_lon": 11.355735055181198
+        },
+        {
+          "lon": 11.355710113565676,
+          "lat": 48.183145117896224,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 30,
+          "velocity_ms": 4.110978096034219,
+          "original_lat": 48.183145,
+          "original_lon": 11.35571,
+          "refined_lat": 48.183145117896224,
+          "refined_lon": 11.355710113565676
+        },
+        {
+          "lon": 11.355677976566703,
+          "lat": 48.183109512977225,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 31,
+          "velocity_ms": 4.605507535466083,
+          "original_lat": 48.1831095,
+          "original_lon": 11.355678,
+          "refined_lat": 48.183109512977225,
+          "refined_lon": 11.355677976566703
+        },
+        {
+          "lon": 11.35564593007885,
+          "lat": 48.18307404779039,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 32,
+          "velocity_ms": 4.605508381810038,
+          "original_lat": 48.183074,
+          "original_lon": 11.355646,
+          "refined_lat": 48.18307404779039,
+          "refined_lon": 11.35564593007885
+        },
+        {
+          "lon": 11.355608001907255,
+          "lat": 48.183036123330965,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 33,
+          "velocity_ms": 5.078509609847563,
+          "original_lat": 48.183036,
+          "original_lon": 11.355608,
+          "refined_lat": 48.183036123330965,
+          "refined_lon": 11.355608001907255
+        },
+        {
+          "lon": 11.35557010893994,
+          "lat": 48.1829980162138,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 34,
+          "velocity_ms": 5.078510769136934,
+          "original_lat": 48.182998,
+          "original_lon": 11.35557,
+          "refined_lat": 48.1829980162138,
+          "refined_lon": 11.35557010893994
+        },
+        {
+          "lon": 11.3555261895122,
+          "lat": 48.182959348826266,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 35,
+          "velocity_ms": 5.382247565124788,
+          "original_lat": 48.1829595,
+          "original_lon": 11.355526,
+          "refined_lat": 48.182959348826266,
+          "refined_lon": 11.3555261895122
+        },
+        {
+          "lon": 11.3554820447163,
+          "lat": 48.182920814595825,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 36,
+          "velocity_ms": 5.382249050697631,
+          "original_lat": 48.182921,
+          "original_lon": 11.355482,
+          "refined_lat": 48.182920814595825,
+          "refined_lon": 11.3554820447163
+        },
+        {
+          "lon": 11.355435567904589,
+          "lat": 48.18288304204396,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 37,
+          "velocity_ms": 5.453376492702499,
+          "original_lat": 48.182883,
+          "original_lon": 11.3554355,
+          "refined_lat": 48.18288304204396,
+          "refined_lon": 11.355435567904589
+        },
+        {
+          "lon": 11.35538906173487,
+          "lat": 48.18284511040947,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 38,
+          "velocity_ms": 5.453378107770042,
+          "original_lat": 48.182845,
+          "original_lon": 11.355389,
+          "refined_lat": 48.18284511040947,
+          "refined_lon": 11.35538906173487
+        },
+        {
+          "lon": 11.355345970755774,
+          "lat": 48.18280757332918,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 39,
+          "velocity_ms": 5.248880812958811,
+          "original_lat": 48.1828075,
+          "original_lon": 11.355346,
+          "refined_lat": 48.18280757332918,
+          "refined_lon": 11.355345970755774
+        },
+        {
+          "lon": 11.355302829763293,
+          "lat": 48.18276985458553,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 40,
+          "velocity_ms": 5.248882230219548,
+          "original_lat": 48.18277,
+          "original_lon": 11.355303,
+          "refined_lat": 48.18276985458553,
+          "refined_lon": 11.355302829763293
+        },
+        {
+          "lon": 11.35526794424122,
+          "lat": 48.18273392640199,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 41,
+          "velocity_ms": 4.770497904058733,
+          "original_lat": 48.182734,
+          "original_lon": 11.355268,
+          "refined_lat": 48.18273392640199,
+          "refined_lon": 11.35526794424122
+        },
+        {
+          "lon": 11.355232929189839,
+          "lat": 48.1826982131802,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 42,
+          "velocity_ms": 4.7704988960963135,
+          "original_lat": 48.182698,
+          "original_lon": 11.355233,
+          "refined_lat": 48.1826982131802,
+          "refined_lon": 11.355232929189839
+        },
+        {
+          "lon": 11.355209010033658,
+          "lat": 48.1826654979308,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 43,
+          "velocity_ms": 4.028142646651066,
+          "original_lat": 48.1826655,
+          "original_lon": 11.355209,
+          "refined_lat": 48.1826654979308,
+          "refined_lon": 11.355209010033658
+        },
+        {
+          "lon": 11.355184887408393,
+          "lat": 48.1826329061147,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 44,
+          "velocity_ms": 4.028143144290175,
+          "original_lat": 48.182633,
+          "original_lon": 11.355185,
+          "refined_lat": 48.1826329061147,
+          "refined_lon": 11.355184887408393
+        },
+        {
+          "lon": 11.355174061485831,
+          "lat": 48.182603719641584,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 45,
+          "velocity_ms": 3.380111072693986,
+          "original_lat": 48.1826035,
+          "original_lon": 11.355174,
+          "refined_lat": 48.182603719641584,
+          "refined_lon": 11.355174061485831
+        },
+        {
+          "lon": 11.35516295449265,
+          "lat": 48.182573929582304,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 46,
+          "velocity_ms": 3.3801111851694143,
+          "original_lat": 48.182574,
+          "original_lon": 11.355163,
+          "refined_lat": 48.182573929582304,
+          "refined_lon": 11.35516295449265
+        },
+        {
+          "lon": 11.355162065339034,
+          "lat": 48.18254748289532,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 47,
+          "velocity_ms": 2.9475981204491246,
+          "original_lat": 48.1825475,
+          "original_lon": 11.355162,
+          "refined_lat": 48.18254748289532,
+          "refined_lon": 11.355162065339034
+        },
+        {
+          "lon": 11.355160848012732,
+          "lat": 48.182520879228704,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 48,
+          "velocity_ms": 2.9475981206233595,
+          "original_lat": 48.182521,
+          "original_lon": 11.355161,
+          "refined_lat": 48.182520879228704,
+          "refined_lon": 11.355160848012732
+        },
+        {
+          "lon": 11.355173041487049,
+          "lat": 48.182496471520246,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 49,
+          "velocity_ms": 2.8658708418889356,
+          "original_lat": 48.1824965,
+          "original_lon": 11.355173,
+          "refined_lat": 48.182496471520246,
+          "refined_lon": 11.355173041487049
+        },
+        {
+          "lon": 11.355184986547972,
+          "lat": 48.182472071932246,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 50,
+          "velocity_ms": 2.865870973898052,
+          "original_lat": 48.182472,
+          "original_lon": 11.355185,
+          "refined_lat": 48.182472071932246,
+          "refined_lon": 11.355184986547972
+        },
+        {
+          "lon": 11.355215175879032,
+          "lat": 48.182444976728966,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 51,
+          "velocity_ms": 3.736402385416551,
+          "original_lat": 48.182445,
+          "original_lon": 11.355215,
+          "refined_lat": 48.182444976728966,
+          "refined_lon": 11.355215175879032
+        },
+        {
+          "lon": 11.355245029561482,
+          "lat": 48.1824181260062,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 52,
+          "velocity_ms": 3.7364030835341464,
+          "original_lat": 48.182418,
+          "original_lon": 11.355245,
+          "refined_lat": 48.1824181260062,
+          "refined_lon": 11.355245029561482
+        },
+        {
+          "lon": 11.355288894222284,
+          "lat": 48.18239002837421,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 53,
+          "velocity_ms": 4.5094840997720205,
+          "original_lat": 48.18239,
+          "original_lon": 11.355289,
+          "refined_lat": 48.18239002837421,
+          "refined_lon": 11.355288894222284
+        },
+        {
+          "lon": 11.355333000073982,
+          "lat": 48.18236202783909,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 54,
+          "velocity_ms": 4.509485388723336,
+          "original_lat": 48.182362,
+          "original_lon": 11.355333,
+          "refined_lat": 48.18236202783909,
+          "refined_lon": 11.355333000073982
+        },
+        {
+          "lon": 11.355389994983858,
+          "lat": 48.18233498619534,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 55,
+          "velocity_ms": 5.183894430209056,
+          "original_lat": 48.182335,
+          "original_lon": 11.35539,
+          "refined_lat": 48.18233498619534,
+          "refined_lon": 11.355389994983858
+        },
+        {
+          "lon": 11.35544701193181,
+          "lat": 48.182307928544155,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 56,
+          "velocity_ms": 5.183896245302524,
+          "original_lat": 48.182308,
+          "original_lon": 11.355447,
+          "refined_lat": 48.182307928544155,
+          "refined_lon": 11.35544701193181
+        },
+        {
+          "lon": 11.355505557058475,
+          "lat": 48.182285458914365,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 57,
+          "velocity_ms": 5.007092331474793,
+          "original_lat": 48.1822855,
+          "original_lon": 11.3555055,
+          "refined_lat": 48.182285458914365,
+          "refined_lon": 11.355505557058475
+        },
+        {
+          "lon": 11.355564214895653,
+          "lat": 48.182262940988316,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 58,
+          "velocity_ms": 5.007093980551689,
+          "original_lat": 48.182263,
+          "original_lon": 11.355564,
+          "refined_lat": 48.182262940988316,
+          "refined_lon": 11.355564214895653
+        },
+        {
+          "lon": 11.355622014787116,
+          "lat": 48.18225098830281,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 59,
+          "velocity_ms": 4.502425988890182,
+          "original_lat": 48.182251,
+          "original_lon": 11.355622,
+          "refined_lat": 48.18225098830281,
+          "refined_lon": 11.355622014787116
+        },
+        {
+          "lon": 11.355680068197419,
+          "lat": 48.18223894560464,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 60,
+          "velocity_ms": 4.502426950206178,
+          "original_lat": 48.182239,
+          "original_lon": 11.35568,
+          "refined_lat": 48.18223894560464,
+          "refined_lon": 11.355680068197419
+        },
+        {
+          "lon": 11.355740088346483,
+          "lat": 48.18223957173439,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 61,
+          "velocity_ms": 4.448790685488795,
+          "original_lat": 48.1822395,
+          "original_lon": 11.35574,
+          "refined_lat": 48.18223957173439,
+          "refined_lon": 11.355740088346483
+        },
+        {
+          "lon": 11.355800096341868,
+          "lat": 48.182239913830685,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 62,
+          "velocity_ms": 4.448790641969774,
+          "original_lat": 48.18224,
+          "original_lon": 11.3558,
+          "refined_lat": 48.182239913830685,
+          "refined_lon": 11.355800096341868
+        },
+        {
+          "lon": 11.355858492395118,
+          "lat": 48.18224912304505,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 63,
+          "velocity_ms": 4.451189549977616,
+          "original_lat": 48.182249,
+          "original_lon": 11.3558585,
+          "refined_lat": 48.18224912304505,
+          "refined_lon": 11.355858492395118
+        },
+        {
+          "lon": 11.355917045734248,
+          "lat": 48.182257903454264,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 64,
+          "velocity_ms": 4.451188807966213,
+          "original_lat": 48.182258,
+          "original_lon": 11.355917,
+          "refined_lat": 48.182257903454264,
+          "refined_lon": 11.355917045734248
+        },
+        {
+          "lon": 11.355970060199013,
+          "lat": 48.18227251651011,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 65,
+          "velocity_ms": 4.247378339654699,
+          "original_lat": 48.1822725,
+          "original_lon": 11.35597,
+          "refined_lat": 48.18227251651011,
+          "refined_lon": 11.355970060199013
+        },
+        {
+          "lon": 11.356023015346842,
+          "lat": 48.18228700474404,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 66,
+          "velocity_ms": 4.247377311149722,
+          "original_lat": 48.182287,
+          "original_lon": 11.356023,
+          "refined_lat": 48.18228700474404,
+          "refined_lon": 11.356023015346842
+        },
+        {
+          "lon": 11.356066284168142,
+          "lat": 48.18230281010721,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 67,
+          "velocity_ms": 3.6832932282901765,
+          "original_lat": 48.182303,
+          "original_lon": 11.3560665,
+          "refined_lat": 48.18230281010721,
+          "refined_lon": 11.356066284168142
+        },
+        {
+          "lon": 11.356109901793191,
+          "lat": 48.18231904957299,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 68,
+          "velocity_ms": 3.683292347112841,
+          "original_lat": 48.182319,
+          "original_lon": 11.35611,
+          "refined_lat": 48.18231904957299,
+          "refined_lon": 11.356109901793191
+        },
+        {
+          "lon": 11.356144782467762,
+          "lat": 48.18233708570033,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 69,
+          "velocity_ms": 3.27714062377945,
+          "original_lat": 48.182337,
+          "original_lon": 11.356145,
+          "refined_lat": 48.18233708570033,
+          "refined_lon": 11.356144782467762
+        },
+        {
+          "lon": 11.356179910715928,
+          "lat": 48.18235511126761,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 70,
+          "velocity_ms": 3.277139902746262,
+          "original_lat": 48.182355,
+          "original_lon": 11.35618,
+          "refined_lat": 48.18235511126761,
+          "refined_lon": 11.356179910715928
+        },
+        {
+          "lon": 11.35620747527009,
+          "lat": 48.182377028863016,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 71,
+          "velocity_ms": 3.184540232851614,
+          "original_lat": 48.182377,
+          "original_lon": 11.3562075,
+          "refined_lat": 48.182377028863016,
+          "refined_lon": 11.35620747527009
+        },
+        {
+          "lon": 11.356235018722142,
+          "lat": 48.18239898004529,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 72,
+          "velocity_ms": 3.184539672005427,
+          "original_lat": 48.182399,
+          "original_lon": 11.356235,
+          "refined_lat": 48.18239898004529,
+          "refined_lon": 11.356235018722142
+        },
+        {
+          "lon": 11.356258472841466,
+          "lat": 48.182425075567146,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 73,
+          "velocity_ms": 3.375483336111079,
+          "original_lat": 48.182425,
+          "original_lon": 11.3562585,
+          "refined_lat": 48.182425075567146,
+          "refined_lon": 11.356258472841466
+        },
+        {
+          "lon": 11.356282076606442,
+          "lat": 48.182450799209114,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 74,
+          "velocity_ms": 3.3754828793549323,
+          "original_lat": 48.182451,
+          "original_lon": 11.356282,
+          "refined_lat": 48.182450799209114,
+          "refined_lon": 11.356282076606442
+        },
+        {
+          "lon": 11.356303297429546,
+          "lat": 48.18247794832055,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 75,
+          "velocity_ms": 3.399187875664588,
+          "original_lat": 48.182478,
+          "original_lon": 11.3563035,
+          "refined_lat": 48.18247794832055,
+          "refined_lon": 11.356303297429546
+        },
+        {
+          "lon": 11.356325003349815,
+          "lat": 48.182504957192,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 76,
+          "velocity_ms": 3.399187481299392,
+          "original_lat": 48.182505,
+          "original_lon": 11.356325,
+          "refined_lat": 48.182504957192,
+          "refined_lon": 11.356325003349815
+        },
+        {
+          "lon": 11.356345958294092,
+          "lat": 48.18253199997318,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 77,
+          "velocity_ms": 3.3819618781067113,
+          "original_lat": 48.182532,
+          "original_lon": 11.356346,
+          "refined_lat": 48.18253199997318,
+          "refined_lon": 11.356345958294092
+        },
+        {
+          "lon": 11.356366703407144,
+          "lat": 48.182558949667396,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 78,
+          "velocity_ms": 3.3819614998630594,
+          "original_lat": 48.182559,
+          "original_lon": 11.356367,
+          "refined_lat": 48.182558949667396,
+          "refined_lon": 11.356366703407144
+        },
+        {
+          "lon": 11.356386491021059,
+          "lat": 48.18258603833229,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 79,
+          "velocity_ms": 3.3322262757628436,
+          "original_lat": 48.182586,
+          "original_lon": 11.3563865,
+          "refined_lat": 48.18258603833229,
+          "refined_lon": 11.356386491021059
+        },
+        {
+          "lon": 11.356405915836374,
+          "lat": 48.182612983289424,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 80,
+          "velocity_ms": 3.332225945427358,
+          "original_lat": 48.182613,
+          "original_lon": 11.356406,
+          "refined_lat": 48.182612983289424,
+          "refined_lon": 11.356405915836374
+        },
+        {
+          "lon": 11.356427036632601,
+          "lat": 48.18264096596359,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 81,
+          "velocity_ms": 3.48104769007061,
+          "original_lat": 48.182641,
+          "original_lon": 11.356427,
+          "refined_lat": 48.18264096596359,
+          "refined_lon": 11.356427036632601
+        },
+        {
+          "lon": 11.356447997191918,
+          "lat": 48.18266897595924,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 82,
+          "velocity_ms": 3.4810473103966326,
+          "original_lat": 48.182669,
+          "original_lon": 11.356448,
+          "refined_lat": 48.18266897595924,
+          "refined_lon": 11.356447997191918
+        },
+        {
+          "lon": 11.35647037989617,
+          "lat": 48.18269991727823,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 83,
+          "velocity_ms": 3.829469123059988,
+          "original_lat": 48.1827,
+          "original_lon": 11.3564705,
+          "refined_lat": 48.18269991727823,
+          "refined_lon": 11.35647037989617
+        },
+        {
+          "lon": 11.356493119797477,
+          "lat": 48.18273091906243,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 84,
+          "velocity_ms": 3.829468683599524,
+          "original_lat": 48.182731,
+          "original_lon": 11.356493,
+          "refined_lat": 48.18273091906243,
+          "refined_lon": 11.356493119797477
+        },
+        {
+          "lon": 11.35651760624461,
+          "lat": 48.18276404319217,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 85,
+          "velocity_ms": 4.094404981437245,
+          "original_lat": 48.182764,
+          "original_lon": 11.3565175,
+          "refined_lat": 48.18276404319217,
+          "refined_lon": 11.35651760624461
+        },
+        {
+          "lon": 11.356542042259184,
+          "lat": 48.18279701294126,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 86,
+          "velocity_ms": 4.094404462594478,
+          "original_lat": 48.182797,
+          "original_lon": 11.356542,
+          "refined_lat": 48.18279701294126,
+          "refined_lon": 11.356542042259184
+        },
+        {
+          "lon": 11.356568029726356,
+          "lat": 48.18283118219795,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 87,
+          "velocity_ms": 4.243692880091433,
+          "original_lat": 48.182831,
+          "original_lon": 11.356568,
+          "refined_lat": 48.18283118219795,
+          "refined_lon": 11.356568029726356
+        },
+        {
+          "lon": 11.356594082451313,
+          "lat": 48.182865030511586,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 88,
+          "velocity_ms": 4.243692299309494,
+          "original_lat": 48.182865,
+          "original_lon": 11.356594,
+          "refined_lat": 48.182865030511586,
+          "refined_lon": 11.356594082451313
+        },
+        {
+          "lon": 11.356620449722142,
+          "lat": 48.182898450228535,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 89,
+          "velocity_ms": 4.211402678822644,
+          "original_lat": 48.1828985,
+          "original_lon": 11.3566205,
+          "refined_lat": 48.182898450228535,
+          "refined_lon": 11.356620449722142
+        },
+        {
+          "lon": 11.356647026346302,
+          "lat": 48.18293202230616,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 90,
+          "velocity_ms": 4.21140207980294,
+          "original_lat": 48.182932,
+          "original_lon": 11.356647,
+          "refined_lat": 48.18293202230616,
+          "refined_lon": 11.356647026346302
+        },
+        {
+          "lon": 11.356704945352309,
+          "lat": 48.18300848256433,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 91,
+          "velocity_ms": 9.531521784145284,
+          "original_lat": 48.1830085,
+          "original_lon": 11.356705,
+          "refined_lat": 48.18300848256433,
+          "refined_lon": 11.356704945352309
+        },
+        {
+          "lon": 11.35676308700267,
+          "lat": 48.18308511138981,
+          "watch": "Watch 1 (93 points)",
+          "point_index": 92,
+          "velocity_ms": 9.53151888895284,
+          "original_lat": 48.183085,
+          "original_lon": 11.356763,
+          "refined_lat": 48.18308511138981,
+          "refined_lon": 11.35676308700267
+        }
+      ],
+      "watch2": [
+        {
+          "lon": 11.356860090127558,
+          "lat": 48.18309323659374,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 0,
+          "velocity_ms": 0.0,
+          "original_lat": 48.18309327587485,
+          "original_lon": 11.356860045343636,
+          "refined_lat": 48.18309323659374,
+          "refined_lon": 11.356860090127558
+        },
+        {
+          "lon": 11.35686223713397,
+          "lat": 48.18310023117845,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 1,
+          "velocity_ms": 0.7720364991099304,
+          "original_lat": 48.18310006521642,
+          "original_lon": 11.356862224638462,
+          "refined_lat": 48.18310023117845,
+          "refined_lon": 11.35686223713397
+        },
+        {
+          "lon": 11.356881108391542,
+          "lat": 48.18314533797998,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 2,
+          "velocity_ms": 5.2235476911130565,
+          "original_lat": 48.18314532749355,
+          "original_lon": 11.356881083920598,
+          "refined_lat": 48.18314533797998,
+          "refined_lon": 11.356881108391542
+        },
+        {
+          "lon": 11.356889264922112,
+          "lat": 48.18318894114113,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 3,
+          "velocity_ms": 4.885421962991894,
+          "original_lat": 48.18318891339004,
+          "original_lon": 11.356889382004738,
+          "refined_lat": 48.18318894114113,
+          "refined_lon": 11.356889264922112
+        },
+        {
+          "lon": 11.356872782069821,
+          "lat": 48.18327271587302,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 4,
+          "velocity_ms": 9.41959921116009,
+          "original_lat": 48.18327290005982,
+          "original_lon": 11.356872785836458,
+          "refined_lat": 48.18327271587302,
+          "refined_lon": 11.356872782069821
+        },
+        {
+          "lon": 11.356845042343375,
+          "lat": 48.183318672721995,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 5,
+          "velocity_ms": 5.488843917614181,
+          "original_lat": 48.183318665251136,
+          "original_lon": 11.35684504173696,
+          "refined_lat": 48.183318672721995,
+          "refined_lon": 11.356845042343375
+        },
+        {
+          "lon": 11.356765069203393,
+          "lat": 48.18340284143537,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 6,
+          "velocity_ms": 11.07288778324546,
+          "original_lat": 48.183402735739946,
+          "original_lon": 11.356764994561672,
+          "refined_lat": 48.18340284143537,
+          "refined_lon": 11.356765069203393
+        },
+        {
+          "lon": 11.356653955737716,
+          "lat": 48.183474337695245,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 7,
+          "velocity_ms": 11.445621250493847,
+          "original_lat": 48.183474233374,
+          "original_lon": 11.35665393434465,
+          "refined_lat": 48.183474337695245,
+          "refined_lon": 11.356653955737716
+        },
+        {
+          "lon": 11.356515602598263,
+          "lat": 48.18352233130064,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 8,
+          "velocity_ms": 11.568386275860824,
+          "original_lat": 48.18352251313627,
+          "original_lon": 11.35651571676135,
+          "refined_lat": 48.18352233130064,
+          "refined_lon": 11.356515602598263
+        },
+        {
+          "lon": 11.356443392858885,
+          "lat": 48.18354123271851,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 9,
+          "velocity_ms": 5.7607270408195514,
+          "original_lat": 48.18354128859937,
+          "original_lon": 11.356443297117949,
+          "refined_lat": 48.18354123271851,
+          "refined_lon": 11.356443392858885
+        },
+        {
+          "lon": 11.356366753554587,
+          "lat": 48.183548963089976,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 10,
+          "velocity_ms": 5.736649649654686,
+          "original_lat": 48.18354891613126,
+          "original_lon": 11.356366770341992,
+          "refined_lat": 48.183548963089976,
+          "refined_lon": 11.356366753554587
+        },
+        {
+          "lon": 11.356159674370637,
+          "lat": 48.18353889196185,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 11,
+          "velocity_ms": 15.401601206657743,
+          "original_lat": 48.18353894166648,
+          "original_lon": 11.356159569695592,
+          "refined_lat": 48.18353889196185,
+          "refined_lon": 11.356159674370637
+        },
+        {
+          "lon": 11.356094613819149,
+          "lat": 48.18352851412946,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 12,
+          "velocity_ms": 4.94672640276465,
+          "original_lat": 48.18352854810655,
+          "original_lon": 11.356094693765044,
+          "refined_lat": 48.18352851412946,
+          "refined_lon": 11.356094613819149
+        },
+        {
+          "lon": 11.355975823847864,
+          "lat": 48.18348144803128,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 13,
+          "velocity_ms": 10.240964268609277,
+          "original_lat": 48.18348152562976,
+          "original_lon": 11.355975922197104,
+          "refined_lat": 48.18348144803128,
+          "refined_lon": 11.355975823847864
+        },
+        {
+          "lon": 11.355975851238309,
+          "lat": 48.183481510636696,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 14,
+          "velocity_ms": 0.0,
+          "original_lat": 48.18348152562976,
+          "original_lon": 11.355975922197104,
+          "refined_lat": 48.183481510636696,
+          "refined_lon": 11.355975851238309
+        },
+        {
+          "lon": 11.355872451121227,
+          "lat": 48.18341196019009,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 15,
+          "velocity_ms": 10.899140903319294,
+          "original_lat": 48.1834118720144,
+          "original_lon": 11.355872489511968,
+          "refined_lat": 48.18341196019009,
+          "refined_lon": 11.355872451121227
+        },
+        {
+          "lon": 11.355872635882378,
+          "lat": 48.183411844177996,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 16,
+          "velocity_ms": 0.0,
+          "original_lat": 48.1834118720144,
+          "original_lon": 11.355872489511968,
+          "refined_lat": 48.183411844177996,
+          "refined_lon": 11.355872635882378
+        },
+        {
+          "lon": 11.3557792732141,
+          "lat": 48.183327544406595,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 17,
+          "velocity_ms": 11.643693468167468,
+          "original_lat": 48.18332763388753,
+          "original_lon": 11.355779198929667,
+          "refined_lat": 48.183327544406595,
+          "refined_lon": 11.3557792732141
+        },
+        {
+          "lon": 11.355615468546853,
+          "lat": 48.18316641641166,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 18,
+          "velocity_ms": 21.645385581709498,
+          "original_lat": 48.18316644988954,
+          "original_lon": 11.355615500360727,
+          "refined_lat": 48.18316641641166,
+          "refined_lon": 11.355615468546853
+        },
+        {
+          "lon": 11.355533249952927,
+          "lat": 48.1830867350895,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 19,
+          "velocity_ms": 10.749953024682213,
+          "original_lat": 48.18308682180941,
+          "original_lon": 11.355533273890616,
+          "refined_lat": 48.1830867350895,
+          "refined_lon": 11.355533249952927
+        },
+        {
+          "lon": 11.355533175802918,
+          "lat": 48.18308678499872,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 20,
+          "velocity_ms": 0.0,
+          "original_lat": 48.18308682180941,
+          "original_lon": 11.355533273890616,
+          "refined_lat": 48.18308678499872,
+          "refined_lon": 11.355533175802918
+        },
+        {
+          "lon": 11.355451935544417,
+          "lat": 48.18300788890162,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 21,
+          "velocity_ms": 10.653307912475288,
+          "original_lat": 48.183007864281535,
+          "original_lon": 11.35545188561082,
+          "refined_lat": 48.18300788890162,
+          "refined_lon": 11.355451935544417
+        },
+        {
+          "lon": 11.355372953779696,
+          "lat": 48.18293301354604,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 22,
+          "velocity_ms": 10.167840124614978,
+          "original_lat": 48.182933097705245,
+          "original_lon": 11.355372928082945,
+          "refined_lat": 48.18293301354604,
+          "refined_lon": 11.355372953779696
+        },
+        {
+          "lon": 11.355300171974607,
+          "lat": 48.18285882355337,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 23,
+          "velocity_ms": 9.871166034949612,
+          "original_lat": 48.18285875022411,
+          "original_lon": 11.355300173163414,
+          "refined_lat": 48.18285882355337,
+          "refined_lon": 11.355300171974607
+        },
+        {
+          "lon": 11.355265118624256,
+          "lat": 48.18282269326322,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 24,
+          "velocity_ms": 4.791550548813074,
+          "original_lat": 48.18282254040241,
+          "original_lon": 11.355265136808155,
+          "refined_lat": 48.18282269326322,
+          "refined_lon": 11.355265118624256
+        },
+        {
+          "lon": 11.355193705265695,
+          "lat": 48.18275531107135,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 25,
+          "velocity_ms": 9.148835265266232,
+          "original_lat": 48.18275540135801,
+          "original_lon": 11.355193806812167,
+          "refined_lat": 48.18275531107135,
+          "refined_lon": 11.355193705265695
+        },
+        {
+          "lon": 11.35519374649526,
+          "lat": 48.182755419732004,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 26,
+          "velocity_ms": 0.0,
+          "original_lat": 48.18275540135801,
+          "original_lon": 11.355193806812167,
+          "refined_lat": 48.182755419732004,
+          "refined_lon": 11.35519374649526
+        },
+        {
+          "lon": 11.355126412823665,
+          "lat": 48.18268288345486,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 27,
+          "velocity_ms": 9.48797170411183,
+          "original_lat": 48.182682897895575,
+          "original_lon": 11.355126332491636,
+          "refined_lat": 48.18268288345486,
+          "refined_lon": 11.355126412823665
+        },
+        {
+          "lon": 11.355126340617426,
+          "lat": 48.18268287848092,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 28,
+          "velocity_ms": 0.0,
+          "original_lat": 48.182682897895575,
+          "original_lon": 11.355126332491636,
+          "refined_lat": 48.18268287848092,
+          "refined_lon": 11.355126340617426
+        },
+        {
+          "lon": 11.355079700472169,
+          "lat": 48.18260903957843,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 29,
+          "velocity_ms": 8.919486739118723,
+          "original_lat": 48.1826089695096,
+          "original_lon": 11.35507964529097,
+          "refined_lat": 48.18260903957843,
+          "refined_lon": 11.355079700472169
+        },
+        {
+          "lon": 11.355070790220251,
+          "lat": 48.18257111738446,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 30,
+          "velocity_ms": 4.274113635928347,
+          "original_lat": 48.18257099948824,
+          "original_lon": 11.355070676654575,
+          "refined_lat": 48.18257111738446,
+          "refined_lon": 11.355070790220251
+        },
+        {
+          "lon": 11.355071659049662,
+          "lat": 48.18253262334893,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 31,
+          "velocity_ms": 4.26932632499148,
+          "original_lat": 48.18253261037171,
+          "original_lon": 11.355071682482958,
+          "refined_lat": 48.18253262334893,
+          "refined_lon": 11.355071659049662
+        },
+        {
+          "lon": 11.355118718857632,
+          "lat": 48.182420089202516,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 32,
+          "velocity_ms": 12.995196385256962,
+          "original_lat": 48.18242004141212,
+          "original_lon": 11.355118788778782,
+          "refined_lat": 48.182420089202516,
+          "refined_lon": 11.355118718857632
+        },
+        {
+          "lon": 11.35514242765298,
+          "lat": 48.18238370346428,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 33,
+          "velocity_ms": 4.416845713374872,
+          "original_lat": 48.18238358013332,
+          "original_lon": 11.355142425745726,
+          "refined_lat": 48.18238370346428,
+          "refined_lon": 11.35514242765298
+        },
+        {
+          "lon": 11.355204057854944,
+          "lat": 48.18232475538686,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 34,
+          "velocity_ms": 7.975867794713088,
+          "original_lat": 48.182324739173055,
+          "original_lon": 11.355203948915005,
+          "refined_lat": 48.18232475538686,
+          "refined_lon": 11.355204057854944
+        },
+        {
+          "lon": 11.355245880305002,
+          "lat": 48.182297514452074,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 35,
+          "velocity_ms": 4.3174469481819315,
+          "original_lat": 48.18229766562581,
+          "original_lon": 11.3552456907928,
+          "refined_lat": 48.182297514452074,
+          "refined_lon": 11.355245880305002
+        },
+        {
+          "lon": 11.355390658614937,
+          "lat": 48.18222447384501,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 36,
+          "velocity_ms": 13.466606280413776,
+          "original_lat": 48.18222465924919,
+          "original_lon": 11.355390613898637,
+          "refined_lat": 48.18222447384501,
+          "refined_lon": 11.355390658614937
+        },
+        {
+          "lon": 11.35544818165898,
+          "lat": 48.18220793748681,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 37,
+          "velocity_ms": 4.6528009988826335,
+          "original_lat": 48.18220789544284,
+          "original_lon": 11.355448113754392,
+          "refined_lat": 48.18220793748681,
+          "refined_lon": 11.35544818165898
+        },
+        {
+          "lon": 11.355577675893262,
+          "lat": 48.18218009411475,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 38,
+          "velocity_ms": 10.09043270676714,
+          "original_lat": 48.18217998370528,
+          "original_lon": 11.355577614158392,
+          "refined_lat": 48.18218009411475,
+          "refined_lon": 11.355577675893262
+        },
+        {
+          "lon": 11.355640365368922,
+          "lat": 48.182174524978365,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 39,
+          "velocity_ms": 4.695065134573297,
+          "original_lat": 48.18217445164919,
+          "original_lon": 11.355640394613149,
+          "refined_lat": 48.182174524978365,
+          "refined_lon": 11.355640365368922
+        },
+        {
+          "lon": 11.35583661236775,
+          "lat": 48.182182269042734,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 40,
+          "velocity_ms": 14.587261278951962,
+          "original_lat": 48.1821824144572,
+          "original_lon": 11.355836782604456,
+          "refined_lat": 48.182182269042734,
+          "refined_lon": 11.35583661236775
+        },
+        {
+          "lon": 11.356105534480387,
+          "lat": 48.18229541273297,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 41,
+          "velocity_ms": 23.564155752196115,
+          "original_lat": 48.182295486330986,
+          "original_lon": 11.356105590239167,
+          "refined_lat": 48.18229541273297,
+          "refined_lon": 11.356105534480387
+        },
+        {
+          "lon": 11.356272906035343,
+          "lat": 48.18241514163138,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 42,
+          "velocity_ms": 18.177071572827163,
+          "original_lat": 48.18241492845118,
+          "original_lon": 11.356272976845505,
+          "refined_lat": 48.18241514163138,
+          "refined_lon": 11.356272906035343
+        },
+        {
+          "lon": 11.35647432019334,
+          "lat": 48.18255121612755,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 43,
+          "velocity_ms": 21.271551687268108,
+          "original_lat": 48.18255121819675,
+          "original_lon": 11.356474310159683,
+          "refined_lat": 48.18255121612755,
+          "refined_lon": 11.35647432019334
+        },
+        {
+          "lon": 11.356632950814145,
+          "lat": 48.18266218452847,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 44,
+          "velocity_ms": 17.059859842713255,
+          "original_lat": 48.18266227841377,
+          "original_lon": 11.356633063405752,
+          "refined_lat": 48.18266218452847,
+          "refined_lon": 11.356632950814145
+        },
+        {
+          "lon": 11.356837475690906,
+          "lat": 48.18280884608473,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 45,
+          "velocity_ms": 22.234104967796263,
+          "original_lat": 48.18280862644315,
+          "original_lon": 11.356837414205074,
+          "refined_lat": 48.18280884608473,
+          "refined_lon": 11.356837475690906
+        },
+        {
+          "lon": 11.3569578166463,
+          "lat": 48.18294652215165,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 46,
+          "velocity_ms": 17.750916320056998,
+          "original_lat": 48.18294659256935,
+          "original_lon": 11.35695786215365,
+          "refined_lat": 48.18294652215165,
+          "refined_lon": 11.3569578166463
+        },
+        {
+          "lon": 11.357013583329742,
+          "lat": 48.18305704894848,
+          "watch": "Watch 2 (48 points)",
+          "point_index": 47,
+          "velocity_ms": 12.958598006002193,
+          "original_lat": 48.18305706605315,
+          "original_lon": 11.357013517990708,
+          "refined_lat": 48.18305704894848,
+          "refined_lon": 11.357013583329742
+        }
+      ]
+    },
+    "atmospheric_from_gps": {
+      "watch1": [
+        {
+          "position": [
+            48.18311696071889,
+            11.356855044783922
+          ],
+          "S_k": 0.6,
+          "S_t": 0.1,
+          "S_e": 0.35,
+          "velocity": 0.0,
+          "point_index": 0
+        },
+        {
+          "position": [
+            48.18312866596203,
+            11.356860012495508
+          ],
+          "S_k": 0.6,
+          "S_t": 0.15325555970516505,
+          "S_e": 0.35001609311866794,
+          "velocity": 1.331388992629126,
+          "point_index": 1
+        },
+        {
+          "position": [
+            48.18314001048643,
+            11.356865024470945
+          ],
+          "S_k": 0.6749741132201533,
+          "S_t": 0.15325555878039127,
+          "S_e": 0.3661165092480908,
+          "velocity": 1.3313889695097811,
+          "point_index": 2
+        },
+        {
+          "position": [
+            48.183162027751095,
+            11.356863882917374
+          ],
+          "S_k": 0.6632617934924874,
+          "S_t": 0.19789646383857687,
+          "S_e": 0.35000928784289387,
+          "velocity": 2.4474115959644216,
+          "point_index": 3
+        },
+        {
+          "position": [
+            48.183183815813194,
+            11.356862996233364
+          ],
+          "S_k": 0.6534009602538684,
+          "S_t": 0.19789646376827097,
+          "S_e": 0.3558237341698579,
+          "velocity": 2.4474115942067747,
+          "point_index": 4
+        },
+        {
+          "position": [
+            48.18322450747086,
+            11.356849500606414
+          ],
+          "S_k": 0.627299852228949,
+          "S_t": 0.2845310807405521,
+          "S_e": 0.3500000552718173,
+          "velocity": 4.613277018513802,
+          "point_index": 5
+        },
+        {
+          "position": [
+            48.18326510569542,
+            11.35683607464172
+          ],
+          "S_k": 0.6093029522905529,
+          "S_t": 0.28453107384572013,
+          "S_e": 0.35816212757263705,
+          "velocity": 4.613276846143004,
+          "point_index": 6
+        },
+        {
+          "position": [
+            48.18330260432125,
+            11.356807521393067
+          ],
+          "S_k": 0.5519409785747196,
+          "S_t": 0.28698425595306676,
+          "S_e": 0.35000192695132093,
+          "velocity": 4.67460639882667,
+          "point_index": 7
+        },
+        {
+          "position": [
+            48.18333981816437,
+            11.356778885836912
+          ],
+          "S_k": 0.5515817659975342,
+          "S_t": 0.2869842279782381,
+          "S_e": 0.3538870681334363,
+          "velocity": 4.674605699455952,
+          "point_index": 8
+        },
+        {
+          "position": [
+            48.183372444119136,
+            11.356739095740936
+          ],
+          "S_k": 0.5606251692043369,
+          "S_t": 0.28699465397075685,
+          "S_e": 0.35000138730424263,
+          "velocity": 4.674866349268921,
+          "point_index": 9
+        },
+        {
+          "position": [
+            48.18340504695872,
+            11.356698983212596
+          ],
+          "S_k": 0.5627753331773373,
+          "S_t": 0.28699460628016876,
+          "S_e": 0.3535945999132409,
+          "velocity": 4.674865157004219,
+          "point_index": 10
+        },
+        {
+          "position": [
+            48.18343245029538,
+            11.356644104675045
+          ],
+          "S_k": 0.5683381745617287,
+          "S_t": 0.30387331850981303,
+          "S_e": 0.35000002583212986,
+          "velocity": 5.096832962745325,
+          "point_index": 11
+        },
+        {
+          "position": [
+            48.18345996602291,
+            11.356588920054104
+          ],
+          "S_k": 0.5676067588377622,
+          "S_t": 0.30387324847856445,
+          "S_e": 0.3532334710844766,
+          "velocity": 5.096831211964112,
+          "point_index": 12
+        },
+        {
+          "position": [
+            48.18347792240152,
+            11.35651990165076
+          ],
+          "S_k": 0.5600548653099399,
+          "S_t": 0.3197280778495325,
+          "S_e": 0.35000019286650996,
+          "velocity": 5.493201946238313,
+          "point_index": 13
+        },
+        {
+          "position": [
+            48.183495985006935,
+            11.356450929041205
+          ],
+          "S_k": 0.5585310879422566,
+          "S_t": 0.3197280109211672,
+          "S_e": 0.35215556044933355,
+          "velocity": 5.4932002730291805,
+          "point_index": 14
+        },
+        {
+          "position": [
+            48.183502088175686,
+            11.356380461609259
+          ],
+          "S_k": 0.5635446016143193,
+          "S_t": 0.31076801964455625,
+          "S_e": 0.3500006344818767,
+          "velocity": 5.2692004911139065,
+          "point_index": 15
+        },
+        {
+          "position": [
+            48.183507972163596,
+            11.35631014637041
+          ],
+          "S_k": 0.5651329027762106,
+          "S_t": 0.31076799537267413,
+          "S_e": 0.3515919882005218,
+          "velocity": 5.269199884316853,
+          "point_index": 16
+        },
+        {
+          "position": [
+            48.183503910519065,
+            11.356245074284432
+          ],
+          "S_k": 0.5614867600599318,
+          "S_t": 0.29358040279581277,
+          "S_e": 0.350000251906228,
+          "velocity": 4.839510069895319,
+          "point_index": 17
+        },
+        {
+          "position": [
+            48.18349996652212,
+            11.356179968186126
+          ],
+          "S_k": 0.559433394012561,
+          "S_t": 0.29358041776641186,
+          "S_e": 0.3526719436155897,
+          "velocity": 4.839510444160296,
+          "point_index": 18
+        },
+        {
+          "position": [
+            48.18348391328009,
+            11.35611697606231
+          ],
+          "S_k": 0.5573093553546286,
+          "S_t": 0.29992471096451545,
+          "S_e": 0.35000025605964663,
+          "velocity": 4.9981177741128855,
+          "point_index": 19
+        },
+        {
+          "position": [
+            48.18346796318931,
+            11.356053901912302
+          ],
+          "S_k": 0.5572633764374261,
+          "S_t": 0.29992476545812774,
+          "S_e": 0.3539712904001914,
+          "velocity": 4.9981191364531945,
+          "point_index": 20
+        },
+        {
+          "position": [
+            48.183439524620084,
+            11.355999049933597
+          ],
+          "S_k": 0.556665992306408,
+          "S_t": 0.30657235050787945,
+          "S_e": 0.3500001005894858,
+          "velocity": 5.164308762696987,
+          "point_index": 21
+        },
+        {
+          "position": [
+            48.183410915840795,
+            11.35594402569675
+          ],
+          "S_k": 0.5578397065123445,
+          "S_t": 0.3065724221178604,
+          "S_e": 0.3537314651767686,
+          "velocity": 5.16431055294651,
+          "point_index": 22
+        },
+        {
+          "position": [
+            48.183376573329255,
+            11.355903498811193
+          ],
+          "S_k": 0.5686121420301528,
+          "S_t": 0.29486372014270334,
+          "S_e": 0.3500001151298643,
+          "velocity": 4.871593003567583,
+          "point_index": 23
+        },
+        {
+          "position": [
+            48.18334215286081,
+            11.3558629818161
+          ],
+          "S_k": 0.5708899269523648,
+          "S_t": 0.2948637699710942,
+          "S_e": 0.35218823398147475,
+          "velocity": 4.871594249277355,
+          "point_index": 24
+        },
+        {
+          "position": [
+            48.183307909713335,
+            11.355834398453528
+          ],
+          "S_k": 0.5747679941798028,
+          "S_t": 0.27324095956051847,
+          "S_e": 0.3500006451177896,
+          "velocity": 4.331023989012962,
+          "point_index": 25
+        },
+        {
+          "position": [
+            48.18327401837399,
+            11.355805939683092
+          ],
+          "S_k": 0.5751128927755519,
+          "S_t": 0.2732409868862112,
+          "S_e": 0.35038025783548954,
+          "velocity": 4.33102467215528,
+          "point_index": 26
+        },
+        {
+          "position": [
+            48.18324248555928,
+            11.35578308033203
+          ],
+          "S_k": 0.5641595382059138,
+          "S_t": 0.25582659334701585,
+          "S_e": 0.3500017508801663,
+          "velocity": 3.8956648336753967,
+          "point_index": 27
+        },
+        {
+          "position": [
+            48.18321098058534,
+            11.35576000812579
+          ],
+          "S_k": 0.561966630516334,
+          "S_t": 0.25582661169675497,
+          "S_e": 0.3500207478241935,
+          "velocity": 3.8956652924188746,
+          "point_index": 28
+        },
+        {
+          "position": [
+            48.18317807006883,
+            11.355735055181198
+          ],
+          "S_k": 0.5687727577207473,
+          "S_t": 0.26443910235208345,
+          "S_e": 0.35000005134779805,
+          "velocity": 4.1109775588020865,
+          "point_index": 29
+        },
+        {
+          "position": [
+            48.183145117896224,
+            11.355710113565676
+          ],
+          "S_k": 0.5701567531156257,
+          "S_t": 0.26443912384136875,
+          "S_e": 0.35055881151383905,
+          "velocity": 4.110978096034219,
+          "point_index": 30
+        },
+        {
+          "position": [
+            48.183109512977225,
+            11.355677976566703
+          ],
+          "S_k": 0.5739934484093728,
+          "S_t": 0.28422030141864335,
+          "S_e": 0.3500000229398788,
+          "velocity": 4.605507535466083,
+          "point_index": 31
+        },
+        {
+          "position": [
+            48.18307404779039,
+            11.35564593007885
+          ],
+          "S_k": 0.572877079390599,
+          "S_t": 0.28422033527240154,
+          "S_e": 0.3501923226969369,
+          "velocity": 4.605508381810038,
+          "point_index": 32
+        },
+        {
+          "position": [
+            48.183036123330965,
+            11.355608001907255
+          ],
+          "S_k": 0.5682361792107566,
+          "S_t": 0.3031403843939025,
+          "S_e": 0.3500006163428526,
+          "velocity": 5.078509609847563,
+          "point_index": 33
+        },
+        {
+          "position": [
+            48.1829980162138,
+            11.35557010893994
+          ],
+          "S_k": 0.566647201192239,
+          "S_t": 0.30314043076547736,
+          "S_e": 0.3503298184247813,
+          "velocity": 5.078510769136934,
+          "point_index": 34
+        },
+        {
+          "position": [
+            48.182959348826266,
+            11.3555261895122
+          ],
+          "S_k": 0.5592303396911281,
+          "S_t": 0.31528990260499157,
+          "S_e": 0.35000135281888667,
+          "velocity": 5.382247565124788,
+          "point_index": 35
+        },
+        {
+          "position": [
+            48.182920814595825,
+            11.3554820447163
+          ],
+          "S_k": 0.5578097524896858,
+          "S_t": 0.31528996202790527,
+          "S_e": 0.3500928891260173,
+          "velocity": 5.382249050697631,
+          "point_index": 36
+        },
+        {
+          "position": [
+            48.18288304204396,
+            11.355435567904589
+          ],
+          "S_k": 0.5541604466613747,
+          "S_t": 0.31813505970809997,
+          "S_e": 0.3500002293087192,
+          "velocity": 5.453376492702499,
+          "point_index": 37
+        },
+        {
+          "position": [
+            48.18284511040947,
+            11.35538906173487
+          ],
+          "S_k": 0.555166359568319,
+          "S_t": 0.3181351243108017,
+          "S_e": 0.35007885783765996,
+          "velocity": 5.453378107770042,
+          "point_index": 38
+        },
+        {
+          "position": [
+            48.18280757332918,
+            11.355345970755774
+          ],
+          "S_k": 0.5642610660521581,
+          "S_t": 0.30995523251835244,
+          "S_e": 0.3500002476371045,
+          "velocity": 5.248880812958811,
+          "point_index": 39
+        },
+        {
+          "position": [
+            48.18276985458553,
+            11.355302829763293
+          ],
+          "S_k": 0.5662917247399635,
+          "S_t": 0.30995528920878196,
+          "S_e": 0.35050009556272826,
+          "velocity": 5.248882230219548,
+          "point_index": 40
+        },
+        {
+          "position": [
+            48.18273392640199,
+            11.35526794424122
+          ],
+          "S_k": 0.5775512984980086,
+          "S_t": 0.29081991616234937,
+          "S_e": 0.35000176571141783,
+          "velocity": 4.770497904058733,
+          "point_index": 41
+        },
+        {
+          "position": [
+            48.1826982131802,
+            11.355232929189839
+          ],
+          "S_k": 0.5807500201618017,
+          "S_t": 0.29081995584385256,
+          "S_e": 0.35155707432329575,
+          "velocity": 4.7704988960963135,
+          "point_index": 42
+        },
+        {
+          "position": [
+            48.1826654979308,
+            11.355209010033658
+          ],
+          "S_k": 0.5868269131680947,
+          "S_t": 0.2611257058660426,
+          "S_e": 0.35000256448358713,
+          "velocity": 4.028142646651066,
+          "point_index": 43
+        },
+        {
+          "position": [
+            48.1826329061147,
+            11.355184887408393
+          ],
+          "S_k": 0.5886041345862184,
+          "S_t": 0.26112572577160703,
+          "S_e": 0.3559237085147858,
+          "velocity": 4.028143144290175,
+          "point_index": 44
+        },
+        {
+          "position": [
+            48.182603719641584,
+            11.355174061485831
+          ],
+          "S_k": 0.5847386654179645,
+          "S_t": 0.23520444290775944,
+          "S_e": 0.3500002133045358,
+          "velocity": 3.380111072693986,
+          "point_index": 45
+        },
+        {
+          "position": [
+            48.182573929582304,
+            11.35516295449265
+          ],
+          "S_k": 0.5849625255085926,
+          "S_t": 0.23520444740677657,
+          "S_e": 0.35776972748529234,
+          "velocity": 3.3801111851694143,
+          "point_index": 46
+        },
+        {
+          "position": [
+            48.18254748289532,
+            11.355162065339034
+          ],
+          "S_k": 0.5718016046556524,
+          "S_t": 0.217903924817965,
+          "S_e": 0.35001101330551476,
+          "velocity": 2.9475981204491246,
+          "point_index": 47
+        },
+        {
+          "position": [
+            48.182520879228704,
+            11.355160848012732
+          ],
+          "S_k": 0.5691701281485133,
+          "S_t": 0.21790392482493437,
+          "S_e": 0.36901759523757927,
+          "velocity": 2.9475981206233595,
+          "point_index": 48
+        },
+        {
+          "position": [
+            48.182496471520246,
+            11.355173041487049
+          ],
+          "S_k": 0.5820941118915162,
+          "S_t": 0.2146348336755574,
+          "S_e": 0.35000485605397424,
+          "velocity": 2.8658708418889356,
+          "point_index": 49
+        },
+        {
+          "position": [
+            48.182472071932246,
+            11.355184986547972
+          ],
+          "S_k": 0.5876441146901912,
+          "S_t": 0.21463483895592209,
+          "S_e": 0.36092949596889395,
+          "velocity": 2.865870973898052,
+          "point_index": 50
+        },
+        {
+          "position": [
+            48.182444976728966,
+            11.355215175879032
+          ],
+          "S_k": 0.6005043079924234,
+          "S_t": 0.24945609541666203,
+          "S_e": 0.3500000830297376,
+          "velocity": 3.736402385416551,
+          "point_index": 51
+        },
+        {
+          "position": [
+            48.1824181260062,
+            11.355245029561482
+          ],
+          "S_k": 0.5957787445364036,
+          "S_t": 0.24945612334136585,
+          "S_e": 0.35198301692063866,
+          "velocity": 3.7364030835341464,
+          "point_index": 52
+        },
+        {
+          "position": [
+            48.18239002837421,
+            11.355288894222284
+          ],
+          "S_k": 0.5870948856405777,
+          "S_t": 0.2803793639908808,
+          "S_e": 0.35000123334299443,
+          "velocity": 4.5094840997720205,
+          "point_index": 53
+        },
+        {
+          "position": [
+            48.18236202783909,
+            11.355333000073982
+          ],
+          "S_k": 0.5842127098470752,
+          "S_t": 0.2803794155489334,
+          "S_e": 0.35112671643197935,
+          "velocity": 4.509485388723336,
+          "point_index": 54
+        },
+        {
+          "position": [
+            48.18233498619534,
+            11.355389994983858
+          ],
+          "S_k": 0.5688606528652796,
+          "S_t": 0.30735577720836227,
+          "S_e": 0.3500000004736557,
+          "velocity": 5.183894430209056,
+          "point_index": 55
+        },
+        {
+          "position": [
+            48.182307928544155,
+            11.35544701193181
+          ],
+          "S_k": 0.5648586283680038,
+          "S_t": 0.30735584981210096,
+          "S_e": 0.35044009676064264,
+          "velocity": 5.183896245302524,
+          "point_index": 56
+        },
+        {
+          "position": [
+            48.182285458914365,
+            11.355505557058475
+          ],
+          "S_k": 0.5650225966790644,
+          "S_t": 0.3002836932589917,
+          "S_e": 0.35000000042027624,
+          "velocity": 5.007092331474793,
+          "point_index": 57
+        },
+        {
+          "position": [
+            48.182262940988316,
+            11.355564214895653
+          ],
+          "S_k": 0.5674935776152286,
+          "S_t": 0.30028375922206757,
+          "S_e": 0.35197899032132746,
+          "velocity": 5.007093980551689,
+          "point_index": 58
+        },
+        {
+          "position": [
+            48.18225098830281,
+            11.355622014787116
+          ],
+          "S_k": 0.5663450908241588,
+          "S_t": 0.2800970395556073,
+          "S_e": 0.3500000289057571,
+          "velocity": 4.502425988890182,
+          "point_index": 59
+        },
+        {
+          "position": [
+            48.18223894560464,
+            11.355680068197419
+          ],
+          "S_k": 0.5639673308434969,
+          "S_t": 0.2800970780082471,
+          "S_e": 0.35345265474030274,
+          "velocity": 4.502426950206178,
+          "point_index": 60
+        },
+        {
+          "position": [
+            48.18223957173439,
+            11.355740088346483
+          ],
+          "S_k": 0.5517378385740042,
+          "S_t": 0.2779516274195518,
+          "S_e": 0.3500016785538806,
+          "velocity": 4.448790685488795,
+          "point_index": 61
+        },
+        {
+          "position": [
+            48.182239913830685,
+            11.355800096341868
+          ],
+          "S_k": 0.5514125125292662,
+          "S_t": 0.27795162567879095,
+          "S_e": 0.35170037434318974,
+          "velocity": 4.448790641969774,
+          "point_index": 62
+        },
+        {
+          "position": [
+            48.18224912304505,
+            11.355858492395118
+          ],
+          "S_k": 0.5555119060351937,
+          "S_t": 0.2780475819991046,
+          "S_e": 0.3500042953841516,
+          "velocity": 4.451189549977616,
+          "point_index": 63
+        },
+        {
+          "position": [
+            48.182257903454264,
+            11.355917045734248
+          ],
+          "S_k": 0.5568244041972924,
+          "S_t": 0.2780475523186485,
+          "S_e": 0.3510808077533812,
+          "velocity": 4.451188807966213,
+          "point_index": 64
+        },
+        {
+          "position": [
+            48.18227251651011,
+            11.355970060199013
+          ],
+          "S_k": 0.5699162404546152,
+          "S_t": 0.269895133586188,
+          "S_e": 0.3500002720974038,
+          "velocity": 4.247378339654699,
+          "point_index": 65
+        },
+        {
+          "position": [
+            48.18228700474404,
+            11.356023015346842
+          ],
+          "S_k": 0.5733250950940075,
+          "S_t": 0.26989509244598886,
+          "S_e": 0.35051843892957063,
+          "velocity": 4.247377311149722,
+          "point_index": 66
+        },
+        {
+          "position": [
+            48.18230281010721,
+            11.356066284168142
+          ],
+          "S_k": 0.5788987350023196,
+          "S_t": 0.24733172913160706,
+          "S_e": 0.3500028732195092,
+          "velocity": 3.6832932282901765,
+          "point_index": 67
+        },
+        {
+          "position": [
+            48.18231904957299,
+            11.356109901793191
+          ],
+          "S_k": 0.5790684904394892,
+          "S_t": 0.24733169388451362,
+          "S_e": 0.35109320235651065,
+          "velocity": 3.683292347112841,
+          "point_index": 68
+        },
+        {
+          "position": [
+            48.18233708570033,
+            11.356144782467762
+          ],
+          "S_k": 0.5689059342806114,
+          "S_t": 0.23108562495117801,
+          "S_e": 0.35000072896934886,
+          "velocity": 3.27714062377945,
+          "point_index": 69
+        },
+        {
+          "position": [
+            48.18235511126761,
+            11.356179910715928
+          ],
+          "S_k": 0.5667001235505585,
+          "S_t": 0.2310855961098505,
+          "S_e": 0.3529209055330971,
+          "velocity": 3.277139902746262,
+          "point_index": 70
+        },
+        {
+          "position": [
+            48.182377028863016,
+            11.35620747527009
+          ],
+          "S_k": 0.5565439235003687,
+          "S_t": 0.22738160931406456,
+          "S_e": 0.35000009396261167,
+          "velocity": 3.184540232851614,
+          "point_index": 71
+        },
+        {
+          "position": [
+            48.18239898004529,
+            11.356235018722142
+          ],
+          "S_k": 0.5578052691179436,
+          "S_t": 0.22738158688021706,
+          "S_e": 0.3520562130880277,
+          "velocity": 3.184539672005427,
+          "point_index": 72
+        },
+        {
+          "position": [
+            48.182425075567146,
+            11.356258472841466
+          ],
+          "S_k": 0.558869963629287,
+          "S_t": 0.23501933344444315,
+          "S_e": 0.35000796994461003,
+          "velocity": 3.375483336111079,
+          "point_index": 73
+        },
+        {
+          "position": [
+            48.182450799209114,
+            11.356282076606442
+          ],
+          "S_k": 0.5573273148655283,
+          "S_t": 0.23501931517419727,
+          "S_e": 0.3504678790872751,
+          "velocity": 3.3754828793549323,
+          "point_index": 74
+        },
+        {
+          "position": [
+            48.18247794832055,
+            11.356303297429546
+          ],
+          "S_k": 0.5509582752373153,
+          "S_t": 0.23596751502658353,
+          "S_e": 0.3500137152960462,
+          "velocity": 3.399187875664588,
+          "point_index": 75
+        },
+        {
+          "position": [
+            48.182504957192,
+            11.356325003349815
+          ],
+          "S_k": 0.5508667375423503,
+          "S_t": 0.23596749925197566,
+          "S_e": 0.3500235815126775,
+          "velocity": 3.399187481299392,
+          "point_index": 76
+        },
+        {
+          "position": [
+            48.18253199997318,
+            11.356345958294092
+          ],
+          "S_k": 0.5521820227937849,
+          "S_t": 0.23527847512426844,
+          "S_e": 0.350000768226906,
+          "velocity": 3.3819618781067113,
+          "point_index": 77
+        },
+        {
+          "position": [
+            48.182558949667396,
+            11.356366703407144
+          ],
+          "S_k": 0.5524864672928832,
+          "S_t": 0.23527845999452238,
+          "S_e": 0.3500474266223435,
+          "velocity": 3.3819614998630594,
+          "point_index": 78
+        },
+        {
+          "position": [
+            48.18258603833229,
+            11.356386491021059
+          ],
+          "S_k": 0.5548189071195114,
+          "S_t": 0.23328905103051376,
+          "S_e": 0.35000294635549634,
+          "velocity": 3.3322262757628436,
+          "point_index": 79
+        },
+        {
+          "position": [
+            48.182612983289424,
+            11.356405915836374
+          ],
+          "S_k": 0.5559306579966095,
+          "S_t": 0.2332890378170943,
+          "S_e": 0.3500360802520508,
+          "velocity": 3.332225945427358,
+          "point_index": 80
+        },
+        {
+          "position": [
+            48.18264096596359,
+            11.356427036632601
+          ],
+          "S_k": 0.5655622038859069,
+          "S_t": 0.2392419076028244,
+          "S_e": 0.35000127696446753,
+          "velocity": 3.48104769007061,
+          "point_index": 81
+        },
+        {
+          "position": [
+            48.18266897595924,
+            11.356447997191918
+          ],
+          "S_k": 0.566841277234697,
+          "S_t": 0.2392418924158653,
+          "S_e": 0.3500196202838546,
+          "velocity": 3.4810473103966326,
+          "point_index": 82
+        },
+        {
+          "position": [
+            48.18269991727823,
+            11.35647037989617
+          ],
+          "S_k": 0.5687213186661412,
+          "S_t": 0.25317876492239955,
+          "S_e": 0.350003272656327,
+          "velocity": 3.829469123059988,
+          "point_index": 83
+        },
+        {
+          "position": [
+            48.18273091906243,
+            11.356493119797477
+          ],
+          "S_k": 0.5674528343007038,
+          "S_t": 0.25317874734398094,
+          "S_e": 0.3500010352798303,
+          "velocity": 3.829468683599524,
+          "point_index": 84
+        },
+        {
+          "position": [
+            48.18276404319217,
+            11.35651760624461
+          ],
+          "S_k": 0.5621815818741531,
+          "S_t": 0.2637761992574898,
+          "S_e": 0.35000011681524124,
+          "velocity": 4.094404981437245,
+          "point_index": 85
+        },
+        {
+          "position": [
+            48.18279701294126,
+            11.356542042259184
+          ],
+          "S_k": 0.5610514823382633,
+          "S_t": 0.2637761785037791,
+          "S_e": 0.35001152666071383,
+          "velocity": 4.094404462594478,
+          "point_index": 86
+        },
+        {
+          "position": [
+            48.18283118219795,
+            11.356568029726356
+          ],
+          "S_k": 0.5549446511274544,
+          "S_t": 0.2697477152036573,
+          "S_e": 0.35000249234898906,
+          "velocity": 4.243692880091433,
+          "point_index": 87
+        },
+        {
+          "position": [
+            48.182865030511586,
+            11.356594082451313
+          ],
+          "S_k": 0.5539396792175443,
+          "S_t": 0.2697476919723798,
+          "S_e": 0.35001079415749753,
+          "velocity": 4.243692299309494,
+          "point_index": 88
+        },
+        {
+          "position": [
+            48.182898450228535,
+            11.356620449722142
+          ],
+          "S_k": 0.6498050611153803,
+          "S_t": 0.26845610715290574,
+          "S_e": 0.35000020036269425,
+          "velocity": 4.211402678822644,
+          "point_index": 89
+        },
+        {
+          "position": [
+            48.18293202230616,
+            11.356647026346302
+          ],
+          "S_k": 0.6512410921730087,
+          "S_t": 0.2684560831921176,
+          "S_e": 0.35003411762922787,
+          "velocity": 4.21140207980294,
+          "point_index": 90
+        },
+        {
+          "position": [
+            48.18300848256433,
+            11.356704945352309
+          ],
+          "S_k": 0.6,
+          "S_t": 0.4812608713658113,
+          "S_e": 0.3500000464384063,
+          "velocity": 9.531521784145284,
+          "point_index": 91
+        },
+        {
+          "position": [
+            48.18308511138981,
+            11.35676308700267
+          ],
+          "S_k": 0.6,
+          "S_t": 0.48126075555811354,
+          "S_e": 0.35,
+          "velocity": 9.53151888895284,
+          "point_index": 92
+        }
+      ],
+      "watch2": [
+        {
+          "position": [
+            48.18309323659374,
+            11.356860090127558
+          ],
+          "S_k": 0.6,
+          "S_t": 0.1,
+          "S_e": 0.35,
+          "velocity": 0.0,
+          "point_index": 0
+        },
+        {
+          "position": [
+            48.18310023117845,
+            11.35686223713397
+          ],
+          "S_k": 0.6,
+          "S_t": 0.13088145996439723,
+          "S_e": 0.350725857818069,
+          "velocity": 0.7720364991099304,
+          "point_index": 1
+        },
+        {
+          "position": [
+            48.18314533797998,
+            11.356881108391542
+          ],
+          "S_k": 0.689900267603534,
+          "S_t": 0.30894190764452223,
+          "S_e": 0.35333659566650366,
+          "velocity": 5.2235476911130565,
+          "point_index": 2
+        },
+        {
+          "position": [
+            48.18318894114113,
+            11.356889264922112
+          ],
+          "S_k": 0.6680287407971797,
+          "S_t": 0.2954168785196758,
+          "S_e": 0.36065562797460377,
+          "velocity": 4.885421962991894,
+          "point_index": 3
+        },
+        {
+          "position": [
+            48.18327271587302,
+            11.356872782069821
+          ],
+          "S_k": 0.6408680358473536,
+          "S_t": 0.4767839684464036,
+          "S_e": 0.35903219057546965,
+          "velocity": 9.41959921116009,
+          "point_index": 4
+        },
+        {
+          "position": [
+            48.183318672721995,
+            11.356845042343375
+          ],
+          "S_k": 0.6361358881844151,
+          "S_t": 0.31955375670456726,
+          "S_e": 0.35351067117605134,
+          "velocity": 5.488843917614181,
+          "point_index": 5
+        },
+        {
+          "position": [
+            48.18340284143537,
+            11.356765069203393
+          ],
+          "S_k": 0.6153763047846322,
+          "S_t": 0.5429155113298184,
+          "S_e": 0.3542706299616183,
+          "velocity": 11.07288778324546,
+          "point_index": 6
+        },
+        {
+          "position": [
+            48.183474337695245,
+            11.356653955737716
+          ],
+          "S_k": 0.6328068909460575,
+          "S_t": 0.5578248500197539,
+          "S_e": 0.35422317231956135,
+          "velocity": 11.445621250493847,
+          "point_index": 7
+        },
+        {
+          "position": [
+            48.18352233130064,
+            11.356515602598263
+          ],
+          "S_k": 0.6310220377745135,
+          "S_t": 0.5627354510344329,
+          "S_e": 0.3504547851125219,
+          "velocity": 11.568386275860824,
+          "point_index": 8
+        },
+        {
+          "position": [
+            48.18354123271851,
+            11.356443392858885
+          ],
+          "S_k": 0.6451788450358731,
+          "S_t": 0.33042908163278206,
+          "S_e": 0.3518095501858005,
+          "velocity": 5.7607270408195514,
+          "point_index": 9
+        },
+        {
+          "position": [
+            48.183548963089976,
+            11.356366753554587
+          ],
+          "S_k": 0.6608132681007608,
+          "S_t": 0.3294659859861875,
+          "S_e": 0.35166473286877004,
+          "velocity": 5.736649649654686,
+          "point_index": 10
+        },
+        {
+          "position": [
+            48.18353889196185,
+            11.356159674370637
+          ],
+          "S_k": 0.6603407586956993,
+          "S_t": 0.7160640482663096,
+          "S_e": 0.3508997138396068,
+          "velocity": 15.401601206657743,
+          "point_index": 11
+        },
+        {
+          "position": [
+            48.18352851412946,
+            11.356094613819149
+          ],
+          "S_k": 0.6838523996597315,
+          "S_t": 0.297869056110586,
+          "S_e": 0.35358465777253983,
+          "velocity": 4.94672640276465,
+          "point_index": 12
+        },
+        {
+          "position": [
+            48.18348144803128,
+            11.355975823847864
+          ],
+          "S_k": 0.6784875956555636,
+          "S_t": 0.509638570744371,
+          "S_e": 0.6065166017743484,
+          "velocity": 10.240964268609277,
+          "point_index": 13
+        },
+        {
+          "position": [
+            48.183481510636696,
+            11.355975851238309
+          ],
+          "S_k": 0.6922438293278085,
+          "S_t": 0.1,
+          "S_e": 0.6265873486201411,
+          "velocity": 0.0,
+          "point_index": 14
+        },
+        {
+          "position": [
+            48.18341196019009,
+            11.355872451121227
+          ],
+          "S_k": 0.6890914089082866,
+          "S_t": 0.5359656361327718,
+          "S_e": 0.560888590528332,
+          "velocity": 10.899140903319294,
+          "point_index": 15
+        },
+        {
+          "position": [
+            48.183411844177996,
+            11.355872635882378
+          ],
+          "S_k": 0.6926923101895008,
+          "S_t": 0.1,
+          "S_e": 0.5408304398802666,
+          "velocity": 0.0,
+          "point_index": 16
+        },
+        {
+          "position": [
+            48.183327544406595,
+            11.3557792732141
+          ],
+          "S_k": 0.6771321914202797,
+          "S_t": 0.5657477387266987,
+          "S_e": 0.35013691990151347,
+          "velocity": 11.643693468167468,
+          "point_index": 17
+        },
+        {
+          "position": [
+            48.18316641641166,
+            11.355615468546853
+          ],
+          "S_k": 0.692757422617559,
+          "S_t": 0.9658154232683799,
+          "S_e": 0.3500041438435763,
+          "velocity": 21.645385581709498,
+          "point_index": 18
+        },
+        {
+          "position": [
+            48.1830867350895,
+            11.355533249952927
+          ],
+          "S_k": 0.6773782047254573,
+          "S_t": 0.5299981209872885,
+          "S_e": 0.4689311200237739,
+          "velocity": 10.749953024682213,
+          "point_index": 19
+        },
+        {
+          "position": [
+            48.18308678499872,
+            11.355533175802918
+          ],
+          "S_k": 0.6787531899063302,
+          "S_t": 0.1,
+          "S_e": 0.4690827385120745,
+          "velocity": 0.0,
+          "point_index": 20
+        },
+        {
+          "position": [
+            48.18300788890162,
+            11.355451935544417
+          ],
+          "S_k": 0.6644269394208304,
+          "S_t": 0.5261323164990115,
+          "S_e": 0.3500108827082561,
+          "velocity": 10.653307912475288,
+          "point_index": 21
+        },
+        {
+          "position": [
+            48.18293301354604,
+            11.355372953779696
+          ],
+          "S_k": 0.6734031927553359,
+          "S_t": 0.5067136049845992,
+          "S_e": 0.3500986225998485,
+          "velocity": 10.167840124614978,
+          "point_index": 22
+        },
+        {
+          "position": [
+            48.18285882355337,
+            11.355300171974607
+          ],
+          "S_k": 0.6164482638908381,
+          "S_t": 0.4948466413979844,
+          "S_e": 0.3500023075421549,
+          "velocity": 9.871166034949612,
+          "point_index": 23
+        },
+        {
+          "position": [
+            48.18282269326322,
+            11.355265118624256
+          ],
+          "S_k": 0.6727442891549771,
+          "S_t": 0.29166202195252294,
+          "S_e": 0.3501462582394881,
+          "velocity": 4.791550548813074,
+          "point_index": 24
+        },
+        {
+          "position": [
+            48.18275531107135,
+            11.355193705265695
+          ],
+          "S_k": 0.6722802013659956,
+          "S_t": 0.4659534106106493,
+          "S_e": 0.6349506211659837,
+          "velocity": 9.148835265266232,
+          "point_index": 25
+        },
+        {
+          "position": [
+            48.182755419732004,
+            11.35519374649526
+          ],
+          "S_k": 0.6916959023615805,
+          "S_t": 0.1,
+          "S_e": 0.6389878122294887,
+          "velocity": 0.0,
+          "point_index": 26
+        },
+        {
+          "position": [
+            48.18268288345486,
+            11.355126412823665
+          ],
+          "S_k": 0.6890009798331231,
+          "S_t": 0.4795188681644732,
+          "S_e": 0.3906360457837739,
+          "velocity": 9.48797170411183,
+          "point_index": 27
+        },
+        {
+          "position": [
+            48.18268287848092,
+            11.355126340617426
+          ],
+          "S_k": 0.6922860744832632,
+          "S_t": 0.1,
+          "S_e": 0.41136890724234015,
+          "velocity": 0.0,
+          "point_index": 28
+        },
+        {
+          "position": [
+            48.18260903957843,
+            11.355079700472169
+          ],
+          "S_k": 0.6790224497879362,
+          "S_t": 0.4567794695647489,
+          "S_e": 0.3582200030831744,
+          "velocity": 8.919486739118723,
+          "point_index": 29
+        },
+        {
+          "position": [
+            48.18257111738446,
+            11.355070790220251
+          ],
+          "S_k": 0.6847579591818229,
+          "S_t": 0.2709645454371339,
+          "S_e": 0.3547879734891127,
+          "velocity": 4.274113635928347,
+          "point_index": 30
+        },
+        {
+          "position": [
+            48.18253262334893,
+            11.355071659049662
+          ],
+          "S_k": 0.6644301502957523,
+          "S_t": 0.27077305299965926,
+          "S_e": 0.3603424419660484,
+          "velocity": 4.26932632499148,
+          "point_index": 31
+        },
+        {
+          "position": [
+            48.182420089202516,
+            11.355118718857632
+          ],
+          "S_k": 0.6645972166990397,
+          "S_t": 0.6198078554102785,
+          "S_e": 0.3524615725662118,
+          "velocity": 12.995196385256962,
+          "point_index": 32
+        },
+        {
+          "position": [
+            48.18238370346428,
+            11.35514242765298
+          ],
+          "S_k": 0.6644000630524639,
+          "S_t": 0.2766738285349949,
+          "S_e": 0.35395490116489314,
+          "velocity": 4.416845713374872,
+          "point_index": 33
+        },
+        {
+          "position": [
+            48.18232475538686,
+            11.355204057854944
+          ],
+          "S_k": 0.6590280430636508,
+          "S_t": 0.4190347117885235,
+          "S_e": 0.3525826891218359,
+          "velocity": 7.975867794713088,
+          "point_index": 34
+        },
+        {
+          "position": [
+            48.182297514452074,
+            11.355245880305002
+          ],
+          "S_k": 0.6649993942569886,
+          "S_t": 0.2726978779272773,
+          "S_e": 0.350907916938391,
+          "velocity": 4.3174469481819315,
+          "point_index": 35
+        },
+        {
+          "position": [
+            48.18222447384501,
+            11.355390658614937
+          ],
+          "S_k": 0.6534943676216388,
+          "S_t": 0.638664251216551,
+          "S_e": 0.3526238435884687,
+          "velocity": 13.466606280413776,
+          "point_index": 36
+        },
+        {
+          "position": [
+            48.18220793748681,
+            11.35544818165898
+          ],
+          "S_k": 0.6638371531943732,
+          "S_t": 0.2861120399553053,
+          "S_e": 0.35034803059433817,
+          "velocity": 4.6528009988826335,
+          "point_index": 37
+        },
+        {
+          "position": [
+            48.18218009411475,
+            11.355577675893262
+          ],
+          "S_k": 0.6564183415786052,
+          "S_t": 0.5036173082706856,
+          "S_e": 0.3511366981368018,
+          "velocity": 10.09043270676714,
+          "point_index": 38
+        },
+        {
+          "position": [
+            48.182174524978365,
+            11.355640365368922
+          ],
+          "S_k": 0.6763194939723217,
+          "S_t": 0.2878026053829319,
+          "S_e": 0.3512279774205864,
+          "velocity": 4.695065134573297,
+          "point_index": 39
+        },
+        {
+          "position": [
+            48.182182269042734,
+            11.35583661236775
+          ],
+          "S_k": 0.6584021186714836,
+          "S_t": 0.6834904511580784,
+          "S_e": 0.35955260587520066,
+          "velocity": 14.587261278951962,
+          "point_index": 40
+        },
+        {
+          "position": [
+            48.18229541273297,
+            11.356105534480387
+          ],
+          "S_k": 0.6498782818562862,
+          "S_t": 1.0,
+          "S_e": 0.35370442671346547,
+          "velocity": 23.564155752196115,
+          "point_index": 41
+        },
+        {
+          "position": [
+            48.18241514163138,
+            11.356272906035343
+          ],
+          "S_k": 0.5982725473828772,
+          "S_t": 0.8270828629130865,
+          "S_e": 0.3500538400838031,
+          "velocity": 18.177071572827163,
+          "point_index": 42
+        },
+        {
+          "position": [
+            48.18255121612755,
+            11.35647432019334
+          ],
+          "S_k": 0.5853641249421472,
+          "S_t": 0.9508620674907242,
+          "S_e": 0.35001982438075385,
+          "velocity": 21.271551687268108,
+          "point_index": 43
+        },
+        {
+          "position": [
+            48.18266218452847,
+            11.356632950814145
+          ],
+          "S_k": 0.5815139463986656,
+          "S_t": 0.7823943937085303,
+          "S_e": 0.35001023713133894,
+          "velocity": 17.059859842713255,
+          "point_index": 44
+        },
+        {
+          "position": [
+            48.18280884608473,
+            11.356837475690906
+          ],
+          "S_k": 0.6020811348681182,
+          "S_t": 0.9893641987118506,
+          "S_e": 0.3539631551296076,
+          "velocity": 22.234104967796263,
+          "point_index": 45
+        },
+        {
+          "position": [
+            48.18294652215165,
+            11.3569578166463
+          ],
+          "S_k": 0.6,
+          "S_t": 0.8100366528022799,
+          "S_e": 0.35470141093905666,
+          "velocity": 17.750916320056998,
+          "point_index": 46
+        },
+        {
+          "position": [
+            48.18305704894848,
+            11.357013583329742
+          ],
+          "S_k": 0.6,
+          "S_t": 0.6183439202400877,
+          "S_e": 0.35,
+          "velocity": 12.958598006002193,
+          "point_index": 47
+        }
+      ]
+    },
+    "weather_forecast": [
+      {
+        "day": 0,
+        "date": "2025-10-13",
+        "temperature_K": 285.47101379973685,
+        "temperature_C": 12.321013799736875,
+        "pressure_hPa": 1011.0455641394766,
+        "humidity_percent": 69.12306402834997,
+        "wind_speed_ms": 5.053208185594306,
+        "precipitation_prob_percent": 0.0,
+        "cloud_cover_percent": 68.00376615636421,
+        "S_k": 0.601301832556473,
+        "S_t": 0.33688054570628706,
+        "S_e": 0.3647342533157888
+      },
+      {
+        "day": 1,
+        "date": "2025-10-14",
+        "temperature_K": 285.6825374345356,
+        "temperature_C": 12.53253743453564,
+        "pressure_hPa": 1012.3850606536912,
+        "humidity_percent": 70.61358320763038,
+        "wind_speed_ms": 3.338414907295929,
+        "precipitation_prob_percent": 2.0452773587679474,
+        "cloud_cover_percent": 68.91414998672346,
+        "S_k": 0.639573161534033,
+        "S_t": 0.22256099381972858,
+        "S_e": 0.3788358289690426
+      },
+      {
+        "day": 2,
+        "date": "2025-10-15",
+        "temperature_K": 285.7912496542459,
+        "temperature_C": 12.64124965424594,
+        "pressure_hPa": 1013.07522303786,
+        "humidity_percent": 71.38210503130817,
+        "wind_speed_ms": 2.1837379897370757,
+        "precipitation_prob_percent": 4.607016771027237,
+        "cloud_cover_percent": 69.3840178193853,
+        "S_k": 0.6592920867960006,
+        "S_t": 0.14558253264913837,
+        "S_e": 0.3860833102830616
+      },
+      {
+        "day": 3,
+        "date": "2025-10-16",
+        "temperature_K": 285.84700628217234,
+        "temperature_C": 12.697006282172367,
+        "pressure_hPa": 1012.393003915381,
+        "humidity_percent": 70.2959930290566,
+        "wind_speed_ms": 1.4080377004525833,
+        "precipitation_prob_percent": 0.9866434301886783,
+        "cloud_cover_percent": 68.44078604701548,
+        "S_k": 0.6398001118680263,
+        "S_t": 0.09386918003017222,
+        "S_e": 0.3898004188114908
+      },
+      {
+        "day": 4,
+        "date": "2025-10-17",
+        "temperature_K": 285.87102480951523,
+        "temperature_C": 12.721024809515256,
+        "pressure_hPa": 1011.4657937901949,
+        "humidity_percent": 68.92337008124781,
+        "wind_speed_ms": 0.896751766741314,
+        "precipitation_prob_percent": 0.0,
+        "cloud_cover_percent": 67.31066298564457,
+        "S_k": 0.6133083940055665,
+        "S_t": 0.0597834511160876,
+        "S_e": 0.391401653967684
+      },
+      {
+        "day": 5,
+        "date": "2025-10-18",
+        "temperature_K": 285.87848252144516,
+        "temperature_C": 12.728482521445187,
+        "pressure_hPa": 1011.7226350321558,
+        "humidity_percent": 69.27537071733234,
+        "wind_speed_ms": 0.5638419929592056,
+        "precipitation_prob_percent": 0.0,
+        "cloud_cover_percent": 67.58231987860566,
+        "S_k": 0.6206467152044531,
+        "S_t": 0.037589466197280375,
+        "S_e": 0.3918988347630108
+      },
+      {
+        "day": 6,
+        "date": "2025-10-19",
+        "temperature_K": 285.88294778776776,
+        "temperature_C": 12.732947787767785,
+        "pressure_hPa": 1012.9267173678346,
+        "humidity_percent": 70.98655780708538,
+        "wind_speed_ms": 0.3397006474114674,
+        "precipitation_prob_percent": 3.2885260236179192,
+        "cloud_cover_percent": 68.94531586197799,
+        "S_k": 0.6550490676524171,
+        "S_t": 0.02264670982743116,
+        "S_e": 0.3921965191845156
+      },
+      {
+        "day": 7,
+        "date": "2025-10-20",
+        "temperature_K": 285.890097463154,
+        "temperature_C": 12.74009746315403,
+        "pressure_hPa": 1013.5085484091748,
+        "humidity_percent": 71.8034456582274,
+        "wind_speed_ms": 0.17995237797858593,
+        "precipitation_prob_percent": 6.011485527424678,
+        "cloud_cover_percent": 69.5892932423766,
+        "S_k": 0.6716728116907079,
+        "S_t": 0.011996825198572396,
+        "S_e": 0.39267316421026616
+      },
+      {
+        "day": 8,
+        "date": "2025-10-21",
+        "temperature_K": 285.8959927905238,
+        "temperature_C": 12.745992790523815,
+        "pressure_hPa": 1012.7396642124327,
+        "humidity_percent": 70.69324900814198,
+        "wind_speed_ms": 0.068466408478511,
+        "precipitation_prob_percent": 2.3108300271399194,
+        "cloud_cover_percent": 68.69327548581516,
+        "S_k": 0.6497046917837922,
+        "S_t": 0.004564427231900733,
+        "S_e": 0.393066186034921
+      },
+      {
+        "day": 9,
+        "date": "2025-10-22",
+        "temperature_K": 285.8955253127713,
+        "temperature_C": 12.745525312771349,
+        "pressure_hPa": 1011.7431220278363,
+        "humidity_percent": 69.27055227136627,
+        "wind_speed_ms": 0.000732864783869005,
+        "precipitation_prob_percent": 0.0,
+        "cloud_cover_percent": 67.55574140006455,
+        "S_k": 0.6212320579381791,
+        "S_t": 4.885765225793367e-05,
+        "S_e": 0.39303502085142317
+      },
+      {
+        "day": 10,
+        "date": "2025-10-23",
+        "temperature_K": 285.89094824898507,
+        "temperature_C": 12.740948248985092,
+        "pressure_hPa": 1011.9444976222691,
+        "humidity_percent": 69.56738581955703,
+        "wind_speed_ms": 0.0,
+        "precipitation_prob_percent": 0.0,
+        "cloud_cover_percent": 67.79931099033222,
+        "S_k": 0.6269856463505433,
+        "S_t": 0.0,
+        "S_e": 0.39272988326567093
+      }
+    ],
+    "initial_partition": {
+      "S_k_mean": 0.601301832556473,
+      "S_t_mean": 0.33688054570628706,
+      "S_e_mean": 0.3647342533157888,
+      "S_k_std": 0.047270166228683644,
+      "S_t_std": 0.17572886820387287,
+      "S_e_std": 0.05277786051016965,
+      "num_samples": 141,
+      "spatial_extent": {
+        "lat_min": 48.182174524978365,
+        "lat_max": 48.183548963089976,
+        "lon_min": 11.355070790220251,
+        "lon_max": 11.357013583329742,
+        "center_lat": 48.18285976401555,
+        "center_lon": 11.355987759147279
+      }
+    },
+    "actual_weather": [
+      {
+        "day": 0,
+        "date": "2025-10-13",
+        "temperature_C": 3.87,
+        "temperature_K": 277.02,
+        "pressure_hPa": 1024,
+        "humidity_percent": 90,
+        "wind_speed_ms": 2.06,
+        "cloud_cover_percent": 0,
+        "precipitation_mm": 0.0,
+        "S_k": 0.9714285714285714,
+        "S_t": 0.13733333333333334,
+        "S_e": 0.0,
+        "description": "clear sky"
+      },
+      {
+        "day": 0,
+        "date": "2025-10-13",
+        "temperature_C": 3.57,
+        "temperature_K": 276.71999999999997,
+        "pressure_hPa": 1023,
+        "humidity_percent": 87,
+        "wind_speed_ms": 2,
+        "cloud_cover_percent": 2,
+        "precipitation_mm": 0.0,
+        "S_k": 0.9428571428571428,
+        "S_t": 0.13333333333333333,
+        "S_e": 0.0,
+        "description": "clear sky"
+      },
+      {
+        "day": 0,
+        "date": "2025-10-13",
+        "temperature_C": 7.17,
+        "temperature_K": 280.32,
+        "pressure_hPa": 1023,
+        "humidity_percent": 70,
+        "wind_speed_ms": 0.95,
+        "cloud_cover_percent": 4,
+        "precipitation_mm": 0.0,
+        "S_k": 0.9428571428571428,
+        "S_t": 0.06333333333333332,
+        "S_e": 0.021333333333332878,
+        "description": "clear sky"
+      },
+      {
+        "day": 0,
+        "date": "2025-10-13",
+        "temperature_C": 10.6,
+        "temperature_K": 283.75,
+        "pressure_hPa": 1021,
+        "humidity_percent": 49,
+        "wind_speed_ms": 1.91,
+        "cloud_cover_percent": 4,
+        "precipitation_mm": 0.0,
+        "S_k": 0.8857142857142857,
+        "S_t": 0.12733333333333333,
+        "S_e": 0.25,
+        "description": "clear sky"
+      },
+      {
+        "day": 0,
+        "date": "2025-10-13",
+        "temperature_C": 12.29,
+        "temperature_K": 285.44,
+        "pressure_hPa": 1020,
+        "humidity_percent": 50,
+        "wind_speed_ms": 1.47,
+        "cloud_cover_percent": 1,
+        "precipitation_mm": 0.0,
+        "S_k": 0.8571428571428571,
+        "S_t": 0.098,
+        "S_e": 0.3626666666666665,
+        "description": "clear sky"
+      },
+      {
+        "day": 0,
+        "date": "2025-10-13",
+        "temperature_C": 10.25,
+        "temperature_K": 283.4,
+        "pressure_hPa": 1020,
+        "humidity_percent": 70,
+        "wind_speed_ms": 1.66,
+        "cloud_cover_percent": 2,
+        "precipitation_mm": 0.0,
+        "S_k": 0.8571428571428571,
+        "S_t": 0.11066666666666666,
+        "S_e": 0.22666666666666516,
+        "description": "clear sky"
+      },
+      {
+        "day": 0,
+        "date": "2025-10-13",
+        "temperature_C": 8.59,
+        "temperature_K": 281.73999999999995,
+        "pressure_hPa": 1021,
+        "humidity_percent": 76,
+        "wind_speed_ms": 1.92,
+        "cloud_cover_percent": 5,
+        "precipitation_mm": 0.0,
+        "S_k": 0.8857142857142857,
+        "S_t": 0.128,
+        "S_e": 0.11599999999999681,
+        "description": "clear sky"
+      },
+      {
+        "day": 0,
+        "date": "2025-10-13",
+        "temperature_C": 7.28,
+        "temperature_K": 280.42999999999995,
+        "pressure_hPa": 1022,
+        "humidity_percent": 79,
+        "wind_speed_ms": 1.96,
+        "cloud_cover_percent": 6,
+        "precipitation_mm": 0.0,
+        "S_k": 0.9142857142857143,
+        "S_t": 0.13066666666666665,
+        "S_e": 0.028666666666663333,
+        "description": "clear sky"
+      },
+      {
+        "day": 1,
+        "date": "2025-10-14",
+        "temperature_C": 6.28,
+        "temperature_K": 279.42999999999995,
+        "pressure_hPa": 1022,
+        "humidity_percent": 76,
+        "wind_speed_ms": 1.94,
+        "cloud_cover_percent": 7,
+        "precipitation_mm": 0.0,
+        "S_k": 0.9142857142857143,
+        "S_t": 0.12933333333333333,
+        "S_e": 0.0,
+        "description": "clear sky"
+      },
+      {
+        "day": 1,
+        "date": "2025-10-14",
+        "temperature_C": 5.38,
+        "temperature_K": 278.53,
+        "pressure_hPa": 1023,
+        "humidity_percent": 75,
+        "wind_speed_ms": 2.19,
+        "cloud_cover_percent": 6,
+        "precipitation_mm": 0.0,
+        "S_k": 0.9428571428571428,
+        "S_t": 0.146,
+        "S_e": 0.0,
+        "description": "clear sky"
+      },
+      {
+        "day": 1,
+        "date": "2025-10-14",
+        "temperature_C": 10.26,
+        "temperature_K": 283.40999999999997,
+        "pressure_hPa": 1023,
+        "humidity_percent": 65,
+        "wind_speed_ms": 3.18,
+        "cloud_cover_percent": 8,
+        "precipitation_mm": 0.0,
+        "S_k": 0.9428571428571428,
+        "S_t": 0.21200000000000002,
+        "S_e": 0.22733333333333122,
+        "description": "clear sky"
+      }
+    ],
+    "forecast_validation": {
+      "num_days_compared": 11,
+      "temperature": {
+        "rmse_C": 5.572653916668056,
+        "mae_C": 4.891529645895758,
+        "max_error_C": 8.96253743453564
+      },
+      "pressure": {
+        "rmse_hPa": 9.846094138204897,
+        "mae_hPa": 9.731833617426643
+      },
+      "humidity": {
+        "rmse_percent": 12.347925312313484,
+        "mae_percent": 9.763911933003264
+      },
+      "wind": {
+        "rmse_ms": 1.8617866626927964,
+        "mae_ms": 1.6670797567110704
+      }
+    },
+    "derived_gps": {
+      "trajectories": [
+        {
+          "watch": "watch1",
+          "positions": [
+            {
+              "point_index": 0,
+              "lat": 48.18311696071889,
+              "lon": 11.356855044783922,
+              "velocity_ms": 0.0,
+              "S_k": 0.6,
+              "S_t": 0.1,
+              "S_e": 0.35,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 1,
+              "lat": 48.18312866596203,
+              "lon": 11.356860012495508,
+              "velocity_ms": 1.331388992629126,
+              "S_k": 0.6,
+              "S_t": 0.15325555970516505,
+              "S_e": 0.35001609311866794,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 2,
+              "lat": 48.18314001048643,
+              "lon": 11.356865024470945,
+              "velocity_ms": 1.3313889695097811,
+              "S_k": 0.6749741132201533,
+              "S_t": 0.15325555878039127,
+              "S_e": 0.3661165092480908,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 3,
+              "lat": 48.183162027751095,
+              "lon": 11.356863882917374,
+              "velocity_ms": 2.4474115959644216,
+              "S_k": 0.6632617934924874,
+              "S_t": 0.19789646383857687,
+              "S_e": 0.35000928784289387,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 4,
+              "lat": 48.183183815813194,
+              "lon": 11.356862996233364,
+              "velocity_ms": 2.4474115942067747,
+              "S_k": 0.6534009602538684,
+              "S_t": 0.19789646376827097,
+              "S_e": 0.3558237341698579,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 5,
+              "lat": 48.18322450747086,
+              "lon": 11.356849500606414,
+              "velocity_ms": 4.613277018513802,
+              "S_k": 0.627299852228949,
+              "S_t": 0.2845310807405521,
+              "S_e": 0.3500000552718173,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 6,
+              "lat": 48.18326510569542,
+              "lon": 11.35683607464172,
+              "velocity_ms": 4.613276846143004,
+              "S_k": 0.6093029522905529,
+              "S_t": 0.28453107384572013,
+              "S_e": 0.35816212757263705,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 7,
+              "lat": 48.18330260432125,
+              "lon": 11.356807521393067,
+              "velocity_ms": 4.67460639882667,
+              "S_k": 0.5519409785747196,
+              "S_t": 0.28698425595306676,
+              "S_e": 0.35000192695132093,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 8,
+              "lat": 48.18333981816437,
+              "lon": 11.356778885836912,
+              "velocity_ms": 4.674605699455952,
+              "S_k": 0.5515817659975342,
+              "S_t": 0.2869842279782381,
+              "S_e": 0.3538870681334363,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 9,
+              "lat": 48.183372444119136,
+              "lon": 11.356739095740936,
+              "velocity_ms": 4.674866349268921,
+              "S_k": 0.5606251692043369,
+              "S_t": 0.28699465397075685,
+              "S_e": 0.35000138730424263,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 10,
+              "lat": 48.18340504695872,
+              "lon": 11.356698983212596,
+              "velocity_ms": 4.674865157004219,
+              "S_k": 0.5627753331773373,
+              "S_t": 0.28699460628016876,
+              "S_e": 0.3535945999132409,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 11,
+              "lat": 48.18343245029538,
+              "lon": 11.356644104675045,
+              "velocity_ms": 5.096832962745325,
+              "S_k": 0.5683381745617287,
+              "S_t": 0.30387331850981303,
+              "S_e": 0.35000002583212986,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 12,
+              "lat": 48.18345996602291,
+              "lon": 11.356588920054104,
+              "velocity_ms": 5.096831211964112,
+              "S_k": 0.5676067588377622,
+              "S_t": 0.30387324847856445,
+              "S_e": 0.3532334710844766,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 13,
+              "lat": 48.18347792240152,
+              "lon": 11.35651990165076,
+              "velocity_ms": 5.493201946238313,
+              "S_k": 0.5600548653099399,
+              "S_t": 0.3197280778495325,
+              "S_e": 0.35000019286650996,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 14,
+              "lat": 48.183495985006935,
+              "lon": 11.356450929041205,
+              "velocity_ms": 5.4932002730291805,
+              "S_k": 0.5585310879422566,
+              "S_t": 0.3197280109211672,
+              "S_e": 0.35215556044933355,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 15,
+              "lat": 48.183502088175686,
+              "lon": 11.356380461609259,
+              "velocity_ms": 5.2692004911139065,
+              "S_k": 0.5635446016143193,
+              "S_t": 0.31076801964455625,
+              "S_e": 0.3500006344818767,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 16,
+              "lat": 48.183507972163596,
+              "lon": 11.35631014637041,
+              "velocity_ms": 5.269199884316853,
+              "S_k": 0.5651329027762106,
+              "S_t": 0.31076799537267413,
+              "S_e": 0.3515919882005218,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 17,
+              "lat": 48.183503910519065,
+              "lon": 11.356245074284432,
+              "velocity_ms": 4.839510069895319,
+              "S_k": 0.5614867600599318,
+              "S_t": 0.29358040279581277,
+              "S_e": 0.350000251906228,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 18,
+              "lat": 48.18349996652212,
+              "lon": 11.356179968186126,
+              "velocity_ms": 4.839510444160296,
+              "S_k": 0.559433394012561,
+              "S_t": 0.29358041776641186,
+              "S_e": 0.3526719436155897,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 19,
+              "lat": 48.18348391328009,
+              "lon": 11.35611697606231,
+              "velocity_ms": 4.9981177741128855,
+              "S_k": 0.5573093553546286,
+              "S_t": 0.29992471096451545,
+              "S_e": 0.35000025605964663,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 20,
+              "lat": 48.18346796318931,
+              "lon": 11.356053901912302,
+              "velocity_ms": 4.9981191364531945,
+              "S_k": 0.5572633764374261,
+              "S_t": 0.29992476545812774,
+              "S_e": 0.3539712904001914,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 21,
+              "lat": 48.183439524620084,
+              "lon": 11.355999049933597,
+              "velocity_ms": 5.164308762696987,
+              "S_k": 0.556665992306408,
+              "S_t": 0.30657235050787945,
+              "S_e": 0.3500001005894858,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 22,
+              "lat": 48.183410915840795,
+              "lon": 11.35594402569675,
+              "velocity_ms": 5.16431055294651,
+              "S_k": 0.5578397065123445,
+              "S_t": 0.3065724221178604,
+              "S_e": 0.3537314651767686,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 23,
+              "lat": 48.183376573329255,
+              "lon": 11.355903498811193,
+              "velocity_ms": 4.871593003567583,
+              "S_k": 0.5686121420301528,
+              "S_t": 0.29486372014270334,
+              "S_e": 0.3500001151298643,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 24,
+              "lat": 48.18334215286081,
+              "lon": 11.3558629818161,
+              "velocity_ms": 4.871594249277355,
+              "S_k": 0.5708899269523648,
+              "S_t": 0.2948637699710942,
+              "S_e": 0.35218823398147475,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 25,
+              "lat": 48.183307909713335,
+              "lon": 11.355834398453528,
+              "velocity_ms": 4.331023989012962,
+              "S_k": 0.5747679941798028,
+              "S_t": 0.27324095956051847,
+              "S_e": 0.3500006451177896,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 26,
+              "lat": 48.18327401837399,
+              "lon": 11.355805939683092,
+              "velocity_ms": 4.33102467215528,
+              "S_k": 0.5751128927755519,
+              "S_t": 0.2732409868862112,
+              "S_e": 0.35038025783548954,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 27,
+              "lat": 48.18324248555928,
+              "lon": 11.35578308033203,
+              "velocity_ms": 3.8956648336753967,
+              "S_k": 0.5641595382059138,
+              "S_t": 0.25582659334701585,
+              "S_e": 0.3500017508801663,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 28,
+              "lat": 48.18321098058534,
+              "lon": 11.35576000812579,
+              "velocity_ms": 3.8956652924188746,
+              "S_k": 0.561966630516334,
+              "S_t": 0.25582661169675497,
+              "S_e": 0.3500207478241935,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 29,
+              "lat": 48.18317807006883,
+              "lon": 11.355735055181198,
+              "velocity_ms": 4.1109775588020865,
+              "S_k": 0.5687727577207473,
+              "S_t": 0.26443910235208345,
+              "S_e": 0.35000005134779805,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 30,
+              "lat": 48.183145117896224,
+              "lon": 11.355710113565676,
+              "velocity_ms": 4.110978096034219,
+              "S_k": 0.5701567531156257,
+              "S_t": 0.26443912384136875,
+              "S_e": 0.35055881151383905,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 31,
+              "lat": 48.183109512977225,
+              "lon": 11.355677976566703,
+              "velocity_ms": 4.605507535466083,
+              "S_k": 0.5739934484093728,
+              "S_t": 0.28422030141864335,
+              "S_e": 0.3500000229398788,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 32,
+              "lat": 48.18307404779039,
+              "lon": 11.35564593007885,
+              "velocity_ms": 4.605508381810038,
+              "S_k": 0.572877079390599,
+              "S_t": 0.28422033527240154,
+              "S_e": 0.3501923226969369,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 33,
+              "lat": 48.183036123330965,
+              "lon": 11.355608001907255,
+              "velocity_ms": 5.078509609847563,
+              "S_k": 0.5682361792107566,
+              "S_t": 0.3031403843939025,
+              "S_e": 0.3500006163428526,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 34,
+              "lat": 48.1829980162138,
+              "lon": 11.35557010893994,
+              "velocity_ms": 5.078510769136934,
+              "S_k": 0.566647201192239,
+              "S_t": 0.30314043076547736,
+              "S_e": 0.3503298184247813,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 35,
+              "lat": 48.182959348826266,
+              "lon": 11.3555261895122,
+              "velocity_ms": 5.382247565124788,
+              "S_k": 0.5592303396911281,
+              "S_t": 0.31528990260499157,
+              "S_e": 0.35000135281888667,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 36,
+              "lat": 48.182920814595825,
+              "lon": 11.3554820447163,
+              "velocity_ms": 5.382249050697631,
+              "S_k": 0.5578097524896858,
+              "S_t": 0.31528996202790527,
+              "S_e": 0.3500928891260173,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 37,
+              "lat": 48.18288304204396,
+              "lon": 11.355435567904589,
+              "velocity_ms": 5.453376492702499,
+              "S_k": 0.5541604466613747,
+              "S_t": 0.31813505970809997,
+              "S_e": 0.3500002293087192,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 38,
+              "lat": 48.18284511040947,
+              "lon": 11.35538906173487,
+              "velocity_ms": 5.453378107770042,
+              "S_k": 0.555166359568319,
+              "S_t": 0.3181351243108017,
+              "S_e": 0.35007885783765996,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 39,
+              "lat": 48.18280757332918,
+              "lon": 11.355345970755774,
+              "velocity_ms": 5.248880812958811,
+              "S_k": 0.5642610660521581,
+              "S_t": 0.30995523251835244,
+              "S_e": 0.3500002476371045,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 40,
+              "lat": 48.18276985458553,
+              "lon": 11.355302829763293,
+              "velocity_ms": 5.248882230219548,
+              "S_k": 0.5662917247399635,
+              "S_t": 0.30995528920878196,
+              "S_e": 0.35050009556272826,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 41,
+              "lat": 48.18273392640199,
+              "lon": 11.35526794424122,
+              "velocity_ms": 4.770497904058733,
+              "S_k": 0.5775512984980086,
+              "S_t": 0.29081991616234937,
+              "S_e": 0.35000176571141783,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 42,
+              "lat": 48.1826982131802,
+              "lon": 11.355232929189839,
+              "velocity_ms": 4.7704988960963135,
+              "S_k": 0.5807500201618017,
+              "S_t": 0.29081995584385256,
+              "S_e": 0.35155707432329575,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 43,
+              "lat": 48.1826654979308,
+              "lon": 11.355209010033658,
+              "velocity_ms": 4.028142646651066,
+              "S_k": 0.5868269131680947,
+              "S_t": 0.2611257058660426,
+              "S_e": 0.35000256448358713,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 44,
+              "lat": 48.1826329061147,
+              "lon": 11.355184887408393,
+              "velocity_ms": 4.028143144290175,
+              "S_k": 0.5886041345862184,
+              "S_t": 0.26112572577160703,
+              "S_e": 0.3559237085147858,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 45,
+              "lat": 48.182603719641584,
+              "lon": 11.355174061485831,
+              "velocity_ms": 3.380111072693986,
+              "S_k": 0.5847386654179645,
+              "S_t": 0.23520444290775944,
+              "S_e": 0.3500002133045358,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 46,
+              "lat": 48.182573929582304,
+              "lon": 11.35516295449265,
+              "velocity_ms": 3.3801111851694143,
+              "S_k": 0.5849625255085926,
+              "S_t": 0.23520444740677657,
+              "S_e": 0.35776972748529234,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 47,
+              "lat": 48.18254748289532,
+              "lon": 11.355162065339034,
+              "velocity_ms": 2.9475981204491246,
+              "S_k": 0.5718016046556524,
+              "S_t": 0.217903924817965,
+              "S_e": 0.35001101330551476,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 48,
+              "lat": 48.182520879228704,
+              "lon": 11.355160848012732,
+              "velocity_ms": 2.9475981206233595,
+              "S_k": 0.5691701281485133,
+              "S_t": 0.21790392482493437,
+              "S_e": 0.36901759523757927,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 49,
+              "lat": 48.182496471520246,
+              "lon": 11.355173041487049,
+              "velocity_ms": 2.8658708418889356,
+              "S_k": 0.5820941118915162,
+              "S_t": 0.2146348336755574,
+              "S_e": 0.35000485605397424,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 50,
+              "lat": 48.182472071932246,
+              "lon": 11.355184986547972,
+              "velocity_ms": 2.865870973898052,
+              "S_k": 0.5876441146901912,
+              "S_t": 0.21463483895592209,
+              "S_e": 0.36092949596889395,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 51,
+              "lat": 48.182444976728966,
+              "lon": 11.355215175879032,
+              "velocity_ms": 3.736402385416551,
+              "S_k": 0.6005043079924234,
+              "S_t": 0.24945609541666203,
+              "S_e": 0.3500000830297376,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 52,
+              "lat": 48.1824181260062,
+              "lon": 11.355245029561482,
+              "velocity_ms": 3.7364030835341464,
+              "S_k": 0.5957787445364036,
+              "S_t": 0.24945612334136585,
+              "S_e": 0.35198301692063866,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 53,
+              "lat": 48.18239002837421,
+              "lon": 11.355288894222284,
+              "velocity_ms": 4.5094840997720205,
+              "S_k": 0.5870948856405777,
+              "S_t": 0.2803793639908808,
+              "S_e": 0.35000123334299443,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 54,
+              "lat": 48.18236202783909,
+              "lon": 11.355333000073982,
+              "velocity_ms": 4.509485388723336,
+              "S_k": 0.5842127098470752,
+              "S_t": 0.2803794155489334,
+              "S_e": 0.35112671643197935,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 55,
+              "lat": 48.18233498619534,
+              "lon": 11.355389994983858,
+              "velocity_ms": 5.183894430209056,
+              "S_k": 0.5688606528652796,
+              "S_t": 0.30735577720836227,
+              "S_e": 0.3500000004736557,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 56,
+              "lat": 48.182307928544155,
+              "lon": 11.35544701193181,
+              "velocity_ms": 5.183896245302524,
+              "S_k": 0.5648586283680038,
+              "S_t": 0.30735584981210096,
+              "S_e": 0.35044009676064264,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 57,
+              "lat": 48.182285458914365,
+              "lon": 11.355505557058475,
+              "velocity_ms": 5.007092331474793,
+              "S_k": 0.5650225966790644,
+              "S_t": 0.3002836932589917,
+              "S_e": 0.35000000042027624,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 58,
+              "lat": 48.182262940988316,
+              "lon": 11.355564214895653,
+              "velocity_ms": 5.007093980551689,
+              "S_k": 0.5674935776152286,
+              "S_t": 0.30028375922206757,
+              "S_e": 0.35197899032132746,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 59,
+              "lat": 48.18225098830281,
+              "lon": 11.355622014787116,
+              "velocity_ms": 4.502425988890182,
+              "S_k": 0.5663450908241588,
+              "S_t": 0.2800970395556073,
+              "S_e": 0.3500000289057571,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 60,
+              "lat": 48.18223894560464,
+              "lon": 11.355680068197419,
+              "velocity_ms": 4.502426950206178,
+              "S_k": 0.5639673308434969,
+              "S_t": 0.2800970780082471,
+              "S_e": 0.35345265474030274,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 61,
+              "lat": 48.18223957173439,
+              "lon": 11.355740088346483,
+              "velocity_ms": 4.448790685488795,
+              "S_k": 0.5517378385740042,
+              "S_t": 0.2779516274195518,
+              "S_e": 0.3500016785538806,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 62,
+              "lat": 48.182239913830685,
+              "lon": 11.355800096341868,
+              "velocity_ms": 4.448790641969774,
+              "S_k": 0.5514125125292662,
+              "S_t": 0.27795162567879095,
+              "S_e": 0.35170037434318974,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 63,
+              "lat": 48.18224912304505,
+              "lon": 11.355858492395118,
+              "velocity_ms": 4.451189549977616,
+              "S_k": 0.5555119060351937,
+              "S_t": 0.2780475819991046,
+              "S_e": 0.3500042953841516,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 64,
+              "lat": 48.182257903454264,
+              "lon": 11.355917045734248,
+              "velocity_ms": 4.451188807966213,
+              "S_k": 0.5568244041972924,
+              "S_t": 0.2780475523186485,
+              "S_e": 0.3510808077533812,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 65,
+              "lat": 48.18227251651011,
+              "lon": 11.355970060199013,
+              "velocity_ms": 4.247378339654699,
+              "S_k": 0.5699162404546152,
+              "S_t": 0.269895133586188,
+              "S_e": 0.3500002720974038,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 66,
+              "lat": 48.18228700474404,
+              "lon": 11.356023015346842,
+              "velocity_ms": 4.247377311149722,
+              "S_k": 0.5733250950940075,
+              "S_t": 0.26989509244598886,
+              "S_e": 0.35051843892957063,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 67,
+              "lat": 48.18230281010721,
+              "lon": 11.356066284168142,
+              "velocity_ms": 3.6832932282901765,
+              "S_k": 0.5788987350023196,
+              "S_t": 0.24733172913160706,
+              "S_e": 0.3500028732195092,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 68,
+              "lat": 48.18231904957299,
+              "lon": 11.356109901793191,
+              "velocity_ms": 3.683292347112841,
+              "S_k": 0.5790684904394892,
+              "S_t": 0.24733169388451362,
+              "S_e": 0.35109320235651065,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 69,
+              "lat": 48.18233708570033,
+              "lon": 11.356144782467762,
+              "velocity_ms": 3.27714062377945,
+              "S_k": 0.5689059342806114,
+              "S_t": 0.23108562495117801,
+              "S_e": 0.35000072896934886,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 70,
+              "lat": 48.18235511126761,
+              "lon": 11.356179910715928,
+              "velocity_ms": 3.277139902746262,
+              "S_k": 0.5667001235505585,
+              "S_t": 0.2310855961098505,
+              "S_e": 0.3529209055330971,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 71,
+              "lat": 48.182377028863016,
+              "lon": 11.35620747527009,
+              "velocity_ms": 3.184540232851614,
+              "S_k": 0.5565439235003687,
+              "S_t": 0.22738160931406456,
+              "S_e": 0.35000009396261167,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 72,
+              "lat": 48.18239898004529,
+              "lon": 11.356235018722142,
+              "velocity_ms": 3.184539672005427,
+              "S_k": 0.5578052691179436,
+              "S_t": 0.22738158688021706,
+              "S_e": 0.3520562130880277,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 73,
+              "lat": 48.182425075567146,
+              "lon": 11.356258472841466,
+              "velocity_ms": 3.375483336111079,
+              "S_k": 0.558869963629287,
+              "S_t": 0.23501933344444315,
+              "S_e": 0.35000796994461003,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 74,
+              "lat": 48.182450799209114,
+              "lon": 11.356282076606442,
+              "velocity_ms": 3.3754828793549323,
+              "S_k": 0.5573273148655283,
+              "S_t": 0.23501931517419727,
+              "S_e": 0.3504678790872751,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 75,
+              "lat": 48.18247794832055,
+              "lon": 11.356303297429546,
+              "velocity_ms": 3.399187875664588,
+              "S_k": 0.5509582752373153,
+              "S_t": 0.23596751502658353,
+              "S_e": 0.3500137152960462,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 76,
+              "lat": 48.182504957192,
+              "lon": 11.356325003349815,
+              "velocity_ms": 3.399187481299392,
+              "S_k": 0.5508667375423503,
+              "S_t": 0.23596749925197566,
+              "S_e": 0.3500235815126775,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 77,
+              "lat": 48.18253199997318,
+              "lon": 11.356345958294092,
+              "velocity_ms": 3.3819618781067113,
+              "S_k": 0.5521820227937849,
+              "S_t": 0.23527847512426844,
+              "S_e": 0.350000768226906,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 78,
+              "lat": 48.182558949667396,
+              "lon": 11.356366703407144,
+              "velocity_ms": 3.3819614998630594,
+              "S_k": 0.5524864672928832,
+              "S_t": 0.23527845999452238,
+              "S_e": 0.3500474266223435,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 79,
+              "lat": 48.18258603833229,
+              "lon": 11.356386491021059,
+              "velocity_ms": 3.3322262757628436,
+              "S_k": 0.5548189071195114,
+              "S_t": 0.23328905103051376,
+              "S_e": 0.35000294635549634,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 80,
+              "lat": 48.182612983289424,
+              "lon": 11.356405915836374,
+              "velocity_ms": 3.332225945427358,
+              "S_k": 0.5559306579966095,
+              "S_t": 0.2332890378170943,
+              "S_e": 0.3500360802520508,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 81,
+              "lat": 48.18264096596359,
+              "lon": 11.356427036632601,
+              "velocity_ms": 3.48104769007061,
+              "S_k": 0.5655622038859069,
+              "S_t": 0.2392419076028244,
+              "S_e": 0.35000127696446753,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 82,
+              "lat": 48.18266897595924,
+              "lon": 11.356447997191918,
+              "velocity_ms": 3.4810473103966326,
+              "S_k": 0.566841277234697,
+              "S_t": 0.2392418924158653,
+              "S_e": 0.3500196202838546,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 83,
+              "lat": 48.18269991727823,
+              "lon": 11.35647037989617,
+              "velocity_ms": 3.829469123059988,
+              "S_k": 0.5687213186661412,
+              "S_t": 0.25317876492239955,
+              "S_e": 0.350003272656327,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 84,
+              "lat": 48.18273091906243,
+              "lon": 11.356493119797477,
+              "velocity_ms": 3.829468683599524,
+              "S_k": 0.5674528343007038,
+              "S_t": 0.25317874734398094,
+              "S_e": 0.3500010352798303,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 85,
+              "lat": 48.18276404319217,
+              "lon": 11.35651760624461,
+              "velocity_ms": 4.094404981437245,
+              "S_k": 0.5621815818741531,
+              "S_t": 0.2637761992574898,
+              "S_e": 0.35000011681524124,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 86,
+              "lat": 48.18279701294126,
+              "lon": 11.356542042259184,
+              "velocity_ms": 4.094404462594478,
+              "S_k": 0.5610514823382633,
+              "S_t": 0.2637761785037791,
+              "S_e": 0.35001152666071383,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 87,
+              "lat": 48.18283118219795,
+              "lon": 11.356568029726356,
+              "velocity_ms": 4.243692880091433,
+              "S_k": 0.5549446511274544,
+              "S_t": 0.2697477152036573,
+              "S_e": 0.35000249234898906,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 88,
+              "lat": 48.182865030511586,
+              "lon": 11.356594082451313,
+              "velocity_ms": 4.243692299309494,
+              "S_k": 0.5539396792175443,
+              "S_t": 0.2697476919723798,
+              "S_e": 0.35001079415749753,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 89,
+              "lat": 48.182898450228535,
+              "lon": 11.356620449722142,
+              "velocity_ms": 4.211402678822644,
+              "S_k": 0.6498050611153803,
+              "S_t": 0.26845610715290574,
+              "S_e": 0.35000020036269425,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 90,
+              "lat": 48.18293202230616,
+              "lon": 11.356647026346302,
+              "velocity_ms": 4.21140207980294,
+              "S_k": 0.6512410921730087,
+              "S_t": 0.2684560831921176,
+              "S_e": 0.35003411762922787,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 91,
+              "lat": 48.18300848256433,
+              "lon": 11.356704945352309,
+              "velocity_ms": 9.531521784145284,
+              "S_k": 0.6,
+              "S_t": 0.4812608713658113,
+              "S_e": 0.3500000464384063,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 92,
+              "lat": 48.18308511138981,
+              "lon": 11.35676308700267,
+              "velocity_ms": 9.53151888895284,
+              "S_k": 0.6,
+              "S_t": 0.48126075555811354,
+              "S_e": 0.35,
+              "match_distance": 0.0
+            }
+          ]
+        },
+        {
+          "watch": "watch2",
+          "positions": [
+            {
+              "point_index": 0,
+              "lat": 48.18311696071889,
+              "lon": 11.356855044783922,
+              "velocity_ms": 0.0,
+              "S_k": 0.6,
+              "S_t": 0.1,
+              "S_e": 0.35,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 1,
+              "lat": 48.18310023117845,
+              "lon": 11.35686223713397,
+              "velocity_ms": 0.7720364991099304,
+              "S_k": 0.6,
+              "S_t": 0.13088145996439723,
+              "S_e": 0.350725857818069,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 2,
+              "lat": 48.18314533797998,
+              "lon": 11.356881108391542,
+              "velocity_ms": 5.2235476911130565,
+              "S_k": 0.689900267603534,
+              "S_t": 0.30894190764452223,
+              "S_e": 0.35333659566650366,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 3,
+              "lat": 48.18318894114113,
+              "lon": 11.356889264922112,
+              "velocity_ms": 4.885421962991894,
+              "S_k": 0.6680287407971797,
+              "S_t": 0.2954168785196758,
+              "S_e": 0.36065562797460377,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 4,
+              "lat": 48.18327271587302,
+              "lon": 11.356872782069821,
+              "velocity_ms": 9.41959921116009,
+              "S_k": 0.6408680358473536,
+              "S_t": 0.4767839684464036,
+              "S_e": 0.35903219057546965,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 5,
+              "lat": 48.183318672721995,
+              "lon": 11.356845042343375,
+              "velocity_ms": 5.488843917614181,
+              "S_k": 0.6361358881844151,
+              "S_t": 0.31955375670456726,
+              "S_e": 0.35351067117605134,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 6,
+              "lat": 48.18340284143537,
+              "lon": 11.356765069203393,
+              "velocity_ms": 11.07288778324546,
+              "S_k": 0.6153763047846322,
+              "S_t": 0.5429155113298184,
+              "S_e": 0.3542706299616183,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 7,
+              "lat": 48.183474337695245,
+              "lon": 11.356653955737716,
+              "velocity_ms": 11.445621250493847,
+              "S_k": 0.6328068909460575,
+              "S_t": 0.5578248500197539,
+              "S_e": 0.35422317231956135,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 8,
+              "lat": 48.18352233130064,
+              "lon": 11.356515602598263,
+              "velocity_ms": 11.568386275860824,
+              "S_k": 0.6310220377745135,
+              "S_t": 0.5627354510344329,
+              "S_e": 0.3504547851125219,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 9,
+              "lat": 48.18354123271851,
+              "lon": 11.356443392858885,
+              "velocity_ms": 5.7607270408195514,
+              "S_k": 0.6451788450358731,
+              "S_t": 0.33042908163278206,
+              "S_e": 0.3518095501858005,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 10,
+              "lat": 48.183548963089976,
+              "lon": 11.356366753554587,
+              "velocity_ms": 5.736649649654686,
+              "S_k": 0.6608132681007608,
+              "S_t": 0.3294659859861875,
+              "S_e": 0.35166473286877004,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 11,
+              "lat": 48.18353889196185,
+              "lon": 11.356159674370637,
+              "velocity_ms": 15.401601206657743,
+              "S_k": 0.6603407586956993,
+              "S_t": 0.7160640482663096,
+              "S_e": 0.3508997138396068,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 12,
+              "lat": 48.18352851412946,
+              "lon": 11.356094613819149,
+              "velocity_ms": 4.94672640276465,
+              "S_k": 0.6838523996597315,
+              "S_t": 0.297869056110586,
+              "S_e": 0.35358465777253983,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 13,
+              "lat": 48.18348144803128,
+              "lon": 11.355975823847864,
+              "velocity_ms": 10.240964268609277,
+              "S_k": 0.6784875956555636,
+              "S_t": 0.509638570744371,
+              "S_e": 0.6065166017743484,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 14,
+              "lat": 48.183481510636696,
+              "lon": 11.355975851238309,
+              "velocity_ms": 0.0,
+              "S_k": 0.6922438293278085,
+              "S_t": 0.1,
+              "S_e": 0.6265873486201411,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 15,
+              "lat": 48.18341196019009,
+              "lon": 11.355872451121227,
+              "velocity_ms": 10.899140903319294,
+              "S_k": 0.6890914089082866,
+              "S_t": 0.5359656361327718,
+              "S_e": 0.560888590528332,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 16,
+              "lat": 48.183411844177996,
+              "lon": 11.355872635882378,
+              "velocity_ms": 0.0,
+              "S_k": 0.6926923101895008,
+              "S_t": 0.1,
+              "S_e": 0.5408304398802666,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 17,
+              "lat": 48.183327544406595,
+              "lon": 11.3557792732141,
+              "velocity_ms": 11.643693468167468,
+              "S_k": 0.6771321914202797,
+              "S_t": 0.5657477387266987,
+              "S_e": 0.35013691990151347,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 18,
+              "lat": 48.18316641641166,
+              "lon": 11.355615468546853,
+              "velocity_ms": 21.645385581709498,
+              "S_k": 0.692757422617559,
+              "S_t": 0.9658154232683799,
+              "S_e": 0.3500041438435763,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 19,
+              "lat": 48.1830867350895,
+              "lon": 11.355533249952927,
+              "velocity_ms": 10.749953024682213,
+              "S_k": 0.6773782047254573,
+              "S_t": 0.5299981209872885,
+              "S_e": 0.4689311200237739,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 20,
+              "lat": 48.18308678499872,
+              "lon": 11.355533175802918,
+              "velocity_ms": 0.0,
+              "S_k": 0.6787531899063302,
+              "S_t": 0.1,
+              "S_e": 0.4690827385120745,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 21,
+              "lat": 48.18300788890162,
+              "lon": 11.355451935544417,
+              "velocity_ms": 10.653307912475288,
+              "S_k": 0.6644269394208304,
+              "S_t": 0.5261323164990115,
+              "S_e": 0.3500108827082561,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 22,
+              "lat": 48.18293301354604,
+              "lon": 11.355372953779696,
+              "velocity_ms": 10.167840124614978,
+              "S_k": 0.6734031927553359,
+              "S_t": 0.5067136049845992,
+              "S_e": 0.3500986225998485,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 23,
+              "lat": 48.18285882355337,
+              "lon": 11.355300171974607,
+              "velocity_ms": 9.871166034949612,
+              "S_k": 0.6164482638908381,
+              "S_t": 0.4948466413979844,
+              "S_e": 0.3500023075421549,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 24,
+              "lat": 48.18282269326322,
+              "lon": 11.355265118624256,
+              "velocity_ms": 4.791550548813074,
+              "S_k": 0.6727442891549771,
+              "S_t": 0.29166202195252294,
+              "S_e": 0.3501462582394881,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 25,
+              "lat": 48.18275531107135,
+              "lon": 11.355193705265695,
+              "velocity_ms": 9.148835265266232,
+              "S_k": 0.6722802013659956,
+              "S_t": 0.4659534106106493,
+              "S_e": 0.6349506211659837,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 26,
+              "lat": 48.182755419732004,
+              "lon": 11.35519374649526,
+              "velocity_ms": 0.0,
+              "S_k": 0.6916959023615805,
+              "S_t": 0.1,
+              "S_e": 0.6389878122294887,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 27,
+              "lat": 48.18268288345486,
+              "lon": 11.355126412823665,
+              "velocity_ms": 9.48797170411183,
+              "S_k": 0.6890009798331231,
+              "S_t": 0.4795188681644732,
+              "S_e": 0.3906360457837739,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 28,
+              "lat": 48.18268287848092,
+              "lon": 11.355126340617426,
+              "velocity_ms": 0.0,
+              "S_k": 0.6922860744832632,
+              "S_t": 0.1,
+              "S_e": 0.41136890724234015,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 29,
+              "lat": 48.18260903957843,
+              "lon": 11.355079700472169,
+              "velocity_ms": 8.919486739118723,
+              "S_k": 0.6790224497879362,
+              "S_t": 0.4567794695647489,
+              "S_e": 0.3582200030831744,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 30,
+              "lat": 48.18257111738446,
+              "lon": 11.355070790220251,
+              "velocity_ms": 4.274113635928347,
+              "S_k": 0.6847579591818229,
+              "S_t": 0.2709645454371339,
+              "S_e": 0.3547879734891127,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 31,
+              "lat": 48.18253262334893,
+              "lon": 11.355071659049662,
+              "velocity_ms": 4.26932632499148,
+              "S_k": 0.6644301502957523,
+              "S_t": 0.27077305299965926,
+              "S_e": 0.3603424419660484,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 32,
+              "lat": 48.182420089202516,
+              "lon": 11.355118718857632,
+              "velocity_ms": 12.995196385256962,
+              "S_k": 0.6645972166990397,
+              "S_t": 0.6198078554102785,
+              "S_e": 0.3524615725662118,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 33,
+              "lat": 48.18238370346428,
+              "lon": 11.35514242765298,
+              "velocity_ms": 4.416845713374872,
+              "S_k": 0.6644000630524639,
+              "S_t": 0.2766738285349949,
+              "S_e": 0.35395490116489314,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 34,
+              "lat": 48.18232475538686,
+              "lon": 11.355204057854944,
+              "velocity_ms": 7.975867794713088,
+              "S_k": 0.6590280430636508,
+              "S_t": 0.4190347117885235,
+              "S_e": 0.3525826891218359,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 35,
+              "lat": 48.182297514452074,
+              "lon": 11.355245880305002,
+              "velocity_ms": 4.3174469481819315,
+              "S_k": 0.6649993942569886,
+              "S_t": 0.2726978779272773,
+              "S_e": 0.350907916938391,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 36,
+              "lat": 48.18222447384501,
+              "lon": 11.355390658614937,
+              "velocity_ms": 13.466606280413776,
+              "S_k": 0.6534943676216388,
+              "S_t": 0.638664251216551,
+              "S_e": 0.3526238435884687,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 37,
+              "lat": 48.18220793748681,
+              "lon": 11.35544818165898,
+              "velocity_ms": 4.6528009988826335,
+              "S_k": 0.6638371531943732,
+              "S_t": 0.2861120399553053,
+              "S_e": 0.35034803059433817,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 38,
+              "lat": 48.18218009411475,
+              "lon": 11.355577675893262,
+              "velocity_ms": 10.09043270676714,
+              "S_k": 0.6564183415786052,
+              "S_t": 0.5036173082706856,
+              "S_e": 0.3511366981368018,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 39,
+              "lat": 48.182174524978365,
+              "lon": 11.355640365368922,
+              "velocity_ms": 4.695065134573297,
+              "S_k": 0.6763194939723217,
+              "S_t": 0.2878026053829319,
+              "S_e": 0.3512279774205864,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 40,
+              "lat": 48.182182269042734,
+              "lon": 11.35583661236775,
+              "velocity_ms": 14.587261278951962,
+              "S_k": 0.6584021186714836,
+              "S_t": 0.6834904511580784,
+              "S_e": 0.35955260587520066,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 41,
+              "lat": 48.18229541273297,
+              "lon": 11.356105534480387,
+              "velocity_ms": 23.564155752196115,
+              "S_k": 0.6498782818562862,
+              "S_t": 1.0,
+              "S_e": 0.35370442671346547,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 42,
+              "lat": 48.18241514163138,
+              "lon": 11.356272906035343,
+              "velocity_ms": 18.177071572827163,
+              "S_k": 0.5982725473828772,
+              "S_t": 0.8270828629130865,
+              "S_e": 0.3500538400838031,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 43,
+              "lat": 48.18255121612755,
+              "lon": 11.35647432019334,
+              "velocity_ms": 21.271551687268108,
+              "S_k": 0.5853641249421472,
+              "S_t": 0.9508620674907242,
+              "S_e": 0.35001982438075385,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 44,
+              "lat": 48.18266218452847,
+              "lon": 11.356632950814145,
+              "velocity_ms": 17.059859842713255,
+              "S_k": 0.5815139463986656,
+              "S_t": 0.7823943937085303,
+              "S_e": 0.35001023713133894,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 45,
+              "lat": 48.18280884608473,
+              "lon": 11.356837475690906,
+              "velocity_ms": 22.234104967796263,
+              "S_k": 0.6020811348681182,
+              "S_t": 0.9893641987118506,
+              "S_e": 0.3539631551296076,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 46,
+              "lat": 48.18294652215165,
+              "lon": 11.3569578166463,
+              "velocity_ms": 17.750916320056998,
+              "S_k": 0.6,
+              "S_t": 0.8100366528022799,
+              "S_e": 0.35470141093905666,
+              "match_distance": 0.0
+            },
+            {
+              "point_index": 47,
+              "lat": 48.18305704894848,
+              "lon": 11.357013583329742,
+              "velocity_ms": 12.958598006002193,
+              "S_k": 0.6,
+              "S_t": 0.6183439202400877,
+              "S_e": 0.35,
+              "match_distance": 0.0
+            }
+          ]
+        }
+      ]
+    },
+    "circular_closure": {
+      "num_points": 141,
+      "rmse_lat_deg": 1.997931757046482e-06,
+      "rmse_lon_deg": 4.2489458356765844e-07,
+      "rmse_lat_m": 0.22177042503215952,
+      "rmse_lon_m": 0.03144638660333979,
+      "rmse_horizontal_m": 0.22398883152816212,
+      "closure_percent": 0.07558292226775705,
+      "is_valid": "True",
+      "interpretation": "Excellent"
+    }
+  }
+}
