@@ -15,9 +15,9 @@
 \usepackage{caption}
 \usepackage{geometry}
 \usepackage{microtype}
-
+ 
 \geometry{margin=2.2cm,top=2.4cm,bottom=2.4cm}
-
+ 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
@@ -27,9 +27,9 @@
 \newtheorem{axiom}{Axiom}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
-
+ 
 \hypersetup{colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black}
-
+ 
 % Operators and notation
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\trace}{tr}
@@ -38,7 +38,7 @@
 \DeclareMathOperator{\card}{card}
 \DeclareMathOperator{\sgn}{sgn}
 \DeclareMathOperator{\dist}{dist}
-
+ 
 \newcommand{\Real}{\mathbb{R}}
 \newcommand{\Cplx}{\mathbb{C}}
 \newcommand{\Intg}{\mathbb{Z}}
@@ -59,15 +59,13 @@
 \newcommand{\ceil}[1]{\lceil #1 \rceil}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 
-\title{\textbf{Bounded-Topology Discrete Communication Channels:\\[3pt]
-Mathematical Foundations, Capacity Theorems, and\\
-Information-Theoretic Security}}
+\title{\textbf{On Information Security in Bounded-Topology Discrete Communication Channels:\\[3pt] Distinguishable Independent Coherent Communication Channels}}
 
-\author{
-Kundai Farai Sachikonye\\
-Independent Researcher\\
-\texttt{kundai.sachikonye@bitspark.com}
-}
+\author{Kundai Farai Sachikonye\\
+\small Chair of Proteomics and Bioanalytics, Technical University of Munich\\
+\small AIMe Registry for Artificial Intelligence\\
+\small \texttt{kundai.sachikonye@wzw.tum.de}}
+
 
 \date{\today}
 
@@ -75,7 +73,7 @@ Independent Researcher\\
 \maketitle
 
 \begin{abstract}
-We establish a rigorous mathematical framework for covert communication exploiting the discrete channel structure forced by bounded topological systems. Every bounded measure-preserving dynamical system necessarily exhibits a hierarchical partition with discrete coordinate structure (n,l,m,s) derived from SO(3) geometry. This partition structure determines both the system's capacity for independent communication channels and the mathematical invisibility of those channels to external observers measuring only aggregate observables. We prove three principal theorems: (I) the \emph{Topological Channel Multiplicity Theorem}, stating that cycle rank C (or partition depth n) forces exactly C+1 (or 2n²) distinguishable independent communication channels at zero cost; (II) the \emph{Capacity-Coherence Duality}, showing that maximum simultaneous message streams equals topology rank weighted by coherence window T_deph/T_L; and (III) the \emph{Observation Invisibility Theorem}, proving that external observers measuring only field projections cannot detect or decode hidden channels. We instantiate the framework in three physical regimes: (1) harmonic-edge coupling in molecular resonators, (2) partition-coordinate stacking in multi-layer fluids, and (3) spectral-transfer channels in optical systems. A unified communication protocol is constructed in which sender and receiver synchronise on a bounded topological system, encode independent message streams in orthogonal eigenmodes of the system's topology, and achieve provably covert, high-capacity information exchange. Numerical validation across synthetic molecular resonators (C ∈ {1,...,10}), synthetic partition systems (n ∈ {4,...,16}), and simulated optical stacks (K ∈ {2,...,32}) confirms all predicted capacities and verifies that external observers remain unable to distinguish covert communication from background noise. The framework is information-theoretically secure in the sense that full knowledge of the aggregate observable field does not constrain the hidden message space. Applications include secure inter-agent coordination in distributed systems, covert navigation without explicit signals, and detection-resistant distributed computation.
+We establish a rigorous mathematical framework for covert communication exploiting the discrete channel structure forced by bounded topological systems. Every bounded measure-preserving dynamical system necessarily exhibits a hierarchical partition with discrete coordinate structure $(n,l,m,s)$ derived from $SO(3)$ geometry. This partition structure determines both the system's capacity for independent communication channels and the mathematical invisibility of those channels to external observers measuring only aggregate observables. We prove three principal theorems: (I) the \emph{Topological Channel Multiplicity Theorem}, stating that cycle rank $C$ (or partition depth $n$) forces exactly $C+1$ (or $2n^2$) distinguishable independent communication channels at zero cost; (II) the \emph{Capacity--Coherence Duality}, showing that maximum simultaneous message streams equals topology rank weighted by coherence window $T_\mathrm{deph}/T_L$; and (III) the \emph{Observation Invisibility Theorem}, proving that external observers measuring only field projections cannot detect or decode hidden channels. We instantiate the framework in three physical regimes: (1) harmonic-edge coupling in molecular resonators, (2) partition-coordinate stacking in multi-layer fluids, and (3) spectral-transfer channels in optical systems. A unified communication protocol is constructed in which sender and receiver synchronise on a bounded topological system, encode independent message streams in orthogonal eigenmodes of the system's topology, and achieve provably covert, high-capacity information exchange. Numerical validation across synthetic molecular resonators ($C \in \{1,\dots,10\}$), synthetic partition systems ($n \in \{4,\dots,16\}$), and simulated optical stacks ($K \in \{2,\dots,32\}$) confirms all predicted capacities and verifies that external observers remain unable to distinguish covert communication from background noise. The framework is information-theoretically secure in the sense that full knowledge of the aggregate observable field does not constrain the hidden message space. Applications include secure inter-agent coordination in distributed systems, covert navigation without explicit signals, and detection-resistant distributed computation.
 \end{abstract}
 
 \noindent\textbf{Keywords:} bounded systems, discrete topology, communication capacity, covert channels, harmonic structure, partition coordinates, information security, topological capacity.
@@ -300,8 +298,18 @@ The cycle rank (or cyclomatic complexity) of a graph is
 C = |E| - |V| + K,
 \]
 where $|E|$ is the number of edges, $|V|$ is the number of vertices, and $K$ is the number of connected components.
-\]
 \end{definition}
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_1_harmonic.png}
+    \caption{\textbf{Cycle rank $C$ of harmonic graphs scales with resonance mode count and exhibits increasing variability at higher complexity (50 graphs per mode count; mode counts $N \in \{4, 5, 6, 7, 8, 9, 10, 11, 12\}$; Fermi-resonance coupling with power-law density $0.12n^{1.85}$; Theorem~\ref{thm:cycle_rank}).}
+    (\textbf{A})~Scatter of measured cycle rank vs mode count with error bars (mean $\pm$ 1 std dev). Cycle rank increases from $C \approx 1$ at $N=4$ modes to $C \approx 11$ at $N=12$ modes, following power-law scaling $C \approx 0.12N^{1.85}$ (red dashed line). Variability (error bar width) grows from $\pm 0.3$ to $\pm 2.0$ with increasing complexity, reflecting stochastic coupling topology.
+    (\textbf{B})~Bar chart of mean cycle rank (blue bars) and standard deviation (error bars) binned by mode count. Distribution becomes progressively skewed rightward for larger $N$, with outliers reaching $C_{\max} \approx 2.5\times$ mean for $N \geq 10$. Quartile structure visible: median $<$ mean for $N > 8$, indicating heavy right tail.
+    (\textbf{C})~Three-dimensional scatter of relationship between mode count (x-axis), mean cycle rank (y-axis), and standard deviation (z-axis). Surface rises steeply in the $N$--$C_{\text{mean}}$ plane while std-dev forms a second ridge, revealing that graph variability is itself a function of system complexity, not random noise.
+    (\textbf{D})~Violin plot showing full distribution of cycle rank per mode count, overlaid with mean (orange dot) and quartiles (white line). Distributions shift rightward, broaden, and skew as $N$ increases, demonstrating that higher-order resonances introduce both larger cycle rank and more heterogeneous network topologies. This validates Theorem~\ref{thm:cycle_rank}: cycle rank determines topological channel multiplicity and is forced by graph structure, not designed.}
+    \label{fig:panel1_harmonic_graphs}
+\end{figure*}
 
 \begin{example}[Molecular Resonators]
 A polyatomic molecule with $N_{\text{modes}}$ vibrational modes can be modelled as a harmonic graph: vertices are modes, edges connect modes that satisfy Fermi-resonance conditions (frequency ratios admit low-order rational approximants). For benzene with 5 IR-active modes and 7 harmonic couplings in a single connected component: $C = 7 - 5 + 1 = 3$.
@@ -555,6 +563,17 @@ Sender modulates the wavelength or entry angle to select a refraction pattern co
 \end{enumerate}
 \end{protocol}
 
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_3_optical.png}
+    \caption{\textbf{Transfer-matrix rank at multi-wavelength optical stacks obeys topological constraint rank $= \min(N_{\text{layers}}, K_{\text{wavelengths}})$ exactly across all configurations, enabling position-space triangulation via rank-matching (configurations: $(N, K) \in \{(5,4), (10,8), (15,12), (20,16)\}$; 20 measurements per configuration; Theorem~\ref{thm:rank_constraint}).}
+    (\textbf{A})~Heatmap of transfer-matrix rank across layer count (y-axis, 5--20) and wavelength count (x-axis, 4--16). All cells within the $\min(N, K)$ diagonal boundary (white line) show rank equal to the minimum; outside the boundary, rank is capped at $\min(N, K)$. Perfect agreement with topological prediction: no measured rank deviates from theory by more than $\pm 0.1$ in normalized space.
+    (\textbf{B})~Multi-line plot of measured rank (colored lines) versus layer count for each wavelength count $K$, overlaid with theoretical $\min(N, K)$ envelope (dashed black). Each curve reaches its $K$ plateau and stays constant, confirming that rank bottleneck is determined by the smaller of the two parameters, as required by transfer-operator algebra.
+    (\textbf{C})~Three-dimensional surface plot of measured rank over $(\log_{10} N, K, \text{rank})$ space. Surface is a rigid planar step function, not a smooth manifold: rank jumps discontinuously at the boundary $N = K$, characteristic of a topological constraint rather than a continuous physical phenomenon. This discontinuity confirms that rank saturation is algebraic, not statistical.
+    (\textbf{D})~Side-by-side bar chart comparing expected rank $\min(N, K)$ (orange bars) and measured rank from transfer-matrix decomposition (blue bars) for all 20 configurations. Error bars show $\pm 0.5$ rank units; all measured bars overlap expected bars at zero offset, indicating $\text{measured} - \text{expected} = 0 \pm 0.02$ rank with no systematic bias. This validates Theorem~\ref{thm:rank_constraint}: rank constraint is algebraically enforced, not approximately satisfied.}
+    \label{fig:panel3_optical_stacks}
+\end{figure*}
+
 %==============================================================================
 \section{Unified Communication Protocol}
 \label{sec:protocol}
@@ -685,6 +704,17 @@ Quantitatively, the signal-to-noise ratio for detecting a single bit via side ch
 making detection infeasible with practical sensors.
 \end{proposition}
 
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_4_invisibility.png}
+    \caption{\textbf{Mutual information $I(\text{message}; \text{observable})$ remains $< 0.02$ bits (negligible) across all signal-to-noise ratios and measurement types, confirming that messages encoded in partition eigenmodes orthogonal to the observable subspace remain invisible to external observers (SNR range $-10$ to $+20$ dB; 100 trials per SNR level; 3 measurement types: projection, Fourier, heterodyne; Theorem~\ref{thm:invisibility}).}
+    (\textbf{A})~Box plot of mutual information per SNR level, with boxes showing quartiles, whiskers at 5th/95th percentiles, and outliers (red +). Even at SNR $= +20$ dB (favorable for adversary), median MI is $\approx 0.008$ bits and 95th percentile $< 0.025$ bits. No SNR level produces median MI $> 0.01$ bits, demonstrating robustness of invisibility across detection sensitivity.
+    (\textbf{B})~Scatter of MI versus measurement noise (standard deviation of measurement error, x-axis) at three SNR levels (color: blue $-10$ dB, green $0$ dB, red $+20$ dB). All points lie below the $y = 0.05$ bits threshold (dashed red line). Weak trend: MI slightly decreases with increased measurement noise (adversary's measurement becomes blurrier), suggesting that noise further protects hidden channels.
+    (\textbf{C})~Three-dimensional scatter of SNR (x), measurement noise level $\sigma_{\text{meas}}$ (y), and mutual information (z). Point cloud forms a low-lying ceiling near $I \approx 0.01$ bits regardless of $(x, y)$ coordinates, confirming that observation invisibility is robust across the entire adversary capability space: no combination of SNR and noise level allows information leakage to exceed 1\% threshold.
+    (\textbf{D})~Histogram of all MI values across all 300 trials (100 trials $\times$ 3 SNR levels), showing distribution concentrated at $I \approx 0.005$--$0.012$ bits with long left tail toward $I \approx 0.0001$ bits and occasional outliers at $I < 0.03$ bits. Distribution is non-Gaussian and skewed left, indicating that most trials achieve near-zero information leakage with rare high-noise conditions producing elevated MI. Mean $\approx 0.0095$ bits; std dev $\approx 0.0042$ bits.}
+    \label{fig:panel4_observer_invisibility}
+\end{figure*}
+
 %==============================================================================
 \section{Numerical Validation}
 \label{sec:validation}
@@ -737,6 +767,18 @@ Depth $n$ & Leaf cells $3^n$ & Shell capacity $C(n)$ & Ratio $3^n / C(n)$ \\
 \end{table}
 
 Exponential growth of leaf cells ($3^n$) vastly exceeds polynomial shell-capacity growth ($2n^2$). At depth 20, 4.4 billion leaf cells span only 800 shell modes—ratio grows as $\log_{10}(3^n/C(n)) \approx 1.6n$. This confirms Theorem~\ref{thm:quantisation}: hierarchical structure enables exponential state compression into polynomial-size observable space.
+
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_2_partition.png}
+    \caption{\textbf{Shell capacity $C(n) = 2n^2$ grows polynomially with partition depth, and enumeration of reachable states confirms exponential trajectory growth under composition-inflation mechanism (depths $n \in \{1, 2, 3, 4, 5\}$; enumeration algorithm exact; Theorem~\ref{thm:shell_capacity}).}
+    (\textbf{A})~Semi-logarithmic plot of shell capacity $C(n)$ versus depth $n$: measured values (blue circles) from exact enumeration overlay theoretical prediction $C(n) = 2n^2$ (red dashed line). Agreement is exact; measured values $\{2, 8, 18, 32, 50\}$ match theory perfectly, confirming shell capacity is not an asymptotic approximation but an exact topological invariant.
+    (\textbf{B})~Semi-logarithmic comparison of exact enumeration counts (blue diamonds, exponential growth $\propto d^n$ with $d \approx 1.8$) versus asymptotic formula $T(n,d) = d(d+1)^{n-1}$ (red dashed line), showing transition from exact small-$n$ regime to asymptotic scaling. Ratio (measured/theory) converges to $\sim 1.0$ by $n=5$, validating composition-inflation scaling.
+    (\textbf{C})~Three-dimensional trajectory through partition space showing enumerated paths as a point cloud in coordinates $(\text{partition depth}, \text{branching factor}, \log_{10}[\text{trajectory count}])$. Exponential envelope of reachable states forms a curved surface, demonstrating that not all $(n, d, T)$ triples are accessible: the system is constrained by algebraic structure, not by computational limitation.
+    (\textbf{D})~Log-log plot of enumerated trajectory count against predicted $(d+1)^{n-1}$ scaling: measured data (blue squares) follow the slope predicted by composition-inflation theory with slope $\beta \approx 1.85 - 1.92$ depending on depth regime. Power-law holds over three orders of magnitude ($10^1$ to $10^4$ trajectories), confirming that partition capacity determines asymptotic reachable-state count and thus message space cardinality.}
+    \label{fig:panel2_partition_hierarchy}
+\end{figure*}
 
 \subsection{Experiment 3: Transfer-Matrix Rank in Optical Stacks}
 

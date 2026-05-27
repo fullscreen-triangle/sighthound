@@ -1,0 +1,51 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: context-dependent-coordinate-field-generator.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: unsrtnat.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: references.bib
+Warning--empty booktitle in lowe2004
+Warning--can't use both volume and number fields in lowe2004
+You've used 13 entries,
+            2481 wiz_defined-function locations,
+            625 strings with 6183 characters,
+and the built_in function-call counts, 4745 in all, are:
+= -- 403
+> -- 207
+< -- 13
++ -- 84
+- -- 58
+* -- 326
+:= -- 735
+add.period$ -- 39
+call.type$ -- 13
+change.case$ -- 25
+chr.to.int$ -- 13
+cite$ -- 15
+duplicate$ -- 268
+empty$ -- 460
+format.name$ -- 85
+if$ -- 1026
+int.to.chr$ -- 1
+int.to.str$ -- 14
+missing$ -- 19
+newline$ -- 73
+num.names$ -- 39
+pop$ -- 128
+preamble$ -- 1
+purify$ -- 13
+quote$ -- 0
+skip$ -- 165
+stack$ -- 0
+substring$ -- 185
+swap$ -- 45
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 73
+warning$ -- 2
+while$ -- 40
+width$ -- 0
+write$ -- 174
+(There were 2 warnings)

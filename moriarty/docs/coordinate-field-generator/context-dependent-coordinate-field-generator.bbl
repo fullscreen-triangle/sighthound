@@ -1,0 +1,83 @@
+\begin{thebibliography}{13}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Hartley and Zisserman(2003)]{hartley2003}
+Richard Hartley and Andrew Zisserman.
+\newblock \emph{Multiple View Geometry in Computer Vision}.
+\newblock Cambridge University Press, 2nd edition, 2003.
+
+\bibitem[Zhang(2000)]{zhang2000}
+Zhengyou Zhang.
+\newblock A flexible new technique for camera calibration.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 22\penalty0 (11):\penalty0 1330--1334, 2000.
+
+\bibitem[Oppenheim and Schafer(1989)]{oppenheim1989}
+Alan~V. Oppenheim and Ronald~W. Schafer.
+\newblock \emph{Discrete-Time Signal Processing}.
+\newblock Prentice Hall, 1st edition, 1989.
+
+\bibitem[Mallat(1989)]{mallat1989}
+Stephane~G. Mallat.
+\newblock A theory for multiresolution signal decomposition: The wavelet
+  representation.
+\newblock \emph{IEEE Transactions on Pattern Analysis and Machine
+  Intelligence}, 11\penalty0 (7):\penalty0 674--693, 1989.
+
+\bibitem[Trucco and Verri(1998)]{trucco1998}
+Emanuele Trucco and Alessandro Verri.
+\newblock \emph{Introductory Techniques for 3-D Computer Vision}.
+\newblock Prentice Hall, 1998.
+
+\bibitem[Forsyth and Ponce(2011)]{forsyth2011}
+David~A. Forsyth and Jean Ponce.
+\newblock \emph{Computer Vision: A Modern Approach}.
+\newblock Pearson, 2nd edition, 2011.
+
+\bibitem[Press et~al.(1992)Press, Teukolsky, Vetterling, and
+  Flannery]{press1992}
+William~H. Press, Saul~A. Teukolsky, William~T. Vetterling, and Brian~P.
+  Flannery.
+\newblock \emph{Numerical Recipes in C: The Art of Scientific Computing}.
+\newblock Cambridge University Press, 2nd edition, 1992.
+
+\bibitem[Tomasi and Manduchi(1998)]{tomasi1998}
+Carlo Tomasi and Roberto Manduchi.
+\newblock Bilateral filtering for gray and color images.
+\newblock In \emph{IEEE International Conference on Computer Vision}, 1998.
+
+\bibitem[Barron et~al.(1994)Barron, Fleet, and Beauchemin]{barron1994}
+John~L. Barron, David~J. Fleet, and Steven~S. Beauchemin.
+\newblock Performance of optical flow techniques.
+\newblock \emph{International Journal of Computer Vision}, 12\penalty0
+  (1):\penalty0 43--77, 1994.
+
+\bibitem[Gonzalez and Woods(2018)]{gonzalez2018}
+Rafael~C. Gonzalez and Richard~E. Woods.
+\newblock \emph{Digital Image Processing}.
+\newblock Pearson, 4th edition, 2018.
+
+\bibitem[Horn and Schunck(1981)]{horn1981}
+Berthold K.~P. Horn and Brian~G. Schunck.
+\newblock Determining optical flow.
+\newblock \emph{Artificial Intelligence}, 17:\penalty0 185--203, 1981.
+
+\bibitem[Seitz et~al.(2006)Seitz, Curless, Diebel, Scharstein, and
+  Szeliski]{seitz2006}
+Steven~M. Seitz, Brian Curless, James Diebel, Daniel Scharstein, and Richard
+  Szeliski.
+\newblock A comparison and evaluation of multi-view stereo reconstruction
+  algorithms.
+\newblock \emph{IEEE Conference on Computer Vision and Pattern Recognition},
+  pages 519--528, 2006.
+
+\bibitem[Lowe(2004)]{lowe2004}
+David~G. Lowe.
+\newblock Distinctive image features from scale-invariant keypoints.
+\newblock volume~60, pages 91--110, 2004.
+
+\end{thebibliography}

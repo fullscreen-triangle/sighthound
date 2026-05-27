@@ -1,0 +1,50 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}The Capacity-Topology Principle}{2}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}The Covertness Mechanism}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Three Instantiations}{3}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Security Model}{3}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Contributions}{3}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Roadmap}{4}{subsection.1.6}%
+\contentsline {section}{\numberline {2}Mathematical Foundations of Bounded Systems}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Bounded Measure-Preserving Dynamical Systems}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Discrete Frequency Spectrum from Recurrence}{4}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Partition Coordinates from SO(3) Geometry}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Partition Potential and Dynamics}{5}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Topology and Channel Structure}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Cycle Rank of Bounded Systems}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Partition Depth and Cell Structure}{6}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Channel Capacity and Information-Theoretic Bounds}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}The Topological Channel Multiplicity Theorem}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}The Capacity-Coherence Duality}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}The Observation Invisibility Theorem}{9}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Physical Instantiations}{9}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Harmonic-Edge Channels in Molecular Resonators}{9}{subsection.5.1}%
+\contentsline {subsubsection}{\numberline {5.1.1}Harmonic Graph Structure}{9}{subsubsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.2}Transfer Matrix Through Harmonic Couplings}{9}{subsubsection.5.1.2}%
+\contentsline {subsubsection}{\numberline {5.1.3}Message Encoding via Harmonic Multiplexing}{10}{subsubsection.5.1.3}%
+\contentsline {subsection}{\numberline {5.2}Partition-Coordinate Channels in Stacked Fluids}{10}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Stacked-Fluid Optical System}{10}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Message Encoding via Partition Coordinates}{10}{subsubsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.3}Spectral-Transfer Channels in Frequency-Dispersive Systems}{10}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Unified Communication Protocol}{11}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Protocol Architecture}{11}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Error Correction and Robustness}{11}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Information-Theoretic Security Analysis}{13}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Threat Model}{13}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Information-Theoretic Bounds}{13}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Computational Security Against Side-Channel Analysis}{13}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Numerical Validation}{13}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Experiment 1: Harmonic-Graph Channel Capacity}{13}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Experiment 2: Partition-Hierarchy Distinguishability}{15}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Experiment 3: Transfer-Matrix Rank in Optical Stacks}{15}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Experiment 4: External-Observer Invisibility}{15}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Applications}{17}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Covert Inter-Agent Coordination in Distributed Networks}{17}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Covert Navigation Without Explicit Signals}{17}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.3}Detection-Resistant Distributed Computation}{17}{subsection.9.3}%
+\contentsline {subsection}{\numberline {9.4}Stealth Communication in Adversarial Environments}{17}{subsection.9.4}%
+\contentsline {section}{\numberline {10}Discussion}{17}{section.10}%
+\contentsline {subsection}{\numberline {10.1}Limitations and Open Questions}{17}{subsection.10.1}%
+\contentsline {subsection}{\numberline {10.2}Experimental Realisability}{17}{subsection.10.2}%
+\contentsline {subsection}{\numberline {10.3}Relation to Existing Stealth Communication Methods}{17}{subsection.10.3}%
+\contentsline {section}{\numberline {11}Conclusion}{18}{section.11}%
