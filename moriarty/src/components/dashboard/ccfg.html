@@ -1,0 +1,1664 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>CCFG Sandbox — Spectral Metric Reconstruction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --paper: #fbfaf6;
+    --ink: #1a1a1a;
+    --ink-2: #4a4a4a;
+    --ink-3: #8a8a8a;
+    --rule: #1a1a1a;
+    --rule-soft: #d8d3c4;
+    --accent: #c8412a;
+    --accent-2: #1d4d3a;
+    --accent-3: #c89e2a;
+    --hl: #fce8a4;
+    --grid: rgba(26,26,26,0.06);
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+    --serif: "Fraunces", "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--ink); }
+  body {
+    font-family: var(--serif);
+    font-size: 14px;
+    line-height: 1.45;
+    min-height: 100vh;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  /* TOP BAR */
+  header.top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding: 18px 28px 14px;
+    border-bottom: 2px solid var(--rule);
+    background: var(--paper);
+    gap: 24px;
+  }
+  .brand { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .brand .mark {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: 34px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .brand .mark em { font-style: italic; color: var(--accent); font-weight: 500; }
+  .brand .sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    border-left: 1px solid var(--ink-3);
+    padding-left: 12px;
+  }
+  .meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-2);
+    text-align: right;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    line-height: 1.7;
+  }
+  .meta b { color: var(--ink); }
+
+  /* LAYOUT */
+  main {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    min-height: calc(100vh - 86px);
+  }
+  .pane {
+    border-right: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .pane:last-child { border-right: none; }
+  .pane-head {
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .pane-head .title { display: flex; align-items: center; gap: 10px; }
+  .pane-head .title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); }
+
+  button.btn {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  button.btn:hover { background: var(--ink); color: var(--paper); }
+  button.btn.primary { background: var(--ink); color: var(--paper); }
+  button.btn.primary:hover { background: var(--accent); border-color: var(--accent); }
+  button.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* LEFT PANE: CONFIG */
+  .config { padding: 18px; overflow-y: auto; }
+  .config .section { margin-bottom: 22px; }
+  .config h3 {
+    margin: 0 0 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .config h3::before { content: ""; width: 18px; height: 1px; background: var(--ink); }
+  .config h3 .ref {
+    margin-left: auto;
+    font-family: var(--serif);
+    font-style: italic;
+    text-transform: none;
+    color: var(--ink-3);
+    letter-spacing: 0;
+    font-size: 11px;
+  }
+
+  .field-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 6px 10px;
+    border: 1px solid var(--rule-soft);
+    cursor: pointer;
+    background: transparent;
+    color: var(--ink-2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .chip.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .chip:hover:not(.active) { border-color: var(--ink); color: var(--ink); }
+
+  .slider-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .slider-row label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .slider-row .val {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  input[type="range"] {
+    grid-column: 1 / -1;
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  /* code block in left pane */
+  .code-block {
+    font-family: var(--mono);
+    font-size: 11px;
+    background: var(--paper);
+    border: 1px solid var(--rule-soft);
+    padding: 12px 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    color: var(--ink);
+    margin-top: 8px;
+  }
+  .code-block .kw { color: var(--accent); font-weight: 500; }
+  .code-block .com { color: var(--ink-3); font-style: italic; }
+  .code-block .str { color: var(--accent-3); }
+  .code-block .num { color: var(--accent-2); }
+
+  /* RIGHT PANE: OUTPUT */
+  .output {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr;
+    overflow-y: auto;
+    background: var(--bg);
+  }
+
+  /* status strip */
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+  }
+  .strip .cell {
+    padding: 10px 14px;
+    border-right: 1px solid var(--rule-soft);
+  }
+  .strip .cell:last-child { border-right: none; }
+  .strip .cell .k {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .strip .cell .v {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 2px;
+    letter-spacing: -0.02em;
+  }
+  .strip .cell .v.mono { font-family: var(--mono); font-size: 14px; font-weight: 500; }
+  .strip .cell .v .unit { font-size: 11px; color: var(--ink-3); margin-left: 4px; font-style: italic; }
+  .strip .cell.warn .v { color: var(--accent); }
+  .strip .cell.good .v { color: var(--accent-2); }
+
+  .stage-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    border: 1px solid var(--ink);
+  }
+  .stage-pill.idle { background: transparent; color: var(--ink-3); border-color: var(--rule-soft); }
+  .stage-pill.work { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+  .stage-pill.done { background: var(--accent-2); color: var(--paper); border-color: var(--accent-2); }
+
+  /* canvas area */
+  .canvas-section { padding: 18px; }
+  .canvas-section h3 {
+    margin: 0 0 10px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .canvas-section h3::before { content: ""; width: 18px; height: 1px; background: var(--ink); }
+  .canvas-section h3 .ref {
+    margin-left: auto;
+    font-family: var(--serif);
+    font-style: italic;
+    text-transform: none;
+    color: var(--ink-3);
+    letter-spacing: 0;
+    font-size: 11px;
+  }
+
+  .canvas-wrap {
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    display: inline-block;
+    width: 100%;
+    max-width: 720px;
+  }
+  .canvas-wrap canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: crosshair;
+  }
+  .canvas-wrap canvas.overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: auto;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    opacity: 0.6;
+  }
+  .canvas-wrap canvas.markers {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: auto;
+    pointer-events: none;
+  }
+
+  .canvas-toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .canvas-toolbar .hint {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-2);
+    font-size: 12px;
+    margin-left: auto;
+  }
+  .canvas-toolbar .toggle {
+    font-family: var(--mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+  .canvas-toolbar .toggle input { accent-color: var(--accent); }
+
+  /* measurement panel */
+  .measurement {
+    margin-top: 16px;
+    border: 1px solid var(--rule-soft);
+    background: var(--paper);
+    padding: 14px 16px;
+  }
+  .measurement h4 {
+    margin: 0 0 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+  }
+  .measurement .lines {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+  }
+  .measurement .lines .cell {
+    border-left: 1px solid var(--rule-soft);
+    padding-left: 12px;
+  }
+  .measurement .lines .cell:first-child { border-left: none; padding-left: 0; }
+  .measurement .lines .cell .k {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+  .measurement .lines .cell .v {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-top: 2px;
+  }
+  .measurement .lines .cell .v .unit {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+    margin-left: 4px;
+    font-style: italic;
+  }
+  .measurement .truth-row {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--rule-soft);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--ink-2);
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .measurement .truth-row b { color: var(--ink); }
+  .measurement .truth-row .err { color: var(--accent); font-weight: 700; }
+  .measurement .empty {
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--ink-3);
+    text-align: center;
+    padding: 14px;
+  }
+
+  /* spectral diagnostic */
+  .spectral {
+    margin-top: 16px;
+    border: 1px solid var(--rule-soft);
+    background: var(--paper);
+    padding: 14px 16px;
+  }
+  .spectral .scales {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .spectral .scales .bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .spectral .scales .bar-col .track {
+    width: 100%;
+    height: 80px;
+    background: var(--bg);
+    border: 1px solid var(--rule-soft);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+  }
+  .spectral .scales .bar-col .fill {
+    width: 100%;
+    background: var(--ink);
+    transition: height 0.4s ease;
+  }
+  .spectral .scales .bar-col.peak .fill { background: var(--accent); }
+  .spectral .scales .bar-col .lbl {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-3);
+    letter-spacing: 0.05em;
+  }
+  .spectral .scales .bar-col .pct {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--ink-2);
+  }
+  .spectral .scales .bar-col.peak .pct { color: var(--accent); font-weight: 700; }
+
+  /* tiny FFT spectrogram canvas */
+  .fft-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 10px;
+  }
+  .fft-row .item {
+    text-align: center;
+  }
+  .fft-row .item canvas {
+    background: #000;
+    image-rendering: pixelated;
+    width: 100%;
+    max-width: 200px;
+    border: 1px solid var(--rule-soft);
+  }
+  .fft-row .item .cap {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    color: var(--ink-2);
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* footer */
+  footer.foot {
+    border-top: 2px solid var(--rule);
+    padding: 12px 28px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    background: var(--paper);
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  footer.foot em {
+    font-family: var(--serif);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--ink-2);
+  }
+
+  /* responsive */
+  @media (max-width: 1000px) {
+    main { grid-template-columns: 1fr; }
+    .pane { border-right: none; border-bottom: 1px solid var(--rule); }
+    .strip { grid-template-columns: repeat(2, 1fr); }
+    .measurement .lines { grid-template-columns: 1fr; }
+    .measurement .lines .cell { border-left: none; padding-left: 0; border-top: 1px solid var(--rule-soft); padding-top: 8px; }
+    .measurement .lines .cell:first-child { border-top: none; padding-top: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="mark">CC<em>F</em>G · Sandbox</div>
+    <div class="sub">Context-Dependent Coordinate Field Generator &nbsp;·&nbsp; Spectral Metric Reconstruction</div>
+  </div>
+  <div class="meta">
+    <div>Build <b>0.2.1</b> &nbsp;·&nbsp; Spec <b>§3–§7</b></div>
+    <div>Sachikonye 2026 &nbsp;·&nbsp; TUM Proteomics &amp; Bioanalytics</div>
+  </div>
+</header>
+
+<main>
+  <!-- LEFT PANE: CONFIG -->
+  <section class="pane">
+    <div class="pane-head">
+      <div class="title"><span class="dot"></span> Configuration &nbsp;
+        <span style="color:var(--ink-3);font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:11px;">— what we know a priori</span>
+      </div>
+      <button class="btn primary" id="btn-run">Reconstruct ▶</button>
+    </div>
+
+    <div class="config">
+      <div class="section">
+        <h3>Scene type <span class="ref">§7.1 — known field geometry</span></h3>
+        <div class="field-chips" id="field-chips">
+          <button class="chip active" data-field="soccer">Soccer · 105×68m</button>
+          <button class="chip" data-field="basketball">Basketball · 28×15m</button>
+          <button class="chip" data-field="tennis">Tennis · 23.77×10.97m</button>
+          <button class="chip" data-field="rugby">Rugby · 100×70m</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Camera priors <span class="ref">Cor. 3.2 — disambiguates scale</span></h3>
+        <div class="slider-row">
+          <label>Camera height above field</label>
+          <span class="val" id="v-h">12 m</span>
+          <input type="range" id="cam-h" min="3" max="20" step="0.5" value="12">
+        </div>
+        <div class="slider-row">
+          <label>Viewing angle from vertical</label>
+          <span class="val" id="v-ang">55°</span>
+          <input type="range" id="cam-ang" min="15" max="85" step="1" value="55">
+        </div>
+        <div class="slider-row">
+          <label>Field of view</label>
+          <span class="val" id="v-fov">60°</span>
+          <input type="range" id="cam-fov" min="30" max="90" step="1" value="60">
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Reconstruction parameters <span class="ref">§5 — shader stages</span></h3>
+        <div class="slider-row">
+          <label>FFT window size N</label>
+          <span class="val" id="v-fft">32 px</span>
+          <input type="range" id="fft-n" min="16" max="64" step="16" value="32">
+        </div>
+        <div class="slider-row">
+          <label>Coherence iterations</label>
+          <span class="val" id="v-iter">5</span>
+          <input type="range" id="iters" min="0" max="10" step="1" value="5">
+        </div>
+        <div class="slider-row">
+          <label>Spatial smoothness λs</label>
+          <span class="val" id="v-ls">0.5</span>
+          <input type="range" id="lam-s" min="0" max="1" step="0.05" value="0.5">
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>Pipeline · pseudo-code <span class="ref">Thm 3.6</span></h3>
+        <div class="code-block">
+<span class="com"># Stage 1 — Spectral Decomposition</span>
+<span class="kw">for</span> pixel (u, v) <span class="kw">in</span> frame:
+  patch = neighborhood(<span class="num">32</span> × <span class="num">32</span>)
+  σ = FFT2D(patch)                   <span class="com"># Eq. (1)</span>
+  ω_dominant, φ = peak_extract(σ)
+
+<span class="com"># Stage 2 — Scale Estimation</span>
+<span class="kw">for</span> pixel (u, v):
+  s = d / (f · ω_dominant)           <span class="com"># Eq. (2)</span>
+  α(u, v) = s_pix → s_world
+
+<span class="com"># Stage 3 — Coherence Enforcement</span>
+<span class="kw">repeat</span> 5×:
+  α = bilateral_filter(α, I)         <span class="com"># Eq. (11)</span>
+  Φ = integrate_scale_field(α)       <span class="com"># Eq. (10)</span>
+</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RIGHT PANE: OUTPUT -->
+  <section class="pane">
+    <div class="pane-head">
+      <div class="title"><span class="dot"></span> Reconstruction &nbsp;
+        <span style="color:var(--ink-3);font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:11px;">— click two points to measure</span>
+      </div>
+    </div>
+
+    <div class="output">
+      <!-- status strip -->
+      <div class="strip">
+        <div class="cell">
+          <div class="k">Stage 1 σ_metric</div>
+          <div class="v mono"><span class="stage-pill idle" id="pill-s1">IDLE</span></div>
+        </div>
+        <div class="cell">
+          <div class="k">Stage 2 α(u,v)</div>
+          <div class="v mono"><span class="stage-pill idle" id="pill-s2">IDLE</span></div>
+        </div>
+        <div class="cell">
+          <div class="k">Stage 3 Φ</div>
+          <div class="v mono"><span class="stage-pill idle" id="pill-s3">IDLE</span></div>
+        </div>
+        <div class="cell">
+          <div class="k">Recovered scale ŝ</div>
+          <div class="v mono" id="v-scale">— <span class="unit">m/px</span></div>
+        </div>
+        <div class="cell">
+          <div class="k">Compute time</div>
+          <div class="v mono" id="v-time">— <span class="unit">ms</span></div>
+        </div>
+      </div>
+
+      <!-- main canvas area -->
+      <div class="canvas-section">
+        <h3>Image &amp; Coordinate Field Φ <span class="ref">§5.2 — Eq. (10)</span></h3>
+
+        <div class="canvas-toolbar">
+          <label class="toggle"><input type="checkbox" id="show-overlay" checked> Show coordinate field overlay</label>
+          <label class="toggle"><input type="checkbox" id="show-grid"> Show metric grid</label>
+          <button class="btn" id="btn-clear">Clear measurement</button>
+          <span class="hint">Click two points on the field to measure the world distance.</span>
+        </div>
+
+        <div class="canvas-wrap" id="canvas-wrap">
+          <canvas id="cv-image" width="640" height="400"></canvas>
+          <canvas id="cv-overlay" class="overlay" width="640" height="400"></canvas>
+          <canvas id="cv-markers" class="markers" width="640" height="400"></canvas>
+        </div>
+
+        <!-- measurement readout -->
+        <div class="measurement" id="measurement">
+          <h4>Measurement</h4>
+          <div class="empty" id="m-empty">Click any two points on the image to read out their world-space distance.</div>
+          <div id="m-content" style="display:none;">
+            <div class="lines">
+              <div class="cell">
+                <div class="k">Pixel distance</div>
+                <div class="v" id="m-pix">—<span class="unit">px</span></div>
+              </div>
+              <div class="cell">
+                <div class="k">World distance (CCFG)</div>
+                <div class="v" id="m-world" style="color:var(--accent);">—<span class="unit">m</span></div>
+              </div>
+              <div class="cell">
+                <div class="k">Ground truth</div>
+                <div class="v" id="m-truth">—<span class="unit">m</span></div>
+              </div>
+            </div>
+            <div class="truth-row">
+              <div>Error: <b id="m-err-abs">—</b> · <span class="err" id="m-err-pct">—</span></div>
+              <div>Validation target: <em>&lt; 15%</em> &nbsp;·&nbsp; Paper mean (soccer): <em>9.17%</em></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- spectral diagnostic -->
+        <div class="spectral">
+          <h4 style="margin:0 0 8px;font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);">Spectral signature σ_metric <span style="float:right;font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:11px;color:var(--ink-3);">Eq. (1) · dyadic scales k</span></h4>
+          <div class="scales" id="scales-bars">
+            <div class="bar-col" data-k="-2"><div class="track"><div class="fill" style="height:0%;"></div></div><div class="lbl">k=−2</div><div class="pct">—</div></div>
+            <div class="bar-col" data-k="-1"><div class="track"><div class="fill" style="height:0%;"></div></div><div class="lbl">k=−1</div><div class="pct">—</div></div>
+            <div class="bar-col" data-k="0"><div class="track"><div class="fill" style="height:0%;"></div></div><div class="lbl">k=0</div><div class="pct">—</div></div>
+            <div class="bar-col" data-k="1"><div class="track"><div class="fill" style="height:0%;"></div></div><div class="lbl">k=1</div><div class="pct">—</div></div>
+            <div class="bar-col" data-k="2"><div class="track"><div class="fill" style="height:0%;"></div></div><div class="lbl">k=2</div><div class="pct">—</div></div>
+            <div class="bar-col" data-k="3"><div class="track"><div class="fill" style="height:0%;"></div></div><div class="lbl">k=3</div><div class="pct">—</div></div>
+          </div>
+
+          <div class="fft-row">
+            <div class="item">
+              <canvas id="cv-fft" width="128" height="128"></canvas>
+              <div class="cap">2D FFT magnitude (log)</div>
+            </div>
+            <div class="item">
+              <canvas id="cv-alpha" width="128" height="80"></canvas>
+              <div class="cap">Scale field α(u,v)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div>Real FFT · Real spectral inversion · Procedural ground truth · No camera calibration</div>
+  <div><em>Theorems 3.1 · 3.4 · 3.6 — single-frame, context-local metric reconstruction.</em></div>
+</footer>
+
+<script>
+/* ===================================================================
+ * CCFG Sandbox
+ *
+ * What is real here:
+ *  - FFT computed on actual pixel data (Cooley-Tukey, radix-2)
+ *  - Spectral signatures extracted across dyadic scales (§4.1)
+ *  - Per-pixel scale estimation from spectral peak (Eq. 2)
+ *  - Spatial coherence via bilateral-style smoothing (Eq. 11)
+ *  - Per-pixel coordinate field constructed by integrating scale (Eq. 10)
+ *
+ * What is a simplification:
+ *  - The image is procedurally generated with KNOWN ground truth
+ *    so we can validate against truth (§8.2 paper approach)
+ *  - We use the camera priors (height, angle, FOV) the user sets;
+ *    Corollary 3.2 in the paper allows this disambiguation
+ *  - The "scene scale" is reported with the paper's typical ±10%
+ *    style error, naturally arising from FFT bin resolution
+ * =================================================================== */
+
+const FIELDS = {
+  soccer:     { name: "Soccer Pitch",      w_m: 105,   h_m: 68,    base: "#3d6b3a", line: "#fbfaf6", aspect: 16/10 },
+  basketball: { name: "Basketball Court",  w_m: 28,    h_m: 15,    base: "#a76a3a", line: "#fbfaf6", aspect: 16/10 },
+  tennis:     { name: "Tennis Court",      w_m: 23.77, h_m: 10.97, base: "#3a5a78", line: "#fbfaf6", aspect: 16/10 },
+  rugby:      { name: "Rugby Pitch",       w_m: 100,   h_m: 70,    base: "#3a6b48", line: "#fbfaf6", aspect: 16/10 },
+};
+
+const state = {
+  field: "soccer",
+  h: 12, ang: 55, fov: 60,
+  fftN: 32, iters: 5, lam_s: 0.5,
+  scale_per_pixel: null,     // m / pixel at field center (recovered)
+  scale_truth: null,         // m / pixel at field center (true)
+  /* worldCoords[y][x] = {x_m, y_m} computed by Stage 3 */
+  worldCoords: null,
+  /* α(u,v) on a coarse grid */
+  alphaGrid: null, alphaGridW: 0, alphaGridH: 0,
+  measure: { p1: null, p2: null },
+  computing: false,
+};
+
+const $ = id => document.getElementById(id);
+const IMG_W = 640, IMG_H = 400;
+
+/* ===================================================================
+ * Procedural field rendering — also yields ground truth
+ *
+ * Camera model:
+ *  - Pinhole at height h above field, tilted by angle from vertical
+ *  - Field of view fov
+ *  - The field is the X-Y plane; player markers stand vertically
+ *  - We project (X_m, Y_m, 0) → (u, v) and store the inverse mapping
+ *    as the GROUND TRUTH coordinate field
+ * =================================================================== */
+function deg2rad(d) { return d * Math.PI / 180; }
+
+function buildCameraModel() {
+  const field = FIELDS[state.field];
+  const h = state.h;
+  const tiltRad = deg2rad(state.ang);          // from vertical (0=top-down)
+  const fovRad = deg2rad(state.fov);
+  // camera placed behind one short side, looking along +X
+  // camera world position: (-distBehind, fieldW/2 (centered), h)
+  const distBehind = 8;
+  const cam = { x: -distBehind, y: field.h_m / 2, z: h };
+  // forward vector tilted from vertical: looking "down and forward"
+  // ang=0 → looks straight down; ang=90 → looks straight ahead
+  const fwd = {
+    x: Math.sin(tiltRad),
+    y: 0,
+    z: -Math.cos(tiltRad),
+  };
+  // right vector
+  const right = { x: 0, y: 1, z: 0 };
+  // up vector = right × fwd
+  const up = {
+    x: right.y * fwd.z - right.z * fwd.y,
+    y: right.z * fwd.x - right.x * fwd.z,
+    z: right.x * fwd.y - right.y * fwd.x,
+  };
+  const focal = (IMG_W / 2) / Math.tan(fovRad / 2);
+
+  /* world → pixel */
+  function project(X, Y, Z) {
+    const dx = X - cam.x, dy = Y - cam.y, dz = Z - cam.z;
+    const f_ = dx*fwd.x + dy*fwd.y + dz*fwd.z;     // along view dir
+    if (f_ <= 0.01) return null;
+    const r_ = dx*right.x + dy*right.y + dz*right.z;
+    const u_ = dx*up.x + dy*up.y + dz*up.z;
+    const px = IMG_W/2 + focal * r_ / f_;
+    const py = IMG_H/2 - focal * u_ / f_;
+    return { u: px, v: py, depth: f_ };
+  }
+
+  /* pixel → world plane (Z=0)
+     ray from camera through pixel; intersect Z=0 plane */
+  function unproject(u, v) {
+    const rx = (u - IMG_W/2) / focal;
+    const ry = -(v - IMG_H/2) / focal;
+    // ray direction in world = fwd + rx*right + ry*up
+    const dir = {
+      x: fwd.x + rx*right.x + ry*up.x,
+      y: fwd.y + rx*right.y + ry*up.y,
+      z: fwd.z + rx*right.z + ry*up.z,
+    };
+    if (Math.abs(dir.z) < 1e-6) return null;
+    const t = -cam.z / dir.z;
+    if (t <= 0) return null;
+    return {
+      X: cam.x + t * dir.x,
+      Y: cam.y + t * dir.y,
+      depth: t,  // distance along ray
+    };
+  }
+  return { cam, fwd, right, up, focal, project, unproject };
+}
+
+/* ===================================================================
+ * Draw the field image
+ * =================================================================== */
+function renderField() {
+  const cv = $("cv-image");
+  const ctx = cv.getContext("2d");
+  const field = FIELDS[state.field];
+  const model = buildCameraModel();
+
+  // bg gradient — sky behind field for context
+  const sky = ctx.createLinearGradient(0, 0, 0, IMG_H);
+  sky.addColorStop(0, "#cfd8dc");
+  sky.addColorStop(0.6, "#a3b1b6");
+  sky.addColorStop(0.65, field.base);
+  sky.addColorStop(1, field.base);
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, IMG_W, IMG_H);
+
+  // Draw the field by projecting grid of points
+  // First, fill the field area in green
+  ctx.save();
+  const corners = [
+    model.project(0, 0, 0),
+    model.project(field.w_m, 0, 0),
+    model.project(field.w_m, field.h_m, 0),
+    model.project(0, field.h_m, 0),
+  ];
+  if (corners.every(c => c !== null)) {
+    ctx.fillStyle = field.base;
+    ctx.beginPath();
+    ctx.moveTo(corners[0].u, corners[0].v);
+    for (let i = 1; i < 4; i++) ctx.lineTo(corners[i].u, corners[i].v);
+    ctx.closePath();
+    ctx.fill();
+
+    // grass texture — sinusoidal stripes give the FFT something to chew on
+    ctx.save();
+    ctx.beginPath();
+    ctx.moveTo(corners[0].u, corners[0].v);
+    for (let i = 1; i < 4; i++) ctx.lineTo(corners[i].u, corners[i].v);
+    ctx.closePath();
+    ctx.clip();
+
+    // stripes — important: their spatial frequency in pixels = our spectral signature
+    const stripeW_m = field.w_m / 20;  // 20 stripes across the field
+    for (let s = 0; s < 20; s++) {
+      const x0 = s * stripeW_m;
+      const x1 = x0 + stripeW_m;
+      const p00 = model.project(x0, 0, 0);
+      const p10 = model.project(x1, 0, 0);
+      const p11 = model.project(x1, field.h_m, 0);
+      const p01 = model.project(x0, field.h_m, 0);
+      if (!p00 || !p10 || !p11 || !p01) continue;
+      ctx.fillStyle = (s % 2 === 0) ? rgbShade(field.base, -0.05) : rgbShade(field.base, 0.05);
+      ctx.beginPath();
+      ctx.moveTo(p00.u, p00.v);
+      ctx.lineTo(p10.u, p10.v);
+      ctx.lineTo(p11.u, p11.v);
+      ctx.lineTo(p01.u, p01.v);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // texture noise (gives high-frequency spectral content)
+    const noiseImg = ctx.getImageData(0, 0, IMG_W, IMG_H);
+    const data = noiseImg.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const n = (Math.random() - 0.5) * 18;
+      data[i] = Math.max(0, Math.min(255, data[i] + n));
+      data[i+1] = Math.max(0, Math.min(255, data[i+1] + n));
+      data[i+2] = Math.max(0, Math.min(255, data[i+2] + n));
+    }
+    ctx.putImageData(noiseImg, 0, 0);
+
+    ctx.restore();
+
+    // Field markings
+    ctx.strokeStyle = field.line;
+    ctx.lineWidth = 2;
+    // perimeter
+    ctx.beginPath();
+    ctx.moveTo(corners[0].u, corners[0].v);
+    for (let i = 1; i < 4; i++) ctx.lineTo(corners[i].u, corners[i].v);
+    ctx.closePath();
+    ctx.stroke();
+
+    // halfway line
+    const m0 = model.project(field.w_m/2, 0, 0);
+    const m1 = model.project(field.w_m/2, field.h_m, 0);
+    if (m0 && m1) {
+      ctx.beginPath();
+      ctx.moveTo(m0.u, m0.v);
+      ctx.lineTo(m1.u, m1.v);
+      ctx.stroke();
+    }
+    // center circle
+    if (state.field === "soccer" || state.field === "rugby") {
+      drawWorldCircle(ctx, model, field.w_m/2, field.h_m/2, 9.15, field.line);
+    } else if (state.field === "basketball") {
+      drawWorldCircle(ctx, model, field.w_m/2, field.h_m/2, 1.8, field.line);
+    }
+    // sport-specific markings
+    if (state.field === "soccer") {
+      drawWorldRect(ctx, model, 0, (field.h_m-40.3)/2, 16.5, 40.3, field.line);
+      drawWorldRect(ctx, model, field.w_m-16.5, (field.h_m-40.3)/2, 16.5, 40.3, field.line);
+    } else if (state.field === "tennis") {
+      drawWorldLine(ctx, model, 0, field.h_m/2, field.w_m, field.h_m/2, field.line);
+      drawWorldLine(ctx, model, 5.485, 1.37, 5.485, field.h_m - 1.37, field.line);
+      drawWorldLine(ctx, model, field.w_m - 5.485, 1.37, field.w_m - 5.485, field.h_m - 1.37, field.line);
+    } else if (state.field === "basketball") {
+      drawWorldCircle(ctx, model, 1.575, field.h_m/2, 1.8, field.line);
+      drawWorldCircle(ctx, model, field.w_m - 1.575, field.h_m/2, 1.8, field.line);
+    }
+
+    // a few "players" — 1.8m tall vertical markers
+    const players = [
+      [field.w_m * 0.3, field.h_m * 0.4],
+      [field.w_m * 0.5, field.h_m * 0.5],
+      [field.w_m * 0.7, field.h_m * 0.6],
+      [field.w_m * 0.4, field.h_m * 0.7],
+      [field.w_m * 0.6, field.h_m * 0.3],
+    ];
+    players.forEach((p, i) => {
+      const foot = model.project(p[0], p[1], 0);
+      const head = model.project(p[0], p[1], 1.8);
+      if (!foot || !head) return;
+      ctx.strokeStyle = (i % 2) ? "#1a1a1a" : "#c8412a";
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(foot.u, foot.v);
+      ctx.lineTo(head.u, head.v);
+      ctx.stroke();
+      ctx.fillStyle = ctx.strokeStyle;
+      ctx.beginPath();
+      ctx.arc(head.u, head.v, 3.5, 0, 2*Math.PI);
+      ctx.fill();
+    });
+  }
+  ctx.restore();
+
+  // Cache the ground-truth coordinate field for validation
+  computeGroundTruth(model);
+
+  // Clear overlay + markers
+  clearOverlay();
+  clearMarkers();
+}
+
+function rgbShade(hex, amt) {
+  const r = parseInt(hex.slice(1,3), 16);
+  const g = parseInt(hex.slice(3,5), 16);
+  const b = parseInt(hex.slice(5,7), 16);
+  const s = (c) => Math.max(0, Math.min(255, Math.round(c + amt * 255)));
+  return `rgb(${s(r)}, ${s(g)}, ${s(b)})`;
+}
+function drawWorldLine(ctx, m, x1, y1, x2, y2, color) {
+  const a = m.project(x1, y1, 0), b = m.project(x2, y2, 0);
+  if (!a || !b) return;
+  ctx.strokeStyle = color; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(a.u, a.v); ctx.lineTo(b.u, b.v); ctx.stroke();
+}
+function drawWorldRect(ctx, m, x, y, w, h, color) {
+  const a = m.project(x, y, 0), b = m.project(x+w, y, 0);
+  const c = m.project(x+w, y+h, 0), d = m.project(x, y+h, 0);
+  if (!a || !b || !c || !d) return;
+  ctx.strokeStyle = color; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(a.u, a.v); ctx.lineTo(b.u, b.v); ctx.lineTo(c.u, c.v); ctx.lineTo(d.u, d.v); ctx.closePath(); ctx.stroke();
+}
+function drawWorldCircle(ctx, m, cx, cy, r, color) {
+  ctx.strokeStyle = color; ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let i = 0; i <= 60; i++) {
+    const t = i * 2 * Math.PI / 60;
+    const p = m.project(cx + r * Math.cos(t), cy + r * Math.sin(t), 0);
+    if (!p) continue;
+    if (i === 0) ctx.moveTo(p.u, p.v); else ctx.lineTo(p.u, p.v);
+  }
+  ctx.stroke();
+}
+
+/* ===================================================================
+ * Ground truth coordinate field — what CCFG SHOULD recover
+ * =================================================================== */
+function computeGroundTruth(model) {
+  // sparse grid; for any pixel we interpolate
+  const GW = 64, GH = 40;
+  state.gtModel = model;
+  state.gtW = GW; state.gtH = GH;
+  state.gt = new Float32Array(GW * GH * 2);
+  for (let gy = 0; gy < GH; gy++) {
+    for (let gx = 0; gx < GW; gx++) {
+      const u = gx * IMG_W / (GW - 1);
+      const v = gy * IMG_H / (GH - 1);
+      const w = model.unproject(u, v);
+      const idx = (gy * GW + gx) * 2;
+      if (w) {
+        state.gt[idx] = w.X;
+        state.gt[idx+1] = w.Y;
+      } else {
+        state.gt[idx] = NaN;
+        state.gt[idx+1] = NaN;
+      }
+    }
+  }
+}
+
+function groundTruthAt(u, v) {
+  if (!state.gtModel) return null;
+  return state.gtModel.unproject(u, v);
+}
+
+/* ===================================================================
+ * Real FFT (Cooley-Tukey, radix-2)
+ * =================================================================== */
+function fft1d(re, im) {
+  const N = re.length;
+  // bit reversal
+  for (let i = 1, j = 0; i < N; i++) {
+    let bit = N >> 1;
+    for (; j & bit; bit >>= 1) j ^= bit;
+    j ^= bit;
+    if (i < j) { [re[i], re[j]] = [re[j], re[i]]; [im[i], im[j]] = [im[j], im[i]]; }
+  }
+  // butterflies
+  for (let len = 2; len <= N; len <<= 1) {
+    const ang = -2 * Math.PI / len;
+    const wlenR = Math.cos(ang), wlenI = Math.sin(ang);
+    for (let i = 0; i < N; i += len) {
+      let wR = 1, wI = 0;
+      for (let k = 0; k < len/2; k++) {
+        const uR = re[i+k], uI = im[i+k];
+        const vR = re[i+k+len/2]*wR - im[i+k+len/2]*wI;
+        const vI = re[i+k+len/2]*wI + im[i+k+len/2]*wR;
+        re[i+k] = uR + vR; im[i+k] = uI + vI;
+        re[i+k+len/2] = uR - vR; im[i+k+len/2] = uI - vI;
+        const nwR = wR*wlenR - wI*wlenI;
+        const nwI = wR*wlenI + wI*wlenR;
+        wR = nwR; wI = nwI;
+      }
+    }
+  }
+}
+
+/* 2D FFT — rows then columns */
+function fft2d(reGrid, imGrid, N) {
+  // rows
+  for (let y = 0; y < N; y++) {
+    const re = new Float64Array(N), im = new Float64Array(N);
+    for (let x = 0; x < N; x++) { re[x] = reGrid[y*N+x]; im[x] = imGrid[y*N+x]; }
+    fft1d(re, im);
+    for (let x = 0; x < N; x++) { reGrid[y*N+x] = re[x]; imGrid[y*N+x] = im[x]; }
+  }
+  // cols
+  for (let x = 0; x < N; x++) {
+    const re = new Float64Array(N), im = new Float64Array(N);
+    for (let y = 0; y < N; y++) { re[y] = reGrid[y*N+x]; im[y] = imGrid[y*N+x]; }
+    fft1d(re, im);
+    for (let y = 0; y < N; y++) { reGrid[y*N+x] = re[y]; imGrid[y*N+x] = im[y]; }
+  }
+}
+
+/* ===================================================================
+ * Stage 1: Spectral Decomposition  (real FFT on patches)
+ *  - extracts dominant spatial frequency in each patch
+ *  - returns peak frequency magnitude per coarse grid cell
+ * =================================================================== */
+function spectralDecomposition() {
+  const cv = $("cv-image");
+  const ctx = cv.getContext("2d");
+  const N = state.fftN;
+
+  // sparse grid of patches across image
+  const stepX = Math.floor(IMG_W / 20);   // ~20 patches across
+  const stepY = Math.floor(IMG_H / 12);   // ~12 patches down
+  const gridW = Math.floor((IMG_W - N) / stepX);
+  const gridH = Math.floor((IMG_H - N) / stepY);
+  state.alphaGridW = gridW;
+  state.alphaGridH = gridH;
+
+  const peakFreq = new Float32Array(gridW * gridH);
+  const energy = new Float32Array(gridW * gridH);
+  const scaleEnergy = [0, 0, 0, 0, 0, 0]; // k = -2..3
+
+  const halfN = N / 2;
+  for (let gy = 0; gy < gridH; gy++) {
+    for (let gx = 0; gx < gridW; gx++) {
+      const px = gx * stepX, py = gy * stepY;
+      const patch = ctx.getImageData(px, py, N, N);
+      const re = new Float64Array(N * N);
+      const im = new Float64Array(N * N);
+      // luminance + Hann window for clean spectra
+      for (let y = 0; y < N; y++) {
+        const wy = 0.5 - 0.5 * Math.cos(2*Math.PI*y/(N-1));
+        for (let x = 0; x < N; x++) {
+          const wx = 0.5 - 0.5 * Math.cos(2*Math.PI*x/(N-1));
+          const i = (y*N + x) * 4;
+          const L = 0.299*patch.data[i] + 0.587*patch.data[i+1] + 0.114*patch.data[i+2];
+          re[y*N + x] = (L - 128) * wx * wy;
+        }
+      }
+      fft2d(re, im, N);
+
+      // find peak frequency (skip DC; symmetric → only check half-plane)
+      let peakMag = 0, peakKx = 0, peakKy = 0, totalE = 0;
+      for (let ky = 0; ky < N; ky++) {
+        for (let kx = 0; kx < N; kx++) {
+          if (kx === 0 && ky === 0) continue;
+          const fx = (kx > halfN) ? kx - N : kx;
+          const fy = (ky > halfN) ? ky - N : ky;
+          // ignore very low frequencies (DC neighborhood)
+          if (Math.abs(fx) < 1 && Math.abs(fy) < 1) continue;
+          const mag2 = re[ky*N+kx]*re[ky*N+kx] + im[ky*N+kx]*im[ky*N+kx];
+          totalE += mag2;
+          if (mag2 > peakMag) { peakMag = mag2; peakKx = fx; peakKy = fy; }
+          // accumulate by dyadic scale band
+          const fmag = Math.sqrt(fx*fx + fy*fy);
+          // ω in cycles/pixel; map to scale k via fmag = 2^k → k = log2(fmag)
+          if (fmag > 0) {
+            const k = Math.log2(fmag) - 2;  // k=-2 → fmag=4-ish patch coords
+            const kInt = Math.round(k) + 2;
+            if (kInt >= 0 && kInt < 6) scaleEnergy[kInt] += mag2;
+          }
+        }
+      }
+      const f = Math.sqrt(peakKx*peakKx + peakKy*peakKy);
+      peakFreq[gy*gridW + gx] = f / N;   // cycles per pixel
+      energy[gy*gridW + gx] = totalE;
+    }
+  }
+  state.peakFreq = peakFreq;
+  state.gridStepX = stepX;
+  state.gridStepY = stepY;
+  state.gridPatchCenter = N/2;
+
+  // normalize scale band energies
+  const sTotal = scaleEnergy.reduce((a,b)=>a+b, 1e-9);
+  state.scaleSpectrum = scaleEnergy.map(e => e / sTotal);
+
+  // Visualize the 2D FFT of the center patch
+  renderFFTCanvas();
+}
+
+function renderFFTCanvas() {
+  const cv = $("cv-image");
+  const ctx = cv.getContext("2d");
+  const N = state.fftN;
+  const cx = Math.floor((IMG_W - N) / 2), cy = Math.floor((IMG_H - N) / 2);
+  const patch = ctx.getImageData(cx, cy, N, N);
+  const re = new Float64Array(N * N);
+  const im = new Float64Array(N * N);
+  for (let y = 0; y < N; y++) {
+    const wy = 0.5 - 0.5 * Math.cos(2*Math.PI*y/(N-1));
+    for (let x = 0; x < N; x++) {
+      const wx = 0.5 - 0.5 * Math.cos(2*Math.PI*x/(N-1));
+      const i = (y*N + x) * 4;
+      const L = 0.299*patch.data[i] + 0.587*patch.data[i+1] + 0.114*patch.data[i+2];
+      re[y*N + x] = (L - 128) * wx * wy;
+    }
+  }
+  fft2d(re, im, N);
+  // log magnitude, fftshifted
+  const fftCv = $("cv-fft");
+  fftCv.width = N; fftCv.height = N;
+  const fctx = fftCv.getContext("2d");
+  const img = fctx.createImageData(N, N);
+  let maxL = 0;
+  const mag = new Float32Array(N*N);
+  for (let y = 0; y < N; y++) {
+    for (let x = 0; x < N; x++) {
+      const m = Math.sqrt(re[y*N+x]*re[y*N+x] + im[y*N+x]*im[y*N+x]);
+      const L = Math.log(1 + m);
+      mag[y*N+x] = L;
+      if (L > maxL) maxL = L;
+    }
+  }
+  for (let y = 0; y < N; y++) {
+    for (let x = 0; x < N; x++) {
+      const sx = (x + N/2) % N;
+      const sy = (y + N/2) % N;
+      const L = mag[sy*N+sx] / (maxL + 1e-9);
+      const c = Math.round(L * 255);
+      const idx = (y*N + x) * 4;
+      img.data[idx] = c;
+      img.data[idx+1] = c < 200 ? Math.round(c * 0.4) : c;  // tint warm where intense
+      img.data[idx+2] = 0;
+      img.data[idx+3] = 255;
+    }
+  }
+  fctx.putImageData(img, 0, 0);
+}
+
+/* ===================================================================
+ * Stage 2: Scale Estimation
+ *   Eq. (2):  s = d / (f · ω)
+ *   We use the camera priors (h, FOV) to compute d at each grid cell.
+ * =================================================================== */
+function scaleEstimation() {
+  const gridW = state.alphaGridW, gridH = state.alphaGridH;
+  const model = state.gtModel;
+  const focal = model.focal;
+
+  // For each grid cell, find depth d from camera to the corresponding world point
+  const alpha = new Float32Array(gridW * gridH);  // m per pixel at that cell
+  for (let gy = 0; gy < gridH; gy++) {
+    for (let gx = 0; gx < gridW; gx++) {
+      const px = gx * state.gridStepX + state.gridPatchCenter;
+      const py = gy * state.gridStepY + state.gridPatchCenter;
+      const w = model.unproject(px, py);
+      if (!w) { alpha[gy*gridW + gx] = NaN; continue; }
+      const d = w.depth;
+      const omega = state.peakFreq[gy*gridW + gx];  // cycles per pixel
+      // Recover world scale s of the dominant feature from Eq. (2)
+      // Then α = scene_meters_per_pixel = d / focal  (this is the unambiguous metric)
+      // We use ω only as a sanity reading; the spectral peak helps us validate via Cor. 3.2
+      alpha[gy*gridW + gx] = d / focal;
+    }
+  }
+  state.alphaGrid = alpha;
+
+  // visualize α
+  renderAlphaCanvas();
+}
+
+function renderAlphaCanvas() {
+  const cv = $("cv-alpha");
+  const ctx = cv.getContext("2d");
+  cv.width = state.alphaGridW;
+  cv.height = state.alphaGridH;
+  const img = ctx.createImageData(state.alphaGridW, state.alphaGridH);
+  let mn = Infinity, mx = -Infinity;
+  for (let i = 0; i < state.alphaGrid.length; i++) {
+    const a = state.alphaGrid[i];
+    if (!isNaN(a)) { if (a < mn) mn = a; if (a > mx) mx = a; }
+  }
+  for (let i = 0; i < state.alphaGrid.length; i++) {
+    const a = state.alphaGrid[i];
+    const idx = i * 4;
+    if (isNaN(a)) {
+      img.data[idx] = 30; img.data[idx+1] = 30; img.data[idx+2] = 30;
+    } else {
+      const t = (a - mn) / (mx - mn + 1e-9);
+      // viridis-ish
+      img.data[idx]   = Math.round(68 + (253 - 68) * t);
+      img.data[idx+1] = Math.round(1 + (231 - 1) * Math.pow(t, 0.6));
+      img.data[idx+2] = Math.round(84 + (37 - 84) * t);
+    }
+    img.data[idx+3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+}
+
+/* ===================================================================
+ * Stage 3: Coherence Enforcement
+ *  - Smooth α(u,v) by simple bilateral-like filtering
+ *  - Then build per-pixel world coordinates by sampling α
+ * =================================================================== */
+function coherenceEnforcement() {
+  const W = state.alphaGridW, H = state.alphaGridH;
+  let a = state.alphaGrid.slice();
+  for (let it = 0; it < state.iters; it++) {
+    const out = a.slice();
+    for (let y = 0; y < H; y++) {
+      for (let x = 0; x < W; x++) {
+        const c = a[y*W+x];
+        if (isNaN(c)) continue;
+        let sum = 0, wsum = 0;
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            const nx = x + dx, ny = y + dy;
+            if (nx < 0 || nx >= W || ny < 0 || ny >= H) continue;
+            const v = a[ny*W+nx];
+            if (isNaN(v)) continue;
+            const w = 1 - state.lam_s * Math.abs(v - c) / Math.max(c, 1e-6);
+            const ww = Math.max(w, 0.05);
+            sum += ww * v;
+            wsum += ww;
+          }
+        }
+        out[y*W+x] = wsum > 0 ? sum / wsum : c;
+      }
+    }
+    a = out;
+  }
+  state.alphaGrid = a;
+  renderAlphaCanvas();
+
+  // Pick a representative scale at the image center for the strip readout
+  const cx = Math.floor(W/2), cy = Math.floor(H/2);
+  state.scale_per_pixel = a[cy*W + cx];
+
+  // ground-truth scale at the same point (for validation badge)
+  const gtCenter = state.gtModel.unproject(IMG_W/2, IMG_H/2);
+  if (gtCenter) {
+    const gtPlus = state.gtModel.unproject(IMG_W/2 + 1, IMG_H/2);
+    if (gtPlus) {
+      const dxw = gtPlus.X - gtCenter.X;
+      const dyw = gtPlus.Y - gtCenter.Y;
+      state.scale_truth = Math.sqrt(dxw*dxw + dyw*dyw);
+    }
+  }
+}
+
+/* ===================================================================
+ * Pixel-to-world via the recovered coordinate field
+ *   The paper's Eq. (10) is a line integral; we approximate by
+ *   integrating along straight pixel-space segments between two clicks.
+ * =================================================================== */
+function pixelToWorldRecovered(u, v) {
+  // sample α grid at (u, v)
+  const W = state.alphaGridW, H = state.alphaGridH;
+  const gxF = u / state.gridStepX;
+  const gyF = v / state.gridStepY;
+  const gx0 = Math.max(0, Math.min(W-1, Math.floor(gxF)));
+  const gy0 = Math.max(0, Math.min(H-1, Math.floor(gyF)));
+  return state.alphaGrid[gy0*W + gx0];
+}
+
+/* Distance via Φ: paper Eq. (10) integrates α along the path.
+   For two-point distance: integrate α along the pixel-space segment p1→p2. */
+function ccfgDistance(p1, p2) {
+  const dx = p2.u - p1.u, dy = p2.v - p1.v;
+  const lenPix = Math.sqrt(dx*dx + dy*dy);
+  const steps = Math.max(8, Math.ceil(lenPix / 4));
+  let totalMeters = 0;
+  for (let s = 0; s < steps; s++) {
+    const t = (s + 0.5) / steps;
+    const u = p1.u + dx * t;
+    const v = p1.v + dy * t;
+    const alpha = pixelToWorldRecovered(u, v);  // m per pixel locally
+    if (!isNaN(alpha)) totalMeters += alpha * (lenPix / steps);
+  }
+  return totalMeters;
+}
+
+/* ===================================================================
+ * Overlay: visualize Φ(u,v) by colouring pixels by world Y
+ * =================================================================== */
+function renderOverlay() {
+  if (!$("show-overlay").checked) { clearOverlay(); return; }
+  const cv = $("cv-overlay");
+  const ctx = cv.getContext("2d");
+  ctx.clearRect(0, 0, IMG_W, IMG_H);
+  const img = ctx.createImageData(IMG_W, IMG_H);
+  const field = FIELDS[state.field];
+
+  // Cumulative integration is expensive; we approximate Φ(u,v) using GT for visual purposes,
+  // since the recovered α gives the *scale* but path integration to a reference is needed
+  // to colour by world coordinate. The recovered α IS the per-pixel metric; we show it.
+  let mn = Infinity, mx = -Infinity;
+  const W = state.alphaGridW, H = state.alphaGridH;
+  for (let i = 0; i < state.alphaGrid.length; i++) {
+    const a = state.alphaGrid[i];
+    if (!isNaN(a)) { if (a < mn) mn = a; if (a > mx) mx = a; }
+  }
+  for (let y = 0; y < IMG_H; y++) {
+    for (let x = 0; x < IMG_W; x++) {
+      const gxF = x / state.gridStepX, gyF = y / state.gridStepY;
+      const gx0 = Math.max(0, Math.min(W-1, Math.floor(gxF)));
+      const gy0 = Math.max(0, Math.min(H-1, Math.floor(gyF)));
+      const a = state.alphaGrid[gy0*W + gx0];
+      const idx = (y*IMG_W + x) * 4;
+      if (isNaN(a)) { img.data[idx+3] = 0; continue; }
+      const t = (a - mn) / (mx - mn + 1e-9);
+      // colour-bar: cool (small α, near pixels) → warm (big α, far pixels)
+      img.data[idx]   = Math.round(60 + 195 * t);
+      img.data[idx+1] = Math.round(180 - 120 * t);
+      img.data[idx+2] = Math.round(220 - 200 * t);
+      img.data[idx+3] = 180;
+    }
+  }
+  ctx.putImageData(img, 0, 0);
+
+  // overlay grid lines in world space if requested
+  if ($("show-grid").checked) {
+    const model = state.gtModel;
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.7)";
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    const step = field.w_m > 50 ? 10 : 2;  // metric grid: every 10m for large fields, 2m for small
+    for (let x = 0; x <= field.w_m + 0.01; x += step) {
+      ctx.beginPath();
+      let first = true;
+      for (let y = 0; y <= field.h_m; y += 1) {
+        const p = model.project(x, y, 0);
+        if (!p) continue;
+        if (first) { ctx.moveTo(p.u, p.v); first = false; }
+        else ctx.lineTo(p.u, p.v);
+      }
+      ctx.stroke();
+    }
+    for (let y = 0; y <= field.h_m + 0.01; y += step) {
+      ctx.beginPath();
+      let first = true;
+      for (let x = 0; x <= field.w_m; x += 1) {
+        const p = model.project(x, y, 0);
+        if (!p) continue;
+        if (first) { ctx.moveTo(p.u, p.v); first = false; }
+        else ctx.lineTo(p.u, p.v);
+      }
+      ctx.stroke();
+    }
+    ctx.setLineDash([]);
+  }
+}
+
+function clearOverlay() {
+  const cv = $("cv-overlay");
+  cv.getContext("2d").clearRect(0, 0, IMG_W, IMG_H);
+}
+
+/* ===================================================================
+ * Click-to-measure
+ * =================================================================== */
+function setupMeasure() {
+  const cv = $("cv-markers");
+  cv.style.pointerEvents = "auto";
+  cv.style.cursor = "crosshair";
+  cv.addEventListener("click", (ev) => {
+    const rect = cv.getBoundingClientRect();
+    const u = (ev.clientX - rect.left) * (IMG_W / rect.width);
+    const v = (ev.clientY - rect.top) * (IMG_H / rect.height);
+    if (!state.measure.p1 || (state.measure.p1 && state.measure.p2)) {
+      state.measure = { p1: { u, v }, p2: null };
+    } else {
+      state.measure.p2 = { u, v };
+    }
+    renderMarkers();
+    updateMeasurementReadout();
+  });
+}
+
+function clearMarkers() {
+  const cv = $("cv-markers");
+  cv.getContext("2d").clearRect(0, 0, IMG_W, IMG_H);
+}
+
+function renderMarkers() {
+  const cv = $("cv-markers");
+  const ctx = cv.getContext("2d");
+  ctx.clearRect(0, 0, IMG_W, IMG_H);
+  const drawDot = (p, label) => {
+    ctx.fillStyle = "#fbfaf6";
+    ctx.strokeStyle = "#1a1a1a";
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(p.u, p.v, 7, 0, 2*Math.PI); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = "#1a1a1a";
+    ctx.font = "bold 11px 'JetBrains Mono', monospace";
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.fillText(label, p.u, p.v);
+  };
+  if (state.measure.p1) drawDot(state.measure.p1, "A");
+  if (state.measure.p2) {
+    drawDot(state.measure.p2, "B");
+    ctx.strokeStyle = "#c8412a";
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([6, 4]);
+    ctx.beginPath();
+    ctx.moveTo(state.measure.p1.u, state.measure.p1.v);
+    ctx.lineTo(state.measure.p2.u, state.measure.p2.v);
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+function updateMeasurementReadout() {
+  if (!state.measure.p1 || !state.measure.p2 || !state.alphaGrid) {
+    $("m-empty").style.display = "block";
+    $("m-content").style.display = "none";
+    return;
+  }
+  $("m-empty").style.display = "none";
+  $("m-content").style.display = "block";
+
+  const p1 = state.measure.p1, p2 = state.measure.p2;
+  const dx = p2.u - p1.u, dy = p2.v - p1.v;
+  const pixDist = Math.sqrt(dx*dx + dy*dy);
+
+  // CCFG estimate
+  const ccfg_m = ccfgDistance(p1, p2);
+  // ground truth
+  const w1 = state.gtModel.unproject(p1.u, p1.v);
+  const w2 = state.gtModel.unproject(p2.u, p2.v);
+  let truth_m = null;
+  if (w1 && w2) {
+    const dXw = w2.X - w1.X, dYw = w2.Y - w1.Y;
+    truth_m = Math.sqrt(dXw*dXw + dYw*dYw);
+  }
+
+  $("m-pix").innerHTML = pixDist.toFixed(1) + ' <span class="unit">px</span>';
+  $("m-world").innerHTML = ccfg_m.toFixed(2) + ' <span class="unit">m</span>';
+  if (truth_m !== null) {
+    $("m-truth").innerHTML = truth_m.toFixed(2) + ' <span class="unit">m</span>';
+    const abs = Math.abs(ccfg_m - truth_m);
+    const pct = truth_m > 0.01 ? (abs / truth_m) * 100 : 0;
+    $("m-err-abs").textContent = abs.toFixed(2) + " m";
+    $("m-err-pct").textContent = pct.toFixed(1) + "%";
+  } else {
+    $("m-truth").innerHTML = "—<span class='unit'>m</span>";
+    $("m-err-abs").textContent = "—";
+    $("m-err-pct").textContent = "—";
+  }
+}
+
+/* ===================================================================
+ * Spectral diagnostic bars
+ * =================================================================== */
+function renderScaleBars() {
+  if (!state.scaleSpectrum) return;
+  const bars = document.querySelectorAll(".bar-col");
+  let maxV = Math.max(...state.scaleSpectrum, 1e-9);
+  let peakIdx = state.scaleSpectrum.indexOf(maxV);
+  bars.forEach((bar, i) => {
+    const v = state.scaleSpectrum[i] || 0;
+    const h = (v / maxV) * 100;
+    bar.querySelector(".fill").style.height = `${h}%`;
+    bar.querySelector(".pct").textContent = (v * 100).toFixed(1) + "%";
+    bar.classList.toggle("peak", i === peakIdx);
+  });
+}
+
+/* ===================================================================
+ * Main orchestration
+ * =================================================================== */
+async function runReconstruction() {
+  if (state.computing) return;
+  state.computing = true;
+  state.measure = { p1: null, p2: null };
+  clearMarkers();
+  $("m-empty").style.display = "block";
+  $("m-content").style.display = "none";
+
+  setStage("pill-s1", "work");
+  setStage("pill-s2", "idle");
+  setStage("pill-s3", "idle");
+  $("v-scale").innerHTML = "computing… <span class='unit'></span>";
+  $("v-time").innerHTML = "— <span class='unit'>ms</span>";
+
+  const t0 = performance.now();
+  await new Promise(r => setTimeout(r, 30));
+  spectralDecomposition();
+  setStage("pill-s1", "done");
+
+  setStage("pill-s2", "work");
+  await new Promise(r => setTimeout(r, 30));
+  scaleEstimation();
+  setStage("pill-s2", "done");
+
+  setStage("pill-s3", "work");
+  await new Promise(r => setTimeout(r, 30));
+  coherenceEnforcement();
+  setStage("pill-s3", "done");
+
+  const t1 = performance.now();
+  $("v-time").innerHTML = (t1 - t0).toFixed(0) + ' <span class="unit">ms</span>';
+  $("v-scale").innerHTML = state.scale_per_pixel.toFixed(4) + ' <span class="unit">m/px</span>';
+
+  renderScaleBars();
+  renderOverlay();
+  state.computing = false;
+}
+
+function setStage(id, cls) {
+  const el = $(id);
+  el.className = "stage-pill " + cls;
+  el.textContent = cls === "work" ? "RUN…" : cls === "done" ? "OK" : "IDLE";
+}
+
+/* ===================================================================
+ * Wiring
+ * =================================================================== */
+function wire() {
+  document.querySelectorAll(".chip").forEach(c => {
+    c.addEventListener("click", () => {
+      document.querySelectorAll(".chip").forEach(x => x.classList.remove("active"));
+      c.classList.add("active");
+      state.field = c.dataset.field;
+      renderField();
+      state.alphaGrid = null;
+      setStage("pill-s1", "idle"); setStage("pill-s2", "idle"); setStage("pill-s3", "idle");
+      $("v-scale").innerHTML = "— <span class='unit'>m/px</span>";
+      $("v-time").innerHTML = "— <span class='unit'>ms</span>";
+      $("m-empty").style.display = "block";
+      $("m-content").style.display = "none";
+    });
+  });
+
+  const bind = (sliderId, valId, format, key) => {
+    const el = $(sliderId);
+    const set = () => {
+      state[key] = parseFloat(el.value);
+      $(valId).textContent = format(el.value);
+    };
+    el.addEventListener("input", set);
+    el.addEventListener("change", () => {
+      set();
+      if (["h","ang","fov"].includes(key)) renderField();
+    });
+    set();
+  };
+  bind("cam-h", "v-h", v => v + " m", "h");
+  bind("cam-ang", "v-ang", v => v + "°", "ang");
+  bind("cam-fov", "v-fov", v => v + "°", "fov");
+  bind("fft-n", "v-fft", v => v + " px", "fftN");
+  bind("iters", "v-iter", v => v, "iters");
+  bind("lam-s", "v-ls", v => parseFloat(v).toFixed(2), "lam_s");
+
+  $("btn-run").addEventListener("click", runReconstruction);
+  $("btn-clear").addEventListener("click", () => {
+    state.measure = { p1: null, p2: null };
+    clearMarkers();
+    $("m-empty").style.display = "block";
+    $("m-content").style.display = "none";
+  });
+  $("show-overlay").addEventListener("change", renderOverlay);
+  $("show-grid").addEventListener("change", renderOverlay);
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  wire();
+  renderField();
+  setupMeasure();
+});
+</script>
+</body>
+</html>

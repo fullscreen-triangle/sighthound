@@ -1,0 +1,63 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: topological-positioning-scripting.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: IEEEtran.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: references.bib
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--empty journal in hofmann2006inertial
+Warning--empty journal in bishop2006pattern
+Warning--missing publisher in shannon1948communication
+Warning--missing publisher in saltzer1975protection
+
+Done.
+You've used 22 entries,
+            4087 wiz_defined-function locations,
+            945 strings with 10779 characters,
+and the built_in function-call counts, 15015 in all, are:
+= -- 1188
+> -- 314
+< -- 127
++ -- 173
+- -- 50
+* -- 678
+:= -- 2219
+add.period$ -- 42
+call.type$ -- 22
+change.case$ -- 20
+chr.to.int$ -- 309
+cite$ -- 26
+duplicate$ -- 1078
+empty$ -- 1313
+format.name$ -- 61
+if$ -- 3533
+int.to.chr$ -- 0
+int.to.str$ -- 22
+missing$ -- 176
+newline$ -- 89
+num.names$ -- 22
+pop$ -- 436
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 1204
+stack$ -- 0
+substring$ -- 719
+swap$ -- 824
+text.length$ -- 24
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 22
+warning$ -- 4
+while$ -- 74
+width$ -- 24
+write$ -- 214
+(There were 4 warnings)

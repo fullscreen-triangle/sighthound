@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoSL Evidence Accumulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #f5f5f5;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            height: 100%;
+        }
+
+        .left-pane {
+            width: 28%;
+            background: white;
+            border-right: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .right-pane {
+            width: 72%;
+            background: linear-gradient(135deg, #f9f9f9 0%, #f0f0f0 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            overflow: hidden;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            font-weight: normal;
+            letter-spacing: 0.05em;
+        }
+
+        .brand {
+            font-style: italic;
+            color: #c85a54;
+            font-weight: bold;
+        }
+
+        .section {
+            margin-bottom: 28px;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #333;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .scenario-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .chip {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-radius: 16px;
+            background: white;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .chip:hover {
+            border-color: #999;
+        }
+
+        .chip.active {
+            background: #c85a54;
+            color: white;
+            border-color: #c85a54;
+        }
+
+        .partition-display {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .region-item {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .region-item:hover {
+            background: #f0f0f0;
+        }
+
+        .region-item.winner {
+            background: #c85a54;
+            color: white;
+            border-color: #c85a54;
+            font-weight: bold;
+        }
+
+        .channel-selector {
+            margin-bottom: 16px;
+        }
+
+        .channel-label {
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #555;
+        }
+
+        .channel-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-family: 'Courier New', monospace;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #f5f5f5;
+            border-color: #999;
+        }
+
+        .btn.primary {
+            background: #2d5016;
+            color: white;
+            border-color: #2d5016;
+            grid-column: span 2;
+            font-weight: bold;
+        }
+
+        .btn.primary:hover {
+            background: #3a6b1f;
+        }
+
+        .btn.danger {
+            background: #c85a54;
+            color: white;
+            border-color: #c85a54;
+        }
+
+        .btn.danger:hover {
+            background: #d97060;
+        }
+
+        .status-strip {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            font-size: 11px;
+        }
+
+        .status-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .status-label {
+            color: #888;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 10px;
+            letter-spacing: 0.05em;
+        }
+
+        .status-value {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .evidence-log {
+            margin-top: 16px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .evidence-entry {
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+            font-size: 11px;
+            font-family: 'Courier New', monospace;
+            color: #555;
+        }
+
+        .evidence-entry:last-child {
+            border-bottom: none;
+        }
+
+        .evidence-entry .idx {
+            color: #999;
+            margin-right: 8px;
+        }
+
+        .visualization-area {
+            display: flex;
+            gap: 16px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .map-container {
+            flex: 1;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .grid-map {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .region-cell {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .region-cell::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(200, 90, 84, 0.1);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .region-cell:hover::before {
+            opacity: 1;
+        }
+
+        .region-cell-label {
+            font-size: 12px;
+            font-weight: bold;
+            color: #555;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .region-cell-prob {
+            font-size: 18px;
+            font-weight: bold;
+            color: #c85a54;
+            margin-top: 6px;
+            z-index: 2;
+        }
+
+        .metrics-panel {
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .metric-box {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px;
+        }
+
+        .metric-title {
+            font-size: 11px;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .metric-value {
+            font-size: 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #c85a54;
+        }
+
+        .metric-bar {
+            margin-top: 8px;
+            height: 4px;
+            background: #eee;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .metric-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2d5016, #c85a54);
+            transition: width 0.3s;
+        }
+
+        .posterior-ranks {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 12px;
+            max-height: 280px;
+            overflow-y: auto;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 11px;
+        }
+
+        .rank-item:last-child {
+            border-bottom: none;
+        }
+
+        .rank-index {
+            color: #999;
+            font-weight: bold;
+            width: 20px;
+        }
+
+        .rank-label {
+            flex: 0 0 60px;
+            font-family: 'Courier New', monospace;
+            color: #555;
+        }
+
+        .rank-bar-container {
+            flex: 1;
+            height: 16px;
+            background: #f5f5f5;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .rank-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #c85a54, #a84840);
+            transition: width 0.3s;
+        }
+
+        .rank-prob {
+            flex: 0 0 50px;
+            text-align: right;
+            font-family: 'Courier New', monospace;
+            color: #333;
+            font-weight: bold;
+        }
+
+        scrollbar {
+            width: 6px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- LEFT PANE: CONTROLS -->
+        <div class="left-pane">
+            <div class="header">
+                <h1>Po<span class="brand">S</span>L</h1>
+                <span style="font-size: 12px; color: #999;">Evidence Accumulator</span>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Scenario</div>
+                <div class="scenario-chips" id="scenarioChips"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Partition (P)</div>
+                <div class="partition-display" id="partitionDisplay"></div>
+            </div>
+
+            <div class="section">
+                <div class="status-strip">
+                    <div class="status-item">
+                        <div class="status-label">Depth</div>
+                        <div class="status-value" id="depthValue">0</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Channels</div>
+                        <div class="status-value" id="channelsValue">0</div>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-label">Winner</div>
+                        <div class="status-value" id="winnerValue">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Add Evidence</div>
+                <div class="channel-selector" id="channelsContainer"></div>
+                <button class="btn danger" onclick="clearEvidence()">Clear All</button>
+                <button class="btn primary" onclick="simulateRandomEvidence()">Random Burst (5)</button>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Evidence Log (τ)</div>
+                <div class="evidence-log" id="evidenceLog"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT PANE: VISUALIZATION -->
+        <div class="right-pane">
+            <div class="visualization-area">
+                <div class="map-container">
+                    <div class="grid-map" id="gridMap"></div>
+                </div>
+
+                <div class="metrics-panel">
+                    <div class="metric-box">
+                        <div class="metric-title">Posterior Margin</div>
+                        <div class="metric-value" id="marginValue">0.000</div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="marginBar" style="width: 0%"></div>
+                        </div>
+                        <div style="font-size: 10px; color: #999; margin-top: 6px;">max − 2nd max</div>
+                    </div>
+
+                    <div class="metric-box">
+                        <div class="metric-title">Signature Strength</div>
+                        <div class="metric-value" id="strengthValue">0.000</div>
+                        <div class="metric-bar">
+                            <div class="metric-bar-fill" id="strengthBar" style="width: 0%"></div>
+                        </div>
+                        <div style="font-size: 10px; color: #999; margin-top: 6px;">sum of winner σ</div>
+                    </div>
+
+                    <div class="metric-box">
+                        <div class="metric-title">State Space</div>
+                        <div class="metric-value" id="gammaValue">0</div>
+                        <div style="font-size: 10px; color: #999; margin-top: 6px;">Γ(n,d) = d(1+d)^(n-1)</div>
+                    </div>
+
+                    <div style="flex: 1; min-height: 0;">
+                        <div class="section-title" style="margin: 0 0 8px 0;">Posterior Ranking</div>
+                        <div class="posterior-ranks" id="posteriorRanks"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================================
+        // DATA MODEL
+        // ============================================================================
+
+        const scenarios = {
+            building: {
+                name: "Building",
+                regions: ["Room 1", "Room 2", "Room 3", "Room 4", "Room 5", "Room 6", "Room 7", "Room 8", "Room 9"],
+                channels: [
+                    {
+                        id: "video",
+                        name: "Video",
+                        cells: ["wall", "floor", "door"]
+                    },
+                    {
+                        id: "audio",
+                        name: "Audio",
+                        cells: ["quiet", "medium", "loud"]
+                    }
+                ]
+            },
+            warehouse: {
+                name: "Warehouse",
+                regions: ["Zone A", "Zone B", "Zone C", "Zone D", "Zone E", "Zone F", "Zone G", "Zone H", "Zone I"],
+                channels: [
+                    {
+                        id: "rfid",
+                        name: "RFID",
+                        cells: ["near", "far"]
+                    },
+                    {
+                        id: "temp",
+                        name: "Temperature",
+                        cells: ["cold", "warm", "hot"]
+                    },
+                    {
+                        id: "motion",
+                        name: "Motion",
+                        cells: ["static", "moving"]
+                    }
+                ]
+            },
+            field: {
+                name: "Sports Field",
+                regions: ["A1", "A2", "A3", "B1", "B2", "B3", "C1", "C2", "C3"],
+                channels: [
+                    {
+                        id: "camera1",
+                        name: "Cam 1",
+                        cells: ["visible", "hidden"]
+                    },
+                    {
+                        id: "camera2",
+                        name: "Cam 2",
+                        cells: ["visible", "hidden"]
+                    }
+                ]
+            }
+        };
+
+        // Generate random signatures for each region/channel
+        function generateSignatures(scenario) {
+            const sigs = {};
+            for (let region of scenario.regions) {
+                sigs[region] = {};
+                for (let channel of scenario.channels) {
+                    const probs = {};
+                    let sum = 0;
+                    for (let cell of channel.cells) {
+                        probs[cell] = Math.random();
+                        sum += probs[cell];
+                    }
+                    // Normalize
+                    for (let cell of channel.cells) {
+                        probs[cell] /= sum;
+                    }
+                    sigs[region][channel.id] = probs;
+                }
+            }
+            return sigs;
+        }
+
+        let state = {
+            currentScenario: null,
+            scenarios: {},
+            signatures: {},
+            evidence: [],
+            posteriors: {}
+        };
+
+        // ============================================================================
+        // POSTERIOR COMPUTATION
+        // ============================================================================
+
+        function computePosteriorsFromEvidence() {
+            const scenario = state.scenarios[state.currentScenario];
+            if (!scenario || state.evidence.length === 0) {
+                // Uniform priors
+                const uniform = 1.0 / scenario.regions.length;
+                scenario.regions.forEach(r => {
+                    state.posteriors[r] = uniform;
+                });
+                return;
+            }
+
+            // Likelihood product: Pr[Ω_i | τ] ∝ ∏_j σ_χj(i)(c_j)
+            const likelihoods = {};
+            scenario.regions.forEach(region => {
+                let likelihood = 1.0;
+                state.evidence.forEach(obs => {
+                    const channel = scenario.channels.find(ch => ch.id === obs.channel);
+                    if (channel) {
+                        const sig = state.signatures[state.currentScenario][region][obs.channel];
+                        if (sig && sig[obs.cell]) {
+                            likelihood *= sig[obs.cell];
+                        }
+                    }
+                });
+                likelihoods[region] = likelihood;
+            });
+
+            // Normalize to posterior
+            const total = Object.values(likelihoods).reduce((a, b) => a + b, 0);
+            scenario.regions.forEach(r => {
+                state.posteriors[r] = total > 0 ? likelihoods[r] / total : 1.0 / scenario.regions.length;
+            });
+        }
+
+        // ============================================================================
+        // UI UPDATES
+        // ============================================================================
+
+        function loadScenario(scenarioKey) {
+            state.currentScenario = scenarioKey;
+            state.scenarios[scenarioKey] = JSON.parse(JSON.stringify(scenarios[scenarioKey]));
+            state.signatures[scenarioKey] = generateSignatures(state.scenarios[scenarioKey]);
+            state.evidence = [];
+            state.posteriors = {};
+
+            // Initialize posteriors to uniform
+            const scenario = state.scenarios[scenarioKey];
+            const uniform = 1.0 / scenario.regions.length;
+            scenario.regions.forEach(r => {
+                state.posteriors[r] = uniform;
+            });
+
+            render();
+        }
+
+        function addEvidence(channelId, cell) {
+            state.evidence.push({
+                channel: channelId,
+                cell: cell,
+                timestamp: Date.now()
+            });
+            computePosteriorsFromEvidence();
+            render();
+        }
+
+        function clearEvidence() {
+            state.evidence = [];
+            const scenario = state.scenarios[state.currentScenario];
+            const uniform = 1.0 / scenario.regions.length;
+            scenario.regions.forEach(r => {
+                state.posteriors[r] = uniform;
+            });
+            render();
+        }
+
+        function simulateRandomEvidence() {
+            const scenario = state.scenarios[state.currentScenario];
+            // Pick a random true region
+            const trueRegion = scenario.regions[Math.floor(Math.random() * scenario.regions.length)];
+
+            // Add 5 observations biased toward that region
+            for (let i = 0; i < 5; i++) {
+                const channel = scenario.channels[Math.floor(Math.random() * scenario.channels.length)];
+                const sig = state.signatures[state.currentScenario][trueRegion][channel.id];
+                const cells = Object.keys(sig);
+                const cell = cells[Math.floor(Math.random() * cells.length)];
+                addEvidence(channel.id, cell);
+            }
+        }
+
+        function render() {
+            renderScenarioChips();
+            renderPartitionDisplay();
+            renderChannelSelector();
+            renderStatusStrip();
+            renderEvidenceLog();
+            renderGridMap();
+            renderMetrics();
+            renderPosteriorRanks();
+        }
+
+        function renderScenarioChips() {
+            const container = document.getElementById("scenarioChips");
+            container.innerHTML = "";
+            Object.keys(scenarios).forEach(key => {
+                const chip = document.createElement("div");
+                chip.className = "chip" + (state.currentScenario === key ? " active" : "");
+                chip.textContent = scenarios[key].name;
+                chip.onclick = () => loadScenario(key);
+                container.appendChild(chip);
+            });
+        }
+
+        function renderPartitionDisplay() {
+            const container = document.getElementById("partitionDisplay");
+            container.innerHTML = "";
+            if (!state.currentScenario) return;
+
+            const scenario = state.scenarios[state.currentScenario];
+            scenario.regions.forEach(region => {
+                const item = document.createElement("div");
+                item.className = "region-item";
+                if (getWinnerRegion() === region) {
+                    item.classList.add("winner");
+                }
+                item.textContent = region;
+                container.appendChild(item);
+            });
+        }
+
+        function renderChannelSelector() {
+            const container = document.getElementById("channelsContainer");
+            container.innerHTML = "";
+            if (!state.currentScenario) return;
+
+            const scenario = state.scenarios[state.currentScenario];
+            scenario.channels.forEach(channel => {
+                const section = document.createElement("div");
+                section.style.marginBottom = "12px";
+
+                const label = document.createElement("div");
+                label.className = "channel-label";
+                label.textContent = channel.name;
+                section.appendChild(label);
+
+                const buttons = document.createElement("div");
+                buttons.className = "channel-buttons";
+                channel.cells.forEach(cell => {
+                    const btn = document.createElement("button");
+                    btn.className = "btn";
+                    btn.textContent = cell;
+                    btn.onclick = () => addEvidence(channel.id, cell);
+                    buttons.appendChild(btn);
+                });
+                section.appendChild(buttons);
+                container.appendChild(section);
+            });
+        }
+
+        function renderStatusStrip() {
+            if (!state.currentScenario) return;
+
+            const depth = state.evidence.length;
+            const channels = state.scenarios[state.currentScenario].channels.length;
+            const winner = getWinnerRegion();
+
+            document.getElementById("depthValue").textContent = depth;
+            document.getElementById("channelsValue").textContent = channels;
+            document.getElementById("winnerValue").textContent = winner || "-";
+        }
+
+        function renderEvidenceLog() {
+            const container = document.getElementById("evidenceLog");
+            container.innerHTML = "";
+
+            state.evidence.forEach((obs, idx) => {
+                const entry = document.createElement("div");
+                entry.className = "evidence-entry";
+                entry.innerHTML = `<span class="idx">[${idx}]</span><span style="color: #666;">${obs.channel}</span> → <span style="font-weight: bold;">${obs.cell}</span>`;
+                container.appendChild(entry);
+            });
+        }
+
+        function renderGridMap() {
+            const container = document.getElementById("gridMap");
+            container.innerHTML = "";
+            if (!state.currentScenario) return;
+
+            const scenario = state.scenarios[state.currentScenario];
+            scenario.regions.forEach(region => {
+                const cell = document.createElement("div");
+                cell.className = "region-cell";
+                const prob = state.posteriors[region] || 0;
+                const intensity = Math.min(prob * 3, 1);
+                cell.style.backgroundColor = `rgba(200, 90, 84, ${intensity * 0.3})`;
+                cell.style.borderColor = `rgba(200, 90, 84, ${0.2 + intensity * 0.8})`;
+
+                const label = document.createElement("div");
+                label.className = "region-cell-label";
+                label.textContent = region;
+                cell.appendChild(label);
+
+                const probDisplay = document.createElement("div");
+                probDisplay.className = "region-cell-prob";
+                probDisplay.textContent = (prob * 100).toFixed(1) + "%";
+                cell.appendChild(probDisplay);
+
+                container.appendChild(cell);
+            });
+        }
+
+        function renderMetrics() {
+            if (!state.currentScenario) return;
+
+            const scenario = state.scenarios[state.currentScenario];
+            const posteriorValues = scenario.regions.map(r => state.posteriors[r]).sort((a, b) => b - a);
+            const margin = posteriorValues[0] - posteriorValues[1];
+
+            const winner = getWinnerRegion();
+            let strength = 0;
+            if (winner) {
+                const sigs = state.signatures[state.currentScenario][winner];
+                Object.values(sigs).forEach(channelSig => {
+                    Object.values(channelSig).forEach(prob => {
+                        strength += prob;
+                    });
+                });
+                strength /= scenario.channels.length;
+            }
+
+            const depth = state.evidence.length;
+            const channels = scenario.channels.length;
+            const gamma = channels * Math.pow(1 + channels, depth - 1);
+
+            document.getElementById("marginValue").textContent = margin.toFixed(3);
+            document.getElementById("marginBar").style.width = Math.min(margin * 200, 100) + "%";
+
+            document.getElementById("strengthValue").textContent = strength.toFixed(3);
+            document.getElementById("strengthBar").style.width = strength * 100 + "%";
+
+            document.getElementById("gammaValue").textContent = Math.floor(gamma).toLocaleString();
+        }
+
+        function renderPosteriorRanks() {
+            const container = document.getElementById("posteriorRanks");
+            container.innerHTML = "";
+            if (!state.currentScenario) return;
+
+            const scenario = state.scenarios[state.currentScenario];
+            const sorted = scenario.regions
+                .map(r => ({region: r, prob: state.posteriors[r]}))
+                .sort((a, b) => b.prob - a.prob)
+                .slice(0, 6);
+
+            sorted.forEach((item, idx) => {
+                const entry = document.createElement("div");
+                entry.className = "rank-item";
+
+                const rankIdx = document.createElement("div");
+                rankIdx.className = "rank-index";
+                rankIdx.textContent = (idx + 1);
+                entry.appendChild(rankIdx);
+
+                const label = document.createElement("div");
+                label.className = "rank-label";
+                label.textContent = item.region;
+                entry.appendChild(label);
+
+                const barContainer = document.createElement("div");
+                barContainer.className = "rank-bar-container";
+                const bar = document.createElement("div");
+                bar.className = "rank-bar";
+                bar.style.width = (item.prob * 100) + "%";
+                barContainer.appendChild(bar);
+                entry.appendChild(barContainer);
+
+                const prob = document.createElement("div");
+                prob.className = "rank-prob";
+                prob.textContent = (item.prob * 100).toFixed(1) + "%";
+                entry.appendChild(prob);
+
+                container.appendChild(entry);
+            });
+        }
+
+        function getWinnerRegion() {
+            if (!state.currentScenario) return null;
+            const scenario = state.scenarios[state.currentScenario];
+            return scenario.regions.reduce((max, r) =>
+                (state.posteriors[r] > state.posteriors[max]) ? r : max
+            );
+        }
+
+        // ============================================================================
+        // INIT
+        // ============================================================================
+
+        loadScenario("building");
+    </script>
+</body>
+</html>
