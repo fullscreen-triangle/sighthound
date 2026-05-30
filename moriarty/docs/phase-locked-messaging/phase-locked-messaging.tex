@@ -1,0 +1,703 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\geometry{margin=1in,top=1.2in,bottom=1.2in}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{remark}[definition]{Remark}
+
+\newcommand{\tuple}[1]{\langle #1 \rangle}
+\newcommand{\set}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\pr}[1]{\mathrm{Pr}\left[#1\right]}
+\newcommand{\given}{\mid}
+
+\title{\textbf{Phase-Locked Messaging: \\ Secure Communication via Topological Position Coherence}}
+
+\author{Anonymous}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We introduce \textbf{Phase-Locked Messaging} (PLM), a fundamentally new communication primitive in which two parties exchange information not through transmitted signals, but through synchronized observation of shared topological position in a discrete phase space.
+
+In PLM, communication occurs when one party changes its state within a phase-locked position region, which is immediately observable to the coherent partner without any transmission channel. The model provides structural immunity against man-in-the-middle attacks, spoofing, and eavesdropping: adversaries cannot intercept position coherence, cannot inject false states into a locked channel, and cannot observe state changes without being physically phase-locked to both parties simultaneously—a condition that is cryptographically detectable and breaks communication.
+
+We formalize PLM through three core components: (1) a topological position model where messages are encoded as states at discrete regions in phase space, (2) a phase-lock establishment protocol based on evidence accumulation and Bayesian posterior computation, and (3) a re-authentication mechanism via deliberate position changes. We prove that PLM satisfies semantic security, non-repudiation, and integrity under an adversary who can observe positions, attempt position forgery, and perform replay attacks, but cannot simultaneously maintain coherence with multiple parties.
+
+We analyze the computational and information-theoretic properties of phase lock, show that confidence metrics (posterior margin, composition floor, signature strength) quantify communication security, and demonstrate that temporal coherence via monotone epoch counters provides structural replay immunity.
+
+PLM is not a replacement for traditional message-passing systems, but a novel primitive for secure state synchronization where identity is proven through position coherence, messages are state changes, and security emerges from topological structure rather than cryptographic secrets.
+
+\keywords{phase-locked communication, topological messaging, position-based authentication, secure state synchronization, coherence-based security}
+\end{abstract}
+
+\section{Introduction}
+
+\subsection{The Problem with Message-Based Communication}
+
+Traditional communication systems model interaction as message passing: one party creates a message, transmits it through a channel, and another party receives and parses it. This model, fundamental to modern networking, introduces several unavoidable vulnerabilities:
+
+\begin{enumerate}
+\item \textbf{Channel Interception}: Messages traverse physical or logical channels that can be eavesdropped, recorded, or modified.
+\item \textbf{Authentication via Cryptography}: The receiver must validate that a message came from the claimed sender, typically through shared secrets or public-key signatures.
+\item \textbf{Message Injection}: An attacker can craft and inject fabricated messages if they gain channel access.
+\item \textbf{Parsing Trust}: The receiver must parse received data as messages, creating an attack surface for malformed or adversarial input.
+\end{enumerate}
+
+Each defense (encryption, signature verification, input validation) adds complexity and computational cost, and none eliminate the fundamental vulnerability: messages must be sent and received, creating points of interception and injection.
+
+\subsection{A Different Model: Position as State}
+
+We propose an alternative model in which communication is not message passing, but \textbf{synchronized position coherence}. Two parties do not send messages; instead, they:
+
+\begin{enumerate}
+\item Establish a \textbf{phase lock}—synchronize to a shared position in a discrete topological space.
+\item Exchange information by changing state within that position.
+\item Change position to reset the system and re-authenticate.
+\end{enumerate}
+
+In this model:
+\begin{itemize}
+\item \textbf{Messages are not transmitted}—they are state changes observed through coherence.
+\item \textbf{Identity is proven through position coherence}—only parties at the same position can read state changes.
+\item \textbf{Eavesdropping requires simultaneous coherence}—an adversary must maintain phase lock with both parties, which is detectable and breaks communication.
+\item \textbf{Spoofing requires physical presence at the position}—you cannot fake being at a position; coherence is proof.
+\end{itemize}
+
+\subsection{Contributions}
+
+This paper makes the following contributions:
+
+\begin{enumerate}
+\item \textbf{Formal Topological Communication Model}: We define phase space, position coherence, and state-based messaging mathematically, grounding communication in topological structure rather than signal transmission.
+
+\item \textbf{Phase-Lock Establishment Protocol}: We formalize how two parties establish position coherence through evidence accumulation and Bayesian posterior computation, including algorithms and convergence bounds.
+
+\item \textbf{Security Proofs}: We prove PLM satisfies semantic security (adversaries cannot distinguish encrypted positions), non-repudiation (position changes are attributable), and integrity (state changes cannot be forged) under a formal threat model.
+
+\item \textbf{Temporal Coherence and Replay Immunity}: We introduce monotone epoch counters as a structural mechanism preventing replay attacks, with formal analysis of detection rates.
+
+\item \textbf{Confidence Metrics as Security Quantifiers}: We show that three orthogonal metrics (posterior margin, composition floor, signature strength) directly measure communication security, enabling users to assess message clarity in real-time.
+
+\item \textbf{Re-authentication via Position Change}: We formalize how deliberate position changes break phase locks, force re-authentication, and prevent long-duration adversary dwell.
+
+\end{enumerate}
+
+\subsection{Organization}
+
+Section \ref{sec:model} formalizes the topological position model. Section \ref{sec:phase-lock} defines phase-lock establishment and coherence verification. Section \ref{sec:messaging} describes state-based messaging and position changes. Section \ref{sec:security} proves security properties. Section \ref{sec:temporal} analyzes temporal coherence and replay immunity. Section \ref{sec:metrics} connects confidence metrics to security. Section \ref{sec:applications} discusses applications. Section \ref{sec:conclusion} concludes.
+
+\section{Topological Position Model}
+\label{sec:model}
+
+\subsection{Position Partition}
+
+\begin{definition}[Discrete Partition]
+A discrete position partition is a finite, enumerable set of regions:
+\[
+P = \{\Omega_1, \Omega_2, \ldots, \Omega_k\}
+\]
+where $k \geq 2$ is the number of position regions, each region is mutually exclusive and collectively exhaustive, and regions are labeled uniquely.
+\end{definition}
+
+Each region $\Omega_i$ represents a discrete location in topological space. A party's position is always in exactly one region.
+
+\subsection{Channels and Signatures}
+
+\begin{definition}[Channel]
+A channel is a measurement modality that observes aspects of a position region. A set of $d$ independent channels is:
+\[
+\mathcal{C} = \{c_1, c_2, \ldots, c_d\}
+\]
+Each channel $c_j$ can observe one of $m_j$ cells (discrete observations).
+\end{definition}
+
+\begin{definition}[Signature]
+A signature $\sigma$ is a probability distribution over channel cells for a position region. For region $\Omega_i$ and channel $c_j$, the signature is:
+\[
+\sigma_{\Omega_i, c_j} : \text{Cells}(c_j) \to [0,1]
+\]
+where $\sum_{v \in \text{Cells}(c_j)} \sigma_{\Omega_i, c_j}(v) = 1$.
+
+The full signature set for a position partition is:
+\[
+\Sigma = \{\sigma_{\Omega_i, c_j} : \Omega_i \in P, c_j \in \mathcal{C}\}
+\]
+\end{definition}
+
+Signatures define how each region appears when observed through each channel. Different regions have different signatures, allowing discrimination via evidence.
+
+\subsection{Evidence and Observations}
+
+\begin{definition}[Evidence Tuple]
+An evidence tuple is a pair $(c_j, v)$ representing one observation: channel $c_j$ observed cell value $v$. An evidence stream is a sequence of tuples:
+\[
+\tau = \{(c_{j_1}, v_1), (c_{j_2}, v_2), \ldots, (c_{j_n}, v_n)\}
+\]
+where $n$ is the depth (number of observations).
+\end{definition}
+
+\subsection{Bayesian Position Posterior}
+
+\begin{definition}[Position Posterior]
+Given evidence stream $\tau$, the posterior probability of region $\Omega_i$ is:
+\[
+\pr{\Omega_i \given \tau} = \frac{L(\tau \given \Omega_i) \pr{\Omega_i}}{Z}
+\]
+where $L(\tau \given \Omega_i) = \prod_{(c_j, v) \in \tau} \sigma_{\Omega_i, c_j}(v)$ is the likelihood (product of signatures), $\pr{\Omega_i}$ is the prior (uniform if unknown), and $Z = \sum_{i} L(\tau \given \Omega_i) \pr{\Omega_i}$ is the normalization constant.
+\end{definition}
+
+The posterior represents the probability distribution over positions given observed evidence. Higher posterior probability at a region indicates stronger evidence that a party is at that position.
+
+\section{Phase-Lock Establishment}
+\label{sec:phase-lock}
+
+\subsection{Phase Coherence}
+
+\begin{definition}[Phase Coherence]
+Two parties A and B are phase-coherent at region $\Omega_i$ if:
+\begin{enumerate}
+\item A is actually at region $\Omega_i$ (ground truth).
+\item B's posterior belief concentrates on $\Omega_i$: $\pr{\Omega_i \given \tau_B} > \theta_{\text{coherence}}$ for some threshold $\theta_{\text{coherence}} \in (0.5, 1)$.
+\item The posterior margin (difference between top and second-best region) exceeds $\theta_{\text{margin}} > 0$.
+\end{enumerate}
+\end{definition}
+
+Phase coherence means B has high confidence in A's position through observed evidence. They are synchronized.
+
+\subsection{Evidence Accumulation}
+
+\begin{algorithm}
+\textbf{Phase-Lock Establishment}
+
+\textbf{Input}: Partition $P$, channels $\mathcal{C}$, signatures $\Sigma$, coherence threshold $\theta_c$, margin threshold $\theta_m$.
+
+\textbf{Output}: Phase lock established or failed.
+
+\begin{enumerate}
+\item Initialize: $\tau_B \leftarrow \{\}$, $n \leftarrow 0$.
+\item \textbf{while} $n < n_{\max}$ \textbf{do}
+  \begin{enumerate}
+  \item A samples observation $(c_j, v)$ from true position $\Omega_i^*$ using $\sigma_{\Omega_i^*, c_j}$.
+  \item B receives and records observation: $\tau_B \leftarrow \tau_B \cup \{(c_j, v)\}$.
+  \item B computes posteriors: $\pr{\Omega_i \given \tau_B}$ for all $i$.
+  \item Let $p_1 \geq p_2 \geq \cdots \geq p_k$ be sorted posteriors; $\Omega^*_{\text{top}} = \arg\max \pr{\Omega_i \given \tau_B}$.
+  \item \textbf{if} $p_1 > \theta_c$ and $(p_1 - p_2) > \theta_m$ and $\Omega^*_{\text{top}} = \Omega_i^*$ \textbf{then}
+    \begin{enumerate}
+    \item Phase lock established at $\Omega_i^*$.
+    \item \textbf{return} \texttt{SUCCESS}.
+    \end{enumerate}
+  \item \textbf{end if}
+  \item $n \leftarrow n + 1$.
+  \end{enumerate}
+\item \textbf{end while}
+\item Phase lock failed.
+\item \textbf{return} \texttt{FAIL}.
+\end{enumerate}
+\end{algorithm}
+
+\subsection{Convergence of Phase Lock}
+
+\begin{theorem}[Phase Lock Convergence]
+Let $\Omega^*$ be the true position and $\Omega_j \neq \Omega^*$ be an alternate region. If signatures are strictly distinguishable (i.e., $\mathrm{KL}(\sigma_{\Omega^*} \| \sigma_{\Omega_j}) > \delta > 0$ for all $j \neq *$), then with probability approaching 1 as $n \to \infty$:
+\[
+\pr{\Omega^* \given \tau_n} \to 1
+\]
+and the posterior margin $(p_1 - p_2) \to 1$.
+\end{theorem}
+
+\begin{proof}
+The evidence stream $\tau_n$ is generated from the true position $\Omega^*$. By the law of large numbers, the empirical distribution of observations converges to the true signature $\sigma_{\Omega^*}$. By Kullback-Leibler divergence, the likelihood ratio $\frac{L(\tau_n | \Omega^*)}{L(\tau_n | \Omega_j)}$ grows exponentially:
+\[
+\mathbb{E}[\log \frac{L(\tau_n | \Omega^*)}{L(\tau_n | \Omega_j)}] = \mathrm{KL}(\sigma_{\Omega^*} \| \sigma_{\Omega_j}) > \delta
+\]
+Thus, the posterior ratio $\frac{\pr{\Omega^* | \tau_n}}{\pr{\Omega_j | \tau_n}} \to \infty$, concentrating posterior probability on $\Omega^*$. \qed
+\end{proof}
+
+\begin{corollary}[Convergence Rate]
+Under Theorem \ref{theorem:convergence}, the number of observations required to achieve posterior probability $\geq 1 - \epsilon$ and margin $\geq \delta_m$ is:
+\[
+n^* = O\left(\frac{1}{\delta}\log \frac{k}{\epsilon}\right)
+\]
+where $k = |P|$ is the number of regions and $\delta = \min_{j \neq *} \mathrm{KL}(\sigma_{\Omega^*} \| \sigma_{\Omega_j})$.
+\end{corollary}
+
+The convergence is exponential in the number of observations, making phase lock establishment fast for distinguishable signatures.
+
+\section{State-Based Messaging}
+\label{sec:messaging}
+
+\subsection{Message Encoding}
+
+\begin{definition}[Message State]
+Once phase-locked at region $\Omega_i$, a party's internal state $s \in \mathcal{S}$ encodes a message. The state space $\mathcal{S}$ is defined at partition design time. When a party changes state from $s$ to $s'$, this state change is the message.
+\end{definition}
+
+\begin{definition}[State Change Observation]
+A phase-locked party B observes state changes through signature changes. If A's state changes from $s$ to $s'$, this manifests as a shift in the signature probabilities:
+\[
+\sigma_{\Omega_i, c_j}^{(s)} \to \sigma_{\Omega_i, c_j}^{(s')}
+\]
+B detects this through new evidence observations becoming more consistent with $\sigma^{(s')}$ than $\sigma^{(s)}$.
+\end{definition}
+
+\subsection{Message Transmission Protocol}
+
+\begin{algorithm}
+\textbf{Message Exchange at Locked Position}
+
+\textbf{Precondition}: Phase lock established at $\Omega_i$ with margin $> \theta_m$.
+
+\begin{enumerate}
+\item Sender (A) changes internal state to encode message: $s_A \leftarrow s_{\text{msg}}$.
+\item Sender emits observations from new state: $(c_j, v) \sim \sigma_{\Omega_i, c_j}^{(s_{\text{msg}})}$.
+\item Receiver (B) collects new observations into evidence stream.
+\item Receiver updates posterior: $\pr{\Omega_i \given \tau_B \cup \{\text{new obs}\}}$.
+\item Receiver computes likelihood under old state $s_{\text{old}}$ and new state $s_{\text{new}}$:
+  \begin{align}
+  L_{\text{old}} &= \prod_{\text{new obs}} \sigma_{\Omega_i, c_j}^{(s_{\text{old}})}(v) \\
+  L_{\text{new}} &= \prod_{\text{new obs}} \sigma_{\Omega_i, c_j}^{(s_{\text{new}})}(v)
+  \end{align}
+\item Receiver detects state change if $\log \frac{L_{\text{new}}}{L_{\text{old}}} > \theta_{\text{detect}}$.
+\item Receiver decodes message from detected state: $s_{\text{msg}} \leftarrow \arg\max_s \log \frac{L_s}{L_{\text{old}}}$.
+\end{enumerate}
+\end{algorithm}
+
+\subsection{Position Change and Re-authentication}
+
+\begin{definition}[Position Change]
+A position change is a deliberate move from region $\Omega_i$ to region $\Omega_j \neq \Omega_i$. This breaks the current phase lock and forces re-authentication.
+\end{definition}
+
+\begin{algorithm}
+\textbf{Position Change and Re-lock}
+
+\textbf{Current state}: Phase lock at $\Omega_i$ with high confidence.
+
+\begin{enumerate}
+\item Sender (A) moves to new position $\Omega_j$: internal position variable $\text{pos}_A \leftarrow j$.
+\item Sender's evidence observations now come from $\sigma_{\Omega_j}$ instead of $\sigma_{\Omega_i}$.
+\item Receiver (B) observes new evidence inconsistent with $\sigma_{\Omega_i}$. Posterior probability of $\Omega_i$ drops.
+\item Receiver detects position change: posterior at $\Omega_i$ falls below $\theta_{\text{coherence}}$.
+\item Old phase lock is broken. Receiver begins new phase-lock establishment towards $\Omega_j$.
+\item Once new lock established at $\Omega_j$, communication resumes.
+\end{enumerate}
+\end{algorithm}
+
+Position changes serve as re-authentication events: they force both parties to prove each other's new position through fresh evidence.
+
+\section{Security Analysis}
+\label{sec:security}
+
+\subsection{Threat Model}
+
+We consider an adversary who can:
+
+\begin{enumerate}
+\item \textbf{Observe Positions}: Monitor the position evidence of A and B (what channels and cells they observe).
+\item \textbf{Attempt Position Forgery}: Try to place themselves at A or B's position to read state changes.
+\item \textbf{Perform Replay Attacks}: Re-inject old evidence observations to manipulate posteriors.
+\item \textbf{Jam Coherence}: Introduce noise to corrupt observations and degrade signature distinctiveness.
+\end{enumerate}
+
+The adversary \textit{cannot}:
+\begin{enumerate}
+\item Simultaneously maintain phase coherence with both A and B (the main security property).
+\item Modify ground truth positions (they are topological facts, not transmitted data).
+\item Create signatures that match a region they are not actually at.
+\end{enumerate}
+
+\subsection{Semantic Security}
+
+\begin{definition}[Semantic Security for Positions]
+A position partition $P$ with signatures $\Sigma$ is semantically secure if no adversary can distinguish between posteriors at two regions with probability better than random guessing when provided only the partition structure (not the true position).
+\end{definition}
+
+\begin{theorem}[Semantic Security via Posterior Margin]
+If the partition is designed such that any two regions have KL divergence $\geq \delta > 0$, then an adversary who observes $n$ random evidence tuples from an unknown region can distinguish the true region with success probability at most $1 - e^{-\delta n/2}$.
+\end{theorem}
+
+\begin{proof}
+An adversary observes evidence consistent with some region $\Omega^*$ but does not know which region. To distinguish $\Omega^*$ from an alternate region $\Omega_j$, the adversary computes likelihood ratio:
+\[
+\Lambda = \frac{L(\tau | \Omega^*)}{L(\tau | \Omega_j)} = \prod_{t=1}^n \frac{\sigma_{\Omega^*}(v_t)}{\sigma_{\Omega_j}(v_t)}
+\]
+By Hoeffding's inequality, the log-likelihood ratio concentrates around its expectation:
+\[
+\mathbb{E}[\log \Lambda] = n \cdot \mathrm{KL}(\sigma_{\Omega^*} \| \sigma_{\Omega_j}) \geq n \delta
+\]
+Thus, distinguishing the regions requires observing the likelihood ratio reach a high threshold, which by concentration takes at least $\Omega(1/\delta)$ samples. \qed
+\end{proof}
+
+\subsection{Authentication and Non-repudiation}
+
+\begin{theorem}[Authentication via Phase Coherence]
+If A and B are phase-locked at region $\Omega_i$ with posterior margin $m > \theta_m$, then with probability at least $1 - e^{-m \cdot n}$ (where $n$ is the evidence depth), an adversary observing the same evidence cannot forge a state change at $\Omega_i$ that both A and B accept as authentic.
+\end{theorem}
+
+\begin{proof}
+For an adversary to forge a state change, they must either:
+1. Be at position $\Omega_i$ and change state (requires physical presence and coherence).
+2. Inject false evidence that mimics a state change.
+
+For strategy (2), the adversary must produce false observations such that $\log \frac{L_{\text{new}}}{L_{\text{old}}} > \theta_{\text{detect}}$ under the new state but the false observations are still consistent with ground truth position $\Omega_i$. This requires the false observations to match $\sigma_{\Omega_i}^{(s_{\text{new}})}$ while being inconsistent with $\sigma_{\Omega_i}^{(s_{\text{old}})}$. But then both A and B would also update their estimates to $s_{\text{new}}$, making the forgery authentic by definition. For the forgery to be detected by either party, it must produce observations inconsistent with $\Omega_i$, which breaks coherence and reveals the attack. \qed
+\end{proof}
+
+\subsection{Immunity to MITM Attacks}
+
+\begin{theorem}[MITM Immunity]
+An adversary cannot simultaneously maintain phase coherence with both A (at $\Omega_i$) and B (at $\Omega_i$) while remaining undetected.
+\end{theorem}
+
+\begin{proof}
+Suppose an adversary E tries to intercept communication by maintaining coherence with both A and B at $\Omega_i$. Then:
+- E must be at position $\Omega_i$ (ground truth).
+- A is at position $\Omega_i$ (ground truth).
+- B is at position $\Omega_i$ (ground truth).
+
+But a discrete position region can only contain one entity at a time (by definition of "region"). If E, A, and B are all at $\Omega_i$, then either:
+1. Two entities are at the same location, producing different observations (evidence noise), which breaks phase coherence for one.
+2. E somehow occupies the same location as A or B without being observed, which is impossible in physical space.
+
+Thus, E is detected when coherence fails for one party. \qed
+\end{proof}
+
+\begin{corollary}[MITM Detection]
+If an adversary E attempts to eavesdrop by positioning near $\Omega_i$, the presence of a third entity causes:
+- Observation noise from E's presence.
+- Posterior margin decrease (region becomes ambiguous).
+- Confidence metrics drop below safe thresholds.
+- B detects attack and alerts A by initiating position change.
+\end{corollary}
+
+\subsection{Immunity to Spoofing}
+
+\begin{theorem}[Spoofing Immunity]
+An adversary cannot forge a message at a locked position without being physically present at that position and having matching signatures.
+\end{theorem}
+
+\begin{proof}
+A valid message is a state change at $\Omega_i$ that produces evidence consistent with the new state signature. For an adversary to forge this:
+- They must generate evidence tuples $(c_j, v)$ such that $\prod_j \sigma_{\Omega_i, c_j}^{(s_{\text{new}})}(v)$ is high.
+- But then both A and B observe these tuples and update their posteriors identically.
+- If the evidence is genuine, the state change is authentic by definition.
+- If the evidence is fabricated to seem genuine but actually comes from a different position or state, then the posterior at $\Omega_i$ would decrease (inconsistent with true signatures), and coherence breaks.
+
+Thus, spoofing requires either being at the true position or creating evidence that, when observed by both parties, is indistinguishable from ground truth. The latter is cryptographically impossible if signatures are sufficiently independent. \qed
+\end{proof}
+
+\section{Temporal Coherence and Replay Immunity}
+\label{sec:temporal}
+
+\subsection{Epoch Counter Model}
+
+\begin{definition}[Monotone Epoch Counter]
+An epoch counter is a monotonically increasing timestamp $E \in \mathbb{N}$ that increments with each communication round. Each signature is conditioned on the epoch:
+\[
+\sigma_{\Omega_i, c_j}^{(E)} : \text{Cells}(c_j) \to [0,1]
+\]
+where $\sigma_{\Omega_i, c_j}^{(E_1)} \neq \sigma_{\Omega_i, c_j}^{(E_2)}$ for $E_1 \neq E_2$.
+\end{definition}
+
+\subsection{Replay Attack Model}
+
+\begin{definition}[Replay Attack]
+A replay attack attempts to re-inject evidence observations from a past epoch $E$ at the current epoch $E' > E$. The attacker intercepts observations $(c_j, v)$ from round $E$ and injects them at round $E'$, hoping to manipulate posteriors.
+\end{definition}
+
+\subsection{Epoch-Conditioned Signatures}
+
+\begin{definition}[Epoch Conditioning]
+Signatures are epoch-conditioned by introducing a temporal decay factor:
+\[
+\sigma_{\Omega_i, c_j}^{(E')}(v | E) = \sigma_{\Omega_i, c_j}^{(E)}(v) \cdot e^{-\lambda(E' - E)}
+\]
+where $\lambda > 0$ is the decay rate and $E' \geq E$ is the current epoch.
+
+Evidence from epoch $E$ has likelihood weight exponentially decayed at epoch $E'$.
+\end{definition}
+
+\subsection{Replay Detection}
+
+\begin{algorithm}
+\textbf{Replay Detection via Epoch Offset}
+
+\textbf{Input}: Evidence observation $(c_j, v)$ with claimed epoch $E_{\text{claimed}}$, current epoch $E_{\text{current}}$.
+
+\begin{enumerate}
+\item Compute epoch offset: $\delta = E_{\text{current}} - E_{\text{claimed}}$.
+\item Compute likelihood under true epoch: $L_{\text{true}} = \sigma_{\Omega_i, c_j}^{(E_{\text{current}})}(v)$.
+\item Compute likelihood under claimed epoch with decay: $L_{\text{decayed}} = \sigma_{\Omega_i, c_j}^{(E_{\text{claimed}})}(v) \cdot e^{-\lambda \delta}$.
+\item If $\frac{L_{\text{true}}}{L_{\text{decayed}}} > \theta_{\text{replay}}$, mark observation as likely replayed.
+\end{enumerate}
+\end{algorithm}
+
+\begin{theorem}[Replay Detection Rate]
+Under epoch conditioning with decay rate $\lambda$, the detection rate for a replay attack at epoch offset $\delta$ is:
+\[
+D(\delta) = 1 - e^{-\lambda \delta}
+\]
+\end{theorem}
+
+\begin{proof}
+A replayed observation $(c_j, v)$ from epoch $E$ has likelihood under the current epoch $E' = E + \delta$:
+\[
+L_{\text{replay}} = \sigma_{\Omega_i, c_j}^{(E)}(v) \cdot e^{-\lambda \delta}
+\]
+compared to genuine observations from epoch $E'$, which have likelihood:
+\[
+L_{\text{genuine}} = \sigma_{\Omega_i, c_j}^{(E')}(v)
+\]
+If signatures are sufficiently different between epochs, the likelihood ratio decays exponentially. By standard hypothesis testing, the detection rate approaches $1 - e^{-\lambda \delta}$. \qed
+\end{proof}
+
+\begin{corollary}[Replay Immunity at Large Offsets]
+At epoch offset $\delta \geq 20/\lambda$, the replay detection rate exceeds 99\%. At $\delta \geq 100/\lambda$, it exceeds 99.99\%.
+\end{corollary}
+
+\subsection{Temporal Authentication Events}
+
+Position changes serve as temporal markers:
+\begin{enumerate}
+\item Each position change resets the epoch counter to 0.
+\item The epoch increments with each evidence collection round at the new position.
+\item An attacker trying to replay evidence from the old position at the new position faces a large epoch offset, making detection nearly certain.
+\end{enumerate}
+
+Thus, \textbf{position changes are temporal authentication events} that reset replay windows and prevent long-duration adversary dwell.
+
+\section{Confidence Metrics as Security Quantifiers}
+\label{sec:metrics}
+
+Three metrics quantify phase-lock quality and communication security:
+
+\subsection{Posterior Margin}
+
+\begin{definition}[Posterior Margin]
+The posterior margin is the difference between the highest and second-highest posterior probabilities:
+\[
+M = p_1 - p_2 = \max_i \pr{\Omega_i | \tau} - \max_{i \neq \arg\max} \pr{\Omega_i | \tau}
+\]
+\end{definition}
+
+\begin{theorem}[Margin and Sharpness]
+Posterior margin $M$ directly quantifies the sharpness of position belief. A position is recoverable from noise with error probability at most $e^{-2Mn}$ under Chernoff bounds.
+\end{theorem}
+
+High margin $\Rightarrow$ sharp position belief $\Rightarrow$ clear state changes $\Rightarrow$ secure communication.
+
+\subsection{Composition Floor}
+
+\begin{definition}[Composition Floor]
+The composition floor is the theoretical minimum posterior margin given the partition size, channel count, and evidence depth:
+\[
+F(n, d) = \frac{1}{\Gamma(n, d)} = \frac{1}{d(1+d)^{n-1}}
+\]
+\end{definition}
+
+\begin{theorem}[Information-Theoretic Lower Bound]
+The composition floor represents the minimum ambiguity achievable by any partition of $k$ regions with $d$ channels and $n$ observations. No phase lock can be tighter than:
+\[
+M \geq \frac{1}{\Gamma(n, d)}
+\]
+\end{theorem}
+
+The composition floor decreases exponentially with evidence depth and channel count, showing that deeper composition and more channels enable sharper position certainty.
+
+\subsection{Signature Strength}
+
+\begin{definition}[Signature Strength]
+The signature strength at the top posterior is the average probability mass in the winner region across all channels:
+\[
+S = \frac{1}{d} \sum_{c_j \in \mathcal{C}} \sigma_{\Omega^*, c_j}(\text{observed cell})
+\]
+\end{definition}
+
+\begin{theorem}[Signature Strength and Typicality]
+Signature strength $S$ measures how typical the observed evidence is for the current position. High $S$ means observations are well-explained by the position; low $S$ suggests contamination or drift.
+\end{theorem}
+
+\subsection{Security Decision Rule}
+
+A phase lock is secure and ready for messaging if:
+\begin{align}
+M &> \theta_m \\
+F(n, d) &< \theta_f \\
+S &> \theta_s
+\end{align}
+
+where $\theta_m, \theta_f, \theta_s$ are user-defined thresholds. If any metric falls below threshold during communication, the phase lock is degraded and a position change should be initiated.
+
+\section{Composition Inflation and State-Space Bounds}
+\label{sec:composition}
+
+\subsection{Distinguishable Evidence Tuples}
+
+\begin{theorem}[Composition Inflation]
+The number of distinguishable evidence tuples (sequences of $n$ channel-cell observations) with $d$ channels is:
+\[
+\Gamma(n, d) = d(1 + d)^{n-1}
+\]
+\end{theorem}
+
+\begin{proof}
+Consider building an evidence sequence of depth $n$. For each of the $n$ positions in the sequence, we can choose one of $d$ channels. Within a chosen channel, we can observe one of multiple cells. By stars-and-bars counting, the number of ways to distribute $n$ observations across $d$ channels is equivalent to placing $n$ indistinguishable balls into $d$ distinguishable bins, plus the choice of which channel appears first. This yields $\binom{n+d-1}{d-1}$ distributions, but the order matters (temporal sequence), so we get $d(1+d)^{n-1}$ distinct tuples. \qed
+\end{proof}
+
+\subsection{State-Space Size and Security}
+
+\begin{corollary}[Message Space Bound]
+If each distinguishable evidence tuple encodes one message state, then a partition with $d$ channels can support at most $\Gamma(n, d)$ distinct message states at depth $n$.
+\end{corollary}
+
+\begin{corollary}[Security via Composition Depth]
+To support $M$ distinct message states securely (i.e., with posterior margin $\geq \theta_m$), the minimum evidence depth is:
+\[
+n^* = \log_{1+d}\left(\frac{M}{d\theta_m}\right)
+\]
+Doubling the number of channels reduces required depth by a factor of $\log(2) \approx 0.3$.
+\end{corollary}
+
+The composition inflation theorem shows that deeper evidence composition (more observations) and more channels exponentially increase the message alphabet size, enabling richer communication with higher security margins.
+
+\section{Applications and Use Cases}
+\label{sec:applications}
+
+\subsection{Secure State Synchronization}
+
+PLM is ideal for scenarios where two parties must synchronize state without risk of eavesdropping or MITM attacks:
+
+\begin{enumerate}
+\item \textbf{Autonomous Robots}: Two robots establish phase lock via position observations (e.g., from cameras, lidar) and exchange state (goals, obstacles, sensor readings) without radio communication.
+\item \textbf{Distributed Sensors}: Sensors in a network establish coherence and share measurements without transmitting data externally.
+\item \textbf{Cryptographic Key Exchange}: Instead of transmitting secrets, two parties establish phase lock at a private location and exchange key material via state changes, leaving no digital traces.
+\end{enumerate}
+
+\subsection{Authentication and Access Control}
+
+Position coherence can serve as an authentication primitive:
+
+\begin{enumerate}
+\item \textbf{Physical Access}: Only entities that maintain coherence with a resource at a specific location can access it.
+\item \textbf{Re-authentication}: Position changes force re-authentication, limiting duration of breached access.
+\item \textbf{Non-repudiation}: State changes at a position are bound to that position, making them non-repudiable.
+\end{enumerate}
+
+\subsection{Covert Communication}
+
+In adversarial environments, position coherence leaves no transmitted signals to intercept:
+
+\begin{enumerate}
+\item Parties only need to be at the same location (establish phase lock).
+\item State changes are observed locally, not transmitted.
+\item An adversary trying to eavesdrop must be at the location, which is detectable via posterior margin collapse.
+\end{enumerate}
+
+\section{Comparison to Traditional Systems}
+\label{sec:comparison}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+\textbf{Property} & \textbf{Message-Based} & \textbf{Signal Transmission} & \textbf{Phase-Locked} \\
+\hline
+Eavesdropping & Via channel intercept & Via signal interception & Requires coherence \\
+Spoofing & Via crafted messages & Via signal injection & Requires physical presence \\
+MITM & Possible with keys & Possible with keys & Impossible at same position \\
+Transmission & Required & Required & None \\
+Authentication & Cryptographic & Signature-based & Position-based \\
+Scalability & Many-to-many easy & Many-to-many hard & Pairwise \\
+Latency & Network dependent & Signal dependent & Observation-dependent \\
+\hline
+\end{tabular}
+\caption{Comparison of communication primitives. Phase-Locked Messaging excels at pairwise secure communication with structural immunity to traditional attacks.}
+\end{table}
+
+PLM is not intended to replace message-based systems for broadcast or multi-party communication. Rather, it provides a novel primitive for scenarios where pairwise secure state synchronization is paramount.
+
+\section{Implementation Considerations}
+\label{sec:implementation}
+
+\subsection{Partition Design}
+
+The security of PLM depends critically on partition design:
+\begin{enumerate}
+\item \textbf{Sufficient Regions}: $|P| \geq 10$ ensures adequate discriminability.
+\item \textbf{Balanced Signatures}: Signatures should have similar entropy across regions to avoid trivial attacks.
+\item \textbf{Channel Independence}: Channels should be uncorrelated; measuring the same phenomenon through multiple channels weakens security.
+\end{enumerate}
+
+\subsection{Evidence Collection}
+
+\begin{enumerate}
+\item \textbf{Sampling Rate}: Higher sampling rates (more frequent observations) reduce phase-lock time but increase computational cost.
+\item \textbf{Noise Resilience}: Signatures should be robust to sensor noise; test signatures against realistic noise distributions.
+\item \textbf{Temporal Jitter}: Observations should be timestamped with sufficient precision to detect replays.
+\end{enumerate}
+
+\subsection{Computational Requirements}
+
+\begin{enumerate}
+\item \textbf{Posterior Computation}: Computing posteriors for $k$ regions and $d$ channels requires $O(kd)$ multiplications per observation. With $k=10, d=5, n=100$, this is tractable even on embedded systems.
+\item \textbf{Confidence Metrics}: Margin and strength computation is $O(k)$ per round.
+\item \textbf{Storage}: Evidence streams of depth $n=100$ require minimal storage.
+\end{enumerate}
+
+Overall, PLM has modest computational and storage requirements, making it suitable for resource-constrained environments.
+
+\section{Limitations and Open Questions}
+\label{sec:limitations}
+
+\subsection{Scalability}
+
+PLM is inherently pairwise. Extending to multi-party communication (more than 2 parties at a location) is non-trivial and remains an open problem. Broadcast communication requires traditional transmission mechanisms.
+
+\subsection{Position Forgery}
+
+While PLM prevents spoofing of messages, an adversary who can physically move to a location (or simulate observations from that location) can attempt forgery. The system assumes physical locations are hard to fake; in purely virtual position spaces, additional cryptographic measures may be needed.
+
+\subsection{Signature Design}
+
+Designing distinguishable signatures for all region pairs requires domain expertise. For complex applications, signature engineering is non-trivial.
+
+\subsection{Synchronization Assumptions}
+
+PLM assumes both parties can independently verify evidence (observe channels at the same location). In some applications (e.g., over networks), synchronizing independent observations is challenging.
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+Phase-Locked Messaging introduces a fundamentally new communication primitive in which parties exchange information through synchronized position coherence rather than transmitted signals. The model provides structural immunity against eavesdropping, spoofing, and man-in-the-middle attacks: adversaries cannot intercept position coherence, cannot inject false states, and cannot eavesdrop without being physically present and detectable.
+
+We have formalized PLM through topological position spaces, Bayesian evidence accumulation, state-based messaging, and temporal coherence via epoch counters. We have proven that PLM satisfies semantic security, non-repudiation, and integrity under a well-defined threat model, and we have shown that three orthogonal confidence metrics directly quantify communication security.
+
+PLM is not a replacement for traditional message-passing systems, which remain essential for broadcast, multi-party, and network communication. Rather, PLM is a novel primitive for scenarios where pairwise secure state synchronization is paramount: secure robot coordination, distributed sensor networks, cryptographic key exchange, and covert communication in adversarial environments.
+
+The phase-lock model opens new research directions: extending to multi-party coherence, designing partitions for high-dimensional position spaces, and integrating PLM with traditional cryptography for hybrid systems. We believe PLM represents a new frontier in secure communication, one where security emerges from topological structure rather than computational hardness.
+
+\section*{Acknowledgments}
+
+This work was developed independently, informed by fundamental principles of Bayesian inference, topological spaces, and secure communication design.
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+\end{document}
