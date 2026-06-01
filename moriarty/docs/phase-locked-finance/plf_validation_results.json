@@ -1,0 +1,4159 @@
+{
+  "atomic_settlement": {
+    "trials": [
+      {
+        "transfer_amount": 43.708610696262625,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 95.56428757689245,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 75.87945476302646,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 63.8792635777333,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 24.041677639819287,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 24.03950683025824,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 15.227525095137953,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 87.95585311974416,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 64.1003510568888,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 73.7265320016441,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 11.85260448662222,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 97.29188669457949,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 84.91983767203796,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 29.110519961044854,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 26.364247048639054,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 26.506405886809045,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 37.381801866358394,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 57.228078846901404,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 48.87505167779042,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 36.21062261782377,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 65.06676052501416,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 22.554447458683764,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 36.29301836816963,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 42.97256589643225,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 51.046298579533236,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 80.66583652537122,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 27.970640394252378,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 56.28109945722505,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 63.31731119758382,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 14.180537144799796,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 64.67903667112945,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 25.347171131856236,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 15.854643368675156,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 95.39969835279999,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 96.90688297671034,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 82.7557613304815,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 37.41523922560336,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 18.79049026057455,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 71.58097238609412,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 49.61372443656412,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 20.983441136030095,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 54.56592191001432,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 13.094966900369656,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 91.83883618709038,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 33.290198344001524,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 69.62700559185838,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 38.053996848046985,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 56.80612190600297,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 59.203925140895166,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 26.636900997297435,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 97.26261649881027,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 79.76195410250031,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 94.55490474077702,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 90.5344615384884,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 63.810998092997664,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 92.96868115208052,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 17.964325184672756,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 27.638457617723066,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 14.070456001948425,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 39.27972976869379,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 44.98095607205338,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 34.42141285965063,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 84.58637582367363,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 42.10779940242303,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 35.28410587186427,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 58.84264748424236,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 22.683180247728636,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 82.19772826786357,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 16.709557931179376,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 98.81982429404655,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 79.50202923669917,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 27.884411338075516,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 10.496990541124216,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 83.39152856093507,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 73.61716094628554,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 75.61064512368885,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 79.41433120173512,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 16.664018656068134,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 42.261915568984534,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 20.428215357261674,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 87.67930832880342,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 66.09683141448022,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 39.78082223673843,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 15.720251525742128,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 37.9884089544096,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 39.266498982407235,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 75.66455605042577,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 67.38017242196918,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 89.84914683186939,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 52.49934326457544,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 20.763482134447152,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 74.19203085006956,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 78.47065437552077,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 60.51494778125466,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 79.38704619591049,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 54.44160367279517,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 57.045954644379464,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 48.47869165226947,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 12.287721406968567,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      },
+      {
+        "transfer_amount": 19.7102284293974,
+        "balance_conservation": true,
+        "nonce_monotonicity": true,
+        "atomic": true
+      }
+    ],
+    "summary": {
+      "atomic_rate": 1.0,
+      "conservation_rate": 1.0,
+      "nonce_monotonicity_rate": 1.0
+    }
+  },
+  "irreversibility": {
+    "trials": [
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      },
+      {
+        "nonce_sequence": [
+          5,
+          6,
+          7
+        ],
+        "can_revert_to_prior": false,
+        "irreversible": true
+      }
+    ],
+    "summary": {
+      "irreversibility_rate": 1.0,
+      "revert_impossible_rate": 1.0
+    }
+  },
+  "double_spend_prevention": {
+    "trials": [
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      },
+      {
+        "original_nonce": 10,
+        "current_nonce": 11,
+        "replay_nonce": 10,
+        "replay_detected": true
+      }
+    ],
+    "summary": {
+      "double_spend_prevention_rate": 1.0,
+      "total_trials": 100
+    }
+  },
+  "complement_forging": {
+    "trials": [
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      },
+      {
+        "involution_holds": true,
+        "forged_involution_valid": true,
+        "forgery_detectable": false
+      }
+    ],
+    "summary": {
+      "involution_rate": 1.0,
+      "forgery_detection_rate": 0.0
+    }
+  },
+  "instantaneous_finality": {
+    "trials": [
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1083.222620236339,
+        "banking_finality_ms": 172382809.60054702,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 915.993369697773,
+        "banking_finality_ms": 206682040.93264794,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 905.56457505746,
+        "banking_finality_ms": 158464504.90988338,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1196.9365159780475,
+        "banking_finality_ms": 111912265.93292218,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 955.6367875439164,
+        "banking_finality_ms": 239477130.9058741,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1012.3290247086688,
+        "banking_finality_ms": 238623546.0824476,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 801.8008322128036,
+        "banking_finality_ms": 133400386.29776934,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1110.763432141263,
+        "banking_finality_ms": 154502998.76484758,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1025.8093938343868,
+        "banking_finality_ms": 111930954.34995894,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1053.5028752260048,
+        "banking_finality_ms": 181264201.75149745,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 761.1669839462766,
+        "banking_finality_ms": 171850284.9720988,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1018.1661755038222,
+        "banking_finality_ms": 88453971.44882789,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 982.4802352884776,
+        "banking_finality_ms": 179986886.4856218,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 732.1717006480395,
+        "banking_finality_ms": 216515129.5830868,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 782.0765907799207,
+        "banking_finality_ms": 134241568.9712464,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 882.7310093995936,
+        "banking_finality_ms": 203238664.43138462,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1157.3075855257525,
+        "banking_finality_ms": 110826531.61322756,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 837.8808724510402,
+        "banking_finality_ms": 97975801.58618245,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1055.1304484830455,
+        "banking_finality_ms": 163768243.33693913,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1024.157481112911,
+        "banking_finality_ms": 142075196.46310246,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1106.5903448437941,
+        "banking_finality_ms": 178818291.91989183,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1166.164693094193,
+        "banking_finality_ms": 100019169.6440891,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 908.5660947252446,
+        "banking_finality_ms": 218843466.50840235,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 960.0915888441689,
+        "banking_finality_ms": 90407947.46575843,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1183.4032070063286,
+        "banking_finality_ms": 137939966.16351524,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 749.5667198198292,
+        "banking_finality_ms": 170322026.50481695,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 925.2948645140093,
+        "banking_finality_ms": 218814590.17552182,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 835.9641945953935,
+        "banking_finality_ms": 162425153.05267027,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 920.9759495602987,
+        "banking_finality_ms": 154550090.83535552,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1148.7288474606935,
+        "banking_finality_ms": 233496339.83439878,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 872.984217046727,
+        "banking_finality_ms": 86433672.2118884,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1140.5606973175684,
+        "banking_finality_ms": 107885359.8903396,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 746.7074491164277,
+        "banking_finality_ms": 112728029.93834081,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 707.8893419886142,
+        "banking_finality_ms": 225137238.54736343,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 947.7008649995546,
+        "banking_finality_ms": 251613244.18806022,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 738.8721073942299,
+        "banking_finality_ms": 170317712.12507725,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1186.457021449482,
+        "banking_finality_ms": 229209439.2666802,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1037.1694074722946,
+        "banking_finality_ms": 119054914.79687285,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1061.6432405458297,
+        "banking_finality_ms": 146459253.1845746,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 918.3221382280547,
+        "banking_finality_ms": 191663057.61323255,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 965.6182269145525,
+        "banking_finality_ms": 211943255.94665563,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 997.0212555853234,
+        "banking_finality_ms": 98214487.94486992,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 874.4082155694643,
+        "banking_finality_ms": 201142933.6412124,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 777.5957892994372,
+        "banking_finality_ms": 140496195.55099213,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 674.7405286527693,
+        "banking_finality_ms": 158736669.576455,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1192.0982605837048,
+        "banking_finality_ms": 135703185.63057286,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 918.8621356116589,
+        "banking_finality_ms": 214831397.28022578,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 608.0983625305624,
+        "banking_finality_ms": 241995955.89858606,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 831.9301108349631,
+        "banking_finality_ms": 236583242.50365773,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 623.3685953396869,
+        "banking_finality_ms": 111570661.7620432,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 793.5176726865355,
+        "banking_finality_ms": 146095794.38533455,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1108.67653381681,
+        "banking_finality_ms": 88335552.73908705,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 984.6670658818077,
+        "banking_finality_ms": 109090788.97165349,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1093.9293904266297,
+        "banking_finality_ms": 220937460.35752726,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 899.9526164467204,
+        "banking_finality_ms": 123152352.56853843,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 980.6972345793338,
+        "banking_finality_ms": 113401437.29124117,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 714.0142755555921,
+        "banking_finality_ms": 194692015.1045418,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1194.7370676531746,
+        "banking_finality_ms": 240375312.67723998,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 955.8644146102063,
+        "banking_finality_ms": 179459153.64301082,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1199.030928004865,
+        "banking_finality_ms": 180990227.11113682,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 852.0699131756663,
+        "banking_finality_ms": 243571196.581979,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 740.5105775215729,
+        "banking_finality_ms": 103252491.12328859,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 980.4540206170982,
+        "banking_finality_ms": 102962816.71523982,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 823.8891221717761,
+        "banking_finality_ms": 159594172.2285213,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 928.52284022954,
+        "banking_finality_ms": 257758769.5052479,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 732.5890339999085,
+        "banking_finality_ms": 151330702.2059944,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 679.3440746463948,
+        "banking_finality_ms": 191395617.29854298,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1036.6039093847,
+        "banking_finality_ms": 169702875.05515987,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 747.4987609739826,
+        "banking_finality_ms": 193689492.91460598,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 923.4946340213097,
+        "banking_finality_ms": 115980893.00416243,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 843.4091403012782,
+        "banking_finality_ms": 161602057.43456167,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1189.5706522628598,
+        "banking_finality_ms": 233156591.79647416,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1040.6224729641563,
+        "banking_finality_ms": 239980670.0069093,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1041.290643497229,
+        "banking_finality_ms": 242507840.56572673,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 632.7318689277048,
+        "banking_finality_ms": 165208240.96132317,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1048.1390011451,
+        "banking_finality_ms": 187193513.65421033,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 705.0996984904721,
+        "banking_finality_ms": 145237032.5521307,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 790.6646250160147,
+        "banking_finality_ms": 131560746.59825327,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 805.8813321083796,
+        "banking_finality_ms": 175366648.2460817,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1112.9214148699657,
+        "banking_finality_ms": 214623244.0616411,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1101.1498224097402,
+        "banking_finality_ms": 239086727.0605013,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 849.6902736585644,
+        "banking_finality_ms": 146193341.8798219,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 634.574029010497,
+        "banking_finality_ms": 247188952.26024786,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 639.4938107628864,
+        "banking_finality_ms": 214468217.05601728,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 826.8649826793524,
+        "banking_finality_ms": 250349317.83345938,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 851.7612125604774,
+        "banking_finality_ms": 227509923.114095,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 769.592899298206,
+        "banking_finality_ms": 138082530.3397367,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 957.3116459270605,
+        "banking_finality_ms": 258851399.10465145,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 910.5434507875177,
+        "banking_finality_ms": 248194132.36876062,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1071.7498969492367,
+        "banking_finality_ms": 223925353.4898262,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 861.5759934772584,
+        "banking_finality_ms": 153194500.82985994,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 715.1530848544892,
+        "banking_finality_ms": 252969050.93477532,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1175.6361674662921,
+        "banking_finality_ms": 215493304.48879957,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 777.7514699116017,
+        "banking_finality_ms": 128767024.57114637,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1193.166145432178,
+        "banking_finality_ms": 97898598.45069307,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1106.1385752847855,
+        "banking_finality_ms": 147823142.48337162,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 851.3218318363323,
+        "banking_finality_ms": 230165737.70379907,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 654.3618096032149,
+        "banking_finality_ms": 147600520.44830042,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1171.2145663017438,
+        "banking_finality_ms": 207198589.7268731,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      },
+      {
+        "plf_finality_ms": 0.001,
+        "blockchain_finality_ms": 1052.9634988835342,
+        "banking_finality_ms": 217296916.00510633,
+        "plf_faster_than_blockchain": true,
+        "plf_faster_than_banking": true
+      }
+    ],
+    "summary": {
+      "mean_plf_finality_ms": 0.0010000000000000002,
+      "mean_blockchain_finality_ms": 927.7463308380215,
+      "mean_banking_finality_ms": 174493930.55531445,
+      "speedup_vs_blockchain": 927746.3308380215,
+      "speedup_vs_banking": 174493930555.31442
+    }
+  },
+  "perfect_privacy": {
+    "trials": [
+      {
+        "transfer_amount": 69.96438233230508,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 211.17551732782684,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 496.35062352039967,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 374.4687301506214,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 416.80317020152495,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 783.6329048394159,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 24.532442717057922,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 663.8870070580264,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 10.109129483804233,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 72.42794032048126,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 414.20325863924774,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 842.5390346067733,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 153.54580790881587,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 559.0751950373254,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 681.7201745584767,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 237.23755533043894,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 517.2069527168871,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 912.2932103068104,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 517.1062401118775,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 165.7498311697715,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 631.5361537206693,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 596.2781782084289,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 36.685212200149905,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 99.68846169009095,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 165.21354158960065,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 144.9261867862512,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 266.87111285532376,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 459.5642700032123,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 377.99913491999456,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 891.743392490551,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 615.9883153122737,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 877.3829064622247,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 531.7689316684229,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 98.97176598244656,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 468.6545745757705,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 823.8122213739413,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 202.16272949543702,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 100.30213596512326,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 336.1403909548775,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 395.0088523337382,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 313.19509964184533,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 143.88837776831042,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 258.33146112449737,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 685.4595805560892,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 392.0692311302323,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 636.2239501723702,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 540.9407421195451,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 553.5624104590923,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 256.064062368318,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 526.3276024404997,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 33.35876672456976,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 437.42630490167693,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 576.896594958016,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 190.1756651405682,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 263.9929211864619,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 227.3357096174632,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 79.85237571276994,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 354.37874792868917,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 979.17610878742,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 360.341602398974,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 465.93125561860586,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 656.5563784468114,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 652.012773657416,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 950.3960302184379,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 858.9884989951339,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 796.0111802341007,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 952.1109535205275,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 238.4577316283399,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 620.8836526755746,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 888.3247990549347,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 627.8967766953208,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 977.6462698608009,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 109.34918676731522,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 444.9371977652683,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 977.5892788295498,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 385.7723482842265,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 742.1608113483113,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 40.098872067862686,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 697.88874348401,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 935.2804652023027,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 388.8792223381027,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 31.086839547660173,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 37.630706351529014,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 893.1030726539781,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 725.2909460252991,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 115.61952038431403,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 64.0443742806846,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 806.7771099793246,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 811.7620264773054,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 129.3166213941285,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 308.5051998497504,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 782.2258039281506,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 530.1579502444663,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 957.0190121180464,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 486.2520188925449,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 680.1883581898575,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 514.6855320841684,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 943.5358407281952,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 404.67250114693275,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      },
+      {
+        "transfer_amount": 237.49849062681403,
+        "has_external_record": false,
+        "has_ledger_entry": false,
+        "transaction_broadcast": false,
+        "privacy_perfect": true,
+        "third_party_visibility": false
+      }
+    ],
+    "summary": {
+      "perfect_privacy_rate": 1.0,
+      "third_party_unaware_rate": 1.0
+    }
+  },
+  "metadata": {
+    "timestamp": "2026-06-01T06:10:42.972371",
+    "total_trials": "100\u00d76 = 600",
+    "theorems_validated": 6
+  }
+}

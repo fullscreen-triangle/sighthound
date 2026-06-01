@@ -1,0 +1,23 @@
+\begin{thebibliography}{1}
+
+\bibitem{kurose2012computer}
+James~F Kurose and Keith~W Ross.
+\newblock {\em Computer networking}.
+\newblock Pearson, 6th edition, 2012.
+
+\bibitem{stockhausen2016http}
+Jürgen Stockhausen et~al.
+\newblock Http adaptive streaming.
+\newblock {\em White paper, Bitmovin}, 2016.
+
+\bibitem{khan2012peer}
+Shahzad Khan, Jose Duran, et~al.
+\newblock Peer-to-peer media streaming.
+\newblock {\em IEEE Communications Surveys \& Tutorials}, 14(2):446--466, 2012.
+
+\bibitem{strang1998terrestrial}
+Julius Strang et~al.
+\newblock Terrestrial digital broadcasting.
+\newblock {\em IEEE Transactions on Broadcasting}, 44(2):123--140, 1998.
+
+\end{thebibliography}

@@ -1,0 +1,104 @@
+\begin{thebibliography}{10}
+
+\bibitem{saltzer1975protection}
+Jerome~H Saltzer and Michael~D Schroeder.
+\newblock {\em The protection of information in computer systems}, volume~63.
+\newblock IEEE, 1975.
+
+\bibitem{diffie1976new}
+Whitfield Diffie and Martin~E Hellman.
+\newblock New directions in cryptography.
+\newblock {\em IEEE Transactions on Information Theory}, 22(6):644--654, 1976.
+
+\bibitem{rsa1978method}
+Ronald~L Rivest, Adi Shamir, and Leonard~M Adleman.
+\newblock A method for obtaining digital signatures and public-key
+  cryptosystems.
+\newblock {\em Communications of the ACM}, 21(2):120--126, 1978.
+
+\bibitem{goldwasser1984probabilistic}
+Shafi Goldwasser and Silvio Micali.
+\newblock Probabilistic encryption and how to play mental poker keeping secret
+  all partial information.
+\newblock {\em Proceedings of the fourteenth annual ACM symposium on Theory of
+  computing}, pages 365--377, 1982.
+
+\bibitem{schneier1996applied}
+Bruce Schneier.
+\newblock {\em Applied cryptography: protocols, algorithms, and source code in
+  C}.
+\newblock John Wiley \& Sons, 1996.
+
+\bibitem{goldreich2001foundations}
+Oded Goldreich.
+\newblock {\em Foundations of cryptography: Volume 1, basic tools}.
+\newblock Cambridge University Press, 2001.
+
+\bibitem{katz2014introduction}
+Jonathan Katz and Yehuda Lindell.
+\newblock {\em Introduction to modern cryptography}.
+\newblock CRC Press, 2014.
+
+\bibitem{dolev1983security}
+Danny Dolev and Andrew~C Yao.
+\newblock On the security of public key protocols.
+\newblock {\em IEEE Transactions on Information Theory}, 29(2):198--208, 1983.
+
+\bibitem{munkres2000topology}
+James~R Munkres.
+\newblock {\em Topology}.
+\newblock Prentice Hall, 2nd edition, 2000.
+
+\bibitem{hatcher2002algebraic}
+Allen Hatcher.
+\newblock {\em Algebraic topology}.
+\newblock Cambridge University Press, 2002.
+
+\bibitem{gelman2013bayesian}
+Andrew Gelman, John~B Carlin, Hal~S Stern, David~B Dunson, Aki Vehtari, and
+  Donald~B Rubin.
+\newblock {\em Bayesian data analysis}.
+\newblock CRC Press, 3rd edition, 2013.
+
+\bibitem{jaynes2003probability}
+Edwin~T Jaynes.
+\newblock {\em Probability theory: the logic of science}.
+\newblock Cambridge University Press, 2003.
+
+\bibitem{kullback1951information}
+Solomon Kullback and Richard~A Leibler.
+\newblock On information and sufficiency.
+\newblock {\em Annals of Mathematical Statistics}, 22(1):79--86, 1951.
+
+\bibitem{cover1991elements}
+Thomas~M Cover and Joy~A Thomas.
+\newblock {\em Elements of information theory}.
+\newblock Wiley-Interscience, 1991.
+
+\bibitem{lamport1978time}
+Leslie Lamport.
+\newblock Time, clocks, and the ordering of events in a distributed system.
+\newblock {\em Communications of the ACM}, 21(7):558--565, 1978.
+
+\bibitem{shannon1948mathematical}
+Claude~E Shannon.
+\newblock {\em A mathematical theory of communication}, volume~27.
+\newblock 1948.
+
+\bibitem{barg2004handbook}
+Alexander Barg.
+\newblock Handbook of coding theory.
+\newblock 1998.
+
+\bibitem{neyman1933problem}
+Jerzy Neyman and Egon~S Pearson.
+\newblock On the problem of the most efficient tests of statistical hypotheses.
+\newblock {\em Philosophical Transactions of the Royal Society A},
+  231:289--337, 1933.
+
+\bibitem{lehmann1997testing}
+Erich~L Lehmann and Joseph~P Romano.
+\newblock {\em Testing statistical hypotheses}.
+\newblock Springer Science+Business Media, 2nd edition, 1997.
+
+\end{thebibliography}

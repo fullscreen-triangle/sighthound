@@ -1,0 +1,52 @@
+This is BibTeX, Version 0.99e
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: phase-locked-messaging-extended.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: unsrt.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Database file #1: references.bib
+Warning--can't use both volume and number fields in saltzer1975protection
+Warning--empty publisher in shannon1948mathematical
+Warning--empty journal in barg2004handbook
+You've used 19 entries,
+            1791 wiz_defined-function locations,
+            553 strings with 5877 characters,
+and the built_in function-call counts, 3693 in all, are:
+= -- 331
+> -- 135
+< -- 3
++ -- 54
+- -- 35
+* -- 200
+:= -- 581
+add.period$ -- 57
+call.type$ -- 19
+change.case$ -- 11
+chr.to.int$ -- 0
+cite$ -- 22
+duplicate$ -- 190
+empty$ -- 394
+format.name$ -- 35
+if$ -- 836
+int.to.chr$ -- 0
+int.to.str$ -- 19
+missing$ -- 30
+newline$ -- 98
+num.names$ -- 19
+pop$ -- 86
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 68
+stack$ -- 0
+substring$ -- 176
+swap$ -- 30
+text.length$ -- 3
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 3
+while$ -- 34
+width$ -- 21
+write$ -- 202
+(There were 3 warnings)
