@@ -1,0 +1,41 @@
+# Tutorial Level 2: Compute S-Entropy at Each Position
+# Beginner-Intermediate - Calculate partition state from geographic coordinates
+
+# Load trajectory data
+load geojson from "user_trajectory.geojson"
+
+# Initialize atmospheric model
+atmosphere initialize model="standard"
+
+# For each position in the trajectory, compute local S-entropy
+for each point in trajectory:
+    latitude = point.lat
+    longitude = point.lon
+    altitude = point.elevation
+
+    # Compute atmospheric state at this location
+    atmosphere compute at latitude longitude altitude
+
+    # Extract S-entropy coordinates
+    entropy get Sk St Se
+
+    # Store result
+    entropy store point.id
+end
+
+# Display entropy results for first 10 points
+show entropy for first 10 points
+
+# Visualize entropy distribution
+entropy plot histogram Sk
+entropy plot histogram St
+entropy plot histogram Se
+
+# Statistical summary
+entropy summary mean variance min max
+
+# Export entropy data
+entropy export to "computed_entropy.csv"
+
+# Optional: Compare entropy variation along trajectory
+entropy show variation over time

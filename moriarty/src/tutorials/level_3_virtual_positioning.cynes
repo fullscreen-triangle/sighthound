@@ -1,0 +1,58 @@
+# Tutorial Level 3: Virtual Satellite Positioning
+# Intermediate - Derive and use virtual satellite constellation
+
+# Load trajectory
+load geojson from "user_trajectory.geojson"
+
+# Derive virtual satellite constellation from Earth partition
+satellite derive from Earth partition
+
+# Create N virtual satellites at standard GPS altitude
+satellite create count=1000 altitude=26560km
+
+# For each trajectory point, compute position using virtual satellites
+for each point in trajectory:
+    # Get measured S-entropy at this point
+    entropy local = point.entropy
+
+    # Query atmospheric state at each virtual satellite
+    for each satellite in constellation:
+        satellite position at point.timestamp
+        atmosphere state at satellite.position
+        entropy satellite = atmosphere.entropy
+
+        # Compute categorical distance
+        distance = entropy.distance(local, satellite)
+    end
+
+    # Select k nearest satellites by categorical distance
+    satellites nearest = select nearest 50 satellites
+
+    # Resolve position through triangulation
+    position estimated = triangulate with satellites.nearest
+
+    # Compare with actual position
+    error horizontal = distance(estimated, point.actual)
+    error vertical = altitude_difference(estimated, point.actual)
+
+    # Store results
+    results store point.id estimated error.horizontal error.vertical
+end
+
+# Display positioning results
+show results for all points
+
+# Compute accuracy statistics
+accuracy mean_horizontal = results.mean_error_horizontal
+accuracy std_horizontal = results.std_error_horizontal
+accuracy max_horizontal = results.max_error_horizontal
+
+# Visualize error distribution
+show error histogram
+
+# Validate against ground truth
+validate position against point.actual
+validate accuracy target=1cm tolerance=0.2cm
+
+# Export positioning results
+export results to "positioning_results.csv"

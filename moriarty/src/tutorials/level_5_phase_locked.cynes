@@ -1,0 +1,136 @@
+# Tutorial Level 5: Phase-Locked Positioning and Coherence
+# Advanced - Establish coherence between two trajectories and validate synchronization
+
+# Load two simultaneous trajectories (two devices at different locations)
+load geojson from "device_a_trajectory.geojson" as device_a with_timestamps=true
+load geojson from "device_b_trajectory.geojson" as device_b with_timestamps=true
+
+# Verify timestamps are synchronized
+sync validate device_a device_b tolerance=1ms
+
+# Initialize positioning model
+satellite derive from Earth partition
+satellite create count=10000 altitude=26560km
+
+# Phase 1: Individual positioning (establish baseline)
+for each (point_a, point_b) in zip(device_a, device_b):
+    # Compute positions independently
+    entropy_a = atmosphere.compute_at(point_a.lat point_a.lon point_a.alt)
+    entropy_b = atmosphere.compute_at(point_b.lat point_b.lon point_b.alt)
+
+    position_a = triangulate_position(entropy_a)
+    position_b = triangulate_position(entropy_b)
+
+    # Store baseline positions
+    baseline store device_a point_a.index position_a
+    baseline store device_b point_b.index position_b
+end
+
+# Phase 2: Establish coherence between devices
+coherence establish device_a device_b
+coherence set measurement_interval=1ms
+coherence set position_space Omega_discrete 9 regions
+
+# Phase 3: Validate phase-lock convergence
+convergence_count = 0
+for epoch in 0 to 100:
+    # Measure entropy at both devices
+    entropy_a = atmosphere.compute_at(device_a[epoch])
+    entropy_b = atmosphere.compute_at(device_b[epoch])
+
+    # Compute entropy difference (coherence metric)
+    entropy_delta = entropy.distance(entropy_a, entropy_b)
+
+    # Phase lock achieved when delta < threshold
+    if entropy_delta < 0.01:
+        convergence_count = convergence_count + 1
+    end
+
+    coherence log epoch entropy_delta convergence_status
+end
+
+# Check phase-lock convergence rate
+convergence_rate = convergence_count / 100
+show phase_lock convergence_rate
+validate convergence_rate target=0.95 tolerance=0.05
+
+# Phase 4: Synchronized position updates
+show phase_locked_synchronization begins
+
+for epoch in 100 to end:
+    point_a = device_a[epoch]
+    point_b = device_b[epoch]
+
+    # Both devices measure entropy at their locations
+    entropy_a = atmosphere.compute_at(point_a.lat point_a.lon point_a.alt)
+    entropy_b = atmosphere.compute_at(point_b.lat point_b.lon point_b.alt)
+
+    # Phase-locked resolution: both resolve simultaneously
+    position_a_coherent = coherence.resolve(entropy_a)
+    position_b_coherent = coherence.resolve(entropy_b)
+
+    # Verify coherence property: observe state change simultaneously
+    state_change_a = position_a_coherent - position_previous_a
+    state_change_b = position_b_coherent - position_previous_b
+
+    # Measure synchronization lag (should be ~0)
+    sync_lag = measure_observation_simultaneity(state_change_a state_change_b)
+
+    # Store results
+    coherent store epoch position_a_coherent position_b_coherent sync_lag
+
+    # Validate: both devices see same state change magnitude
+    magnitude_a = norm(state_change_a)
+    magnitude_b = norm(state_change_b)
+    coherence_quality = 1.0 - abs(magnitude_a - magnitude_b) / (magnitude_a + magnitude_b)
+
+    validate coherence_quality target=0.99 tolerance=0.01
+end
+
+# Phase 5: Compare coherent vs non-coherent positioning
+show comparison coherent vs independent
+
+for epoch in 0 to end:
+    # Independent: each device resolves position separately
+    pos_a_independent = baseline[epoch].position_a
+    pos_b_independent = baseline[epoch].position_b
+
+    # Coherent: devices synchronized through phase-lock
+    pos_a_coherent = coherent[epoch].position_a
+    pos_b_coherent = coherent[epoch].position_b
+
+    # Actual positions from ground truth
+    actual_a = device_a[epoch].actual
+    actual_b = device_b[epoch].actual
+
+    # Compute errors
+    error_a_independent = distance(pos_a_independent, actual_a)
+    error_a_coherent = distance(pos_a_coherent, actual_a)
+    error_b_independent = distance(pos_b_independent, actual_b)
+    error_b_coherent = distance(pos_b_coherent, actual_b)
+
+    # Store comparison
+    comparison store epoch error_a_independent error_a_coherent error_b_independent error_b_coherent
+end
+
+# Summary statistics
+show accuracy comparison
+show mean_error independent vs coherent
+show std_error independent vs coherent
+show improvement_factor = error.independent / error.coherent
+
+# Validate improvement
+validate improvement_factor target=2.0 tolerance=0.5
+
+# Export all results
+export baseline to "baseline_positions.csv"
+export coherent to "coherent_positions.csv"
+export comparison to "coherent_vs_independent.csv"
+
+# Visualization
+show plot trajectory actual device_a device_b
+show plot error_timeline independent vs coherent
+show plot coherence_metric convergence
+
+# Final validation
+validate phase_locked_positioning success=true

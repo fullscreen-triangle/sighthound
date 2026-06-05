@@ -1,0 +1,324 @@
+{
+  "type": "FeatureCollection",
+  "properties": {
+    "name": "Two Synchronized Device Trajectories",
+    "description": "Two devices tracking same path simultaneously for phase-lock validation",
+    "device_a": "smartphone_1",
+    "device_b": "smartwatch_1",
+    "start_time": "2025-03-14T10:00:00Z",
+    "end_time": "2025-03-14T10:10:00Z",
+    "total_points": 11,
+    "sampling_rate_hz": 1.0,
+    "sync_tolerance_ms": 50
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_1",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:00:00Z",
+        "elevation": 520,
+        "gps_accuracy": 2.3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.357, 48.183, 520]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_1_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:00:00.025Z",
+        "elevation": 520,
+        "gps_accuracy": 2.4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.357, 48.183, 520]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_2",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:01:00Z",
+        "elevation": 522,
+        "gps_accuracy": 2.5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.360, 48.187, 522]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_2_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:01:00.020Z",
+        "elevation": 522,
+        "gps_accuracy": 2.3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.360, 48.187, 522]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_3",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:02:00Z",
+        "elevation": 525,
+        "gps_accuracy": 2.4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.362, 48.190, 525]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_3_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:02:00.015Z",
+        "elevation": 525,
+        "gps_accuracy": 2.5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.362, 48.190, 525]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_4",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:03:00Z",
+        "elevation": 528,
+        "gps_accuracy": 2.3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.365, 48.192, 528]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_4_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:03:00.030Z",
+        "elevation": 528,
+        "gps_accuracy": 2.4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.365, 48.192, 528]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_5",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:04:00Z",
+        "elevation": 530,
+        "gps_accuracy": 2.5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.370, 48.195, 530]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_5_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:04:00.025Z",
+        "elevation": 530,
+        "gps_accuracy": 2.3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.370, 48.195, 530]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_6",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:05:00Z",
+        "elevation": 532,
+        "gps_accuracy": 2.4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.372, 48.200, 532]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_6_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:05:00.020Z",
+        "elevation": 532,
+        "gps_accuracy": 2.5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.372, 48.200, 532]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_7",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:06:00Z",
+        "elevation": 535,
+        "gps_accuracy": 2.3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.375, 48.202, 535]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_7_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:06:00.025Z",
+        "elevation": 535,
+        "gps_accuracy": 2.4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.375, 48.202, 535]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_8",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:07:00Z",
+        "elevation": 538,
+        "gps_accuracy": 2.5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.377, 48.205, 538]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_8_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:07:00.015Z",
+        "elevation": 538,
+        "gps_accuracy": 2.3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.377, 48.205, 538]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_9",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:08:00Z",
+        "elevation": 540,
+        "gps_accuracy": 2.4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.380, 48.207, 540]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_9_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:08:00.020Z",
+        "elevation": 540,
+        "gps_accuracy": 2.5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.380, 48.207, 540]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_10",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:09:00Z",
+        "elevation": 542,
+        "gps_accuracy": 2.3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.382, 48.210, 542]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_10_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:09:00.030Z",
+        "elevation": 542,
+        "gps_accuracy": 2.4
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.382, 48.210, 542]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_11",
+        "device": "device_a",
+        "timestamp": "2025-03-14T10:10:00Z",
+        "elevation": 545,
+        "gps_accuracy": 2.5
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.385, 48.212, 545]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sync_11_b",
+        "device": "device_b",
+        "timestamp": "2025-03-14T10:10:00.025Z",
+        "elevation": 545,
+        "gps_accuracy": 2.3
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [11.385, 48.212, 545]
+      }
+    }
+  ]
+}

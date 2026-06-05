@@ -1,0 +1,84 @@
+# Tutorial Level 4: Dynamic Tracking with Time Series
+# Intermediate-Advanced - Real-time position tracking with velocity estimation
+
+# Load trajectory with timestamps
+load geojson from "user_trajectory.geojson" with_timestamps=true
+
+# Initialize tracking filter (Kalman-like state estimation)
+tracker initialize state=(x, y, z, vx, vy, vz)
+
+# Initialize virtual constellation
+satellite derive from Earth partition
+satellite create count=5000 altitude=26560km
+
+# Process trajectory as streaming data
+for each point in trajectory with_index=i:
+    timestamp = point.timestamp
+    epoch_number = i
+
+    # Compute local S-entropy at this timestamp
+    atmosphere compute at point.lat point.lon point.altitude
+    entropy local = atmosphere.entropy_state
+
+    # Find nearest satellites (use spatial index for speed)
+    satellites nearest = select nearest 100 satellites by categorical_distance
+
+    # Resolve position with uncertainty
+    position resolved = triangulate satellites.nearest entropy.local
+    uncertainty sigma = estimate_covariance(satellites.nearest)
+
+    # Update tracking state with prediction-update cycle
+    tracker predict timestamp epoch_number
+    tracker update position.resolved uncertainty.sigma
+
+    # Estimate velocity from position change
+    if i > 0:
+        velocity estimated = (position.resolved - position.previous) / delta_time
+        tracker velocity = velocity.estimated
+    end
+
+    # Extract state estimates
+    state estimated = tracker.get_state()
+    state covariance = tracker.get_covariance()
+
+    # Compute residual (difference from known position)
+    residual = state.estimated - point.actual
+    residual_normalized = residual / sqrt(state.covariance)
+
+    # Detect anomalies (position jumps > 3 sigma)
+    if abs(residual_normalized) > 3:
+        show anomaly detected at timestamp residual
+    end
+
+    # Store tracking results
+    tracking store epoch=i timestamp state.estimated velocity.estimated residual
+
+    # Print progress every 10 points
+    if modulo(i, 10) == 0:
+        show progress: processed i points
+    end
+end
+
+# Analyze tracking performance
+tracking analyze rmse horizontal vertical
+tracking analyze velocity statistics mean std max
+tracking analyze residual distribution percentile_95
+
+# Visualize tracking results
+show trajectory actual vs estimated
+show error timeline
+show velocity profile
+
+# High-frequency analysis (if data supports 1 kHz)
+if tracking.update_rate >= 1000 Hz:
+    show high_frequency analysis enabled
+    tracking spectrum compute
+    show spectral content
+end
+
+# Export complete tracking results
+export tracking to "tracking_results.csv" with_columns=(timestamp, x, y, z, vx, vy, vz, residual)
+
+# Summary statistics
+show summary mean_error std_error max_error
+show summary mean_velocity velocity_range acceleration_range

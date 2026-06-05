@@ -1,0 +1,23 @@
+# Tutorial Level 1: Load KML/GeoJSON and Display Points
+# Beginner - Understand the data format and basic position display
+
+# Load geographic data from file
+# Supported formats: KML, GeoJSON
+load geojson from "user_trajectory.geojson"
+
+# Display loaded points
+show all points
+
+# Count total positions in file
+count positions
+
+# Extract metadata
+show metadata
+
+# Display first 5 points with coordinates
+show first 5 points with coordinates
+
+# For KML files, use:
+# load kml from "flight_path.kml"
+# show all waypoints
+# count waypoints
