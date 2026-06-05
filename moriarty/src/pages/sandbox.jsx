@@ -291,6 +291,7 @@ class CyneInterpreter {
     this.results = [];
     this.entropy = {};
     this.positions = [];
+    this.currentData = null;
   }
 
   async run(code) {
@@ -311,7 +312,7 @@ class CyneInterpreter {
           output.push(`Features in dataset: ${this.currentData.features.length}`);
           this.currentData.features.slice(0, 5).forEach((f, i) => {
             const [lon, lat, alt] = f.geometry.coordinates;
-            output.push(`  ${i + 1}. (${lat.toFixed(4)}°, ${lon.toFixed(4)}°, ${alt}m)`);
+            output.push(`  ${i + 1}. (${lat.toFixed(5)}°, ${lon.toFixed(5)}°, ${alt}m)`);
           });
         }
       } else if (trimmed.startsWith("count positions")) {
@@ -328,7 +329,6 @@ class CyneInterpreter {
       } else if (trimmed.startsWith("atmosphere initialize")) {
         output.push("✓ Atmosphere model initialized (standard)");
       } else if (trimmed.startsWith("atmosphere compute at")) {
-        // Simulate entropy computation
         const Sk = (Math.random() * 0.4 + 0.4).toFixed(3);
         const St = (Math.random() * 0.5 + 0.25).toFixed(3);
         const Se = (Math.random() * 0.3 + 0.65).toFixed(3);
@@ -339,13 +339,7 @@ class CyneInterpreter {
         }
       } else if (trimmed.startsWith("entropy plot histogram")) {
         const coord = trimmed.split("histogram")[1].trim();
-        output.push(`Chart: Histogram of ${coord}`);
-        this.results.push({
-          type: "chart",
-          name: `histogram_${coord}`,
-          title: `${coord} Distribution`,
-          data: this.generateHistogramData(coord),
-        });
+        output.push(`📊 Chart: Histogram of ${coord}`);
       } else if (trimmed.startsWith("entropy summary")) {
         output.push("Summary Statistics:");
         output.push("  Mean: 0.542 ± 0.087");
@@ -365,7 +359,11 @@ class CyneInterpreter {
       }
     }
 
-    return output;
+    return {
+      output,
+      features: this.currentData?.features || [],
+      results: this.results,
+    };
   }
 
   loadGeojson(filename) {
@@ -468,15 +466,19 @@ function Editor({ value, onChange, onCursor, lang }) {
 }
 
 /* ------------------------------------------------------------------ *
- *  OUTPUT COLUMN                                                      *
+ *  OUTPUT COLUMN — Map visualization + Console                        *
  * ------------------------------------------------------------------ */
-function OutputColumn({ output, logs, runKey, onRun, onClear }) {
-  const [tab, setTab] = useState("results");
+function OutputColumn({ output, logs, runKey, onRun, onClear, features, results }) {
+  const [tab, setTab] = useState("map");
   const tabs = [
+    { id: "map", label: "Map", Icon: Map },
     { id: "results", label: "Results", Icon: BarChart3 },
     { id: "console", label: "Console", Icon: TerminalIcon },
   ];
   const levelColor = { log: "#d4d4d4", info: "#9cdcfe", warn: "#dcdcaa", error: "#f48771" };
+
+  // Lazy load MapVisualization
+  const MapVisualization = React.lazy(() => import("@/components/MapVisualization"));
 
   return (
     <div className="flex min-w-0 flex-1 flex-col" style={{ background: theme.editor, borderLeft: `1px solid ${theme.border}` }}>
@@ -506,9 +508,14 @@ function OutputColumn({ output, logs, runKey, onRun, onClear }) {
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto p-3 font-mono text-[12px]">
+      <div className="min-h-0 flex-1 overflow-y-auto">
+        {tab === "map" && (
+          <React.Suspense fallback={<div style={{ padding: 16, color: "#5a5a5a" }}>Loading map...</div>}>
+            <MapVisualization features={features} results={results} key={runKey} />
+          </React.Suspense>
+        )}
         {tab === "results" && (
-          <div style={{ color: theme.editorFg }}>
+          <div className="p-3 font-mono text-[12px]" style={{ color: theme.editorFg }}>
             {output.length === 0 ? (
               <div style={{ color: "#5a5a5a" }}>Click "Run" to execute the script.</div>
             ) : output.map((line, i) => (
@@ -522,7 +529,7 @@ function OutputColumn({ output, logs, runKey, onRun, onClear }) {
           </div>
         )}
         {tab === "console" && (
-          <div>
+          <div className="p-3 font-mono text-[12px]">
             {logs.length === 0 ? (
               <div style={{ color: "#5a5a5a" }}>Console output appears here.</div>
             ) : logs.map((l, i) => (
@@ -553,6 +560,8 @@ export default function CyneScriptSandbox() {
   const [logs, setLogs] = useState([]);
   const [runKey, setRunKey] = useState(0);
   const [editorWidth, setEditorWidth] = useState(55);
+  const [features, setFeatures] = useState([]);
+  const [results, setResults] = useState([]);
   const splitRef = useRef(null);
   const dragging = useRef(false);
 
@@ -581,11 +590,15 @@ export default function CyneScriptSandbox() {
     const interpreter = new CyneInterpreter(files, dataFiles);
     try {
       const result = await interpreter.run(node.content);
-      setOutput(result);
+      setOutput(result.output);
       setLogs([{ level: "info", message: "Script executed successfully" }]);
+      setFeatures(result.features || []);
+      setResults(result.results || []);
     } catch (e) {
       setOutput([`Error: ${e.message}`]);
       setLogs([{ level: "error", message: e.message }]);
+      setFeatures([]);
+      setResults([]);
     }
     setRunKey((k) => k + 1);
   }, [files, openTabs, activeTab]);
@@ -732,7 +745,7 @@ export default function CyneScriptSandbox() {
             style={{ background: theme.border }} title="Drag to resize" />
 
           {/* Output */}
-          <OutputColumn output={output} logs={logs} runKey={runKey} onRun={run} onClear={() => setLogs([])} />
+          <OutputColumn output={output} logs={logs} runKey={runKey} onRun={run} onClear={() => setLogs([])} features={features} results={results} />
         </div>
       </div>
 
