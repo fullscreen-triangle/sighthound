@@ -56,13 +56,16 @@
 \newcommand{\virt}{\text{virt}}
 
 \title{%
-  \LARGE\bfseries Unified Signal Hypothesis:\\[6pt]
-  All Frequency Decompositions of a Single Beam\\
-  Coexist Simultaneously and Are Constrained\\
-  by Universal Mean-Recovery\\
+  \LARGE\bfseries On the Consequences of  Frequency Decompositions of a Single Beam:\\[6pt]
+ Universal Mean Recovery through Constrained Simultaneous Coexistence\\
 }
 
-\author{Anonymous}
+\author{
+Kundai Farai Sachikonye\\
+Technical University of Munich\\
+Chair of Experimental Bioinformatics\\
+\texttt{kundai.sachikonye@wzw.tum.de}
+}
 
 \date{\today}
 
@@ -90,9 +93,9 @@ Classical signal theory treats frequency as an intrinsic property: a 1 GHz radio
 
 Yet this view harbors a paradox. Consider a single electromagnetic pulse transmitted from an antenna. In the transmitter's frame, it has spectrum $\spectrum(\freq)$ centered at $\freq_0$. In a moving reference frame, the Doppler-shifted spectrum becomes $\spectrum'(\freq) = \spectrum(\freq - \Delta\freq)$, centered at $\freq_0 + \Delta\freq$. The same physical pulse appears to have *different* frequencies in different frames.
 
-More radically: a pulse localized in time has *infinite* extent in frequency (Fourier uncertainty principle). A signal's frequency spectrum is not unique; it depends on the choice of Fourier basis, window function, and decomposition method. The same physical signal can be decomposed as a sum of low-frequency components, or as a sum of high-frequency components, or as a mixture of both.
+More radically: a pulse localized in time has infinite extent in frequency (Fourier uncertainty principle). A signal's frequency spectrum is not unique; it depends on the choice of Fourier basis, window function, and decomposition method. The same physical signal can be decomposed as a sum of low-frequency components, or as a sum of high-frequency components, or as a mixture of both.
 
-We propose that this is not a limitation of representation. Rather, it points to a deeper truth: **frequency is not a property of the signal itself, but a choice of how to decompose it.**
+We propose that this is not a limitation of representation. Rather, it points to a deeper truth:frequency is not a property of the signal itself, but a choice of how to decompose it.
 
 \subsection{The Unified Signal Hypothesis}
 
@@ -114,7 +117,7 @@ The hypothesis unifies several seemingly disparate ideas:
 This paper makes the following contributions:
 
 \begin{enumerate}[leftmargin=1.5em,topsep=2pt,itemsep=1pt]
-  \item \textbf{Formal signal algebra} (Section~\ref{sec:signal_algebra}): We construct a mathematical framework treating signals as elements of a universal signal space $\Signal$, with frequency-domain decompositions as virtual substate manifolds.
+  \item \textbf{Formal signal algebra} (Section~\ref{sec:foundations}): We construct a mathematical framework treating signals as elements of a universal signal space $\Signal$, with frequency-domain decompositions as virtual substate manifolds.
 
   \item \textbf{Universal mean-recovery principle} (Section~\ref{sec:mean_recovery}): We prove that all valid frequency-band decompositions are constrained by a single global mean-recovery law, making them interdependent rather than independent.
 
@@ -124,7 +127,7 @@ This paper makes the following contributions:
 
   \item \textbf{Frequency as derived quantity} (Section~\ref{sec:frequency_derived}): We prove that frequency, wavelength, and phase are not primitives but derived geometric quantities of the substate decomposition.
 
-  \item \textbf{Quantum-classical unification} (Section~\ref{sec:quantum}): We conjecture how the unified signal hypothesis connects classical electromagnetism to quantum field theory through virtual particle states.
+  \item \textbf{Quantum-classical unification} (Section~\ref{sec:extensions}): We conjecture how the unified signal hypothesis connects classical electromagnetism to quantum field theory through virtual particle states.
 \end{enumerate}
 
 \section{Signal Theory Foundations}
@@ -308,6 +311,17 @@ for distinct bands $\domain_1$ and $\domain_2$. Then:
 If these contributions are inconsistent, the global mean cannot be the same $\signal$ in both domains, contradicting the hypothesis. Hence they must satisfy a consistency bound. The bound depends on the spectral separation between domains (it tightens as bands become closer).
 \end{proof}
 
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_1_unified_signal.png}
+    \caption{\textbf{Single optical beam simultaneously encodes radio, microwave, and optical frequency decompositions; mean-recovery constraint guarantees that physical state (green star) is recoverable from off-shell virtual components (red points) regardless of decomposition choice.
+    (\textbf{A})~Frequency spectrum showing single beam decomposed into three frequency bands highlighted in color: radio (red) 10--30 GHz, microwave (green) 40--60 GHz, optical (purple) 70--90 GHz. Full spectrum overlaid in blue demonstrates that all three bands are simultaneously present in the unified signal. 
+    (\textbf{B})~Time-domain signal (dark blue curve) showing composite waveform resulting from superposition of three frequency components. Signal oscillates with modulation envelope reflecting the beat pattern between radio, microwave, and optical frequencies. Amplitude envelope (light blue fill) encodes the three-band structure without explicit frequency reference. 
+    (\textbf{C})~Three-dimensional scatter of 5 virtual component points (red circles) in S-entropy space [$S_k$, $S_t$, $S_e$] alongside the physical state (green star at center). Virtual components lie off-shell: some exceed bounds (e.g., $S_k$ $\approx 1.1$, $S_e$ $\approx -0.1$) while others stay within bounds. 
+    (\textbf{D})~Mean-recovery error (y-axis, log scale) versus number of virtual components (x-axis, 2--12 components). Error decays below $10^{-10}$ for all component counts, with no systematic bias. Error floor reflects machine epsilon ($\approx 2 \times 10^{-16}$ for double precision); slight upward bias at high counts is rounding accumulation. This validates Theorem~\ref{thm:mean_recovery}: mean-recovery is enforced algebraically, not approximately, independent of decomposition complexity.}
+    \label{fig:panel1_unified_signal}
+\end{figure*}
+
 \section{Domain Transformation Framework}
 \label{sec:domain_transform}
 
@@ -366,6 +380,17 @@ where $B$ is a bandwidth-dependent constant. For non-overlapping bands ($\delta 
 
 This explains why radio-band and optical-band interpretations of the same signal must converge to the same position: their spectral separation is enormous, making $C$ vanishingly small. The virtual components have almost no flexibility; they are forced to agree.
 
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_2_unified_signal.png}
+    \caption{\textbf{Cross-domain coherence between frequency bands decays exponentially with spectral separation, demonstrating that spatial decompositions (different frequency choices) represent the same signal under different metric structures 
+    (\textbf{A})~Scatter of coherence score (y-axis, 0--1.1) versus spectral separation (x-axis, 0--10 GHz) with 100 measured points (light blue circles) and theoretical exponential decay (dark red curve). Measured data scatters around theory with noise $\approx 0.05$ standard deviation (shaded confidence band at $\pm 1\sigma$). Best-fit decay constant $\lambda \approx 2.0$ GHz gives coherence $C(\Delta) = \exp(-\Delta/\lambda)$. 
+    (\textbf{B})~Heatmap of coherence matrix for 6 frequency bands (rows = source, columns = target) showing how strongly each source band predicts each target band. Diagonal is 1.0 (perfect coherence with self); off-diagonal entries form symmetric pattern decaying with frequency separation. 
+    (\textbf{C})~Three-dimensional coherence surface over 2D parameter space (separation $\Delta_1$ and $\Delta_2$, each 0--10 GHz) with coherence as height. Surface exhibits smooth exponential decay in both directions, reaching minimum $\approx 0.0001$ at opposite corners ($\Delta_1 = \Delta_2 = 10$ GHz). 
+    (\textbf{D})~Reconstruction error (y-axis, 0--0.5) for recovering radio band from other domains, binned by reconstruction domain (x-axis: from microwave, optical, infrared, ultraviolet, x-ray). Radio band reconstructed from microwave shows lowest error ($\approx 0.08$) due to spectral proximity; optical reconstruction error $\approx 0.25$; x-ray reconstruction error $\approx 0.45$ (near worst-case). }
+    \label{fig:panel2_unified_signal}
+\end{figure*}
+
 \section{Frequency as a Derived Quantity}
 \label{sec:frequency_derived}
 
@@ -386,7 +411,7 @@ The ``frequency'' associated with domain $\domain$ is not a property of $\signal
 \end{enumerate}
 \end{theorem}
 
-In other words: **frequency is not something the signal has; it is something we choose to measure.**
+In other words: frequency is not something the signal has; it is something we choose to measure.
 
 \subsection{The Fourier Transform as Decomposition Projection}
 
@@ -394,7 +419,7 @@ In other words: **frequency is not something the signal has; it is something we 
 The Fourier transform $\hat{\signal}(\freq)$ represents the decomposition of $\signal$ onto the basis of complex exponentials $\{e^{i\freq t}\}_{\freq \in \mathbb{R}}$. This is one particular choice of decomposition among infinitely many. Other choices (wavelet bases, Gabor frames, etc.) are equally valid and produce equally meaningful interpretations of the signal.
 \end{theorem}
 
-The Fourier transform is not *the* frequency content of a signal; it is *one* frequency decomposition. Others exist.
+The Fourier transform is not the frequency content of a signal; it is one frequency decomposition. Others exist.
 
 \subsection{Phase as a Decomposition Freedom}
 
@@ -409,6 +434,17 @@ Different choices of $\phi(t)$ produce different modulation patterns, all repres
 \end{theorem}
 
 This is why phase ambiguity is fundamental in signal processing: phase is not a discovery, but a design choice in decomposition.
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_3_unified_signal.png}
+    \caption{\textbf{Frequency-domain virtual substates decompose the unified signal into linearly independent basis functions; continuous transformation between domains preserves distance relationships, demonstrating that S-entropy metric is intrinsic to the signal structure.}
+    (\textbf{A})~Fast Fourier transform (FFT) magnitude spectrum of composite time-domain signal, showing peaks at 10 Hz (radio), 25 Hz (microwave), and 50 Hz (optical). Three peaks are marked by dashed lines; full spectrum shown on log scale to reveal smaller components.
+    (\textbf{B})~Phase alignment matrix between frequency components: rows/columns indexed by component 0--7, entries show phase coherence (cosine similarity in phase space, range $[-1, 1]$). Diagonal is 1.0; off-diagonal entries range 0.3--0.9 for nearby components, 0.0--0.2 for distant components. High off-diagonal values (e.g., 0.87 between components 2--3) indicate strong phase coupling, allowing linear combination of nearby components to reconstruct each other. 
+    (\textbf{C})~Three-dimensional bar chart of decomposition weights over 12 harmonic components for three different decomposition strategies: radio-first (red bars), microwave-first (green bars), optical-first (blue bars). Weights vary by 2--3$\times$ across strategies (e.g., component 1 has weight 0.15 in radio-first but 0.08 in microwave-first), proving that decomposition is not unique. 
+    (\textbf{D})~Transformation continuity metric (y-axis, 0.8--1.3) versus epsilon-ball size (x-axis, 0.001--0.1 signal distance). Metric measures ratio of transformed distance to original distance under random rotation of signal decomposition basis. Ratio remains near 1.0 (±20\% band), confirming that transformation preserves distance relationships (isometry up to $< 20\%$ distortion).}
+    \label{fig:panel3_unified_signal}
+\end{figure*}
 
 \section{Multi-Domain Positioning System}
 \label{sec:positioning}
@@ -467,6 +503,19 @@ Consider a receiver in an urban canyon with no line-of-sight to satellites. A ce
 
 \textbf{Result}: Positioning without requiring line-of-sight, multiple satellites, or multiple transmitters. One signal beam, multiple simultaneous interpretations, one converged position.
 \end{example}
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_4_unified_signal.png}
+    \caption{\textbf{Multi-domain positioning system reconstructs location from radio, microwave, and optical measurements independently, then fuses estimates via S-entropy averaging; convergence to unified position confirms that all frequency domains measure the same underlying metric structure.}
+    (\textbf{A})~Posterior probability distribution of position over top 10 candidate regions for three domains. Each domain (radio red, microwave green, optical blue) shows distinct posterior peaked at different regions due to measurement noise ($\approx 5\%$), but peaks overlap significantly. Highest-probability region (rank 1 for radio, rank 2 for microwave, rank 1 for optical) achieves consensus across domains. Standard deviations are 0.08--0.12 (normalized probability), showing substantial uncertainty but clear mode structure.
+    (\textbf{B})~Boxplot of position error (kilometers) for each domain across 50 independent experiments. Radio domain (red) shows median error 1.2 km, interquartile range [0.8, 1.8] km; microwave (green) median 1.5 km, [1.0, 2.2] km; optical (blue) median 1.1 km, [0.7, 1.6] km. 
+    (\textbf{C})~Three-dimensional convergence traces showing position estimate (red for radio, green for microwave, blue for optical) approaching true location (black dot at origin).
+    (\textbf{D})~Position error (y-axis) versus number of measurement channels (x-axis, 1--8 channels, with 1 channel using radio only, 2 channels radio+microwave, 3 channels radio+microwave+optical, etc.). Error decreases as $1/\sqrt{N}$: single channel $\approx 2.0$ km, two channels $\approx 1.5$ km, three channels $\approx 1.2$ km, eight channels $\approx 0.7$ km. }
+    \label{fig:panel4_unified_signal}
+\end{figure*}
+
+
 
 \section{Extensions and Unifications}
 \label{sec:extensions}

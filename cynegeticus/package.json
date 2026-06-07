@@ -1,0 +1,28 @@
+{
+  "name": "cynegeticus-compiler",
+  "version": "1.0.0",
+  "description": "Cynegeticus Programming Language - TypeScript Compiler for GPS-Free Positioning",
+  "main": "dist/compiler/src/compiler.js",
+  "types": "dist/compiler/src/compiler.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "node dist/compiler/src/test.js",
+    "example": "node dist/compiler/src/example.js"
+  },
+  "keywords": [
+    "cynegeticus",
+    "positioning",
+    "gps-free",
+    "s-entropy",
+    "compiler",
+    "dsl",
+    "typescript"
+  ],
+  "author": "Physics Sighthound",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {}
+}
