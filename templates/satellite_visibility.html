@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satellite Visibility Demo - S-Entropy Positioning</title>
+    <link rel="stylesheet" href="'static', 'style.css'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@r128/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">S-Entropy Positioning - Satellite Visibility</div>
+        <a href="index.html" class="navbar-back">â† Back to Home</a>
+    </nav>
+
+    <div class="container">
+        <div class="demo-layout">
+            <!-- Left Panel: Controls and Info -->
+            <div class="control-panel">
+                <h2>Satellite Visibility</h2>
+                <p class="description">Determine which satellites in the constellation are currently visible from your location based on elevation angle.</p>
+
+                <div class="control-group">
+                    <h3>Observer Location</h3>
+                    <label>Latitude</label>
+                    <input type="number" id="lat" value="40.7128" min="-90" max="90" step="0.01">
+                    <label>Longitude</label>
+                    <input type="number" id="lon" value="-74.0060" min="-180" max="180" step="0.01">
+                    <label>Altitude (meters)</label>
+                    <input type="number" id="alt" value="10" min="0" max="10000" step="10">
+                    <small>New York City (default)</small>
+                </div>
+
+                <div class="control-group">
+                    <h3>Visibility Parameters</h3>
+                    <label>Minimum Elevation (degrees)</label>
+                    <input type="number" id="min_elev" value="10" min="0" max="90" step="1">
+                    <small>10Â° = typical horizon elevation</small>
+                </div>
+
+                <button id="computeButton" class="primary-button">Compute Visibility</button>
+
+                <div id="results" class="results-box" style="display: none;">
+                    <h3>Visible Satellites</h3>
+                    <div id="resultContent"></div>
+                </div>
+
+                <div class="presets">
+                    <h3>Quick Presets</h3>
+                    <button class="preset-button" onclick="setPreset('nyc')">New York City</button>
+                    <button class="preset-button" onclick="setPreset('london')">London</button>
+                    <button class="preset-button" onclick="setPreset('sydney')">Sydney</button>
+                    <button class="preset-button" onclick="setPreset('equator')">Equator</button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Globe and List -->
+            <div class="globe-container">
+                <div id="globeCanvas" style="width: 100%; height: 100%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Elevation angle â‰¥ 10Â° = above horizon and visible | MEO constellation (20,000 km altitude)</p>
+    </footer>
+
+    <script>
+        // S-Entropy Satellite Visibility - Pure Frontend Implementation
+
+        // Simulated satellite constellation
+        const SATELLITES = [
+            {id: 1, lat: 56.0, lon: 0, alt: 20000},
+            {id: 2, lat: 56.0, lon: 120, alt: 20000},
+            {id: 3, lat: 56.0, lon: 240, alt: 20000},
+            {id: 4, lat: -56.0, lon: 60, alt: 20000},
+            {id: 5, lat: -56.0, lon: 180, alt: 20000},
+            {id: 6, lat: -56.0, lon: 300, alt: 20000},
+            {id: 7, lat: 0, lon: 30, alt: 20000},
+            {id: 8, lat: 0, lon: 150, alt: 20000},
+            {id: 9, lat: 0, lon: 270, alt: 20000},
+        ];
+
+        const EARTH_RADIUS_KM = 6371.0;
+
+        // Three.js scene setup
+        let scene, camera, renderer, earth, soyuzModel, satellites = [];
+
+        function haversineDistance(lat1, lon1, lat2, lon2) {
+            const deg2rad = Math.PI / 180;
+            const dlat = (lat2 - lat1) * deg2rad;
+            const dlon = (lon2 - lon1) * deg2rad;
+            const a = Math.sin(dlat/2)**2 +
+                     Math.cos(lat1 * deg2rad) * Math.cos(lat2 * deg2rad) * Math.sin(dlon/2)**2;
+            const c = 2 * Math.asin(Math.sqrt(a));
+            return EARTH_RADIUS_KM * c;
+        }
+
+        function elevationAngle(obs_lat, obs_lon, sat_lat, sat_lon, sat_alt_km = 20000) {
+            const obs_alt_km = 0.01; // Sea level
+            const gc_distance = haversineDistance(obs_lat, obs_lon, sat_lat, sat_lon);
+            const dalt = sat_alt_km - obs_alt_km;
+            const elev = Math.atan2(dalt, gc_distance) * 180 / Math.PI;
+            return elev;
+        }
+
+        function computeVisibleSatellites(lat, lon, min_elev = 10) {
+            return SATELLITES.filter(sat => {
+                const elev = elevationAngle(lat, lon, sat.lat, sat.lon);
+                if (elev >= min_elev) {
+                    return {
+                        ...sat,
+                        elevation: elev.toFixed(2),
+                        distance: haversineDistance(lat, lon, sat.lat, sat.lon).toFixed(0)
+                    };
+                }
+            }).map(sat => ({
+                ...sat,
+                elevation: parseFloat(elevationAngle(lat, lon, sat.lat, sat.lon).toFixed(2)),
+                distance: parseFloat(haversineDistance(lat, lon, sat.lat, sat.lon).toFixed(0))
+            })).sort((a, b) => b.elevation - a.elevation);
+        }
+
+        function initGlobe() {
+            const container = document.getElementById('globeCanvas');
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 10000);
+            camera.position.z = 2.5;
+
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(width, height);
+            renderer.setClearColor(0x000011);
+            container.appendChild(renderer.domElement);
+
+            // Create Earth
+            const geometry = new THREE.SphereGeometry(1, 64, 64);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x1a4d99,
+                wireframe: false,
+                shininess: 5
+            });
+            earth = new THREE.Mesh(geometry, material);
+            scene.add(earth);
+
+            // Add grid
+            const gridHelper = new THREE.GridHelper(2.5, 16, 0x444444, 0x222222);
+            gridHelper.position.z = 0;
+            scene.add(gridHelper);
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(5, 3, 5);
+            scene.add(directionalLight);
+
+            // Load Soyuz-Apollo docking model
+            const loader = new THREE.GLTFLoader();
+            loader.load('public/soyuz_apollo.glb', (gltf) => {
+                soyuzModel = gltf.scene;
+                soyuzModel.scale.set(0.1, 0.1, 0.1);
+                soyuzModel.position.set(0, 0, 0);
+                scene.add(soyuzModel);
+            }).catch(err => {
+                console.log('Model loading note: soyuz_apollo.glb not found, using markers instead');
+            });
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                earth.rotation.y += 0.0001;
+                if (soyuzModel) {
+                    soyuzModel.rotation.x += 0.001;
+                    soyuzModel.rotation.y += 0.002;
+                }
+                renderer.render(scene, camera);
+            }
+            animate();
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                const newWidth = container.clientWidth;
+                const newHeight = container.clientHeight;
+                camera.aspect = newWidth / newHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, newHeight);
+            });
+        }
+
+        function clearSatellites() {
+            satellites.forEach(sat => scene.remove(sat));
+            satellites = [];
+        }
+
+        function addSatelliteMarkers(visibleSats) {
+            clearSatellites();
+
+            visibleSats.forEach(sat => {
+                const deg2rad = Math.PI / 180;
+                const lat = sat.lat * deg2rad;
+                const lon = sat.lon * deg2rad;
+
+                const x = Math.cos(lat) * Math.cos(lon);
+                const y = Math.sin(lat);
+                const z = Math.cos(lat) * Math.sin(lon);
+
+                const satGeometry = new THREE.SphereGeometry(0.05, 8, 8);
+                const satMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x00ff00
+                });
+                const satMarker = new THREE.Mesh(satGeometry, satMaterial);
+                satMarker.position.set(x, y, z);
+                scene.add(satMarker);
+                satellites.push(satMarker);
+            });
+
+            // Add observer marker
+            const deg2rad = Math.PI / 180;
+            const obsLat = parseFloat(document.getElementById('lat').value) * deg2rad;
+            const obsLon = parseFloat(document.getElementById('lon').value) * deg2rad;
+
+            const obsX = Math.cos(obsLat) * Math.cos(obsLon);
+            const obsY = Math.sin(obsLat);
+            const obsZ = Math.cos(obsLat) * Math.sin(obsLon);
+
+            const obsGeometry = new THREE.SphereGeometry(0.08, 8, 8);
+            const obsMaterial = new THREE.MeshBasicMaterial({
+                color: 0xff0000
+            });
+            const obsMarker = new THREE.Mesh(obsGeometry, obsMaterial);
+            obsMarker.position.set(obsX * 1.1, obsY * 1.1, obsZ * 1.1);
+            scene.add(obsMarker);
+            satellites.push(obsMarker);
+        }
+
+        document.getElementById('computeButton').addEventListener('click', function() {
+            const lat = parseFloat(document.getElementById('lat').value);
+            const lon = parseFloat(document.getElementById('lon').value);
+            const min_elevation = parseFloat(document.getElementById('min_elev').value);
+
+            // Compute visible satellites (100% frontend)
+            const visibleSats = computeVisibleSatellites(lat, lon, min_elevation);
+
+            // Update globe
+            addSatelliteMarkers(visibleSats);
+
+            // Show results
+            const resultContent = document.getElementById('resultContent');
+            let html = `
+                <p><strong>Visible Satellites:</strong> ${visibleSats.length} / ${SATELLITES.length}</p>
+                <p><strong>Location:</strong> ${lat.toFixed(2)}Â°, ${lon.toFixed(2)}Â°</p>
+                <p><strong>Minimum Elevation:</strong> ${min_elevation}Â°</p>
+            `;
+
+            if (visibleSats.length > 0) {
+                html += '<h4>Satellite Details:</h4><ul>';
+                visibleSats.forEach(sat => {
+                    html += `
+                        <li>
+                            <strong>Satellite ${sat.id}</strong><br>
+                            Elevation: ${sat.elevation}Â°<br>
+                            Distance: ${sat.distance} km
+                        </li>
+                    `;
+                });
+                html += '</ul>';
+            } else {
+                html += '<p><em>No satellites visible from this location.</em></p>';
+            }
+
+            resultContent.innerHTML = html;
+            document.getElementById('results').style.display = 'block';
+        });
+
+        function setPreset(preset) {
+            const presets = {
+                'nyc': {lat: 40.7128, lon: -74.0060},
+                'london': {lat: 51.5074, lon: -0.1278},
+                'sydney': {lat: -33.8688, lon: 151.2093},
+                'equator': {lat: 0, lon: 0}
+            };
+
+            const p = presets[preset];
+            document.getElementById('lat').value = p.lat;
+            document.getElementById('lon').value = p.lon;
+
+            document.getElementById('computeButton').click();
+        }
+
+        // Initialize
+        initGlobe();
+        document.getElementById('computeButton').click();
+    </script>
+</body>
+</html>

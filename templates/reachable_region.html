@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reachable Region Demo - S-Entropy Positioning</title>
+    <link rel="stylesheet" href="'static', 'style.css'">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">S-Entropy Positioning - Reachable Region</div>
+        <a href="index.html" class="navbar-back">â† Back to Home</a>
+    </nav>
+
+    <div class="container">
+        <div class="demo-layout">
+            <!-- Left Panel: Controls -->
+            <div class="control-panel">
+                <h2>Reachable Region Calculator</h2>
+                <p class="description">Determine how far someone can travel from a starting point in a given time using great-circle distances on Earth.</p>
+
+                <div class="control-group">
+                    <h3>Center Location</h3>
+                    <label>Latitude</label>
+                    <input type="number" id="lat" value="40.7128" min="-90" max="90" step="0.01">
+                    <label>Longitude</label>
+                    <input type="number" id="lon" value="-74.0060" min="-180" max="180" step="0.01">
+                    <small>New York City (default)</small>
+                </div>
+
+                <div class="control-group">
+                    <h3>Movement Parameters</h3>
+                    <label>Walking Time (hours)</label>
+                    <input type="number" id="time" value="2.0" min="0.1" max="24" step="0.5">
+
+                    <label>Walking Speed (km/h)</label>
+                    <input type="number" id="speed" value="5.0" min="0.1" max="20" step="0.5">
+                    <small>5 km/h = typical walking speed</small>
+                </div>
+
+                <button id="computeButton" class="primary-button">Compute Reachable Region</button>
+
+                <div id="results" class="results-box" style="display: none;">
+                    <h3>Results</h3>
+                    <div id="resultContent"></div>
+                </div>
+
+                <div class="presets">
+                    <h3>Quick Presets</h3>
+                    <button class="preset-button" onclick="setPreset('1hour')">1 Hour Walk</button>
+                    <button class="preset-button" onclick="setPreset('2hour')">2 Hour Walk</button>
+                    <button class="preset-button" onclick="setPreset('4hour')">4 Hour Walk</button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Map -->
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Great-circle distance calculations on Earth surface (radius = 6371 km)</p>
+    </footer>
+
+    <script>
+        const map = L.map('map').setView([40.7128, -74.0060], 10);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: 'Â© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        let centerMarker, regionCircle;
+        const regionLayer = L.featureGroup().addTo(map);
+
+        function setCenterMarker() {
+            const lat = parseFloat(document.getElementById('lat').value);
+            const lon = parseFloat(document.getElementById('lon').value);
+
+            if (centerMarker) centerMarker.remove();
+
+            centerMarker = L.circleMarker([lat, lon], {
+                radius: 8,
+                fillColor: '#0066ff',
+                color: '#000',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(map).bindPopup('Center');
+
+            map.setView([lat, lon], 10);
+        }
+
+        // Frontend reachable region computation
+        function computeReachableRegion(center_lat, center_lon, walking_time_hours, speed_kmh = 5.0) {
+            const EARTH_RADIUS_KM = 6371.0;
+            const max_distance_km = walking_time_hours * speed_kmh;
+            const n_points = 360;
+            const points = [];
+
+            for (let angle = 0; angle < 2 * Math.PI; angle += (2 * Math.PI) / n_points) {
+                const lat_rad = center_lat * Math.PI / 180;
+                const lon_rad = center_lon * Math.PI / 180;
+                const d_rad = max_distance_km / EARTH_RADIUS_KM;
+
+                const lat_new_rad = Math.asin(
+                    Math.sin(lat_rad) * Math.cos(d_rad) +
+                    Math.cos(lat_rad) * Math.sin(d_rad) * Math.cos(angle)
+                );
+                const lon_new_rad = lon_rad + Math.atan2(
+                    Math.sin(angle) * Math.sin(d_rad) * Math.cos(lat_rad),
+                    Math.cos(d_rad) - Math.sin(lat_rad) * Math.sin(lat_new_rad)
+                );
+
+                const lat_new = lat_new_rad * 180 / Math.PI;
+                const lon_new = lon_new_rad * 180 / Math.PI;
+                points.push([lat_new, lon_new]);
+            }
+
+            return points;
+        }
+
+        document.getElementById('computeButton').addEventListener('click', function() {
+            const lat = parseFloat(document.getElementById('lat').value);
+            const lon = parseFloat(document.getElementById('lon').value);
+            const time_hours = parseFloat(document.getElementById('time').value);
+            const speed_kmh = parseFloat(document.getElementById('speed').value);
+
+            setCenterMarker();
+
+            // Compute region (100% frontend)
+            const max_distance = time_hours * speed_kmh;
+            const boundary = computeReachableRegion(lat, lon, time_hours, speed_kmh);
+
+            // Draw boundary
+            regionLayer.clearLayers();
+            if (boundary.length > 0) {
+                regionCircle = L.polygon(boundary, {
+                    color: '#ff9900',
+                    weight: 2,
+                    opacity: 0.7,
+                    fillColor: '#ff9900',
+                    fillOpacity: 0.2
+                }).addTo(regionLayer);
+            }
+
+            // Show results
+            const resultContent = document.getElementById('resultContent');
+            resultContent.innerHTML = `
+                <p><strong>Max Distance:</strong> ${max_distance.toFixed(1)} km</p>
+                <p><strong>Time:</strong> ${time_hours} hours</p>
+                <p><strong>Speed:</strong> ${speed_kmh} km/h</p>
+                <p><strong>Coverage Area:</strong> ~${(Math.PI * max_distance * max_distance).toFixed(0)} kmÂ²</p>
+            `;
+            document.getElementById('results').style.display = 'block';
+        });
+
+        function setPreset(preset) {
+            const presets = {
+                '1hour': {time: 1.0, speed: 5.0},
+                '2hour': {time: 2.0, speed: 5.0},
+                '4hour': {time: 4.0, speed: 5.0}
+            };
+
+            const p = presets[preset];
+            document.getElementById('time').value = p.time;
+            document.getElementById('speed').value = p.speed;
+
+            // Trigger computation
+            document.getElementById('computeButton').click();
+        }
+
+        // Initialize
+        setCenterMarker();
+    </script>
+</body>
+</html>

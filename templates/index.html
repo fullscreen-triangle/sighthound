@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S-Entropy Positioning - Interactive Demos</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">S-Entropy Positioning Framework</div>
+        <div class="navbar-subtitle">Interactive Demonstrations</div>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h1>S-Entropy Based Positioning System</h1>
+            <p>Intrinsic metric structure for global coordinate-free navigation</p>
+        </section>
+
+        <section class="demos-grid">
+            <!-- Demo 1: Shortest Path -->
+            <div class="demo-card">
+                <div class="demo-icon">📍</div>
+                <h2>Shortest Path Algorithm</h2>
+                <p>Find the optimal route between two locations using S-entropy coordinates and the SEBD algorithm. Visualize the path on an interactive map.</p>
+                <div class="demo-features">
+                    <ul>
+                        <li>A* pathfinding with S-entropy metric</li>
+                        <li>Real-time distance calculation</li>
+                        <li>Interactive map with route visualization</li>
+                        <li>Multi-waypoint support</li>
+                    </ul>
+                </div>
+                <a href="shortest_path.html" class="demo-button">Launch Demo →</a>
+            </div>
+
+            <!-- Demo 2: Reachable Region -->
+            <div class="demo-card">
+                <div class="demo-icon">🚶</div>
+                <h2>Reachable Region Calculator</h2>
+                <p>Determine how far someone can travel from a starting point in a given time. Visualize the accessible area as a circle on the map.</p>
+                <div class="demo-features">
+                    <ul>
+                        <li>Time-based distance calculation</li>
+                        <li>Adjustable walking speed</li>
+                        <li>Great-circle distance on Earth</li>
+                        <li>Dynamic boundary visualization</li>
+                    </ul>
+                </div>
+                <a href="reachable_region.html" class="demo-button">Launch Demo →</a>
+            </div>
+
+            <!-- Demo 3: Satellite Visibility -->
+            <div class="demo-card">
+                <div class="demo-icon">🛰️</div>
+                <h2>Satellite Visibility Globe</h2>
+                <p>See which satellites in the constellation are currently visible from any location on Earth. Visualize the 3D coverage on an interactive globe.</p>
+                <div class="demo-features">
+                    <ul>
+                        <li>Elevation angle calculation</li>
+                        <li>Line-of-sight detection</li>
+                        <li>Interactive 3D globe</li>
+                        <li>Real-time satellite status</li>
+                    </ul>
+                </div>
+                <a href="satellite_visibility.html" class="demo-button">Launch Demo →</a>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <h2>About This Framework</h2>
+            <div class="info-content">
+                <p><strong>S-Entropy Coordinates:</strong> A three-dimensional bounded metric space [0,1]³ representing kinetic entropy (Sk), temporal entropy (St), and energetic entropy (Se). This coordinate system encodes intrinsic distance relationships without pre-computed lookup tables.</p>
+
+                <p><strong>Key Innovation:</strong> Distance computation is O(1) and independent of database size, reducing storage from petabytes to megabytes while maintaining metric accuracy.</p>
+
+                <p><strong>Applications:</strong></p>
+                <ul>
+                    <li><strong>Shortest Path:</strong> SEBD (S-Entropy Bidirectional Dijkstra) algorithm finds optimal routes by bidirectional search in 3D coordinate space</li>
+                    <li><strong>Mobility Analysis:</strong> Calculate reachable regions based on motion constraints and speed limits</li>
+                    <li><strong>Satellite Coverage:</strong> Determine line-of-sight accessibility to orbital infrastructure</li>
+                </ul>
+
+                <p><strong>Theoretical Foundation:</strong> Based on the Dual-Domain Execution Model which combines temporal programming (deterministic execution) with frequency-domain virtual substates (rich computation), mediated by mean-recovery constraints.</p>
+            </div>
+        </section>
+
+        <section class="references">
+            <h2>Mathematical References</h2>
+            <div class="ref-grid">
+                <div class="ref-card">
+                    <h3>Intrinsic Metric Structure</h3>
+                    <p>S-entropy coordinates form a natural metric space where distances are computed directly from coordinates without pre-computed graphs or lookup tables.</p>
+                </div>
+                <div class="ref-card">
+                    <h3>SEBD Algorithm</h3>
+                    <p>S-Entropy Bidirectional Dijkstra searches forward through time-domain subtasks and backward through frequency-domain virtual substates.</p>
+                </div>
+                <div class="ref-card">
+                    <h3>Mean-Recovery Constraint</h3>
+                    <p>All virtual decompositions satisfy the constraint that their mean equals the physical observable state, ensuring global coherence.</p>
+                </div>
+                <div class="ref-card">
+                    <h3>Coordinate-Free Navigation</h3>
+                    <p>No absolute positioning required; only relative metric relationships between locations matter for pathfinding and distance calculation.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Physics Sighthound | S-Entropy Positioning Framework | Intrinsic Coordinate Systems</p>
+    </footer>
+
+    <script src="../static/app.js"></script>
+</body>
+</html>

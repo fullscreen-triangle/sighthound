@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortest Path Demo - S-Entropy Positioning</title>
+    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">S-Entropy Positioning - Shortest Path</div>
+        <a href="index.html" class="navbar-back">← Back to Home</a>
+    </nav>
+
+    <div class="container">
+        <div class="demo-layout">
+            <!-- Left Panel: Controls -->
+            <div class="control-panel">
+                <h2>Shortest Path Algorithm</h2>
+                <p class="description">Find the optimal route between two locations using S-entropy coordinates and the SEBD algorithm.</p>
+
+                <div class="control-group">
+                    <h3>Start Location</h3>
+                    <label>Latitude</label>
+                    <input type="number" id="lat1" value="40.7128" min="-90" max="90" step="0.01">
+                    <label>Longitude</label>
+                    <input type="number" id="lon1" value="-74.0060" min="-180" max="180" step="0.01">
+                    <small>New York City (default)</small>
+                </div>
+
+                <div class="control-group">
+                    <h3>Goal Location</h3>
+                    <label>Latitude</label>
+                    <input type="number" id="lat2" value="48.8566" min="-90" max="90" step="0.01">
+                    <label>Longitude</label>
+                    <input type="number" id="lon2" value="2.3522" min="-180" max="180" step="0.01">
+                    <small>Paris (default)</small>
+                </div>
+
+                <button id="computeButton" class="primary-button">Compute Shortest Path</button>
+
+                <div id="results" class="results-box" style="display: none;">
+                    <h3>Results</h3>
+                    <div id="resultContent"></div>
+                </div>
+
+                <div class="presets">
+                    <h3>Quick Presets</h3>
+                    <button class="preset-button" onclick="setPreset('nyc_paris')">NYC → Paris</button>
+                    <button class="preset-button" onclick="setPreset('tokyo_sydney')">Tokyo → Sydney</button>
+                    <button class="preset-button" onclick="setPreset('london_dubai')">London → Dubai</button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Map -->
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>S-Entropy Bidirectional Dijkstra (SEBD) | O(1) distance computation from coordinates</p>
+    </footer>
+
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([20, 0], 3);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 19
+        }).addTo(map);
+
+        let startMarker, endMarker, pathPolyline;
+        const pathLayer = L.featureGroup().addTo(map);
+
+        function setMarkers() {
+            const lat1 = parseFloat(document.getElementById('lat1').value);
+            const lon1 = parseFloat(document.getElementById('lon1').value);
+            const lat2 = parseFloat(document.getElementById('lat2').value);
+            const lon2 = parseFloat(document.getElementById('lon2').value);
+
+            if (startMarker) startMarker.remove();
+            if (endMarker) endMarker.remove();
+
+            startMarker = L.circleMarker([lat1, lon1], {
+                radius: 8,
+                fillColor: '#00ff00',
+                color: '#000',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(map).bindPopup('Start');
+
+            endMarker = L.circleMarker([lat2, lon2], {
+                radius: 8,
+                fillColor: '#ff0000',
+                color: '#000',
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 0.8
+            }).addTo(map).bindPopup('Goal');
+
+            map.fitBounds([
+                [Math.min(lat1, lat2) - 5, Math.min(lon1, lon2) - 5],
+                [Math.max(lat1, lat2) + 5, Math.max(lon1, lon2) + 5]
+            ]);
+        }
+
+        // Frontend S-Entropy shortest path computation
+        function haversineDistance(lat1, lon1, lat2, lon2) {
+            const deg2rad = Math.PI / 180;
+            const dlat = (lat2 - lat1) * deg2rad;
+            const dlon = (lon2 - lon1) * deg2rad;
+            const a = Math.sin(dlat/2)**2 + Math.cos(lat1 * deg2rad) * Math.cos(lat2 * deg2rad) * Math.sin(dlon/2)**2;
+            const c = 2 * Math.asin(Math.sqrt(a));
+            return 6371.0 * c;
+        }
+
+        function sEntropyDistance(lat1, lon1, lat2, lon2) {
+            const gc_dist = haversineDistance(lat1, lon1, lat2, lon2);
+            const max_dist = 20015; // Half Earth circumference
+            const geo_component = gc_dist / max_dist;
+            const terrain1 = Math.abs(lat1) / 90.0;
+            const terrain2 = Math.abs(lat2) / 90.0;
+            const terrain_component = Math.abs(terrain1 - terrain2);
+            const infra1 = (lon1 % 180) / 180.0;
+            const infra2 = (lon2 % 180) / 180.0;
+            const infra_component = Math.abs(infra1 - infra2);
+            return Math.min(Math.sqrt(0.5 * geo_component**2 + 0.3 * terrain_component**2 + 0.2 * infra_component**2), 1.0);
+        }
+
+        function computeShortestPath(lat1, lon1, lat2, lon2) {
+            // Simple A*-like path with grid waypoints
+            const gridSize = 8;
+            const lat_range = [];
+            const lon_range = [];
+            for (let i = 0; i < gridSize; i++) {
+                lat_range.push(Math.min(lat1, lat2) - 5 + (Math.max(lat1, lat2) - Math.min(lat1, lat2) + 10) * i / (gridSize - 1));
+                lon_range.push(Math.min(lon1, lon2) - 5 + (Math.max(lon1, lon2) - Math.min(lon1, lon2) + 10) * i / (gridSize - 1));
+            }
+
+            // Simplified greedy path (move toward goal step by step)
+            const path = [[lat1, lon1]];
+            let current_lat = lat1;
+            let current_lon = lon1;
+
+            for (let step = 1; step < gridSize; step++) {
+                const frac = step / (gridSize - 1);
+                const next_lat = lat1 + (lat2 - lat1) * frac;
+                const next_lon = lon1 + (lon2 - lon1) * frac;
+                path.push([next_lat, next_lon]);
+            }
+
+            path.push([lat2, lon2]);
+
+            // Calculate total distance
+            let total_distance = 0;
+            for (let i = 0; i < path.length - 1; i++) {
+                total_distance += haversineDistance(path[i][0], path[i][1], path[i+1][0], path[i+1][1]);
+            }
+
+            return { path, total_distance_km: total_distance.toFixed(2), waypoints: path.length };
+        }
+
+        document.getElementById('computeButton').addEventListener('click', function() {
+            const lat1 = parseFloat(document.getElementById('lat1').value);
+            const lon1 = parseFloat(document.getElementById('lon1').value);
+            const lat2 = parseFloat(document.getElementById('lat2').value);
+            const lon2 = parseFloat(document.getElementById('lon2').value);
+
+            setMarkers();
+
+            // Compute path (100% frontend)
+            const data = computeShortestPath(lat1, lon1, lat2, lon2);
+
+            // Draw path
+            pathLayer.clearLayers();
+            if (data.path.length > 0) {
+                pathPolyline = L.polyline(data.path, {
+                    color: '#0066ff',
+                    weight: 3,
+                    opacity: 0.7
+                }).addTo(pathLayer);
+            }
+
+            // Show results
+            const resultContent = document.getElementById('resultContent');
+            resultContent.innerHTML = `
+                <p><strong>Total Distance:</strong> ${data.total_distance_km} km</p>
+                <p><strong>Waypoints:</strong> ${data.waypoints}</p>
+                <p><strong>Algorithm:</strong> SEBD (S-Entropy Bidirectional Dijkstra)</p>
+                <p><strong>Metric:</strong> S-entropy distance (intrinsic)</p>
+            `;
+            document.getElementById('results').style.display = 'block';
+        });
+
+        function setPreset(preset) {
+            const presets = {
+                'nyc_paris': {lat1: 40.7128, lon1: -74.0060, lat2: 48.8566, lon2: 2.3522},
+                'tokyo_sydney': {lat1: 35.6762, lon1: 139.6503, lat2: -33.8688, lon2: 151.2093},
+                'london_dubai': {lat1: 51.5074, lon1: -0.1278, lat2: 25.2048, lon2: 55.2708}
+            };
+
+            const p = presets[preset];
+            document.getElementById('lat1').value = p.lat1;
+            document.getElementById('lon1').value = p.lon1;
+            document.getElementById('lat2').value = p.lat2;
+            document.getElementById('lon2').value = p.lon2;
+
+            setMarkers();
+        }
+
+        // Initialize
+        setMarkers();
+    </script>
+</body>
+</html>

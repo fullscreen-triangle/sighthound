@@ -1,0 +1,44 @@
+{
+  "name": "s-entropy-positioning-frontend",
+  "version": "2.0.0",
+  "description": "S-Entropy Positioning Framework - 100% Frontend Interactive Demos",
+  "main": "templates/index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "python -m http.server 8000",
+    "start": "npm run serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/physics-sighthound/s-entropy-positioning.git"
+  },
+  "dependencies": {
+    "three": "^r128",
+    "leaflet": "^1.9.4"
+  },
+  "devDependencies": {
+    "vite": "^5.0.8",
+    "@vitejs/plugin-basic-ssl": "^1.0.1"
+  },
+  "keywords": [
+    "s-entropy",
+    "positioning",
+    "shortest-path",
+    "satellite-visibility",
+    "satellite-tracking",
+    "gps",
+    "navigation",
+    "frontend",
+    "three.js",
+    "leaflet",
+    "interactive"
+  ],
+  "author": "Physics Sighthound",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
