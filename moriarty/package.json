@@ -9,8 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-three/fiber": "^8.13.0",
     "@react-three/drei": "^9.80.0",
+    "@react-three/fiber": "^8.13.0",
     "eslint": "^8.35.0",
     "eslint-config-next": "^13.2.1",
     "framer-motion": "^10.0.1",
@@ -19,14 +19,15 @@
     "next": "^13.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-globe.gl": "^2.32.0",
-    "satellite.js": "^1.53.0",
-    "three": "^0.184.0"
+    "react-globe": "5.0.2",
+    "satellite.js": "7.0.1",
+    "three": "^0.184.0",
+    "typescript": "^6.0.3"
   },
   "devDependencies": {
     "@types/leaflet": "^1.9.8",
-    "@types/react": "^18.2.0",
-    "@types/node": "^18.16.0",
+    "@types/node": "^18.19.130",
+    "@types/react": "^18.3.31",
     "autoprefixer": "^10.4.13",
     "eslint-plugin-react": "^7.32.0",
     "postcss": "^8.4.21",
