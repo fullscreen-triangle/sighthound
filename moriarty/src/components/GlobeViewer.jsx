@@ -35,7 +35,7 @@ export default function GlobeViewer() {
       <pointLight position={[0, 5, 10]} intensity={0.6} color="#007acc" />
 
       {/* Model */}
-      <GLBModel />
+      <GLBModel scale={0.8} />
 
       {/* Controls - minimal, auto-rotate disabled for smooth experience */}
       <OrbitControls
