@@ -2,6 +2,50 @@ import { useState, useCallback, useMemo, useEffect, useRef } from "react";
 import Head from "next/head";
 import TransitionEffect from "@/components/TransitionEffect";
 
+// Simple AreaChart component for accuracy trends
+function SimpleAreaChart({ data, width, height, color }) {
+  const svgRef = useRef(null);
+
+  useEffect(() => {
+    if (!svgRef.current || !data || data.length === 0) return;
+
+    // Simple SVG-based area chart
+    const margin = { top: 10, right: 20, bottom: 30, left: 50 };
+    const w = (typeof width === "string" ? 400 : width) - margin.left - margin.right;
+    const h = (typeof height === "string" ? 300 : height) - margin.top - margin.bottom;
+
+    const maxValue = Math.max(...data.map((d) => d.value));
+    const minValue = Math.min(...data.map((d) => d.value));
+    const range = maxValue - minValue || 1;
+
+    const points = data
+      .map((d, i) => ({
+        x: (i / (data.length - 1 || 1)) * w,
+        y: h - ((d.value - minValue) / range) * h,
+      }))
+      .map((p) => `${p.x},${p.y}`)
+      .join(" ");
+
+    const svg = svgRef.current;
+    svg.innerHTML = `
+      <g transform="translate(${margin.left},${margin.top})">
+        <polyline points="${points}" fill="none" stroke="${color || '#3b82f6'}" stroke-width="2" />
+        <polyline points="0,${h} ${points.split(" ").map((p) => p.split(",")[0]).join(" ")},${h}"
+                  fill="${color || '#3b82f6'}" fill-opacity="0.2" />
+      </g>
+    `;
+  }, [data, width, height, color]);
+
+  return (
+    <svg
+      ref={svgRef}
+      width={typeof width === "string" ? "100%" : width}
+      height={typeof height === "string" ? "100%" : height}
+      style={{ display: "block" }}
+    />
+  );
+}
+
 // ============================================================================
 // CYNEGETICUS EXECUTOR
 // ============================================================================
@@ -145,123 +189,222 @@ function FileTree({ files, selectedFile, onSelectFile }) {
 }
 
 // ============================================================================
-// MAP COMPONENT
+// MAP COMPONENT - SUPPORTS LEAFLET & CESIUM
 // ============================================================================
 
-function MapComponent({ position, satellites }) {
+function MapComponent({ position, satellites, provider = "leaflet" }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
 
   useEffect(() => {
     if (!containerRef.current || !position) return;
 
-    // Load Leaflet from CDN
-    const loadMap = async () => {
-      // Load CSS if not already loaded
-      if (!document.getElementById("leaflet-css")) {
-        const link = document.createElement("link");
-        link.id = "leaflet-css";
-        link.rel = "stylesheet";
-        link.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
-        document.head.appendChild(link);
-      }
-
-      // Load JS if not already loaded
-      if (!window.L) {
-        return new Promise((resolve) => {
-          const script = document.createElement("script");
-          script.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
-          script.onload = () => {
-            initMap();
-            resolve();
-          };
-          document.head.appendChild(script);
-        });
-      } else {
-        initMap();
-      }
-    };
-
-    const initMap = () => {
-      if (!window.L || !containerRef.current) return;
-
-      const L = window.L;
-
-      // Clear existing map
-      if (mapRef.current) {
-        mapRef.current.remove();
-        mapRef.current = null;
-      }
-
-      // Create map
-      const map = L.map(containerRef.current).setView(
-        [parseFloat(position.lat), parseFloat(position.lon)],
-        8
-      );
-
-      mapRef.current = map;
-
-      // Add OSM tiles
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "© OpenStreetMap",
-        maxZoom: 19,
-      }).addTo(map);
-
-      // Add position marker (red)
-      L.circleMarker([parseFloat(position.lat), parseFloat(position.lon)], {
-        radius: 8,
-        fillColor: "#ef4444",
-        color: "#fff",
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 0.9,
-      })
-        .bindPopup(
-          `<div style="font-size: 12px;"><b>Resolved Position</b><br/>Lat: ${position.lat}°<br/>Lon: ${position.lon}°<br/>Accuracy: ±${position.accuracy}m</div>`
-        )
-        .addTo(map)
-        .openPopup();
-
-      // Add accuracy circle
-      L.circle([parseFloat(position.lat), parseFloat(position.lon)], {
-        radius: parseFloat(position.accuracy) || 50,
-        color: "#ef4444",
-        weight: 1,
-        opacity: 0.3,
-        fill: true,
-        fillOpacity: 0.1,
-      }).addTo(map);
-
-      // Add satellites (green)
-      if (satellites && satellites.length > 0) {
-        satellites.forEach((sat) => {
-          L.circleMarker([sat.lat, sat.lon], {
-            radius: 5,
-            fillColor: "#22c55e",
-            color: "#fff",
-            weight: 1,
-            opacity: 1,
-            fillOpacity: 0.7,
-          })
-            .bindPopup(
-              `<div style="font-size: 12px;"><b>Satellite ${sat.id}</b><br/>Lat: ${sat.lat.toFixed(2)}°<br/>Lon: ${sat.lon.toFixed(2)}°<br/>Alt: ${sat.altitude}km</div>`
-            )
-            .addTo(map);
-        });
-      }
-    };
-
-    loadMap();
+    if (provider === "cesium") {
+      initCesiumMap();
+    } else {
+      initLeafletMap();
+    }
 
     return () => {
       if (mapRef.current) {
-        mapRef.current.remove();
+        if (provider === "cesium" && mapRef.current.destroy) {
+          mapRef.current.destroy();
+        } else if (provider === "leaflet" && mapRef.current.remove) {
+          mapRef.current.remove();
+        }
         mapRef.current = null;
       }
     };
-  }, [position, satellites]);
+  }, [position, satellites, provider]);
 
-  return <div ref={containerRef} className="w-full h-full bg-white rounded" />;
+  const initLeafletMap = () => {
+    // Load CSS if not already loaded
+    if (!document.getElementById("leaflet-css")) {
+      const link = document.createElement("link");
+      link.id = "leaflet-css";
+      link.rel = "stylesheet";
+      link.href = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css";
+      document.head.appendChild(link);
+    }
+
+    // Load JS if not already loaded
+    if (!window.L) {
+      const script = document.createElement("script");
+      script.src = "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js";
+      script.onload = () => renderLeafletMap();
+      document.head.appendChild(script);
+    } else {
+      renderLeafletMap();
+    }
+  };
+
+  const renderLeafletMap = () => {
+    if (!window.L || !containerRef.current) return;
+
+    const L = window.L;
+
+    // Clear existing map
+    if (mapRef.current) {
+      mapRef.current.remove();
+      mapRef.current = null;
+    }
+
+    // Create map
+    const map = L.map(containerRef.current).setView(
+      [parseFloat(position.lat), parseFloat(position.lon)],
+      8
+    );
+
+    mapRef.current = map;
+
+    // Add OSM tiles
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap",
+      maxZoom: 19,
+    }).addTo(map);
+
+    // Add position marker (red)
+    L.circleMarker([parseFloat(position.lat), parseFloat(position.lon)], {
+      radius: 8,
+      fillColor: "#ef4444",
+      color: "#fff",
+      weight: 2,
+      opacity: 1,
+      fillOpacity: 0.9,
+    })
+      .bindPopup(
+        `<div style="font-size: 12px;"><b>Resolved Position</b><br/>Lat: ${position.lat}°<br/>Lon: ${position.lon}°<br/>Accuracy: ±${position.accuracy}m</div>`
+      )
+      .addTo(map)
+      .openPopup();
+
+    // Add accuracy circle
+    L.circle([parseFloat(position.lat), parseFloat(position.lon)], {
+      radius: parseFloat(position.accuracy) || 50,
+      color: "#ef4444",
+      weight: 1,
+      opacity: 0.3,
+      fill: true,
+      fillOpacity: 0.1,
+    }).addTo(map);
+
+    // Add satellites (green)
+    if (satellites && satellites.length > 0) {
+      satellites.forEach((sat) => {
+        L.circleMarker([sat.lat, sat.lon], {
+          radius: 5,
+          fillColor: "#22c55e",
+          color: "#fff",
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 0.7,
+        })
+          .bindPopup(
+            `<div style="font-size: 12px;"><b>Satellite ${sat.id}</b><br/>Lat: ${sat.lat.toFixed(2)}°<br/>Lon: ${sat.lon.toFixed(2)}°<br/>Alt: ${sat.altitude}km</div>`
+          )
+          .addTo(map);
+      });
+    }
+  };
+
+  const initCesiumMap = () => {
+    // Load Cesium CSS
+    if (!document.getElementById("cesium-css")) {
+      const link = document.createElement("link");
+      link.id = "cesium-css";
+      link.rel = "stylesheet";
+      link.href = "https://cesium.com/downloads/cesiumjs/releases/1.104/Build/Cesium/Widgets/widgets.css";
+      document.head.appendChild(link);
+    }
+
+    // Load Cesium JS
+    if (!window.Cesium) {
+      const script = document.createElement("script");
+      script.src = "https://cesium.com/downloads/cesiumjs/releases/1.104/Build/Cesium/Cesium.js";
+      script.onload = () => renderCesiumMap();
+      document.head.appendChild(script);
+    } else {
+      renderCesiumMap();
+    }
+  };
+
+  const renderCesiumMap = () => {
+    if (!window.Cesium || !containerRef.current) return;
+
+    const Cesium = window.Cesium;
+
+    // Clear existing map
+    if (mapRef.current && mapRef.current.destroy) {
+      mapRef.current.destroy();
+      mapRef.current = null;
+    }
+
+    // Create Cesium viewer
+    const viewer = new Cesium.Viewer(containerRef.current, {
+      terrainProvider: Cesium.createWorldTerrain(),
+      imageryProvider: Cesium.ArcGisMapServerImageryProvider.fromUrl(
+        "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+      ),
+    });
+
+    mapRef.current = viewer;
+
+    // Add position marker (red)
+    viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(
+        parseFloat(position.lon),
+        parseFloat(position.lat)
+      ),
+      point: {
+        pixelSize: 10,
+        color: Cesium.Color.RED,
+        outlineColor: Cesium.Color.WHITE,
+        outlineWidth: 2,
+      },
+      label: {
+        text: "Resolved Position",
+        font: "12px sans-serif",
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        outlineWidth: 2,
+        verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+      },
+    });
+
+    // Add satellites (green)
+    if (satellites && satellites.length > 0) {
+      satellites.forEach((sat) => {
+        viewer.entities.add({
+          position: Cesium.Cartesian3.fromDegrees(sat.lon, sat.lat, sat.altitude * 1000),
+          point: {
+            pixelSize: 6,
+            color: Cesium.Color.GREEN,
+            outlineColor: Cesium.Color.WHITE,
+            outlineWidth: 1,
+          },
+          label: {
+            text: `Sat-${sat.id}`,
+            font: "10px sans-serif",
+            fillColor: Cesium.Color.WHITE,
+            outlineColor: Cesium.Color.BLACK,
+            outlineWidth: 1,
+            verticalOrigin: Cesium.VerticalOrigin.BOTTOM,
+          },
+        });
+      });
+    }
+
+    // Fly to position
+    viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(
+        parseFloat(position.lon),
+        parseFloat(position.lat),
+        500000
+      ),
+    });
+  };
+
+  return <div ref={containerRef} className="w-full h-full bg-gray-900 rounded" />;
 }
 
 // ============================================================================
@@ -325,11 +468,44 @@ position show
     errors: [],
   });
   const [activeTab, setActiveTab] = useState("console");
+  const [mapProvider, setMapProvider] = useState("leaflet");
+  const [accuracyHistory, setAccuracyHistory] = useState([]);
+  const [playback, setPlayback] = useState({
+    isPlaying: false,
+    currentStep: 0,
+    steps: [],
+  });
 
   const handleCompile = useCallback(() => {
     const result = executeCynegeticus(code);
     setResults(result);
-  }, [code]);
+
+    // Record playback step
+    if (result.position) {
+      const newStep = {
+        id: Date.now(),
+        code,
+        position: result.position,
+        satellites: result.satellites,
+        accuracy: parseFloat(result.position.accuracy),
+        timestamp: new Date().toLocaleTimeString(),
+      };
+
+      setPlayback((prev) => ({
+        ...prev,
+        steps: [...prev.steps, newStep],
+      }));
+
+      // Track accuracy history
+      setAccuracyHistory((prev) => [
+        ...prev,
+        {
+          step: accuracyHistory.length + 1,
+          accuracy: parseFloat(result.position.accuracy),
+        },
+      ]);
+    }
+  }, [code, accuracyHistory.length]);
 
 
   return (
@@ -346,11 +522,72 @@ position show
 
       <main className="relative h-screen w-full overflow-hidden bg-gray-950 flex flex-col">
         {/* Header Bar */}
-        <div className="bg-gray-900 border-b border-gray-700 px-4 py-3 flex items-center justify-between">
+        <div className="bg-gray-900 border-b border-gray-700 px-4 py-3 flex items-center justify-between flex-wrap gap-3">
           <div>
             <h1 className="text-lg font-bold text-white">Cynegeticus Sandbox</h1>
             <p className="text-xs text-gray-400">GPS-Free Positioning via S-Entropy Coordinates</p>
           </div>
+
+          {/* Map Provider Selection */}
+          <div className="flex items-center gap-2">
+            <label className="text-xs text-gray-400">Map:</label>
+            <select
+              value={mapProvider}
+              onChange={(e) => setMapProvider(e.target.value)}
+              className="px-3 py-1 bg-gray-800 text-white text-xs rounded border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="leaflet">Leaflet (2D)</option>
+              <option value="cesium">Cesium (3D)</option>
+            </select>
+          </div>
+
+          {/* Playback Controls */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                setPlayback((prev) => ({ ...prev, currentStep: Math.max(0, prev.currentStep - 1) }));
+                if (playback.steps[playback.currentStep - 1]) {
+                  const step = playback.steps[playback.currentStep - 1];
+                  setResults({
+                    success: true,
+                    position: step.position,
+                    satellites: step.satellites,
+                    validations: [],
+                    logs: [`Loaded step: ${step.timestamp}`],
+                    errors: [],
+                  });
+                }
+              }}
+              className="px-2 py-1 bg-gray-700 hover:bg-gray-600 text-white text-xs rounded"
+              title="Previous step"
+            >
+              ◀
+            </button>
+            <span className="text-xs text-gray-400">
+              {playback.steps.length > 0 ? `${playback.currentStep}/${playback.steps.length}` : "0/0"}
+            </span>
+            <button
+              onClick={() => {
+                setPlayback((prev) => ({ ...prev, currentStep: Math.min(prev.steps.length - 1, prev.currentStep + 1) }));
+                if (playback.steps[playback.currentStep + 1]) {
+                  const step = playback.steps[playback.currentStep + 1];
+                  setResults({
+                    success: true,
+                    position: step.position,
+                    satellites: step.satellites,
+                    validations: [],
+                    logs: [`Loaded step: ${step.timestamp}`],
+                    errors: [],
+                  });
+                }
+              }}
+              className="px-2 py-1 bg-gray-700 hover:bg-gray-600 text-white text-xs rounded"
+              title="Next step"
+            >
+              ▶
+            </button>
+          </div>
+
           <button
             onClick={handleCompile}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded transition-colors"
@@ -399,7 +636,7 @@ position show
           <div className="flex-1 flex flex-col overflow-hidden border-l border-gray-700">
             {/* Tabs */}
             <div className="flex border-b border-gray-700 bg-gray-800">
-              {["console", "results", "map"].map((tab) => (
+              {["console", "results", "charts", "map"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
@@ -466,10 +703,35 @@ position show
                 </div>
               )}
 
+              {activeTab === "charts" && (
+                <div className="h-full w-full p-4">
+                  {accuracyHistory.length > 0 ? (
+                    <div>
+                      <h3 className="text-xs text-gray-400 mb-3">Accuracy Trend (meters)</h3>
+                      <SimpleAreaChart
+                        data={accuracyHistory}
+                        width={400}
+                        height={250}
+                        color="#3b82f6"
+                      />
+                      <div className="mt-4 p-3 bg-gray-800 rounded text-xs text-gray-300">
+                        <div>Total Executions: {accuracyHistory.length}</div>
+                        <div>Best Accuracy: ±{Math.min(...accuracyHistory.map((d) => d.accuracy)).toFixed(2)}m</div>
+                        <div>Latest: ±{accuracyHistory[accuracyHistory.length - 1]?.accuracy.toFixed(2) || "—"}m</div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="text-gray-500 flex items-center justify-center h-full">
+                      // Compile to view accuracy trends
+                    </div>
+                  )}
+                </div>
+              )}
+
               {activeTab === "map" && (
                 <div className="h-full w-full">
                   {results.position ? (
-                    <MapComponent position={results.position} satellites={results.satellites} />
+                    <MapComponent position={results.position} satellites={results.satellites} provider={mapProvider} />
                   ) : (
                     <div className="text-gray-500 flex items-center justify-center h-full">
                       // Compile to view position on map
@@ -482,9 +744,13 @@ position show
         </div>
 
         {/* Status Bar */}
-        <div className="bg-gray-900 border-t border-gray-700 px-4 py-1 text-xs text-gray-500 flex justify-between">
-          <div>Cynegeticus v1.0</div>
-          <div>{results.success ? "✓ Ready" : "✗ Error"}</div>
+        <div className="bg-gray-900 border-t border-gray-700 px-4 py-2 text-xs text-gray-500 flex justify-between items-center">
+          <div>Cynegeticus v1.0 | {results.success ? "✓ Ready" : "✗ Error"}</div>
+          <div className="flex gap-4 text-gray-400">
+            <span>Executions: {playback.steps.length}</span>
+            <span>Accuracy: {accuracyHistory.length > 0 ? `±${accuracyHistory[accuracyHistory.length - 1].accuracy.toFixed(2)}m` : "—"}</span>
+            <span>Map: {mapProvider === "cesium" ? "3D Cesium" : "2D Leaflet"}</span>
+          </div>
         </div>
       </main>
     </>
