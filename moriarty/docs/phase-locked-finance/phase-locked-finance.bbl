@@ -1,0 +1,24 @@
+\begin{thebibliography}{1}
+
+\bibitem{bank1998principles}
+Bruce~J Summers.
+\newblock {\em Principles of payment systems}.
+\newblock IMF, 2002.
+
+\bibitem{nakamoto2008bitcoin}
+Satoshi Nakamoto.
+\newblock Bitcoin: A peer-to-peer electronic cash system.
+\newblock {\em White paper}, 2008.
+
+\bibitem{wood2014ethereum}
+Gavin Wood.
+\newblock Ethereum: A next-generation smart contract and decentralized
+  application platform.
+\newblock {\em White paper}, 3:37, 2014.
+
+\bibitem{rogoff2016curse}
+Kenneth~S Rogoff.
+\newblock The curse of cash.
+\newblock {\em Journal of Economic Literature}, 54(2):20--39, 2016.
+
+\end{thebibliography}
