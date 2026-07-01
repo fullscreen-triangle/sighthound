@@ -1,0 +1,29 @@
+{
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "env": {
+    "NEXT_PUBLIC_MAPBOX_TOKEN": {
+      "description": "Mapbox API token for map visualization"
+    },
+    "NEXT_PUBLIC_CESIUM_TOKEN": {
+      "description": "Cesium Ion token for 3D globe visualization"
+    },
+    "NEXT_PUBLIC_OPENWEATHER_API_KEY": {
+      "description": "OpenWeather API key for weather data"
+    },
+    "NEXT_PUBLIC_TOMTOM_API_KEY": {
+      "description": "TomTom API key for mapping services"
+    }
+  },
+  "public": false,
+  "regions": ["iad1"],
+  "functions": {
+    "src/pages/api/**/*.ts": {
+      "maxDuration": 60
+    }
+  },
+  "redirects": [],
+  "rewrites": []
+}
