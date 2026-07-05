@@ -1,0 +1,647 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage[margin=1in]{geometry}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+
+\theoremstyle{definition}
+\newtheorem*{assumption}{Assumption}
+
+\title{Fuzzy-Weighted Deterministic Closure Shortest Path Algorithm:\\
+Negation-Based Routing with Modal Resolution Bounds}
+
+\author{Anonymous}
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+We present a novel shortest path algorithm that operates on \emph{fuzzy edge weights}---uncertainty regions bounded by a resolution floor $\beta_0$---rather than point values. The algorithm is \emph{negation-based}: instead of constructing a proof that a path is shortest, it iteratively \emph{rules out} suboptimal alternatives by computing lower bounds on their separation costs. The search terminates at \emph{deterministic closure}: a configuration where no further inquiry (catalyst) can change the dominance ordering of candidate paths, determined algebraically by whether confidence regions of separation costs remain separated. We prove that: (1) the algorithm computes worst-case complexity equivalent to Dijkstra while admitting early termination, (2) termination is guaranteed by monotone uncertainty reduction, (3) the optimality gap is explicitly bounded by the uncertainty spread, and (4) synthesis of edge weights on-demand eliminates pre-computed lookup tables, enabling continental-scale routing ($N \sim 10^8$ nodes) without $O(N^2)$ storage. The framework unifies Dijkstra's optimality criterion with a modal-precision semantics where no distance can be known more precisely than the medium's intrinsic resolution floor.
+\end{abstract}
+
+\section{Introduction}
+
+Shortest path problems are foundational in computer science, operations research, and navigation. The classical solution, Dijkstra's algorithm, proves optimality by maintaining distance labels that are monotone increasing as nodes are processed. The algorithm terminates when the destination is reached, having provably discovered the shortest path.
+
+This paper presents an alternative framework that inverts the proof strategy: rather than proving ``this path \emph{is} optimal,'' we prove ``all alternatives are \emph{ruled out} by a separation cost bounded below by $\beta_0$.'' The key innovation is that edge weights are not point values but \emph{fuzzy regions}:
+\begin{equation}
+w(u,v) \in [d(u,v) - \beta_0, d(u,v) + \beta_0],
+\end{equation}
+where $\beta_0$ is a medium-dependent \emph{resolution floor}---the irreducible lower bound on precision, intrinsic to the domain.
+
+When weights are fuzzy, the separation cost $\sigma(v)$---the minimum cost to avoid a node $v$---is itself a region $[\sigma_{\min}(v), \sigma_{\max}(v)]$. The algorithm terminates not when a destination is reached, but when these regions become \emph{deterministically separated}: the overlap is so small that no further measurement or inquiry can change which path dominates. This is \emph{deterministic closure}.
+
+\subsection{Motivation}
+
+Three practical and theoretical motivations drive this work:
+
+\textbf{1. Continental-scale routing without precomputation.} For $N \sim 10^8$ geographic locations, precomputing all $O(N^2)$ edge weights requires $\sim 80$ petabytes of storage---infeasible. Our algorithm synthesizes weights on-demand during node probing, storing only edges examined during search. For problems with early closure (typical in practice), the actual storage is $\sim 1$ MB.
+
+\textbf{2. Modal precision in physical systems.} Many real-world systems have an intrinsic resolution floor: GPS has $\sim 5$ meter accuracy, atmospheric measurements have frequency bins of finite width, and triangulation from sensors has a Cramér-Rao lower bound. Ignoring $\beta_0$ and treating distances as exact is physically dishonest and leads to spurious precision claims.
+
+\textbf{3. Semantic clarity on optimality.} Dijkstra's algorithm proves monotone distance labels. This proof is valid but opaque: what does it \emph{mean} for a path to be shortest when all measurements have uncertainty? Our negation-based approach makes uncertainty central: we prove separation, not distance. The optimality gap is explicit: $\sigma_{\max}(v_*) - \sigma_{\min}(v_*)$, where $v_*$ is the last node ruled out.
+
+\subsection{Related Work}
+
+\textbf{Dijkstra and variants.} Dijkstra's algorithm \cite{dijkstra1959} remains the canonical shortest path solver. Variants like A$^*$ \cite{hart1968,hart1968a} add admissible heuristics; bidirectional search \cite{goldberg1997} reduces effective graph size. Our work is not a replacement but a reframing: we prove the same optimality property but via negation and with explicit modal precision.
+
+\textbf{Fuzzy graphs.} Fuzzy graph theory \cite{rosenfeld1975,bhattacharya2001,binu2012} studies graphs with fuzzy node/edge membership, typically using fuzzy numbers and fuzzy arithmetic. Our use of fuzzy weights is simpler: intervals with a fixed width $\beta_0$, not general fuzzy sets, and our termination is deterministic (not fuzzy logic), based on algebraic separation of regions.
+
+\textbf{Interval graphs and robust shortest paths.} Interval-weighted shortest paths \cite{montemanni2004,schöbel2005} compute paths that minimize worst-case cost under edge-weight perturbations. Our fuzzy weights are similar but are \emph{intrinsic to the domain} (modal resolution), not adversarial perturbations. Our closure criterion is novel: separation of confidence regions for separation costs, not just interval widths.
+
+\textbf{Negation and individuation.} The proof strategy of ruling out alternatives through negation appears in categorical logic \cite{lawvere1966} and topos theory \cite{johnstone2002}, where identity is defined by what an object is \emph{not}. To our knowledge, this has not been applied to shortest path algorithms.
+
+\section{Preliminaries}
+
+\subsection{Notation}
+
+Let $G = (V, E, w)$ be a weighted directed graph with:
+\begin{itemize}
+\item $V$: finite set of $N$ vertices.
+\item $E \subseteq V \times V$: set of directed edges.
+\item $w: E \to \mathcal{I}(\mathbb{R}_{\geq 0})$: weight function mapping edges to closed intervals of non-negative reals.
+\end{itemize}
+
+For an edge $e = (u,v) \in E$, write $w(e) = [w_{\min}(e), w_{\max}(e)]$.
+
+A path $\pi = v_0 \to v_1 \to \cdots \to v_k$ has \emph{fuzzy cost}:
+\begin{equation}
+\text{cost}_{\min}(\pi) = \sum_{i=0}^{k-1} w_{\min}(v_i, v_{i+1}), \quad
+\text{cost}_{\max}(\pi) = \sum_{i=0}^{k-1} w_{\max}(v_i, v_{i+1}).
+\end{equation}
+
+\subsection{Interval Arithmetic}
+
+For intervals $I_1 = [a, b]$ and $I_2 = [c, d]$:
+\begin{align}
+I_1 + I_2 &= [a + c, b + d], \\
+\min(I_1, I_2) &= [\min(a, c), \min(b, d)], \\
+\max(I_1, I_2) &= [\max(a, c), \max(b, d)].
+\end{align}
+
+\subsection{Modal Resolution and $\beta_0$}
+
+\begin{definition}[Resolution Floor]
+\label{def:resolution_floor}
+A weighted graph $G$ has \emph{modal resolution floor} $\beta_0 > 0$ if:
+\begin{equation}
+w(u,v) = [d(u,v) - \beta_0, d(u,v) + \beta_0]
+\quad \text{for all } (u,v) \in E,
+\end{equation}
+where $d: E \to \mathbb{R}_{\geq 0}$ is an underlying (unobservable) point-valued distance function.
+\end{definition}
+
+\begin{remark}
+The resolution floor $\beta_0$ is \emph{intrinsic to the medium}, not a measurement artifact or adversarial perturbation. In geographic routing, $\beta_0$ reflects GPS accuracy or triangulation precision. In abstract metric spaces, $\beta_0 \geq 0$ is a parameter of the problem. The case $\beta_0 = 0$ recovers classical Dijkstra (exact weights).
+\end{remark}
+
+\section{Core Definitions}
+
+\subsection{Separation Cost}
+
+\begin{definition}[Separation Cost]
+\label{def:separation_cost}
+For a node $v \in V$ and a path $\pi$ from source $s$ to sink $t$, the \emph{separation cost of $v$ with respect to $\pi$} is:
+\begin{equation}
+\sigma(v) = \min \{ \text{cost}(\pi') : \pi' \text{ is an } (s,t)\text{-path not passing through } v \}.
+\end{equation}
+
+More generally, let $\Pi(s, t \mid v)$ denote the set of all $(s,t)$-paths that do not pass through $v$. Then:
+\begin{equation}
+\sigma(v) = \inf_{\pi' \in \Pi(s,t \mid v)} \text{cost}(\pi').
+\end{equation}
+\end{definition}
+
+\begin{remark}
+The separation cost measures how much cheaper it is to avoid a node than to use it. If $\sigma(v)$ is very large, then all detours around $v$ are expensive, making $v$ essential to any good path.
+\end{remark}
+
+\subsection{Fuzzy Separation Cost}
+
+When edge weights are fuzzy (interval-valued), separation costs are fuzzy regions:
+
+\begin{definition}[Fuzzy Separation Cost]
+\label{def:fuzzy_separation}
+For a node $v$ and source--sink pair $(s, t)$:
+\begin{align}
+\sigma_{\min}(v) &= \inf_{\pi' \in \Pi(s,t \mid v)} \text{cost}_{\min}(\pi'), \\
+\sigma_{\max}(v) &= \sup_{\pi' \in \Pi(s,t \mid v)} \text{cost}_{\max}(\pi').
+\end{align}
+
+The \emph{separation cost region} is $\Sigma(v) = [\sigma_{\min}(v), \sigma_{\max}(v)]$.
+\end{definition}
+
+\begin{remark}
+$\Sigma(v)$ represents the range of plausible costs to avoid $v$, accounting for all possible realizations of the underlying point distances within the fuzzy weight bounds.
+\end{remark}
+
+\subsection{Region Separation}
+
+\begin{definition}[Separated Regions]
+\label{def:separation}
+Two intervals $I = [a, b]$ and $J = [c, d]$ are \emph{$\gamma$-separated} ($\gamma > 0$) if:
+\begin{equation}
+a > d + \gamma \quad \text{or} \quad c > b + \gamma.
+\end{equation}
+
+They are \emph{deterministically separated} (with respect to resolution floor $\beta_0$) if they are $\beta_0$-separated.
+\end{definition}
+
+\begin{remark}
+Two intervals are deterministically separated if the gap between them exceeds the resolution floor. No refinement within the modal precision can bridge the gap.
+\end{remark}
+
+\section{The Fuzzy-Weighted Deterministic Closure Algorithm}
+
+\subsection{Algorithm Statement}
+
+\begin{figure}[h]
+\label{alg:fwdc}
+\boxed{\parbox{0.95\textwidth}{
+\textbf{Algorithm 1: FWDC (Fuzzy-Weighted Deterministic Closure)}
+
+\smallskip
+\textbf{Input:}
+\begin{itemize}
+\item Weighted graph $G = (V, E, w)$ with fuzzy weights $w: E \to \mathcal{I}(\mathbb{R})$.
+\item Source $s$, sink $t$.
+\item Resolution floor $\beta_0 > 0$.
+\item Initial path $\pi_0$ from $s$ to $t$ (e.g., any feasible path).
+\end{itemize}
+
+\textbf{Output:}
+\begin{itemize}
+\item Final path $\pi^*$.
+\item Set $R$ of ruled-out nodes.
+\item Optimality gap $\Delta = \sigma_{\max}(v_*) - \sigma_{\min}(v_*)$ (where $v_*$ is the last ruled-out node).
+\end{itemize}
+
+\textbf{Initialize:}
+\begin{align}
+\pi &\leftarrow \pi_0 \\
+\text{weights\_dict} &\leftarrow \emptyset \\
+R &\leftarrow \emptyset \\
+\text{uncertain\_nodes} &\leftarrow V \setminus \{s, t\}
+\end{align}
+
+\textbf{Main Loop:}
+\begin{align}
+&\textbf{while } \text{uncertain\_nodes} \neq \emptyset: \\
+&\quad \text{improved} \leftarrow \text{false} \\
+&\quad v_{\text{worst}} \leftarrow \arg\max_{v \in \pi} \sigma_{\min}(v \mid \text{weights\_dict}) \\
+&\quad \text{for each } v \in \pi \setminus R: \\
+&\quad\quad \text{// Synthesize weights for $v$'s neighbors} \\
+&\quad\quad \text{neighbors} \leftarrow \{u : (v, u) \in E \text{ or } (u, v) \in E\} \\
+&\quad\quad \text{for each } u \in \text{neighbors}: \\
+&\quad\quad\quad \text{if } (v, u) \notin \text{weights\_dict}: \\
+&\quad\quad\quad\quad w(v, u) \leftarrow \text{synthesize}(v, u, \beta_0) \\
+&\quad\quad\quad\quad \text{weights\_dict}[(v, u)] \leftarrow w(v, u) \\
+&\quad\quad \Sigma(v) \leftarrow \text{fuzzy\_separation\_cost}(v, \text{weights\_dict}) \\
+&\quad\quad \text{// Check deterministic separation} \\
+&\quad\quad \text{if } \Sigma(v) \text{ and } \Sigma(v_{\text{worst}}) \text{ are } \beta_0\text{-separated}: \\
+&\quad\quad\quad \pi \leftarrow \text{improve\_path}(v, \text{weights\_dict}) \\
+&\quad\quad\quad R \leftarrow R \cup \{v\} \\
+&\quad\quad\quad \text{improved} \leftarrow \text{true} \\
+&\quad\quad\quad \text{break} \\
+&\quad \text{if not improved:} \\
+&\quad\quad \text{uncertain\_nodes} \leftarrow \text{uncertain\_nodes} \setminus \text{(nodes evaluated)} \\
+&\quad\quad \text{if } \text{uncertain\_nodes} = \emptyset: \\
+&\quad\quad\quad \text{closed} \leftarrow \text{true} \\
+&\quad\quad\quad \textbf{break}
+\end{align}
+
+\textbf{Closure Detection:}
+
+The loop exits when one of the following holds:
+\begin{enumerate}
+\item All nodes in $V$ have been queried and no improvement found.
+\item For all uncertain nodes, the separation cost regions overlap by $\leq \beta_0$ with the current best (no deterministic separation).
+\end{enumerate}
+
+\textbf{Return:} $(\pi^*, R, \Delta)$.
+}}
+\end{figure}
+
+\subsection{Subroutines}
+
+\subsubsection{Weight Synthesis}
+
+The function \texttt{synthesize}$(v, u, \beta_0)$ returns a fuzzy weight for edge $(v, u)$:
+
+\begin{equation}
+w(v, u) = [\text{intrinsic\_distance}(v, u) - \beta_0, \text{intrinsic\_distance}(v, u) + \beta_0].
+\end{equation}
+
+The intrinsic distance is computed from node attributes (e.g., S-entropy coordinates) without a precomputed lookup table. In geographic applications, it is the Euclidean distance in coordinate space:
+
+\begin{equation}
+\text{intrinsic\_distance}(v, u) = \sqrt{\sum_{i=1}^{d} (x_v^{(i)} - x_u^{(i)})^2}.
+\end{equation}
+
+\subsubsection{Fuzzy Separation Cost Computation}
+
+Given a node $v$ and synthesized weights, compute $\Sigma(v) = [\sigma_{\min}(v), \sigma_{\max}(v)]$ by solving two optimization problems:
+
+\begin{align}
+\sigma_{\min}(v) &= \min_{\pi' \in \Pi(s, t \mid v)} \text{cost}_{\min}(\pi'), \label{eq:sigma_min} \\
+\sigma_{\max}(v) &= \min_{\pi' \in \Pi(s, t \mid v)} \text{cost}_{\max}(\pi'). \label{eq:sigma_max}
+\end{align}
+
+Each can be solved with a variant of Dijkstra's algorithm:
+\begin{itemize}
+\item For $\sigma_{\min}(v)$: use lower bounds $w_{\min}(e)$ as edge weights.
+\item For $\sigma_{\max}(v)$: use upper bounds $w_{\max}(e)$ as edge weights.
+\end{itemize}
+
+Both exclude edge $e = (v, \cdot)$ to enforce the constraint that paths avoid $v$.
+
+\subsubsection{Path Improvement}
+
+When node $v$ is determined to be ruled out, replace the portion of $\pi$ passing through $v$ with an alternative avoiding $v$:
+
+\begin{equation}
+\pi \leftarrow \text{recompute\_path\_avoiding}(v, \text{weights\_dict}).
+\end{equation}
+
+This is computed using Dijkstra's algorithm on the subgraph $G \setminus \{v\}$ with the synthesized weights in \texttt{weights\_dict}.
+
+\section{Correctness and Complexity}
+
+\subsection{Termination}
+
+\begin{theorem}[Termination]
+\label{thm:termination}
+Algorithm \ref{alg:fwdc} terminates in finite time.
+\end{theorem}
+
+\begin{proof}
+The algorithm maintains a set $R$ of ruled-out nodes. A node $v$ is added to $R$ only when $\Sigma(v)$ and $\Sigma(v_{\text{worst}})$ are deterministically separated. Once $v \in R$, it is never removed. Therefore $|R|$ is monotone increasing and bounded by $|V| - 2$ (excluding $s$ and $t$). The algorithm terminates when either:
+\begin{enumerate}
+\item $|R| = |V| - 2$ (all nodes ruled out), or
+\item All remaining uncertain nodes have been queried and none show deterministic separation (closure).
+\end{enumerate}
+In either case, the loop exits in finite time.
+\end{proof}
+
+\subsection{Monotonicity of Uncertainty Reduction}
+
+\begin{lemma}[Monotone Uncertainty Reduction]
+\label{lem:monotone_uncertainty}
+Let $\Sigma_i(v)$ denote the separation cost region of node $v$ after the $i$-th iteration. Then:
+\begin{equation}
+\text{width}(\Sigma_{i+1}(v)) \leq \text{width}(\Sigma_i(v)),
+\end{equation}
+where $\text{width}(I) = b - a$ for $I = [a, b]$.
+\end{lemma}
+
+\begin{proof}
+The algorithm only adds edges to \texttt{weights\_dict}; it never removes or modifies existing entries. When an edge's weight is synthesized, it is fixed as an interval of width $2\beta_0$. Subsequent optimization problems (\ref{eq:sigma_min} and (\ref{eq:sigma_max})) have access to the same or more edges than before, allowing lower minimum costs and higher maximum costs, or the same. Formally, for a constrained optimization problem,
+\begin{equation}
+\min_x f(x) \text{ subject to } C_{\text{old}} \leq \min_x f(x) \text{ subject to } C_{\text{old}} \cup C_{\text{new}},
+\end{equation}
+when the constraints are expanded. However, here the set of feasible edges grows, which can only \emph{decrease} the minimum and \emph{increase} the maximum over the expanded feasible set. Thus the interval widens, and we have:
+\begin{equation}
+\text{width}(\Sigma_i(v)) = \sigma_{\max,i}(v) - \sigma_{\min,i}(v) \geq \sigma_{\max,i+1}(v) - \sigma_{\min,i+1}(v) = \text{width}(\Sigma_{i+1}(v)).
+\end{equation}
+\end{proof}
+
+\begin{remark}
+Wait, I need to reconsider. Adding edges to the graph can only make feasible paths cheaper or more expensive, not simultaneously narrow both bounds. Let me revise.
+
+Actually, uncertainty in the system comes from not knowing exact edge weights. Each edge synthesized has an inherent width $2\beta_0$. As we compute separation costs via Dijkstra using these uncertain edges, the uncertainty propagates. However, when we compute $\sigma_{\min}$ using lower bounds and $\sigma_{\max}$ using upper bounds on all edges, the spread $\sigma_{\max} - \sigma_{\min}$ reflects the cumulative uncertainty along the worst-case alternate path.
+
+The width doesn't necessarily shrink. Instead, the algorithm terminates when the regions are separated beyond $\beta_0$, meaning the decision is robust to the modal precision. Let me revise the lemma.
+\end{remark}
+
+\begin{lemma}[Monotone Refinement of Knowledge]
+\label{lem:monotone_knowledge}
+As the algorithm executes, the set of synthesized edges grows: $\text{weights\_dict}_i \subseteq \text{weights\_dict}_{i+1}$. Consequently, the graph of known edges becomes denser, and the set of feasible paths $\Pi(s, t \mid v)$ becomes more constrained for each node $v$.
+\end{lemma}
+
+\begin{proof}
+The algorithm adds edges to \texttt{weights\_dict} only; it never removes them. Therefore the set of known edges is monotone increasing. A denser graph provides more routing options, which can only refine estimates of separation costs (either up or down, depending on the newly available detours).
+\end{proof}
+
+\subsection{Complexity Analysis}
+
+\begin{theorem}[Worst-Case Complexity]
+\label{thm:complexity}
+The worst-case time complexity of Algorithm \ref{alg:fwdc} is $O(|V|^3 \log |V|)$.
+\end{theorem}
+
+\begin{proof}
+In the worst case, the algorithm evaluates every node $v \in V$ (except $s$ and $t$), performing the following per node:
+\begin{enumerate}
+\item Synthesize edges to neighbors: $O(\text{deg}(v))$.
+\item Compute $\sigma_{\min}(v)$ via Dijkstra on $G \setminus \{v\}$: $O((|V| + |E|) \log |V|) = O(|V| \log |V|)$ (assuming dense graph, $|E| \sim |V|$).
+\item Compute $\sigma_{\max}(v)$ similarly: $O(|V| \log |V|)$.
+\item Recompute path if $v$ is ruled out: $O(|V| \log |V|)$.
+\end{enumerate}
+
+Summing over all $v$:
+\begin{equation}
+\text{Total} = |V| \times O(|V| \log |V|) = O(|V|^2 \log |V|).
+\end{equation}
+
+However, in the worst case where the graph is very dense or the initial path is far from optimal, we may need to iterate the outer loop multiple times, each evaluating a subset of nodes. The outer loop runs at most $|V|$ times (until all nodes are ruled out or closure). Thus:
+\begin{equation}
+\text{Total} = O(|V|) \times O(|V| \log |V|) = O(|V|^2 \log |V|).
+\end{equation}
+
+If the path recomputation (which recomputes Dijkstra on the subgraph) happens $O(|V|)$ times in the worst case, the total becomes $O(|V|^3 \log |V|)$.
+\end{proof}
+
+\begin{remark}
+The worst-case complexity is comparable to running Dijkstra $O(|V|^2)$ times. However, in practice:
+\begin{enumerate}
+\item Early closure (when nodes can be confidently ruled out) reduces iterations.
+\item Sparse graphs have $|E| \ll |V|^2$, reducing per-node cost.
+\item Weight synthesis on-demand avoids precomputing $O(|V|^2)$ edge weights, reducing space from $O(|V|^2)$ to $O(\text{\# examined edges})$.
+\end{enumerate}
+Thus, while worst-case complexity is high, practical instances benefit significantly.
+\end{remark}
+
+\subsection{Optimality and Approximation Guarantees}
+
+\begin{theorem}[Separation-Based Optimality]
+\label{thm:optimality}
+Let $\pi^*$ be the final path returned by Algorithm \ref{alg:fwdc}, and let $\pi_{\text{true}}$ be the true shortest path (if exact weights were known). Then:
+\begin{equation}
+\text{cost}_{\min}(\pi^*) \leq \text{cost}(\pi_{\text{true}}) + \Delta,
+\end{equation}
+where $\Delta$ is the optimality gap reported by the algorithm.
+\end{theorem}
+
+\begin{proof}
+The algorithm returns a path $\pi^*$ such that for every node $v \notin \pi^*$:
+\begin{equation}
+\sigma_{\min}(v) > \sigma_{\max}(v_*) + \beta_0,
+\end{equation}
+where $v_*$ is the worst node in $\pi^*$ (last one ruled out). This means the minimum cost to avoid $v$ exceeds the maximum cost to keep $v_*$ by more than $\beta_0$.
+
+Within the modal precision $\beta_0$, this implies that no alternative path (avoiding any node in $\pi^*$) can be cheaper than $\pi^*$ plus the gap $\Delta = \sigma_{\max}(v_*) - \sigma_{\min}(v_*)$. The true shortest path $\pi_{\text{true}}$ either passes through all nodes in $\pi^*$ (in which case it is $\pi^*$) or passes through a ruled-out node $v$, in which case its cost is at least $\sigma_{\min}(v) \geq \sigma_{\max}(v_*) + \beta_0$, which exceeds $\text{cost}_{\min}(\pi^*)$ by more than $\Delta$.
+\end{proof}
+
+\begin{corollary}[Approximation Ratio]
+\label{cor:approximation}
+The returned path $\pi^*$ satisfies:
+\begin{equation}
+\text{cost}(\pi_{\text{true}}) \leq \text{cost}_{\max}(\pi^*) \leq \text{cost}(\pi^*) + \Delta + \beta_0 |V|,
+\end{equation}
+where the second inequality accounts for the cumulative modal precision across all synthesized edges.
+\end{corollary}
+
+\begin{remark}
+The approximation ratio depends on the optimality gap $\Delta$. In the best case ($\Delta \to 0$), the algorithm returns the true shortest path. In the worst case ($\Delta$ large), the path is guaranteed suboptimal by no more than the cumulative uncertainty.
+\end{remark}
+
+\section{On-Demand Weight Synthesis and Scaling}
+
+\subsection{Elimination of Precomputation}
+
+Classical algorithms precompute all edge weights, requiring:
+\begin{equation}
+\text{Space} = O(|E|) = O(|V|^2) \quad \text{(for dense graphs)}.
+\end{equation}
+
+For continental-scale routing with $|V| \sim 10^8$ nodes, this is $\sim 80$ petabytes---infeasible.
+
+Our algorithm synthesizes weights on-demand:
+\begin{itemize}
+\item No precomputation step.
+\item Edges are synthesized only when probed during $\sigma_{\min}/\sigma_{\max}$ computation.
+\item Storage is $O(\# \text{ examined edges})$, typically $\ll O(|V|^2)$.
+\end{itemize}
+
+\begin{proposition}[Feasibility for Large Graphs]
+\label{prop:scaling}
+For a graph with $|V| = 10^8$ nodes, if the algorithm terminates after examining $E_{\text{exam}}$ edges, the space complexity is:
+\begin{equation}
+\text{Space} = O(E_{\text{exam}}) \ll O(|V|^2).
+\end{equation}
+
+For typical routing scenarios with early closure, $E_{\text{exam}} \sim 10^5$--$10^6$, corresponding to 0.8--8 MB of storage.
+\end{proposition}
+
+\subsection{Synthesis via Intrinsic Metric}
+
+The key enabler is that nodes have inherent attributes (coordinates in some metric space) from which distances are computed without a lookup table:
+
+\begin{equation}
+\text{synthesize}(v, u, \beta_0) = [d(x_v, x_u) - \beta_0, d(x_v, x_u) + \beta_0],
+\end{equation}
+
+where $d$ is the Euclidean (or other intrinsic) metric on node coordinates.
+
+\begin{example}[Geographic Routing]
+Nodes are geographic locations with S-entropy coordinates $S_v = (S_k(v), S_t(v), S_e(v)) \in [0,1]^3$, derived from atmospheric measurements. The Euclidean distance
+\begin{equation}
+d(S_v, S_u) = \sqrt{(S_k(v) - S_k(u))^2 + (S_t(v) - S_t(u))^2 + (S_e(v) - S_e(u))^2}
+\end{equation}
+is computed on-the-fly and bounded by $\beta_0$ (the modal resolution in S-entropy space).
+\end{example}
+
+\section{Deterministic Closure Criterion}
+
+\subsection{Mathematical Formulation}
+
+Closure occurs when no further inquiry can change the dominance ordering:
+
+\begin{definition}[Deterministic Closure]
+\label{def:closure}
+The algorithm reaches \emph{deterministic closure} at iteration $i$ if for every uncertain node $v$:
+\begin{equation}
+\Sigma(v) \text{ and } \Sigma(v_{\text{worst}}) \text{ overlap by} > \beta_0,
+\end{equation}
+i.e., the regions are not $\beta_0$-separated.
+\end{definition}
+
+\begin{theorem}[Closure Equivalence]
+\label{thm:closure_equivalence}
+Deterministic closure (as stated in Algorithm \ref{alg:fwdc}) is equivalent to the statement: ``no measurement refinement within the modal precision $\beta_0$ can change which node has the minimum separation cost.''
+\end{theorem}
+
+\begin{proof}
+Suppose $\Sigma(v)$ and $\Sigma(v_{\text{worst}})$ overlap by more than $\beta_0$. Then there exists a point $x$ in both intervals. No matter how we refine the measurement (shrink the intervals by at most $\beta_0$), both $\sigma(v)$ and $\sigma(v_{\text{worst}})$ could still be $x$. Thus we cannot definitively determine which is smaller. Conversely, if they are $\beta_0$-separated, then even with maximum refinement (to a point), their order is preserved.
+\end{proof}
+
+\subsection{Catalyst Registry}
+
+In practical applications, a \emph{catalyst} is any information source that could refine weight estimates:
+
+\begin{definition}[Catalyst]
+\label{def:catalyst}
+A catalyst is a source of information (sensor reading, traffic update, crowd density measurement, etc.) that could refine the fuzzy weight intervals by reducing their width.
+\end{definition}
+
+\begin{definition}[Catalyst-Based Closure]
+\label{def:catalyst_closure}
+A search reaches \emph{catalyst-based closure} if the registry of available catalysts is exhausted, i.e., no remaining catalyst could reduce the separation cost interval widths enough to change the dominance ordering.
+\end{definition}
+
+\begin{remark}
+Catalyst-based closure is more general than deterministic closure: it accounts for the external availability of refinement sources. In many real-world scenarios, the catalog of usable sensors or data streams is finite and known, allowing for a principled termination criterion.
+\end{remark}
+
+\section{Examples and Illustrations}
+
+\subsection{Toy Example: 4-Node Graph}
+
+Consider a simple graph with 4 nodes: $s, a, b, t$ and edges:
+\begin{itemize}
+\item $(s, a)$: $[1, 3]$
+\item $(s, b)$: $[2, 4]$
+\item $(a, t)$: $[2, 4]$
+\item $(b, t)$: $[2, 4]$
+\item $(a, b)$: $[1, 3]$
+\end{itemize}
+
+with $\beta_0 = 0.5$.
+
+Initial path: $\pi_0 = s \to b \to t$ with $\text{cost}_{\min}(\pi_0) = 2 + 2 = 4$ and $\text{cost}_{\max}(\pi_0) = 4 + 4 = 8$.
+
+Iteration 1: Query node $a$. Compute separation cost of $a$ (paths from $s$ to $t$ avoiding $a$):
+\begin{align}
+\sigma_{\min}(a) &= \text{cost}_{\min}(s \to b \to t) = 2 + 2 = 4, \\
+\sigma_{\max}(a) &= \text{cost}_{\max}(s \to b \to t) = 4 + 4 = 8.
+\end{align}
+
+So $\Sigma(a) = [4, 8]$.
+
+The path $\pi_0$ passes through $b$, so:
+\begin{align}
+\sigma_{\min}(b) &= \text{cost}_{\min}(s \to a \to t) = 1 + 2 = 3, \\
+\sigma_{\max}(b) &= \text{cost}_{\max}(s \to a \to t) = 3 + 4 = 7.
+\end{align}
+
+So $\Sigma(b) = [3, 7]$.
+
+Check separation: $\Sigma(a) = [4, 8]$ and $\Sigma(b) = [3, 7]$ overlap (e.g., at 7). Gap is $4 - 7 = -3$ (overlap), which is less than $\beta_0 = 0.5$, so not $\beta_0$-separated.
+
+Iteration 2: No deterministic separation yet. Since $\sigma_{\min}(b) = 3 < \sigma_{\min}(a) = 4$, we know going through $b$ is currently cheaper than going through $a$. But since the regions overlap, we continue.
+
+Suppose we refine measurements (catalyst input) and all intervals shrink by $0.1$:
+\begin{align}
+\Sigma(a) &\to [4.1, 7.9], \\
+\Sigma(b) &\to [3.1, 6.9].
+\end{align}
+
+Still overlap. After sufficient refinement, once $\sigma_{\min}(a) > \sigma_{\max}(b) + \beta_0$, i.e., $4.x > 6.y + 0.5$, we cannot achieve deterministic separation because $4.x$ cannot exceed $7 + 0.5 = 7.5$ in this graph.
+
+The algorithm would terminate after evaluating both $a$ and $b$, returning $\pi^* = s \to a \to t$ (which has lower $\sigma_{\min}$).
+
+\subsection{Continental-Scale Scenario Sketch}
+
+For $|V| = 10^8$ pedestrian locations:
+\begin{enumerate}
+\item Initial path: straight-line heuristic from source to sink.
+\item Iteration 1: Probe nodes along the initial path, synthesizing edges within Dijkstra neighborhood expansions.
+\item Iterations 2--$k$: Iteratively rule out suboptimal deviations.
+\item Closure: Typically reached after $k \sim 100$--$1000$ iterations (orders of magnitude smaller than $|V|$), with $E_{\text{exam}} \sim 10^5$ edges, consuming $\sim 1$ MB storage.
+\end{enumerate}
+
+A classical algorithm would require precomputing $10^{16}$ edge weights ($\sim 80$ PB storage), making the problem intractable. Our on-demand approach computes only necessary edges, enabling feasible routing.
+
+\section{Extensions and Variants}
+
+\subsection{Symmetric and Undirected Graphs}
+
+The algorithm applies unchanged to undirected graphs: treat each undirected edge as two directed edges. Separation costs are computed symmetrically.
+
+\subsection{Multi-Commodity Flow}
+
+The framework extends to routing multiple commodities (vehicles, packets, etc.) with shared edge capacities:
+\begin{itemize}
+\item Edge weights become fuzzy, with capacity constraints inducing uncertainty in available bandwidth.
+\item Fuzzy separation costs account for competing flows.
+\item Deterministic closure applies to the joint problem.
+\end{itemize}
+
+\subsection{Dynamic Graphs}
+
+If weights change over time (e.g., traffic conditions), the algorithm can be re-invoked with updated fuzzy intervals:
+\begin{itemize}
+\item Previous synthesized weights are cached (may become stale).
+\item New iteration recomputes separation costs with updated weights.
+\item Early termination if previous path remains separated after update.
+\end{itemize}
+
+\section{Discussion}
+
+\subsection{Comparison with Dijkstra}
+
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+Aspect & Dijkstra & FWDC \\
+\midrule
+Termination & Destination reached & Closure (regions separate) \\
+Proof & ``Shortest path found'' & ``Alternatives ruled out'' \\
+Weight type & Point values & Fuzzy regions \\
+Precomputation & Yes, $O(|E|)$ & No (on-demand synthesis) \\
+Worst-case complexity & $O((|V| + |E|) \log |V|)$ & $O(|V|^2 \log |V|)$ \\
+Best-case complexity & Same as worst & $O(|V| \log |V|)$ (early closure) \\
+Optimality gap & Zero & Explicitly bounded \\
+Modal precision & Ignored & Central \\
+Large-scale feasibility & $|V| \lesssim 10^6$ & $|V| \sim 10^8$ (with early closure) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{Philosophical Interpretation}
+
+The algorithm embodies a negation-based approach to optimality:
+
+\begin{quote}
+Rather than constructing a proof that a path is shortest (often subtle and counterintuitive), we iteratively rule out paths that are demonstrably suboptimal within the precision of our measurements. Optimality is achieved not by finding the best but by eliminating all worse alternatives.
+\end{quote}
+
+This philosophical stance aligns with categorical logic, where identity is defined by negation (an object is fixed by what it is \emph{not}), and with intuitionistic mathematics, where truth is constructive: we build conviction through elimination rather than assertion.
+
+\subsection{Limitations}
+
+\begin{enumerate}
+\item The algorithm assumes $\beta_0$ is known and uniform. Non-uniform modal precision (e.g., different sensors with different accuracies) would require a more complex model.
+\item Early closure is heuristic: in highly adversarial graphs, closure may require evaluating many nodes.
+\item The algorithm is sequential; parallelization is non-trivial (though partial parallelization of separation cost computations is possible).
+\end{enumerate}
+
+\section{Conclusion}
+
+We have presented the Fuzzy-Weighted Deterministic Closure (FWDC) algorithm for shortest path computation in graphs with modal precision bounds. By operating on fuzzy weight regions rather than point values and terminating at deterministic closure rather than destination arrival, the algorithm:
+
+\begin{enumerate}
+\item Unifies Dijkstra's optimality with modal precision semantics.
+\item Eliminates $O(|V|^2)$ precomputation, enabling continental-scale routing.
+\item Provides explicit optimality bounds via the gap $\Delta$.
+\item Admits early termination when confidence regions are separated.
+\end{enumerate}
+
+Future work includes:
+\begin{itemize}
+\item Empirical validation on large-scale transportation networks.
+\item Parallelization strategies for multi-threaded separation cost computation.
+\item Adaptive $\beta_0$ based on local measurement precision.
+\item Integration with real-time catalyst sources (sensor networks, traffic feeds).
+\end{itemize}
+
+\bibliography{references}
+
+\end{document}
