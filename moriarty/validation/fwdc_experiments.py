@@ -398,5 +398,6 @@ if __name__ == '__main__':
     print("\nSummary Statistics:")
     for exp in results['experiments']:
         if 'experiment' in exp:
-            print(f"  {exp.get('experiment', 'unknown')}: "
-                  f"time={exp.get('time_seconds', 'N/A'):.4f if isinstance(exp.get('time_seconds'), float) else 'N/A'}s")
+            time_val = exp.get('time_seconds', 'N/A')
+            time_str = f"{time_val:.4f}s" if isinstance(time_val, (int, float)) else str(time_val)
+            print(f"  {exp.get('experiment', 'unknown')}: time={time_str}")

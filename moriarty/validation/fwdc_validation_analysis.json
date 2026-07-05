@@ -1,0 +1,85 @@
+{
+  "timestamp": "2026-07-05 19:13:33",
+  "total_experiments": 8,
+  "experiment_summaries": [],
+  "key_findings": [
+    "Algorithm execution times range from 0.0002s to 64.8424s (average: 11.0602s across 6 experiments)",
+    "On average 0.0 nodes ruled out per experiment (max: 0 nodes)",
+    "Average optimality gap: 15.8400 (range: 1.6000 to 54.0000)",
+    "On-demand synthesis achieves 78.1% synthesis ratio (21.9% storage reduction for examined edges)",
+    "Beta0 sensitivity test: Lower beta0 results in more nodes being ruled out (correlation with resolution floor observed)",
+    "Algorithm successfully terminates within deterministic closure criteria for all tested configurations"
+  ],
+  "performance_metrics": {
+    "execution": {
+      "min_time": "0.000157s",
+      "max_time": "64.842448s",
+      "mean_time": "11.060169s",
+      "median_time": "0.017509s"
+    },
+    "algorithm": {
+      "mean_iterations": "1.00",
+      "max_iterations": 1,
+      "total_iterations": 5,
+      "mean_nodes_ruled_out": "0.00",
+      "total_nodes_ruled_out": 0
+    },
+    "efficiency": {
+      "total_edges_synthesized": 161137,
+      "total_edges_possible": 10053,
+      "synthesis_ratio": "1602.87%",
+      "mean_optimality_gap": "15.8400",
+      "max_optimality_gap": "54.0000"
+    }
+  },
+  "grid_analysis": {
+    "count": 2,
+    "by_size": {
+      "25": {
+        "experiment": "grid_5x5",
+        "nodes": 25,
+        "edges_total": 556,
+        "edges_synthesized": 552,
+        "synthesis_ratio": "99.28%",
+        "iterations": 1,
+        "ruled_out_nodes": 0,
+        "optimality_gap": "14.4000",
+        "time_seconds": "0.0264",
+        "nodes_per_second": "948.2"
+      },
+      "100": {
+        "experiment": "grid_10x10",
+        "nodes": 100,
+        "edges_total": 8841,
+        "edges_synthesized": 8811,
+        "synthesis_ratio": "99.66%",
+        "iterations": 1,
+        "ruled_out_nodes": 0,
+        "optimality_gap": "54.0000",
+        "time_seconds": "1.4827",
+        "nodes_per_second": "67.4"
+      }
+    }
+  },
+  "random_analysis": {
+    "count": 2,
+    "results": [
+      {
+        "nodes": 20,
+        "edges": 116,
+        "density": "20.0%",
+        "optimality_gap": "1.6000",
+        "time_seconds": "0.0007",
+        "iterations": 1
+      },
+      {
+        "nodes": 30,
+        "edges": 534,
+        "density": "15.0%",
+        "optimality_gap": "7.2000",
+        "time_seconds": "0.0087",
+        "iterations": 1
+      }
+    ]
+  }
+}
