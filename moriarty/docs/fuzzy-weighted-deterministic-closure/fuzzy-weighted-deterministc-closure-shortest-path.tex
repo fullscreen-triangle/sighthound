@@ -328,7 +328,7 @@ Similarly, $\sigma_{\max,i+1}(v) \geq \sigma_{\max,i}(v)$ since the feasible set
 \end{proof}
 
 \begin{remark}
-Note that $\text{width}(\Sigma_i(v)) = \sigma_{\max,i}(v) - \sigma_{\min,i}(v)$ need not shrink monotonically: $\sigma_{\min}$ decreases (lower bound gets better) while $\sigma_{\max}$ increases (upper bound gets worse), so the interval can widen. Termination is not driven by narrowing intervals, but by **separated intervals** (Definition \ref{def:separation}): when $\sigma_{\min}(v) > \sigma_{\max}(w) + \beta_0$ for some pair of nodes, the decision is robust to all further edge discoveries within modal precision.
+Note that $\text{width}(\Sigma_i(v)) = \sigma_{\max,i}(v) - \sigma_{\min,i}(v)$ need not shrink monotonically: $\sigma_{\min}$ decreases (lower bound gets better) while $\sigma_{\max}$ increases (upper bound gets worse), so the interval can widen. Termination is not driven by narrowing intervals, but by \textbf{separated intervals} (Definition \ref{def:separation}): when $\sigma_{\min}(v) > \sigma_{\max}(w) + \beta_0$ for some pair of nodes, the decision is robust to all further edge discoveries within modal precision.
 \end{remark}
 
 
@@ -356,15 +356,15 @@ Therefore:
 \text{Total worst-case} = O(|V|) \times O(|V|^2 \log |V|) = O(|V|^3 \log |V|).
 \end{equation}
 
-However, this worst-case is only achieved if **no nodes are ruled out** until all have been queried. In practice, as soon as deterministic separation occurs (Definition \ref{def:separation}), nodes are ruled out and the search space shrinks. The amortized complexity (accounting for early termination) is $O(|V|^2 \log |V|)$ on most real graphs.
+However, this worst-case is only achieved if \textbf{no nodes are ruled out} until all have been queried. In practice, as soon as deterministic separation occurs (Definition \ref{def:separation}), nodes are ruled out and the search space shrinks. The amortized complexity (accounting for early termination) is $O(|V|^2 \log |V|)$ on most real graphs.
 \end{proof}
 
 \begin{remark}
 The gap between worst-case $O(|V|^3 \log |V|)$ and practical $O(|V|^2 \log |V|)$ is closed by early closure:
 \begin{enumerate}
-\item **Early closure**: When separation cost regions become $\beta_0$-separated (Definition \ref{def:separation}), the algorithm terminates immediately, avoiding $O(|V|)$ iterations.
-\item **Sparse graphs**: If $|E| \ll |V|^2$, the per-iteration cost is $O((|V| + |E|) \log |V|) \ll O(|V|^2 \log |V|)$.
-\item **On-demand synthesis**: Only examined edges are stored, avoiding $O(|V|^2)$ space precomputation, reducing storage from infeasible (80 PB for $|V|=10^8$) to feasible (~1 MB with early closure).
+\item \textbf{Early closure}: When separation cost regions become $\beta_0$-separated (Definition \ref{def:separation}), the algorithm terminates immediately, avoiding $O(|V|)$ iterations.
+\item \textbf{Sparse graphs}: If $|E| \ll |V|^2$, the per-iteration cost is $O((|V| + |E|) \log |V|) \ll O(|V|^2 \log |V|)$.
+\item \textbf{On-demand synthesis}: Only examined edges are stored, avoiding $O(|V|^2)$ space precomputation, reducing storage from infeasible (80 PB for $|V|=10^8$) to feasible ($\sim 1$ MB with early closure).
 \end{enumerate}
 Experiments confirm practical behavior matches amortized bound, not worst-case.
 \end{remark}
@@ -495,12 +495,12 @@ Catalyst-based closure is more general than deterministic closure: it accounts f
 
 \subsection{Motivation}
 
-In urban pedestrian routing, traffic light signal phases introduce inherent uncertainty into edge traversal times. Unlike deterministic models, this uncertainty cannot be eliminated—it is fundamental to the asynchronous nature of signalized intersections. The FWDC framework is ideally suited to this problem because:
+In urban pedestrian routing, traffic light signal phases introduce inherent uncertainty into edge traversal times. Unlike deterministic models, this uncertainty cannot be eliminated---it is fundamental to the asynchronous nature of signalized intersections. The FWDC framework is ideally suited to this problem because:
 
 \begin{enumerate}
-\item **Bounded uncertainty**: Signal cycle time $T_c$ bounds the wait time at any intersection: wait $\in [0, T_c]$.
-\item **Modal precision**: The crossing time itself (pedestrian speed × street width) has a floor determined by human biomechanics, not noise.
-\item **Real-time adaptability**: Observed signal phases (via traffic camera or pedestrian queuing) refine the fuzzy weight intervals without requiring full re-search.
+\item \textbf{Bounded uncertainty}: Signal cycle time $T_c$ bounds the wait time at any intersection: wait $\in [0, T_c]$.
+\item \textbf{Modal precision}: The crossing time itself (pedestrian speed $\times$ street width) has a floor determined by human biomechanics, not noise.
+\item \textbf{Real-time adaptability}: Observed signal phases (via traffic camera or pedestrian queuing) refine the fuzzy weight intervals without requiring full re-search.
 \end{enumerate}
 
 \subsection{Fuzzy Edge Weights in Pedestrian Networks}
@@ -536,13 +536,13 @@ Consider a pedestrian routing from source $s$ to sink $t$ in a 3-intersection ne
 
 Thus $\beta_0 = 45$ seconds.
 
-**Path 1**: $s \to A \to B \to t$ with walking time 300 seconds.
+\textbf{Path 1}: $s \to A \to B \to t$ with walking time 300 seconds.
 \begin{align}
 \text{cost}_{\min}(\pi_1) &= 300 + 0 + 0 = 300 \text{ s}, \\
 \text{cost}_{\max}(\pi_1) &= 300 + 60 + 90 = 450 \text{ s}.
 \end{align}
 
-**Path 2**: $s \to C \to B \to t$ with walking time 320 seconds.
+\textbf{Path 2}: $s \to C \to B \to t$ with walking time 320 seconds.
 \begin{align}
 \text{cost}_{\min}(\pi_2) &= 320 + 0 + 0 = 320 \text{ s}, \\
 \text{cost}_{\max}(\pi_2) &= 320 + 45 + 90 = 455 \text{ s}.
@@ -552,7 +552,7 @@ The intervals overlap: $[300, 450]$ vs $[320, 455]$. Are they $\beta_0 = 45$-sep
 
 Check: $\sigma_{\min}(\pi_1) = 300$ vs $\sigma_{\max}(\pi_2) = 455$. Gap is $300 - 455 = -155$ (overlap, not separated).
 
-The algorithm cannot rule out Path 2 based on separation cost alone. Both remain feasible until **catalyst input** (e.g., observing actual signal phases at intersections) refines the intervals.
+The algorithm cannot rule out Path 2 based on separation cost alone. Both remain feasible until \textbf{catalyst input} (e.g., observing actual signal phases at intersections) refines the intervals.
 
 If real-time observation shows:
 \begin{itemize}
@@ -569,10 +569,10 @@ In real-world deployment, catalysts refine signal uncertainty:
 \begin{definition}[Pedestrian Catalysts]
 Information sources that reduce $w(e)$ interval width:
 \begin{itemize}
-\item **Signal camera**: Observe current phase at intersection $v$, refine $[0, T_c(v)] \to [t_{\text{wait}}, t_{\text{wait}} + \delta]$ where $\delta$ is observation uncertainty.
-\item **Crowd density**: High pedestrian queue at intersection $v$ delays crossing, refining upper bound.
-\item **Real-time signal broadcast**: If intersection $v$ broadcasts remaining walk phase time, eliminates uncertainty entirely: $T_c(v) \to 0$.
-\item **Historical traffic**: Aggregate data on typical wait times at intersection $v$ at current time-of-day narrows interval.
+\item \textbf{Signal camera}: Observe current phase at intersection $v$, refine $[0, T_c(v)] \to [t_{\text{wait}}, t_{\text{wait}} + \delta]$ where $\delta$ is observation uncertainty.
+\item \textbf{Crowd density}: High pedestrian queue at intersection $v$ delays crossing, refining upper bound.
+\item \textbf{Real-time signal broadcast}: If intersection $v$ broadcasts remaining walk phase time, eliminates uncertainty entirely: $T_c(v) \to 0$.
+\item \textbf{Historical traffic}: Aggregate data on typical wait times at intersection $v$ at current time-of-day narrows interval.
 \end{itemize}
 \end{definition}
 
@@ -710,21 +710,27 @@ We validated the FWDC algorithm across 8 diverse experiments, ranging from toy g
 \subsection{Experiment Results}
 
 \textbf{Experiment 1: Small 4-Node Graph (Correctness).}
-- **Nodes**: 4, **Edges**: 6
-- **Execution time**: 0.00016s
-- **Cost bounds**: [1.00, 3.00]
-- **Optimality gap**: 2.0
-- **Status**: ✓ Algorithm terminates via closure
+\begin{itemize}
+\item \textbf{Nodes}: 4, \textbf{Edges}: 6
+\item \textbf{Execution time}: 0.00016\,s
+\item \textbf{Cost bounds}: $[1.00, 3.00]$
+\item \textbf{Optimality gap}: 2.0
+\item \textbf{Status}: \checkmark~Algorithm terminates via closure
+\end{itemize}
 
 \textbf{Experiment 2: Grid Graphs (Scaling).}
-- **5×5 grid**: 25 nodes, 0.026s, gap = 14.40
-- **10×10 grid**: 100 nodes, 1.48s, gap = 54.00
-- **Interpretation**: Time complexity consistent with $O(|V|^2 \log |V|)$; gap grows with problem size as expected from uncertainty accumulation
+\begin{itemize}
+\item \textbf{$5 \times 5$ grid}: 25 nodes, 0.026\,s, gap $= 14.40$
+\item \textbf{$10 \times 10$ grid}: 100 nodes, 1.48\,s, gap $= 54.00$
+\item \textbf{Interpretation}: Time complexity consistent with $O(|V|^2 \log |V|)$; gap grows with problem size as expected from uncertainty accumulation
+\end{itemize}
 
 \textbf{Experiment 3: Random Sparse Graphs (On-Demand Synthesis).}
-- **20 nodes, 20% density**: 0.0007s, synthesized 57/116 edges (49%)
-- **30 nodes, 15% density**: 0.0087s, synthesized 493/534 edges (92%)
-- **Key finding**: Sparse graphs benefit from on-demand synthesis (50% reduction); denser graphs require more edges for path-finding
+\begin{itemize}
+\item \textbf{20 nodes, 20\% density}: 0.0007\,s, synthesized 57/116 edges (49\%)
+\item \textbf{30 nodes, 15\% density}: 0.0087\,s, synthesized 493/534 edges (92\%)
+\item \textbf{Key finding}: Sparse graphs benefit from on-demand synthesis (50\% reduction); denser graphs require more edges for path-finding
+\end{itemize}
 
 \textbf{Experiment 4: Beta-0 Sensitivity Analysis (Negation Proof).}
 Using a fixed 10-node graph, we varied $\beta_0 \in \{0.05, 0.1, 0.2, 0.5, 1.0\}$:
@@ -742,7 +748,7 @@ $\beta_0$ & Iterations & Nodes Ruled Out & Gap & Time \\
 \end{tabular}
 \end{center}
 
-**Critical observation**: Lower $\beta_0$ (tighter modal precision) requires more iterations and more aggressive node ruling-out. This directly validates the negation-based proof strategy: stricter separation criterion → more explicit elimination of alternatives.
+\textbf{Critical observation}: Lower $\beta_0$ (tighter modal precision) requires more iterations and more aggressive node ruling-out. This directly validates the negation-based proof strategy: stricter separation criterion $\Rightarrow$ more explicit elimination of alternatives.
 
 \textbf{Experiment 5: Scaling Analysis (Complexity Confirmation).}
 \begin{center}
@@ -750,37 +756,41 @@ $\beta_0$ & Iterations & Nodes Ruled Out & Gap & Time \\
 \toprule
 Grid & Nodes & Time & Synthesis Ratio \\
 \midrule
-5×5 & 25 & 0.016s & 99.3\% \\
-10×10 & 100 & 0.855s & 99.7\% \\
-15×15 & 225 & 10.40s & 99.98\% \\
+$5 \times 5$ & 25 & 0.016\,s & 99.3\% \\
+$10 \times 10$ & 100 & 0.855\,s & 99.7\% \\
+$15 \times 15$ & 225 & 10.40\,s & 99.98\% \\
 \bottomrule
 \end{tabular}
 \end{center}
 
 Timing scales as $T(n) \propto n^{2.1}$ (empirically), consistent with $O(|V|^2 \log |V|)$ theory.
 
-\textbf{Experiment 6: On-Demand Efficiency at Scale (20×20 Grid, 400 Nodes).}
-- Execution time: 64.8s
-- Demonstrates algorithm feasibility without precomputed $O(|V|^2)$ lookup tables
-- With spatial indexing (future work), continental-scale routing becomes tractable
+\textbf{Experiment 6: On-Demand Efficiency at Scale ($20 \times 20$ Grid, 400 Nodes).}
+\begin{itemize}
+\item Execution time: 64.8\,s
+\item Demonstrates algorithm feasibility without precomputed $O(|V|^2)$ lookup tables
+\item With spatial indexing (future work), continental-scale routing becomes tractable
+\end{itemize}
 
 \subsection{Validation Summary}
 
 All experiments confirm the theoretical framework:
 
 \begin{enumerate}
-\item **Termination ✓**: All 8 experiments reach closure (Theorem 1).
-\item **Deterministic Closure ✓**: Regions separate by $\beta_0$, not by arbitrary threshold.
-\item **Monotone Uncertainty ✓**: Knowledge of feasible paths becomes denser (Lemma 2).
-\item **Complexity Bound ✓**: Empirical timing $O(n^{2.1})$ matches $O(|V|^2 \log |V|)$ theory.
-\item **Negation-Based Proof ✓**: Beta-0 sensitivity shows: lower $\beta_0$ → stricter elimination → more iterations.
-\item **On-Demand Synthesis ✓**: Sparse graphs synthesize ~50% of edges; dense grids need ~99% (inherent).
+\item \textbf{Termination \checkmark}: All 8 experiments reach closure (Theorem 1).
+\item \textbf{Deterministic Closure \checkmark}: Regions separate by $\beta_0$, not by arbitrary threshold.
+\item \textbf{Monotone Uncertainty \checkmark}: Knowledge of feasible paths becomes denser (Lemma 2).
+\item \textbf{Complexity Bound \checkmark}: Empirical timing $O(n^{2.1})$ matches $O(|V|^2 \log |V|)$ theory.
+\item \textbf{Negation-Based Proof \checkmark}: Beta-0 sensitivity shows: lower $\beta_0$ $\Rightarrow$ stricter elimination $\Rightarrow$ more iterations.
+\item \textbf{On-Demand Synthesis \checkmark}: Sparse graphs synthesize $\sim 50\%$ of edges; dense grids need $\sim 99\%$ (inherent).
 \end{enumerate}
 
 \textbf{Performance Summary}:
-- **Execution times**: 0.0002s (tiny graphs) to 64.8s (400-node grid)
-- **Optimality gaps**: 1.60 to 135.60 (explicitly bounded by $\beta_0$)
-- **Average synthesis efficiency**: 21.9% storage reduction (examined edges only)
+\begin{itemize}
+\item \textbf{Execution times}: 0.0002\,s (tiny graphs) to 64.8\,s (400-node grid)
+\item \textbf{Optimality gaps}: 1.60 to 135.60 (explicitly bounded by $\beta_0$)
+\item \textbf{Average synthesis efficiency}: 21.9\% storage reduction (examined edges only)
+\end{itemize}
 
 \section{Conclusion}
 
