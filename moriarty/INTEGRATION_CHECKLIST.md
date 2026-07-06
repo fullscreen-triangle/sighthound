@@ -1,6 +1,8 @@
 # Integration Checklist: Scripts 1-8 → Cynegeticus Sandbox
 
-**What's been built**: Complete Mapbox GL + Deck.gl infrastructure with 8 progressive visualization scripts and executor.
+**What's been built**: Complete Mapbox GL + Deck.gl infrastructure with **cumulative data pipeline** where each script enriches state for the next, culminating in Script 8 (FWDC) integrating all layers.
+
+**Architecture**: Script 8 is NOT a standalone script—it's an **integration point** that uses all data from Scripts 1-7 for final FWDC routing.
 
 **What's needed**: Wire it into the existing cynegeticus.js page.
 

@@ -7,9 +7,31 @@
 
 ## Overview
 
-Extended Cynegeticus Sandbox with 8 progressive visualization scripts using **Mapbox GL** + **Deck.gl** + **Cesium**.
+Extended Cynegeticus Sandbox with 8 **cumulative data pipeline** scripts using **Mapbox GL** + **Deck.gl** + **Cesium**.
 
-Each script builds on prior layers, lazy-loading data without precomputation overhead.
+### Pipeline Architecture
+Each script **enriches persistent state** for the next, creating a lazy-loaded data hierarchy:
+
+```
+Script 1: Clocks
+    ↓ provides: time sync
+Script 2: Isochrones  
+    ↓ provides: reachability + time
+Script 3: Weather
+    ↓ provides: environmental conditions + all above
+Script 4: Towers
+    ↓ provides: coverage + environmental + reachability
+Script 5: Devices
+    ↓ provides: device density + all above
+Script 6: Signals & Air Quality
+    ↓ provides: signal timing (β₀ = min cycle_time) + AQI + all above
+Script 7: Satellites
+    ↓ provides: orbital data + all above
+Script 8: FWDC Routing  ← INTEGRATION POINT
+    ↓ uses: ALL accumulated data for final path
+```
+
+**Key property**: State is **never cleared** between scripts. Each script appends logs and persists data layers.
 
 ---
 

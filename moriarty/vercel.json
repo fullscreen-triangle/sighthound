@@ -17,7 +17,6 @@
       "description": "TomTom API key for mapping services"
     }
   },
-  "public": false,
   "regions": ["iad1"],
   "functions": {
     "src/pages/api/**/*.ts": {
