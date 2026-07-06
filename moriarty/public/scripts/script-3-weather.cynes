@@ -1,0 +1,28 @@
+# Script 3: Weather Overlay
+# Display real-time weather conditions as map layers
+# Shows wind vectors, temperature, cloud cover, precipitation
+# Integrates with routing decisions (wind impact on walking speed)
+
+# Load weather data
+weather load current
+weather load forecast hourly
+
+# Visualize weather parameters
+show wind vectors as arrows
+show temperature as heatmap
+show cloud coverage as grayscale
+show precipitation as intensity
+
+# Weather metrics
+show pressure contours
+show humidity gradient
+show air quality index
+
+# Impact on routing
+wind affects walking speed
+visibility affects pedestrian safety
+
+# Display results
+weather report
+forecast show
+air quality report

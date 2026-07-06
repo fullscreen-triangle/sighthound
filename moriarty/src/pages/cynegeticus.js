@@ -455,10 +455,129 @@ validate circular closure rmse < 0.5 m
 position show
 `,
     },
+    sandbox: {
+      "script-1-clocks.cynes": `# Script 1: Precision Clocks
+# Display synchronized time points and clock precision across a city
+
+airport Munich
+sync to IANA timezone Europe/Berlin
+sync to NTP server time.nist.gov
+
+precision map within 2km radius
+show clock network
+show synchronization quality as heatmap
+
+time show
+clocks show
+precision report
+`,
+      "script-2-isochrones.cynes": `# Script 2: Isochrones
+# Generate reachability rings for different walking speeds
+
+position Munich city center lat=48.1351 lng=11.5656
+
+isochrone walking time=5 10 15
+isochrone cycling time=5 10 15
+isochrone driving time=5 10 15
+
+show isochrones on map
+show walking reachability rings
+show amenities within 10 minute walk
+
+reachability show
+amenities report
+`,
+      "script-3-weather.cynes": `# Script 3: Weather Overlay
+# Display real-time weather conditions as map layers
+
+weather load current
+weather load forecast hourly
+
+show wind vectors as arrows
+show temperature as heatmap
+show cloud coverage as grayscale
+show precipitation as intensity
+
+show pressure contours
+show humidity gradient
+show air quality index
+
+wind affects walking speed
+visibility affects pedestrian safety
+
+weather report
+forecast show
+air quality report
+`,
+      "script-6-signals-airquality.cynes": `# Script 6: Traffic Signals & Air Quality
+# Display traffic light signal timing and air quality data
+
+signals load from OSM
+  traffic signal locations
+  cycle times
+
+show signal locations as points
+show cycle time labels
+show current phases with colors
+
+air quality load
+  PM2.5 concentration
+  NO2 levels
+  CO levels
+  AQI index
+
+show air quality heatmap
+show pollution hotspots
+show wind dispersion patterns
+
+signals report
+air quality report
+pollution zones show
+`,
+      "script-8-routing.cynes": `# Script 8: FWDC Pedestrian Routing
+# Full implementation of Fuzzy-Weighted Deterministic Closure
+
+position from lat=48.1351 lng=11.5656
+position to lat=48.1400 lng=11.5750
+
+algorithm FWDC
+mode pedestrian
+walking_speed 1.4 m/s
+
+load script 1 clocks
+load script 2 isochrones
+load script 3 weather
+load script 6 signals airquality
+
+edge weight = walk_time + signal_wait
+signal_wait in [0, cycle_time]
+resolution_floor beta_0 = min(cycle_times)
+
+catalyst signal camera at intersection
+catalyst crowd density from mobile data
+catalyst real-time signal broadcast
+catalyst historical traffic patterns
+
+fwdc compute path
+optimize for travel_time
+optimize for air_quality exposure
+optimize for pedestrian safety
+
+show optimal path on map
+show alternative paths
+show signal timing on path
+show separation cost regions
+
+route show
+route metrics
+separation costs show
+fwdc closure analysis
+`,
+    },
   };
 
-  const [selectedFile, setSelectedFile] = useState("tutorials/hello_position.cynes");
-  const [code, setCode] = useState(files.tutorials["hello_position.cynes"]);
+  const [selectedFile, setSelectedFile] = useState("sandbox/script-2-isochrones.cynes");
+  const [code, setCode] = useState(files.sandbox["script-2-isochrones.cynes"]);
   const [results, setResults] = useState({
     success: true,
     position: null,

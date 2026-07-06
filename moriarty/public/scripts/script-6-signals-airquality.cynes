@@ -1,0 +1,40 @@
+# Script 6: Traffic Signals & Air Quality
+# Display traffic light signal timing and phases
+# Show air quality index and pollution hotspots
+# Integrate signal uncertainty into routing decisions
+
+# Load traffic signal data
+signals load from OSM
+  traffic signal locations
+  cycle times (EU standard 45-90s)
+  phases (red, green, yellow)
+
+# Show signal information
+show signal locations as points
+show cycle time labels
+show current phases with colors
+  red = [255, 0, 0]
+  yellow = [255, 255, 0]
+  green = [0, 255, 0]
+
+# Load air quality data
+air quality load
+  PM2.5 concentration
+  NO2 levels
+  CO levels
+  AQI index
+
+# Visualize air quality
+show air quality heatmap
+show pollution hotspots
+show wind dispersion patterns
+
+# Signal-routing integration
+signal cycle time affects walking time
+signal phase uncertainty = cycle time
+resolution floor beta_0 = min(cycle time)
+
+# Display results
+signals report
+air quality report
+pollution zones show

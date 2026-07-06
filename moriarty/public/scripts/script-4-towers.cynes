@@ -1,0 +1,25 @@
+# Script 4: Communication Infrastructure
+# Visualize cell towers, radio towers, TV towers, and coverage
+# Shows signal strength heatmap across city
+# Enables device localization via triangulation
+
+# Load tower data from OSM
+towers load
+  cell towers (OpenCellID)
+  radio towers
+  tv transmission towers
+
+# Visualize coverage
+show signal strength heatmap
+show tower locations as points
+show coverage zones as contours
+
+# Compute coverage metrics
+coverage area within city
+signal strength at random points
+triangulation capability check
+
+# Display results
+towers report
+coverage report
+signal strength metrics

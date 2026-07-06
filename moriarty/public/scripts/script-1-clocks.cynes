@@ -1,0 +1,18 @@
+# Script 1: Precision Clocks
+# Display synchronized time points and clock precision across a city
+# Connects to nearest airport (NTP) for authoritative time
+# Shows time synchronization quality as heatmap overlay
+
+airport Munich
+sync to IANA timezone Europe/Berlin
+sync to NTP server time.nist.gov
+
+# Query precision points across city
+precision map within 2km radius
+show clock network
+show synchronization quality as heatmap
+
+# Display results
+time show
+clocks show
+precision report

@@ -1,0 +1,59 @@
+# Script 8: FWDC Pedestrian Routing
+# Full implementation of Fuzzy-Weighted Deterministic Closure
+# Routes pedestrian accounting for traffic signal timing uncertainty
+# Uses real-time catalysts (observed signal phases) to refine decisions
+
+# Set routing origin and destination
+position from lat=48.1351 lng=11.5656
+position to lat=48.1400 lng=11.5750
+
+# Configure FWDC algorithm
+algorithm FWDC
+mode pedestrian
+walking_speed 1.4 m/s
+
+# Load all prior data layers
+load script 1 clocks
+load script 2 isochrones
+load script 3 weather
+load script 4 towers
+load script 5 devices
+load script 6 signals airquality
+load script 7 satellites
+
+# Define fuzzy edge weights
+edge weight = walk_time + signal_wait
+signal_wait in [0, cycle_time]
+resolution_floor beta_0 = min(cycle_times)
+
+# Catalyst data sources (refine uncertainty)
+catalyst signal camera at intersection
+catalyst crowd density from mobile data
+catalyst real-time signal broadcast
+catalyst historical traffic patterns
+
+# Compute route
+fwdc compute path
+optimize for travel_time
+optimize for air_quality exposure
+optimize for pedestrian safety
+
+# Visualize routing
+show optimal path on map
+show alternative paths (faded)
+show signal timing on path
+show separation cost regions
+show fuzzy intervals for critical decisions
+show closure detection status
+
+# Real-time adaptation
+on signal phase observed: refine_interval
+on crowd density update: recompute_safety
+on weather change: adjust_speed
+
+# Display results
+route show
+route metrics
+separation costs show
+catalyst effectiveness report
+fwdc closure analysis

@@ -1,0 +1,27 @@
+# Script 5: Connected Devices
+# Display density of Bluetooth, cellular, WiFi, and aircraft
+# Shows real-time device positions (simulated in demo)
+# Enables location refinement through device proximity
+
+# Load device data streams
+devices load
+  bluetooth beacons density
+  cellular devices (anonymized)
+  wifi access points
+  aircraft (ADS-B radar)
+
+# Visualize device density
+show device density heatmap
+show beacon locations
+show wifi coverage
+show aircraft flight paths
+
+# Compute statistics
+device count by type
+device density by location
+proximity to pedestrian
+
+# Display results
+devices report
+connectivity metrics
+aircraft tracking show
