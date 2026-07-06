@@ -1,0 +1,63 @@
+\begin{thebibliography}{10}
+
+\bibitem{bhattacharya2001}
+P.~Bhattacharya and F.~Suraweera.
+\newblock An algorithm to compute the transitive closure of fuzzy graphs.
+\newblock {\em Fuzzy Sets and Systems}, 116(3):429--439, 2001.
+
+\bibitem{binu2012}
+D.~Binu and K.~K. Kartha.
+\newblock A survey on fuzzy shortest path problem in transportation networks.
+\newblock {\em Journal of Emerging Technologies and Innovative Research},
+  9(2):12--28, 2012.
+
+\bibitem{dijkstra1959}
+Edsger~W. Dijkstra.
+\newblock A note on two problems in connexion with graphs.
+\newblock {\em Numerische Mathematik}, 1(1):269--271, 1959.
+
+\bibitem{goldberg1997}
+Andrew~V. Goldberg and Chris Harrelson.
+\newblock Computing the shortest path: A search meets graph theory.
+\newblock {\em ACM SIGACT News}, 28(2):37--45, 1997.
+
+\bibitem{hart1968a}
+Peter~E. Hart, Nils~J. Nilsson, and Bertram Raphael.
+\newblock Correction to "a formal basis for the heuristic determination of
+  minimum cost paths".
+\newblock In {\em Proceedings of the International Conference on Artificial
+  Intelligence}, 1968.
+
+\bibitem{hart1968}
+Peter~E. Hart, Nils~J. Nilsson, and Bertram Raphael.
+\newblock A formal basis for the heuristic determination of minimum cost paths.
+\newblock {\em IEEE Transactions on Systems Science and Cybernetics},
+  4(2):100--107, 1968.
+
+\bibitem{johnstone2002}
+Peter~T. Johnstone.
+\newblock {\em Sketches of an Elephant: A Topos Theory Compendium}, volume~43.
+\newblock Oxford University Press, 2002.
+
+\bibitem{lawvere1966}
+F.~William Lawvere.
+\newblock {\em The Category of Categories as a Foundation for Mathematics}.
+\newblock Springer, 1966.
+
+\bibitem{montemanni2004}
+Roberto Montemanni, Luca~Maria Gambardella, and Andrea~Emilio Rizzoli.
+\newblock Robust shortest path problems with interval data.
+\newblock {\em Computers \& Operations Research}, 31(5):725--737, 2004.
+
+\bibitem{rosenfeld1975}
+Azriel Rosenfeld.
+\newblock {\em Fuzzy Graphs}.
+\newblock Academic Press, 1975.
+
+\bibitem{schöbel2005}
+Anita Schöbel and Dieter Scholz.
+\newblock The bounded rationality shortest path problem.
+\newblock {\em European Journal of Operational Research}, 164(1):194--205,
+  2005.
+
+\end{thebibliography}

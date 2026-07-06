@@ -1,47 +1,48 @@
 This is BibTeX, Version 0.99e
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: fuzzy-weighted-deterministc-closure-shortest-path.aux
+Reallocating 'name_of_file' (item size: 1) to 6 items.
+The style file: plain.bst
 Reallocating 'name_of_file' (item size: 1) to 11 items.
-I found no \bibstyle command---while reading file fuzzy-weighted-deterministc-closure-shortest-path.aux
+Database file #1: references.bib
 You've used 11 entries,
-            0 wiz_defined-function locations,
-            95 strings with 710 characters,
-and the built_in function-call counts, 0 in all, are:
-= -- 0
-> -- 0
-< -- 0
-+ -- 0
-- -- 0
-* -- 0
-:= -- 0
-add.period$ -- 0
-call.type$ -- 0
-change.case$ -- 0
+            2118 wiz_defined-function locations,
+            564 strings with 5602 characters,
+and the built_in function-call counts, 3314 in all, are:
+= -- 325
+> -- 134
+< -- 1
++ -- 59
+- -- 42
+* -- 231
+:= -- 564
+add.period$ -- 33
+call.type$ -- 11
+change.case$ -- 51
 chr.to.int$ -- 0
-cite$ -- 0
-duplicate$ -- 0
-empty$ -- 0
-format.name$ -- 0
-if$ -- 0
+cite$ -- 11
+duplicate$ -- 127
+empty$ -- 280
+format.name$ -- 42
+if$ -- 676
 int.to.chr$ -- 0
-int.to.str$ -- 0
-missing$ -- 0
-newline$ -- 0
-num.names$ -- 0
-pop$ -- 0
-preamble$ -- 0
-purify$ -- 0
+int.to.str$ -- 11
+missing$ -- 14
+newline$ -- 58
+num.names$ -- 22
+pop$ -- 55
+preamble$ -- 1
+purify$ -- 43
 quote$ -- 0
-skip$ -- 0
+skip$ -- 78
 stack$ -- 0
-substring$ -- 0
-swap$ -- 0
-text.length$ -- 0
+substring$ -- 224
+swap$ -- 13
+text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 0
+type$ -- 38
 warning$ -- 0
-while$ -- 0
-width$ -- 0
-write$ -- 0
-(There was 1 error message)
+while$ -- 36
+width$ -- 13
+write$ -- 120

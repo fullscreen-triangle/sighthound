@@ -1,0 +1,828 @@
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React, { useState, useEffect, useRef } from 'react';
+  import { createRoot } from 'react-dom';
+  import { csvParseRows } from 'https://esm.sh/d3-dsv';
+  import indexBy from 'https://esm.sh/index-array-by';
+
+  const COUNTRY = 'United States';
+  const OPACITY = 0.22;
+
+  const airportParse = ([airportId, name, city, country, iata, icao, lat, lng, alt, timezone, dst, tz, type, source]) => ({ airportId, name, city, country, iata, icao, lat, lng, alt, timezone, dst, tz, type, source });
+  const routeParse = ([airline, airlineId, srcIata, srcAirportId, dstIata, dstAirportId, codeshare, stops, equipment]) => ({ airline, airlineId, srcIata, srcAirportId, dstIata, dstAirportId, codeshare, stops, equipment});
+
+  const World = () => {
+    const globeEl = useRef();
+    const [airports, setAirports] = useState([]);
+    const [routes, setRoutes] = useState([]);
+
+    useEffect(() => {
+      // load data
+      Promise.all([
+        fetch('https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat').then(res => res.text())
+          .then(d => csvParseRows(d, airportParse)),
+        fetch('https://raw.githubusercontent.com/jpatokal/openflights/master/data/routes.dat').then(res => res.text())
+          .then(d => csvParseRows(d, routeParse))
+      ]).then(([airports, routes]) => {
+
+        const byIata = indexBy(airports, 'iata', false);
+
+        const filteredRoutes = routes
+          .filter(d => byIata.hasOwnProperty(d.srcIata) && byIata.hasOwnProperty(d.dstIata)) // exclude unknown airports
+          .filter(d => d.stops === '0') // non-stop flights only
+          .map(d => Object.assign(d, {
+            srcAirport: byIata[d.srcIata],
+            dstAirport: byIata[d.dstIata]
+          }))
+          .filter(d => d.srcAirport.country === COUNTRY && d.dstAirport.country !== COUNTRY); // international routes from country
+
+        setAirports(airports);
+        setRoutes(filteredRoutes);
+      });
+    }, []);
+
+    useEffect(() => {
+      // aim at continental US centroid
+      globeEl.current.pointOfView({ lat: 39.6, lng: -98.5, altitude: 2 });
+    }, []);
+
+    return <Globe
+      ref={globeEl}
+      globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg"
+
+      arcsData={routes}
+      arcLabel={d => `${d.airline}: ${d.srcIata} &#8594; ${d.dstIata}`}
+      arcStartLat={d => +d.srcAirport.lat}
+      arcStartLng={d => +d.srcAirport.lng}
+      arcEndLat={d => +d.dstAirport.lat}
+      arcEndLng={d => +d.dstAirport.lng}
+      arcDashLength={0.25}
+      arcDashGap={1}
+      arcDashInitialGap={() => Math.random()}
+      arcDashAnimateTime={4000}
+      arcColor={d => [`rgba(0, 255, 0, ${OPACITY})`, `rgba(255, 0, 0, ${OPACITY})`]}
+      arcsTransitionDuration={0}
+
+      pointsData={airports}
+      pointColor={() => 'orange'}
+      pointAltitude={0}
+      pointRadius={0.02}
+      pointsMerge={true}
+    />;
+  };
+
+  createRoot(document.getElementById('globeViz'))
+    .render(<World />);
+</script>
+</body>
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React, { useState, useEffect, useRef } from 'react';
+  import { createRoot } from 'react-dom';
+
+  const World = () => {
+    const globeEl = useRef();
+    const [countries, setCountries] = useState({ features: []});
+    const [altitude, setAltitude] = useState(0.1);
+    const [transitionDuration, setTransitionDuration] = useState(1000);
+
+    useEffect(() => {
+      // load data
+      fetch('../datasets/ne_110m_admin_0_countries.geojson').then(res => res.json())
+        .then(countries=> {
+          setCountries(countries);
+
+          setTimeout(() => {
+            setTransitionDuration(4000);
+            setAltitude(() => feat => Math.max(0.1, Math.sqrt(+feat.properties.POP_EST) * 7e-5));
+          }, 3000);
+        });
+    }, []);
+
+    useEffect(() => {
+      // Auto-rotate
+      globeEl.current.controls().autoRotate = true;
+      globeEl.current.controls().autoRotateSpeed = 0.3;
+
+      globeEl.current.pointOfView({ altitude: 4 }, 5000);
+    }, []);
+
+    return <Globe
+      ref={globeEl}
+      globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-dark.jpg"
+
+      polygonsData={countries.features.filter(d => d.properties.ISO_A2 !== 'AQ')}
+      polygonAltitude={altitude}
+      polygonCapColor={() => 'rgba(200, 0, 0, 0.6)'}
+      polygonSideColor={() => 'rgba(0, 100, 0, 0.15)'}
+      polygonLabel={({ properties: d }) => <div>
+        <div><b>{d.ADMIN} ({d.ISO_A2})</b></div>
+        <div>Population: <i>{Math.round(+d.POP_EST / 1e4) / 1e2}M</i></div>
+      </div>}
+      polygonsTransitionDuration={transitionDuration}
+    />;
+  };
+
+  createRoot(document.getElementById('globeViz'))
+    .render(<World />);
+</script>
+</body>
+<head>
+  <style>
+    body { margin: 0; }
+
+    #time {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      color: lightblue;
+      font-family: monospace;
+    }
+  </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React, { useState, useEffect, useCallback } from 'react';
+  import { createRoot } from 'react-dom';
+  import { TextureLoader, ShaderMaterial, Vector2 } from 'https://esm.sh/three';
+  import * as solar from 'https://esm.sh/solar-calculator';
+
+  const VELOCITY = 1; // minutes per frame
+
+  // Custom shader:  Blends night and day images to simulate day/night cycle
+  const dayNightShader = {
+    vertexShader: `
+      varying vec3 vNormal;
+      varying vec2 vUv;
+      void main() {
+        vNormal = normalize(normalMatrix * normal);
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      #define PI 3.141592653589793
+      uniform sampler2D dayTexture;
+      uniform sampler2D nightTexture;
+      uniform vec2 sunPosition;
+      uniform vec2 globeRotation;
+      varying vec3 vNormal;
+      varying vec2 vUv;
+
+      float toRad(in float a) {
+        return a * PI / 180.0;
+      }
+
+      vec3 Polar2Cartesian(in vec2 c) { // [lng, lat]
+        float theta = toRad(90.0 - c.x);
+        float phi = toRad(90.0 - c.y);
+        return vec3( // x,y,z
+          sin(phi) * cos(theta),
+          cos(phi),
+          sin(phi) * sin(theta)
+        );
+      }
+
+      void main() {
+        float invLon = toRad(globeRotation.x);
+        float invLat = -toRad(globeRotation.y);
+        mat3 rotX = mat3(
+          1, 0, 0,
+          0, cos(invLat), -sin(invLat),
+          0, sin(invLat), cos(invLat)
+        );
+        mat3 rotY = mat3(
+          cos(invLon), 0, sin(invLon),
+          0, 1, 0,
+          -sin(invLon), 0, cos(invLon)
+        );
+        vec3 rotatedSunDirection = rotX * rotY * Polar2Cartesian(sunPosition);
+        float intensity = dot(normalize(vNormal), normalize(rotatedSunDirection));
+        vec4 dayColor = texture2D(dayTexture, vUv);
+        vec4 nightColor = texture2D(nightTexture, vUv);
+        float blendFactor = smoothstep(-0.1, 0.1, intensity);
+        gl_FragColor = mix(nightColor, dayColor, blendFactor);
+      }
+    `
+  };
+
+  const sunPosAt = dt => {
+    const day = new Date(+dt).setUTCHours(0, 0, 0, 0);
+    const t = solar.century(dt);
+    const longitude = (day - dt) / 864e5 * 360 - 180;
+    return [longitude - solar.equationOfTime(t) / 4, solar.declination(t)];
+  };
+
+  const World = () => {
+    const [dt, setDt] = useState(+new Date());
+    const [globeMaterial, setGlobeMaterial] = useState();
+
+    useEffect(() => {
+      (function iterateTime() {
+        setDt(dt => dt + VELOCITY * 60 * 1000);
+        requestAnimationFrame(iterateTime);
+      })();
+    }, []);
+
+    useEffect(() => {
+      Promise.all([
+        new TextureLoader().loadAsync('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-day.jpg'),
+        new TextureLoader().loadAsync('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg')
+      ]).then(([dayTexture, nightTexture]) => {
+        setGlobeMaterial(new ShaderMaterial({
+          uniforms: {
+            dayTexture: {value: dayTexture},
+            nightTexture: {value: nightTexture},
+            sunPosition: {value: new Vector2()},
+            globeRotation: {value: new Vector2()}
+          },
+          vertexShader: dayNightShader.vertexShader,
+          fragmentShader: dayNightShader.fragmentShader
+        }));
+      });
+    }, []);
+
+    useEffect(() => {
+      // Update Sun position
+      globeMaterial?.uniforms.sunPosition.value.set(...sunPosAt(dt));
+    }, [dt, globeMaterial]);
+
+    return <div>
+      <Globe
+        globeMaterial={globeMaterial}
+        backgroundImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png"
+        // Update globe rotation on shader
+        onZoom={useCallback(({ lng, lat }) => globeMaterial?.uniforms.globeRotation.value.set(lng, lat), [globeMaterial])}
+      />
+      <div id="time">{new Date(dt).toLocaleString()}</div>
+    </div>;
+  };
+
+  createRoot(document.getElementById('globeViz'))
+    .render(<World />);
+</script>
+</body>
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React, { useState, useEffect } from 'react';
+  import { createRoot } from 'react-dom';
+  import { scaleLinear } from 'https://esm.sh/d3-scale';
+
+  const World = () => {
+    const [equakes, setEquakes] = useState([]);
+
+    useEffect(() => {
+      // load data
+      fetch('//earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojson').then(res => res.json())
+        .then(({ features }) => setEquakes(features));
+    }, []);
+
+    const weightColor = scaleLinear()
+      .domain([0, 30])
+      .range(['lightblue', 'darkred'])
+      .clamp(true);
+
+    return <Globe
+      globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg"
+
+      hexBinPointsData={equakes}
+      hexBinPointLat={d => d.geometry.coordinates[1]}
+      hexBinPointLng={d => d.geometry.coordinates[0]}
+      hexBinPointWeight={d => d.properties.mag}
+      hexAltitude={({ sumWeight }) => sumWeight * 0.0025}
+      hexTopColor={d => weightColor(d.sumWeight)}
+      hexSideColor={d => weightColor(d.sumWeight)}
+      hexLabel={d => <div>
+        <b>{d.points.length}</b> earthquakes in the past month:
+        <ul>
+          {d.points.slice()
+            .sort((a, b) => b.properties.mag - a.properties.mag)
+            .map(d => <li>{d.properties.title}</li>)
+          }
+        </ul>
+      </div>}
+    />;
+  };
+
+  createRoot(document.getElementById('globeViz'))
+    .render(<World />);
+</script>
+</body>
+<head>
+  <style>
+    body { margin: 0; }
+
+    #time-log {
+      position: absolute;
+      font-size: 12px;
+      font-family: sans-serif;
+      padding: 5px;
+      border-radius: 3px;
+      background-color: rgba(200, 200, 200, 0.1);
+      color: lavender;
+      bottom: 10px;
+      right: 10px;
+    }
+  </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+  import { createRoot } from 'react-dom';
+  import * as satellite from 'https://esm.sh/satellite.js';
+
+  const EARTH_RADIUS_KM = 6371; // km
+  const TIME_STEP = 3 * 1000; // per frame
+
+  const World = () => {
+    const globeEl = useRef();
+    const [satData, setSatData] = useState();
+    const [globeRadius, setGlobeRadius] = useState();
+    const [time, setTime] = useState(new Date());
+
+    useEffect(() => {
+      // time ticker
+      (function frameTicker() {
+        requestAnimationFrame(frameTicker);
+        setTime(time => new Date(+time + TIME_STEP));
+      })();
+    }, []);
+
+    useEffect(() => {
+      // load satellite data
+      fetch('//cdn.jsdelivr.net/npm/globe.gl/example/datasets/space-track-leo.txt').then(r => r.text()).then(rawData => {
+        const tleData = rawData.replace(/\r/g, '')
+          .split(/\n(?=[^12])/)
+          .filter(d => d)
+          .map(tle => tle.split('\n'));
+        const satData = tleData.map(([name, ...tle]) => ({
+          satrec: satellite.twoline2satrec(...tle),
+          name: name.trim().replace(/^0 /, '')
+        }))
+        // exclude those that can't be propagated
+        .filter(d => !!satellite.propagate(d.satrec, new Date())?.position);
+
+        setSatData(satData);
+      });
+    }, []);
+
+    const particlesData = useMemo(() => {
+      if (!satData) return [];
+
+      // Update satellite positions
+      const gmst = satellite.gstime(time);
+      return [
+        satData.map(d => {
+          const eci = satellite.propagate(d.satrec, time);
+          if (eci?.position) {
+            const gdPos = satellite.eciToGeodetic(eci.position, gmst);
+            const lat = satellite.radiansToDegrees(gdPos.latitude);
+            const lng = satellite.radiansToDegrees(gdPos.longitude);
+            const alt = gdPos.height / EARTH_RADIUS_KM;
+            return { ...d, lat, lng, alt };
+          } else {
+            // explicitly handle invalid position
+            d.lat = NaN;
+            d.lng = NaN;
+            d.alt = NaN;
+          }
+          return d;
+        }).filter(d => !isNaN(d.lat) && !isNaN(d.lng) && !isNaN(d.alt))
+      ];
+    }, [satData, time]);
+
+    useEffect(() => {
+      setGlobeRadius(globeEl.current.getGlobeRadius());
+      globeEl.current.pointOfView({ altitude: 3.5 });
+    }, []);
+
+    return <div>
+      <Globe
+        ref={globeEl}
+        globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg"
+        particlesData={particlesData}
+        particleLabel="name"
+        particleLat="lat"
+        particleLng="lng"
+        particleAltitude="alt"
+        particlesColor={useCallback(() => 'palegreen', [])}
+      />
+      <div id="time-log">{time.toString()}</div>
+    </div>;
+  };
+
+  createRoot(document.getElementById('globeViz'))
+    .render(<World />);
+</script>
+</body>
+<head>
+  <style>
+    body { margin: 0; }
+
+    #time {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      color: lightblue;
+      font-family: monospace;
+    }
+  </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React, { useState, useEffect } from 'react';
+  import { createRoot } from 'react-dom';
+  import { MeshLambertMaterial } from 'https://esm.sh/three';
+  import * as solar from 'https://esm.sh/solar-calculator';
+
+  const VELOCITY = 9; // minutes per frame
+
+  const solarMaterial = new MeshLambertMaterial({ color: '#ffff00', opacity: 0.3, transparent: true });
+
+  const sunPosAt = dt => {
+    const day = new Date(+dt).setUTCHours(0, 0, 0, 0);
+    const t = solar.century(dt);
+    const longitude = (day - dt) / 864e5 * 360 - 180;
+    return [longitude - solar.equationOfTime(t) / 4, solar.declination(t)];
+  };
+
+  const World = () => {
+    const [dt, setDt] = useState(+new Date());
+
+    useEffect(() => {
+      (function iterateTime() {
+        setDt(dt => dt + VELOCITY * 60 * 1000);
+        requestAnimationFrame(iterateTime);
+      })();
+    }, []);
+
+    return <div>
+      <Globe
+        globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-dark.jpg"
+        tilesData={[{ pos: sunPosAt(dt) }]}
+        tileLng={d => d.pos[0]}
+        tileLat={d => d.pos[1]}
+        tileAltitude={0.005}
+        tileWidth={180}
+        tileHeight={180}
+        tileUseGlobeProjection={false}
+        tileMaterial={() => solarMaterial}
+        tilesTransitionDuration={0}
+      />
+      <div id="time">{new Date(dt).toLocaleString()}</div>
+    </div>;
+  };
+
+  createRoot(document.getElementById('globeViz'))
+    .render(<World />);
+</script>
+</body>
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React, { useState, useEffect } from 'react';
+  import { createRoot } from 'react-dom';
+
+  const World = () => {
+    const [cablePaths, setCablePaths] = useState([]);
+
+    useEffect(() => {
+      // from https://www.submarinecablemap.com
+      fetch('//http-proxy.vastur.com?url=https://www.submarinecablemap.com/api/v3/cable/cable-geo.json')
+        .then(r => r.json())
+        .then(cablesGeo => {
+          let cablePaths = [];
+          cablesGeo.features.forEach(({ geometry, properties }) => {
+            geometry.coordinates.forEach(coords => cablePaths.push({ coords, properties }));
+          });
+
+          setCablePaths(cablePaths);
+        });
+    }, []);
+
+    return <Globe
+      globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-dark.jpg"
+      bumpImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png"
+      backgroundImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png"
+      pathsData={cablePaths}
+      pathPoints="coords"
+      pathPointLat={p => p[1]}
+      pathPointLng={p => p[0]}
+      pathColor={path => path.properties.color}
+      pathLabel={path => path.properties.name}
+      pathDashLength={0.1}
+      pathDashGap={0.008}
+      pathDashAnimateTime={12000}
+    />;
+  };
+
+  createRoot(document.getElementById('globeViz'))
+    .render(<World />);
+</script>
+</body>
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React from 'react';
+  import { createRoot } from 'react-dom';
+  import { MeshLambertMaterial } from 'https://esm.sh/three';
+
+  const TILE_MARGIN = 0.35; // degrees
+
+  // Gen random data
+  const GRID_SIZE = [60, 20];
+  const COLORS = ['red', 'green', 'yellow', 'blue', 'orange', 'pink', 'brown', 'purple', 'magenta'];
+
+  const materials = COLORS.map(color => new MeshLambertMaterial({ color, opacity: 0.6, transparent: true }));
+  const tileWidth = 360 / GRID_SIZE[0];
+  const tileHeight = 180 / GRID_SIZE[1];
+  const tilesData = [];
+  [...Array(GRID_SIZE[0]).keys()].forEach(lngIdx =>
+    [...Array(GRID_SIZE[1]).keys()].forEach(latIdx =>
+      tilesData.push({
+        lng: -180 + lngIdx * tileWidth,
+        lat: -90 + (latIdx + 0.5) * tileHeight,
+        material: materials[Math.floor(Math.random() * materials.length)]
+      })
+    )
+  );
+
+  createRoot(document.getElementById('globeViz')).render(
+    <Globe
+      tilesData={tilesData}
+      tileWidth={tileWidth - TILE_MARGIN}
+      tileHeight={tileHeight - TILE_MARGIN}
+      tileMaterial="material"
+    />
+  );
+</script>
+</body>
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React, { useState, useEffect } from 'react';
+  import { createRoot } from 'react-dom';
+
+  const World = () => {
+    const [volcanoes, setVolcanoes] = useState([]);
+
+    useEffect(() => {
+      // load data
+      fetch('../datasets/world_volcanoes.json').then(res => res.json())
+        .then(setVolcanoes);
+    }, []);
+
+    return <Globe
+      globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg"
+      heatmapsData={[volcanoes]}
+      heatmapPointLat="lat"
+      heatmapPointLng="lon"
+      heatmapPointWeight={d => d.elevation * 5e-5}
+      heatmapTopAltitude={0.2}
+      heatmapBandwidth={1.35}
+      heatmapColorSaturation={3.2}
+      enablePointerInteraction={false}
+    />;
+  };
+
+  createRoot(document.getElementById('globeViz'))
+    .render(<World />);
+</script>
+</body>
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React from 'react';
+  import { createRoot } from 'react-dom';
+
+  // Gen random data
+  const N = 900;
+  const gData = [...Array(N).keys()].map(() => ({
+    lat: (Math.random() - 0.5) * 160,
+    lng: (Math.random() - 0.5) * 360,
+    weight: Math.random()
+  }));
+
+  createRoot(document.getElementById('globeViz')).render(
+    <Globe
+      globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-dark.jpg"
+      heatmapsData={[gData]}
+      heatmapPointLat="lat"
+      heatmapPointLng="lng"
+      heatmapPointWeight="weight"
+      heatmapTopAltitude={0.7}
+      heatmapsTransitionDuration={3000}
+      enablePointerInteraction={false}
+    />
+  );
+</script>
+</body>
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script type="importmap">{ "imports": {
+    "react": "https://esm.sh/react",
+    "react-dom": "https://esm.sh/react-dom/client"
+  }}</script>
+
+<!--  <script type="module">import * as React from 'react'; window.React = React;</script>-->
+<!--  <script src="../../dist/react-globe.gl.js" defer></script>-->
+</head>
+
+<body>
+<div id="globeViz"></div>
+
+<script src="//unpkg.com/@babel/standalone"></script>
+<script type="text/jsx" data-type="module">
+  import Globe from 'https://esm.sh/react-globe.gl?external=react';
+  import React, { useState, useEffect } from 'react';
+  import { createRoot } from 'react-dom';
+  import { scaleLinear } from 'https://esm.sh/d3-scale';
+
+  const World = () => {
+    const [equakes, setEquakes] = useState([]);
+
+    useEffect(() => {
+      // load data
+      fetch('//earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_month.geojson').then(res => res.json())
+        .then(({ features }) => setEquakes(features));
+    }, []);
+
+    const weightColor = scaleLinear()
+      .domain([0, 30])
+      .range(['lightblue', 'darkred'])
+      .clamp(true);
+
+    return <Globe
+      globeImageUrl="//cdn.jsdelivr.net/npm/three-globe/example/img/earth-night.jpg"
+
+      hexBinPointsData={equakes}
+      hexBinPointLat={d => d.geometry.coordinates[1]}
+      hexBinPointLng={d => d.geometry.coordinates[0]}
+      hexBinPointWeight={d => d.properties.mag}
+      hexAltitude={({ sumWeight }) => sumWeight * 0.0025}
+      hexTopColor={d => weightColor(d.sumWeight)}
+      hexSideColor={d => weightColor(d.sumWeight)}
+      hexLabel={d => <div>
+        <b>{d.points.length}</b> earthquakes in the past month:
+        <ul>
+          {d.points.slice()
+            .sort((a, b) => b.properties.mag - a.properties.mag)
+            .map(d => <li>{d.properties.title}</li>)
+          }
+        </ul>
+      </div>}
+    />;
+  };
+
+  createRoot(document.getElementById('globeViz'))
+    .render(<World />);
+</script>
+</body>
