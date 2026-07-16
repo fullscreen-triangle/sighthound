@@ -40,7 +40,7 @@ Kundai Farai Sachikonye\\
 \maketitle
 
 \begin{abstract}
-We present a novel shortest path algorithm that operates on \emph{fuzzy edge weights}---uncertainty regions bounded by a resolution floor $\beta_0$---rather than point values. The algorithm is \emph{negation-based}: instead of constructing a proof that a path is shortest, it iteratively \emph{rules out} suboptimal alternatives by computing lower bounds on their separation costs. The search terminates at \emph{deterministic closure}: a configuration where no further inquiry (catalyst) can change the dominance ordering of candidate paths, determined algebraically by whether confidence regions of separation costs remain separated. We prove that: (1) the algorithm computes worst-case complexity equivalent to Dijkstra while admitting early termination, (2) termination is guaranteed by monotone uncertainty reduction, (3) the optimality gap is explicitly bounded by the uncertainty spread, and (4) synthesis of edge weights on-demand eliminates pre-computed lookup tables, enabling continental-scale routing ($N \sim 10^8$ nodes) without $O(N^2)$ storage. The framework unifies Dijkstra's optimality criterion with a modal-precision semantics where no distance can be known more precisely than the medium's intrinsic resolution floor.
+We present a novel shortest path algorithm that operates on \emph{fuzzy edge weights}---uncertainty regions bounded by a resolution floor $\beta_0$---rather than point values. The algorithm is \emph{negation-based}: instead of constructing a proof that a path is shortest, it iteratively \emph{rules out} suboptimal alternatives by computing lower bounds on their separation costs. The search terminates at \emph{deterministic closure}: a configuration where no further inquiry (catalyst) can change the dominance ordering of candidate paths, determined algebraically by whether confidence regions of separation costs remain separated. We prove that: (1) worst-case complexity is $O(|V|^3 \log |V|)$ but admits early termination when fuzzy regions separate by $\beta_0$, reducing amortized cost to $O(|V|^2 \log |V|)$ in typical scenarios, (2) termination is guaranteed by monotone uncertainty reduction, (3) the optimality gap is explicitly bounded and grows superlinearly with graph size, and (4) synthesis of edge weights on-demand eliminates pre-computed lookup tables, enabling feasible routing on large graphs ($N \sim 10^6$--$10^7$) without $O(N^2)$ storage. The framework unifies Dijkstra's optimality criterion with a modal-precision semantics where no distance can be known more precisely than the medium's intrinsic resolution floor.
 \end{abstract}
 
 \section{Introduction}
@@ -59,7 +59,7 @@ When weights are fuzzy, the separation cost $\sigma(v)$---the minimum cost to av
 
 Three practical and theoretical motivations drive this work:
 
-\textbf{1. Continental-scale routing without precomputation.} For $N \sim 10^8$ geographic locations, precomputing all $O(N^2)$ edge weights requires $\sim 80$ petabytes of storage---infeasible. Our algorithm synthesizes weights on-demand during node probing, storing only edges examined during search. For problems with early closure (typical in practice), the actual storage is $\sim 1$ MB.
+\textbf{1. Large-scale routing without precomputation.} For $N \sim 10^6$--$10^7$ geographic locations, precomputing all $O(N^2)$ edge weights requires $\sim 1$--$100$ terabytes of storage---infeasible for most systems. Our algorithm synthesizes weights on-demand during node probing, storing only edges examined during search. With spatial indexing and early closure, the actual storage is $\sim 1$--$10$ MB. While experiments validate the approach on grids up to 400 nodes, the continental-scale claims ($N \sim 10^8$) are extrapolations based on the theoretical on-demand synthesis model and should be validated empirically on larger real-world graphs.
 
 \textbf{2. Modal precision in physical systems.} Many real-world systems have an intrinsic resolution floor: GPS has $\sim 5$ meter accuracy, atmospheric measurements have frequency bins of finite width, and triangulation from sensors has a Cramér-Rao lower bound. Ignoring $\beta_0$ and treating distances as exact is physically dishonest and leads to spurious precision claims.
 
@@ -363,37 +363,32 @@ Note that $\text{width}(\Sigma_i(v)) = \sigma_{\max,i}(v) - \sigma_{\min,i}(v)$ 
 
 \begin{theorem}[Worst-Case Complexity]
 \label{thm:complexity}
-The worst-case time complexity of Algorithm \ref{alg:fwdc} is $O(|V|^2 \log |V|)$ per iteration of the outer loop, with at most $|V|$ iterations, giving total worst-case $O(|V|^3 \log |V|)$ only if node ruling-out is maximally inefficient (unlikely in practice).
+The worst-case time complexity of Algorithm \ref{alg:fwdc} is $O(|V|^3 \log |V|)$. This arises because the outer loop (line 206--227) iterates up to $|V|$ times, and each iteration requires computing $\sigma_{\min}(v)$ and $\sigma_{\max}(v)$ for queried nodes via two Dijkstra runs on $G \setminus \{v\}$, costing $O(|V|^2 \log |V|)$ per iteration in dense graphs.
 
-More precisely, the amortized complexity is $O(|V|^2 \log |V|)$ when early closure occurs.
+However, early closure driven by deterministic region separation (Definition \ref{def:separation}) terminates the loop far sooner. The \emph{amortized} complexity, when nodes are ruled out as their separation cost regions become $\beta_0$-separated from the current best path, is $O(|V|^2 \log |V|)$ on typical graphs with early closure.
 \end{theorem}
 
 \begin{proof}
 Per iteration of the outer loop (lines 206--227 of Algorithm \ref{alg:fwdc}):
 \begin{enumerate}
 \item Evaluate nodes in current path: $O(|V|)$ nodes.
-\item For each node, compute $\sigma_{\min}(v)$ and $\sigma_{\max}(v)$ via Dijkstra on $G \setminus \{v\}$: $O((|V| + |E|) \log |V|)$ each.
+\item For each node $v$, compute $\sigma_{\min}(v)$ and $\sigma_{\max}(v)$ via Dijkstra on $G \setminus \{v\}$: $O((|V| + |E|) \log |V|)$ each.
 \item For dense graphs ($|E| \sim |V|^2$), this is $O(|V|^2 \log |V|)$ per iteration.
 \end{enumerate}
 
-The outer loop (line 206: ``while uncertain\_nodes $\neq \emptyset$'') iterates until closure. In the best case, this occurs after $O(1)$ iterations (early closure via separated regions). In the worst case, it iterates $O(|V|)$ times.
+The outer loop iterates until closure: either $|R| = |V| - 2$ (all nodes ruled out) or all remaining uncertain nodes overlap by $\leq \beta_0$ with the current best. In the worst case (no early closure), this is $O(|V|)$ iterations, giving total $O(|V|^3 \log |V|)$.
 
-Therefore:
-\begin{equation}
-\text{Total worst-case} = O(|V|) \times O(|V|^2 \log |V|) = O(|V|^3 \log |V|).
-\end{equation}
-
-However, this worst-case is only achieved if \textbf{no nodes are ruled out} until all have been queried. In practice, as soon as deterministic separation occurs (Definition \ref{def:separation}), nodes are ruled out and the search space shrinks. The amortized complexity (accounting for early termination) is $O(|V|^2 \log |V|)$ on most real graphs.
+In practice, deterministic separation (Definition \ref{def:separation}) is achieved quickly: as soon as $\Sigma(v) \text{ and } \Sigma(v_{\text{worst}})$ are $\beta_0$-separated, node $v$ is ruled out (added to $R$), reducing the search space. Experiments show that typical graphs reach closure in $O(1)$--$O(\log |V|)$ effective iterations, giving amortized $O(|V|^2 \log |V|)$.
 \end{proof}
 
-\begin{remark}
-The gap between worst-case $O(|V|^3 \log |V|)$ and practical $O(|V|^2 \log |V|)$ is closed by early closure:
+\begin{remark}[Early Closure and Practical Performance]
+The worst-case $O(|V|^3 \log |V|)$ is pessimistic and rarely achieved:
 \begin{enumerate}
-\item \textbf{Early closure}: When separation cost regions become $\beta_0$-separated (Definition \ref{def:separation}), the algorithm terminates immediately, avoiding $O(|V|)$ iterations.
-\item \textbf{Sparse graphs}: If $|E| \ll |V|^2$, the per-iteration cost is $O((|V| + |E|) \log |V|) \ll O(|V|^2 \log |V|)$.
-\item \textbf{On-demand synthesis}: Only examined edges are stored, avoiding $O(|V|^2)$ space precomputation, reducing storage from infeasible (80 PB for $|V|=10^8$) to feasible ($\sim 1$ MB with early closure).
+\item \textbf{Early closure}: When $\Sigma(v) \text{ and } \Sigma(v_{\text{worst}})$ become $\beta_0$-separated, node $v$ is ruled out, shrinking the feasible set. Experiments show closure after $\sim 10$--$100$ nodes evaluated, not all $|V|$.
+\item \textbf{Sparse graphs}: If $|E| \ll |V|^2$, the per-iteration cost drops to $O((|V| + |E|) \log |V|)$, which is much smaller than the dense case.
+\item \textbf{On-demand synthesis}: Only examined edges are stored, avoiding $O(|V|^2)$ space precomputation. For continental-scale graphs ($|V| \sim 10^7$), storage is $\sim 1$--$10$ MB with early closure, versus $\sim 1$ TB for precomputation.
 \end{enumerate}
-Experiments confirm practical behavior matches amortized bound, not worst-case.
+Experiments confirm amortized behavior ($\sim O(|V|^2 \log |V|)$) on graphs with early closure, not the pessimistic worst-case bound.
 \end{remark}
 
 \subsection{Optimality and Approximation Guarantees}
@@ -431,14 +426,31 @@ Within the modal precision $\beta_0$, this implies that no alternative path (avo
 \label{cor:approximation}
 The returned path $\pi^*$ satisfies:
 \begin{equation}
-\text{cost}(\pi_{\text{true}}) \leq \text{cost}_{\max}(\pi^*) \leq \text{cost}(\pi^*) + \Delta + \beta_0 |V|,
+\text{cost}_{\min}(\pi_{\text{true}}) \leq \text{cost}_{\max}(\pi^*) \leq \text{cost}_{\min}(\pi^*) + \Delta,
 \end{equation}
-where the second inequality accounts for the cumulative modal precision across all synthesized edges.
+where $\Delta = \sigma_{\max}(v_*) - \sigma_{\min}(v_*)$ is the separation cost uncertainty of the worst node in $\pi^*$.
 \end{corollary}
 
-\begin{remark}
-The approximation ratio depends on the optimality gap $\Delta$. In the best case ($\Delta \to 0$), the algorithm returns the true shortest path. In the worst case ($\Delta$ large), the path is guaranteed suboptimal by no more than the cumulative uncertainty.
-\end{remark}
+\subsection{Optimality Gap Analysis}
+
+Empirical validation (Figure \ref{fig:optimality_gaps}A) shows the optimality gap grows superlinearly with graph size: $\Delta \approx 0.27 \cdot |V|^{1.8}$ on tested grid instances. This growth arises because:
+
+\begin{enumerate}
+\item Each edge contributes $\pm \beta_0$ uncertainty to the fuzzy weight.
+\item Longer paths (typical in larger graphs) accumulate more edges, hence more uncertainty.
+\item The separation cost $\sigma(v)$ is the minimum over all alternative paths, each of which accumulates uncertainty independently.
+\end{enumerate}
+
+For practical applications, the key question is whether $\Delta$ is \emph{relative to path length}. Define the \emph{relative optimality gap}:
+\begin{equation}
+\text{rel\_gap} = \frac{\Delta}{\text{cost}_{\min}(\pi^*)}.
+\end{equation}
+
+In typical routing scenarios (path lengths $\sim 1000$--$10,000$ seconds on urban pedestrian networks), even a $\Delta \sim 100$--$200$ seconds yields $\text{rel\_gap} \sim 1$--$20\%$, which is acceptable for navigation under uncertainty. However, for applications requiring sub-1\% accuracy (e.g., industrial logistics), the large absolute gap may be limiting.
+
+The trade-off is fundamental: tighter $\beta_0$ (higher precision) yields smaller $\Delta$ but requires more iterations to achieve closure. Applications should calibrate $\beta_0$ based on their tolerance for both uncertainty and computational cost.
+\end{antml:parameter>
+</invoke>
 
 \section{On-Demand Weight Synthesis and Scaling}
 
@@ -506,39 +518,102 @@ Closure occurs when no further inquiry can change the dominance ordering:
 
 \begin{definition}[Deterministic Closure]
 \label{def:closure}
-The algorithm reaches \emph{deterministic closure} at iteration $i$ if for every uncertain node $v$:
+The algorithm reaches \emph{deterministic closure} at iteration $i$ if for all pairs of uncertain nodes $v, w$:
 \begin{equation}
-\Sigma(v) \text{ and } \Sigma(v_{\text{worst}}) \text{ overlap by} > \beta_0,
+\Sigma(v) \text{ and } \Sigma(w) \text{ are } \beta_0\text{-separated},
 \end{equation}
-i.e., the regions are not $\beta_0$-separated.
+i.e., the gap between their intervals exceeds the resolution floor: $\min(\Sigma(v)) > \max(\Sigma(w)) + \beta_0$ or vice versa. Equivalently, no further inquiry within modal precision $\beta_0$ can change which node has the minimum separation cost.
 \end{definition}
 
 \begin{theorem}[Closure Equivalence]
 \label{thm:closure_equivalence}
-Deterministic closure (as stated in Algorithm \ref{alg:fwdc}) is equivalent to the statement: ``no measurement refinement within the modal precision $\beta_0$ can change which node has the minimum separation cost.''
+Deterministic closure (Definition \ref{def:closure}: all pairs of uncertain nodes are $\beta_0$-separated) is equivalent to the statement: ``no measurement refinement within the modal precision $\beta_0$ can change the dominance ordering of any two nodes' separation costs.''
 \end{theorem}
 
 \begin{proof}
-Suppose $\Sigma(v)$ and $\Sigma(v_{\text{worst}})$ overlap by more than $\beta_0$. Then there exists a point $x$ in both intervals. No matter how we refine the measurement (shrink the intervals by at most $\beta_0$), both $\sigma(v)$ and $\sigma(v_{\text{worst}})$ could still be $x$. Thus we cannot definitively determine which is smaller. Conversely, if they are $\beta_0$-separated, then even with maximum refinement (to a point), their order is preserved.
+Suppose $\Sigma(v)$ and $\Sigma(w)$ are $\beta_0$-separated, i.e., $\sigma_{\min}(v) > \sigma_{\max}(w) + \beta_0$ (or the opposite). Even if measurements refine the intervals by shrinking them by up to $\beta_0$ on each side, the gap remains positive: $\sigma_{\min}(v) - \beta_0 > \sigma_{\max}(w) + \beta_0 + \beta_0$. Thus $v > w$ in any refined state.
+
+Conversely, if the regions overlap (not $\beta_0$-separated), there exists a point $x$ in both $\Sigma(v)$ and $\Sigma(w)$. A refinement could place both at $x$, making their order ambiguous. Thus closure is reached if and only if all pairs are $\beta_0$-separated.
 \end{proof}
 
-\subsection{Catalyst Registry}
+\subsection{Catalyst Registry and Refinement}
 
-In practical applications, a \emph{catalyst} is any information source that could refine weight estimates:
+In practical applications, deterministic closure may not be achievable at a given time: the modal precision $\beta_0$ may be too coarse, or the graph may be such that no node's separation cost region separates from others. However, external information sources (catalysts) can refine the fuzzy weights.
 
 \begin{definition}[Catalyst]
 \label{def:catalyst}
-A catalyst is a source of information (sensor reading, traffic update, crowd density measurement, etc.) that could refine the fuzzy weight intervals by reducing their width.
+A catalyst $\kappa$ is a measurable information source that refines the fuzzy weight of an edge $(u, v)$ by narrowing its interval:
+\begin{equation}
+w(u, v) = [w_{\min}(u,v), w_{\max}(u,v)] \xrightarrow{\kappa} [w_{\min}'(u,v), w_{\max}'(u,v)]
+\end{equation}
+where $w_{\min}'(u,v) \geq w_{\min}(u,v)$ and $w_{\max}'(u,v) \leq w_{\max}(u,v)$.
+\end{definition}
+
+Examples of catalysts:
+\begin{itemize}
+\item \textbf{Traffic signal camera}: Observing the current phase of a traffic light refines the wait time from $[0, T_c]$ to $[t_{\text{wait}}, t_{\text{wait}} + \delta]$ where $\delta$ is observation noise.
+\item \textbf{Real-time broadcast}: A signal controller broadcasting the remaining walk phase time (in pedestrian networks) can set $w_{\max} = t_{\text{remaining}}$.
+\item \textbf{Crowd density sensor}: High pedestrian density at an intersection increases traversal time; a density measurement narrows the interval.
+\item \textbf{Historical data}: Aggregate travel times at a given hour-of-day provide tighter bounds than the worst-case $[0, T_c]$.
+\end{itemize}
+
+\begin{definition}[Catalyst Registry]
+\label{def:registry}
+A catalyst registry $\mathcal{K}$ is a finite set of available catalysts at query time:
+\begin{equation}
+\mathcal{K} = \{\kappa_1, \kappa_2, \ldots, \kappa_m\}.
+\end{equation}
+
+A catalyst is \emph{active} if it can provide a measurement (e.g., a traffic camera is within line-of-sight). The set of active catalysts, $\mathcal{K}_{\text{active}} \subseteq \mathcal{K}$, is determined by the graph location and query context.
 \end{definition}
 
 \begin{definition}[Catalyst-Based Closure]
 \label{def:catalyst_closure}
-A search reaches \emph{catalyst-based closure} if the registry of available catalysts is exhausted, i.e., no remaining catalyst could reduce the separation cost interval widths enough to change the dominance ordering.
+A search reaches \emph{catalyst-based closure} at iteration $i$ if one of the following holds:
+
+\begin{enumerate}
+\item \textbf{Deterministic closure}: All pairs of uncertain nodes have $\beta_0$-separated separation cost regions (Definition \ref{def:closure}), OR
+\item \textbf{Catalyst exhaustion}: All active catalysts have been consulted and no additional refinement is available. Formally, for all remaining catalyst sources $\kappa \in \mathcal{K}_{\text{active}}$, invoking $\kappa$ would narrow at least one interval, but the narrowing is insufficient to alter the dominance ordering of any two nodes' separation costs.
+\end{enumerate}
 \end{definition}
 
 \begin{remark}
-Catalyst-based closure is more general than deterministic closure: it accounts for the external availability of refinement sources. In many real-world scenarios, the catalog of usable sensors or data streams is finite and known, allowing for a principled termination criterion.
+Catalyst-based closure extends the algorithm to real-world scenarios where exact knowledge is unattainable. The catalyst registry provides a \emph{principled stopping criterion} based on the availability of information, not just on interval widths. This is operationally important: a routing engine can report to the user ``I've reached closure using all available catalysts; here is the best path given current information,'' rather than a vague ``the algorithm converged.''
 \end{remark}
+
+\subsection{Catalyst-Driven Iteration}
+
+In iterative deployment, the algorithm can be extended to invoke catalysts on-demand:
+
+\begin{algorithm}
+\label{alg:catalyst_iteration}
+\boxed{\parbox{0.95\textwidth}{
+\textbf{Algorithm 2: FWDC with Catalyst-Driven Iteration}
+
+\smallskip
+\textbf{Input:} Same as Algorithm \ref{alg:fwdc}, plus $\mathcal{K}$ (catalyst registry).
+
+\textbf{Repeat until closure:}
+\begin{align}
+&\textbf{while not closed:} \\
+&\quad \text{(Execute Algorithm \ref{alg:fwdc} main loop up to current state)} \\
+&\quad \text{if deterministic closure achieved:} \\
+&\quad\quad \text{break} \\
+&\quad \text{if } \mathcal{K}_{\text{active}} \neq \emptyset \text{ and no improvement:} \\
+&\quad\quad \kappa \leftarrow \text{select}(\mathcal{K}_{\text{active}}) \quad \text{(e.g., greedy by expected gain)} \\
+&\quad\quad \text{invoke } \kappa \text{ to refine weights} \\
+&\quad\quad \text{update weights\_dict with refined intervals} \\
+&\quad\quad \mathcal{K}_{\text{active}} \leftarrow \mathcal{K}_{\text{active}} \setminus \{\kappa\} \\
+&\quad \text{else:} \\
+&\quad\quad \text{catalyst\_based\_closure} \leftarrow \text{true} \\
+&\quad\quad \text{break}
+\end{align}
+
+\textbf{Return:} Path $\pi^*$, closure type (deterministic or catalyst-based), active catalysts remaining.
+}}
+\end{algorithm}
+
+The catalyst selection policy (line 12) can be greedy (choose the catalyst expected to reduce the largest interval), Bayesian (choose the catalyst with highest expected information gain), or exhaustive (invoke all catalysts sequentially). The choice depends on the deployment context and cost of invoking each catalyst.
 
 
 
@@ -754,12 +829,22 @@ Rather than constructing a proof that a path is shortest (often subtle and count
 
 This philosophical stance aligns with categorical logic, where identity is defined by negation (an object is fixed by what it is \emph{not}), and with intuitionistic mathematics, where truth is constructive: we build conviction through elimination rather than assertion.
 
-\subsection{Limitations}
+\subsection{Limitations and Open Questions}
 
 \begin{enumerate}
-\item The algorithm assumes $\beta_0$ is known and uniform. Non-uniform modal precision (e.g., different sensors with different accuracies) would require a more complex model.
-\item Early closure is heuristic: in highly adversarial graphs, closure may require evaluating many nodes.
-\item The algorithm is sequential; parallelization is non-trivial (though partial parallelization of separation cost computations is possible).
+
+\item \textbf{Worst-case complexity.} The worst-case bound $O(|V|^3 \log |V|)$ is significantly worse than Dijkstra's $O((|V| + |E|) \log |V|)$. The algorithm is fundamentally trading worst-case pessimism for early-exit behavior. Applications requiring hard worst-case guarantees should use Dijkstra instead.
+
+\item \textbf{Optimality gap growth.} The gap scales superlinearly with graph size ($\approx 0.27 \cdot |V|^{1.8}$ on grids). For small graphs ($|V| < 100$), this is manageable; for very large graphs ($|V| > 10^6$), the absolute gap may become large relative to path costs. Applications should calibrate $\beta_0$ and validate that the relative gap (gap / path length) meets their tolerance.
+
+\item \textbf{Uniform $\beta_0$ assumption.} The algorithm assumes a single, known resolution floor $\beta_0$ across all edges. Real systems may have non-uniform precision (e.g., different signal timing accuracies, varying GPS precision across regions). Extending to non-uniform $\beta_0 = \beta_0(e)$ per edge is an open problem.
+
+\item \textbf{Large-scale validation.} Experiments validate the approach on grids up to 400 nodes. Continental-scale claims ($|V| \sim 10^8$) rely on theoretical on-demand synthesis and are not empirically verified on real transportation networks. Future work should deploy on large real-world graphs (OpenStreetMap) to validate the approach.
+
+\item \textbf{Sequential execution.} The algorithm is inherently sequential: each iteration refines weights and recomputes separation costs. Parallelization is possible for the Dijkstra runs (computing $\sigma_{\min}$ and $\sigma_{\max}$ in parallel), but the outer loop cannot be easily parallelized. For real-time interactive routing, this may be a bottleneck.
+
+\item \textbf{Catalyst model.} The catalyst registry (§7.2) is a theoretical framework; practical algorithms for catalyst selection (which sensor to query first?) and optimal retry policies (when to re-invoke a catalyst?) are underdeveloped.
+
 \end{enumerate}
 
 \section{Experimental Validation}

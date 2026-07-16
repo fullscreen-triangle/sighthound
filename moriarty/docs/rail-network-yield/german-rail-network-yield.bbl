@@ -1,0 +1,118 @@
+\begin{thebibliography}{10}
+
+\bibitem{abril2008}
+M.~Abril, F.~Barber, L.~Ingolotti, M.~A. Salido, P.~Tormos, and A.~Lova.
+\newblock An assessment of railway capacity.
+\newblock {\em Transportation Research Part E: Logistics and Transportation
+  Review}, 44(5):774--806, 2008.
+
+\bibitem{ahuja1993}
+Ravindra~K. Ahuja, Thomas~L. Magnanti, and James~B. Orlin.
+\newblock {\em Network Flows: Theory, Algorithms, and Applications}.
+\newblock Prentice Hall, Englewood Cliffs, NJ, 1993.
+
+\bibitem{arrow1971}
+Kenneth~J. Arrow and Frank~H. Hahn.
+\newblock {\em General Competitive Analysis}.
+\newblock Holden-Day, San Francisco, 1971.
+
+\bibitem{beckmann1956}
+Martin Beckmann, C.~B. McGuire, and Christopher~B. Winsten.
+\newblock Studies in the economics of transportation.
+\newblock {\em Yale University Press, New Haven}, 1956.
+
+\bibitem{bertsekas1998}
+Dimitri~P. Bertsekas.
+\newblock {\em Network Optimization: Continuous and Discrete Models}.
+\newblock Athena Scientific, Belmont, MA, 1998.
+
+\bibitem{cacchiani2012}
+Valentina Cacchiani and Paolo Toth.
+\newblock Nominal and robust train timetabling problems.
+\newblock {\em European Journal of Operational Research}, 219(3):727--737,
+  2012.
+
+\bibitem{caprara2002}
+Alberto Caprara, Matteo Fischetti, and Paolo Toth.
+\newblock Modeling and solving the train timetabling problem.
+\newblock {\em Operations Research}, 50(5):851--861, 2002.
+
+\bibitem{dennis1980}
+Jack~B. Dennis.
+\newblock Data flow supercomputers.
+\newblock {\em Computer}, 13(11):48--56, 1980.
+
+\bibitem{ford1956}
+L.~R. Ford and D.~R. Fulkerson.
+\newblock Maximal flow through a network.
+\newblock {\em Canadian Journal of Mathematics}, 8:399--404, 1956.
+
+\bibitem{georgiadis2006}
+Leonidas Georgiadis, Michael~J. Neely, and Leandros Tassiulas.
+\newblock {\em Resource Allocation and Cross-Layer Control in Wireless
+  Networks}.
+\newblock Foundations and Trends in Networking. Now Publishers, 2006.
+
+\bibitem{gibson2003}
+Stephen Gibson, Gilberto Cooper, and Brett Ball.
+\newblock Developments in transport policy: The evolution of capacity charges
+  on the uk rail network.
+\newblock {\em Journal of Transport Economics and Policy}, 37(3):341--354,
+  2003.
+
+\bibitem{goverde2007}
+Rob M.~P. Goverde.
+\newblock Railway timetable stability analysis using max-plus system theory.
+\newblock {\em Transportation Research Part B: Methodological}, 41(2):179--201,
+  2007.
+
+\bibitem{hansen2008}
+Ingo~A. Hansen and J\"{o}rn Pachl.
+\newblock {\em Railway Timetable and Traffic: Analysis, Modelling, Simulation}.
+\newblock Eurailpress, Hamburg, 2008.
+
+\bibitem{uic406}
+{International Union of Railways (UIC)}.
+\newblock Uic code 406: Capacity.
+\newblock Technical Report 2nd edition, UIC, Paris, 2013.
+
+\bibitem{landex2008}
+Alex Landex.
+\newblock Methods to estimate railway capacity and passenger delays.
+\newblock {\em PhD Thesis, Technical University of Denmark}, 2008.
+
+\bibitem{nash2005}
+Chris Nash.
+\newblock Rail infrastructure charges in europe.
+\newblock {\em Journal of Transport Economics and Policy}, 39(3):259--278,
+  2005.
+
+\bibitem{neely2010}
+Michael~J. Neely.
+\newblock {\em Stochastic Network Optimization with Application to
+  Communication and Queueing Systems}.
+\newblock Morgan and Claypool, 2010.
+
+\bibitem{pachl2021}
+J\"{o}rn Pachl.
+\newblock {\em Railway Operation and Control}.
+\newblock VTD Rail Publishing, Mountlake Terrace, WA, 4 edition, 2021.
+
+\bibitem{serafini1989}
+Paolo Serafini and Walter Ukovich.
+\newblock A mathematical model for periodic scheduling problems.
+\newblock {\em SIAM Journal on Discrete Mathematics}, 2(4):550--581, 1989.
+
+\bibitem{tassiulas1992}
+Leandros Tassiulas and Anthony Ephremides.
+\newblock Stability properties of constrained queueing systems and scheduling
+  policies for maximum throughput in multihop radio networks.
+\newblock {\em IEEE Transactions on Automatic Control}, 37(12):1936--1948,
+  1992.
+
+\bibitem{vickrey1969}
+William~S. Vickrey.
+\newblock Congestion theory and transport investment.
+\newblock {\em The American Economic Review}, 59(2):251--260, 1969.
+
+\end{thebibliography}

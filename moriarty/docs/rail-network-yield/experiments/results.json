@@ -1,0 +1,291 @@
+{
+  "summary": {
+    "paper": "A Buffer-Processor Model of Rail Network Yield",
+    "total_experiments": 5,
+    "passed": 5,
+    "all_pass": true,
+    "total_runtime_s": 1.3552
+  },
+  "experiments": [
+    {
+      "name": "Occupancy-Closure-Clearing Equivalence (Thm 6.4)",
+      "network": {
+        "stations": [
+          "A",
+          "B",
+          "C"
+        ],
+        "sections": [
+          "AB_fast",
+          "AB_slow",
+          "BC"
+        ],
+        "beta0_s": 120.0
+      },
+      "task_feasible_A_to_C": true,
+      "yield_star": 19.98201618543311,
+      "optimal_configuration": {
+        "AB_fast": {
+          "vehicle": "H",
+          "v_kmh": 300.0,
+          "items": [
+            "x1",
+            "x2"
+          ]
+        },
+        "AB_slow": null,
+        "BC": {
+          "vehicle": "H",
+          "v_kmh": 300.0,
+          "items": [
+            "x1",
+            "x2"
+          ]
+        }
+      },
+      "separation_costs": {
+        "AB_fast": 6.194409,
+        "BC": 19.982016
+      },
+      "closure": {
+        "is_closed": true,
+        "best_reassignment_gain": 0.0,
+        "beta0_yield_units": 0.99910081,
+        "gain_below_beta0": true
+      },
+      "clearing": {
+        "price_equals_separation_cost": true,
+        "clearing_holds": true,
+        "max_deviation_profit": 0.0
+      },
+      "equivalence_holds": true,
+      "pass": true,
+      "runtime_s": 0.9673
+    },
+    {
+      "name": "Forced optimal speed + interior optimum (Thm 7.3, Def 7.1)",
+      "section": {
+        "length_km": 150.0,
+        "vmax_kmh": 300.0
+      },
+      "vehicle": {
+        "vmax_kmh": 300.0,
+        "energy_b": 1.0
+      },
+      "cases": [
+        {
+          "lambda": 0.0,
+          "v_star_kmh": 300.0,
+          "ceiling_kmh": 300.0,
+          "interior_optimum": false,
+          "is_local_max": true,
+          "best_ratio": 10.0
+        },
+        {
+          "lambda": 1e-07,
+          "v_star_kmh": 300.0,
+          "ceiling_kmh": 300.0,
+          "interior_optimum": false,
+          "is_local_max": true,
+          "best_ratio": 9.174311926605505
+        },
+        {
+          "lambda": 1e-06,
+          "v_star_kmh": 250.0,
+          "ceiling_kmh": 300.0,
+          "interior_optimum": true,
+          "is_local_max": true,
+          "best_ratio": 5.47945205479452
+        },
+        {
+          "lambda": 1e-05,
+          "v_star_kmh": 115.4,
+          "ceiling_kmh": 300.0,
+          "interior_optimum": true,
+          "is_local_max": true,
+          "best_ratio": 2.5434187006386013
+        },
+        {
+          "lambda": 0.0001,
+          "v_star_kmh": 53.6,
+          "ceiling_kmh": 300.0,
+          "interior_optimum": true,
+          "is_local_max": true,
+          "best_ratio": 1.1802250925296471
+        }
+      ],
+      "v_star_monotone_decreasing_in_lambda": true,
+      "hits_ceiling_at_lambda_zero": true,
+      "interior_when_energy_binds": true,
+      "all_cases_are_local_maxima": true,
+      "pass": true,
+      "runtime_s": 0.0187
+    },
+    {
+      "name": "Comparative-advantage sorting, NBG-Berlin corridor (Thm 7.6)",
+      "corridor_km": {
+        "Nuremberg": 0.0,
+        "Erfurt": 190.0,
+        "HalleLeipzig": 310.0,
+        "Bitterfeld": 340.0,
+        "Berlin": 460.0
+      },
+      "rows": [
+        {
+          "section": "NBG_Erfurt",
+          "vmax_kmh": 300.0,
+          "D_H": 9.9999910000081,
+          "D_R": 5.27777707888187,
+          "winner_by_density": "H_ICE",
+          "high_speed_section": true
+        },
+        {
+          "section": "Erfurt_HL",
+          "vmax_kmh": 300.0,
+          "D_H": 9.9999910000081,
+          "D_R": 5.21739063712885,
+          "winner_by_density": "H_ICE",
+          "high_speed_section": true
+        },
+        {
+          "section": "HL_Bitterfeld",
+          "vmax_kmh": 160.0,
+          "D_H": 4.999999437500064,
+          "D_R": 4.999999437500064,
+          "winner_by_density": "tie",
+          "high_speed_section": false
+        },
+        {
+          "section": "Bitterfeld_Berlin",
+          "vmax_kmh": 160.0,
+          "D_H": 5.21739063712885,
+          "D_R": 5.21739063712885,
+          "winner_by_density": "tie",
+          "high_speed_section": false
+        }
+      ],
+      "high_speed_sections_won_by_H": true,
+      "limited_sections_no_H_advantage": true,
+      "pass": true,
+      "runtime_s": 0.0204
+    },
+    {
+      "name": "Liveness: gradient routing drains all buffers (Thm 8.6)",
+      "network": {
+        "stations": [
+          "F",
+          "A",
+          "B",
+          "C",
+          "D",
+          "E"
+        ],
+        "sections": [
+          "FA",
+          "AB",
+          "EB",
+          "BC",
+          "CD"
+        ]
+      },
+      "target_descendable": true,
+      "num_items": 5,
+      "rounds_used": 6,
+      "all_items_settled": true,
+      "residual_distance_monotone": true,
+      "final_residual_distances": {
+        "i1": 0.0,
+        "i2": 0.0,
+        "i3": 0.0,
+        "i4": 0.0,
+        "i5": 0.0
+      },
+      "settled_within_finite_rounds": true,
+      "pass": true,
+      "runtime_s": 0.0005
+    },
+    {
+      "name": "Quantum coincidence: split beta_0 degrades equivalence (Prop 6.5)",
+      "beta0_yield_units": 1.99820162,
+      "separation_costs": {
+        "BC": 9.991008
+      },
+      "trials": [
+        {
+          "multipliers": {
+            "phys": 1,
+            "alg": 1,
+            "econ": 1
+          },
+          "predicted_equivalence_slack": 1.99820162,
+          "predicted_price_band_width": 0.0,
+          "measured_closure_gap": 0.0,
+          "measured_clearing_profit": 0.0,
+          "closure_within_alg_threshold": true,
+          "clearing_within_econ_threshold": true,
+          "equivalence_holds": true
+        },
+        {
+          "multipliers": {
+            "phys": 1,
+            "alg": 3,
+            "econ": 1
+          },
+          "predicted_equivalence_slack": 5.99460486,
+          "predicted_price_band_width": 3.99640324,
+          "measured_closure_gap": 0.0,
+          "measured_clearing_profit": 0.0,
+          "closure_within_alg_threshold": true,
+          "clearing_within_econ_threshold": true,
+          "equivalence_holds": true
+        },
+        {
+          "multipliers": {
+            "phys": 1,
+            "alg": 1,
+            "econ": 5
+          },
+          "predicted_equivalence_slack": 9.99100809,
+          "predicted_price_band_width": 7.99280647,
+          "measured_closure_gap": 0.0,
+          "measured_clearing_profit": 0.0,
+          "closure_within_alg_threshold": true,
+          "clearing_within_econ_threshold": true,
+          "equivalence_holds": true
+        },
+        {
+          "multipliers": {
+            "phys": 2,
+            "alg": 4,
+            "econ": 6
+          },
+          "predicted_equivalence_slack": 11.98920971,
+          "predicted_price_band_width": 3.99640324,
+          "measured_closure_gap": 0.0,
+          "measured_clearing_profit": 0.0,
+          "closure_within_alg_threshold": true,
+          "clearing_within_econ_threshold": true,
+          "equivalence_holds": true
+        },
+        {
+          "multipliers": {
+            "phys": 1,
+            "alg": 5,
+            "econ": 2
+          },
+          "predicted_equivalence_slack": 9.99100809,
+          "predicted_price_band_width": 5.99460486,
+          "measured_closure_gap": 0.0,
+          "measured_clearing_profit": 0.0,
+          "closure_within_alg_threshold": true,
+          "clearing_within_econ_threshold": true,
+          "equivalence_holds": true
+        }
+      ],
+      "coincidence_recovered_when_unified": true,
+      "price_band_tracks_alg_econ_split": true,
+      "pass": true,
+      "runtime_s": 0.348
+    }
+  ]
+}
