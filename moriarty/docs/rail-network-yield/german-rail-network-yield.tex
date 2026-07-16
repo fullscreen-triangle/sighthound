@@ -519,6 +519,11 @@ Consider a live item $x$ at buffer $b$ with target $\tau(x)$, so $r(x)=\rho(b,\t
 The proof turns on a single identification made rigorous by Theorem~\ref{thm:trinity}: the price an undrained buffer raises on its relieving section (Assumption~\ref{ass:backpressure}), the yield a vehicle earns by serving that section (Def.~\ref{def:price_system}), and the fare the stranded item is willing to pay (Def.~\ref{def:fare}) are the \emph{same number} $\sep(\sigma^\ast)$. Because the summoning signal and the earning opportunity are identical, no separate coordination or route commitment is needed to prevent starvation: the stranded item is, by the pricing, its own advertisement. This is the model's liveness-without-commitment property, and it is a theorem, not a design.
 \end{remark}
 
+\begin{remark}[Target-relative gradient suffices for liveness]
+\label{rem:target_relative}
+The universal gradient-connectedness of Def.~\ref{def:geo} (from \emph{every} station one can descend toward \emph{every} other) is stronger than the liveness proof uses, and it fails on a strictly one-way corridor---from the terminus one cannot descend back toward the origin. Inspecting the proof, the only descent invoked is toward each item's \emph{own} target from stations on a path to that target. It therefore suffices that $G$ be \emph{target-descendable} for the item population $\items$: for every item $x\in\items$ and every station $b$ from which $\tau(x)$ is reachable, some section with tail $b$ strictly reduces $\rho(\cdot,\tau(x))$. Theorem~\ref{thm:liveness} holds verbatim under this weaker hypothesis, which one-way corridors do satisfy. The distinction is not merely notational: it is exactly the hypothesis that the numerical validation of Section~\ref{sec:validation} exercises, since its test corridors are directed.
+\end{remark}
+
 \section{Participation and the Occupancy Market}
 \label{sec:market}
 
@@ -598,6 +603,77 @@ On the upgraded mixed sections ($\bar v = 200$, but here we assume a segment lim
 
 Suppose VDE 8.1 (Nuremberg--Erfurt) is the sole fast path south and its removal forces flow onto a legacy line adding, say, 60 minutes of running time to southbound items: then $\sep(\text{VDE 8.1})$ is large, and by \eqref{eq:fare} an item traversing it pays a correspondingly large share of its fare there. A redundant parallel track on the Bitterfeld--Berlin approach, by contrast, has $\sep\approx 0$: an item pays almost nothing for that block-second because the network reroutes it freely. A Nuremberg--Berlin passenger's total fare \eqref{eq:fare} is thus dominated by the scarce high-speed sections it consumes and is nearly free on the redundant approaches---the line integral of scarcity along its realized path, exactly as Theorem~\ref{thm:trinity} predicts.
 
+\section{Numerical Validation}
+\label{sec:validation}
+
+The theorems of Sections~\ref{sec:equivalence}--\ref{sec:liveness} are statements about a formal object; to confirm that the object behaves as the proofs assert, we instantiated the model numerically and checked each claim against an independently computed ground truth. Networks were kept small enough that the global yield optimum is obtainable by brute-force enumeration over configurations, so every check compares a separately-derived quantity (a closure gap, a clearing deviation, a separation cost, a settling time) against an exact reference rather than against another approximation. Five experiments, one per claim, are reported; all pass. The purpose is internal corroboration of the proofs, not empirical measurement of any system.
+
+\subsection{Equivalence and the coincidence of the quantum}
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_1_equivalence.png}
+    \caption{\textbf{Occupancy--Closure--Clearing equivalence (Theorem~\ref{thm:trinity}) on a two-hop corridor.}
+    (\textbf{A})~Yield of the $58$ task-delivering single-section neighbours of the brute-force optimum, sorted; every neighbour lies strictly below the optimum (dashed line), so the optimum admits no improving reassignment---it is closed.
+    (\textbf{B})~Per-section separation costs $\sep(\sigma)$ recovered from the yield functional: the essential downstream section carries a large separation cost while the substitutable upstream section carries a smaller one, and these equal the clearing prices by construction.
+    (\textbf{C})~Closure gap and maximum clearing-deviation profit at the optimum, both at the floor: no reassignment and no participant deviation gains more than the resolution-floor threshold $\blocktime$ (in yield units).
+    (\textbf{D})~Three-dimensional yield surface over the (upstream-vehicle, downstream-vehicle) speed choices at fixed carried set; the maximum sits at the fast/fast corner, and the closed optimum (marked) coincides with it.}\label{fig:val_equivalence}
+\end{figure*}
+
+Experiment~1 builds a corridor $A\to B\to C$ with a fast and a slow upstream section and a demand that must traverse both hops. Brute-force enumeration yields the global optimum; independently, the local-reassignment operator confirms closure (the best of $58$ task-preserving single-section neighbours is strictly dominated, closure gap $0$), and the constructed price system $p=\sep$ admits no profitable deviation (maximum deviation profit $0$). The separation costs are non-trivial and unequal across sections---large on the essential downstream section, smaller on the section with a partial substitute---confirming that $\sep$ discriminates bottlenecks from redundancy as Section~\ref{sec:separation} claims. Figure~\ref{fig:val_equivalence} shows the three coinciding at one configuration. Experiment~5 then splits $\blocktime$ into distinct physical, algorithmic, and economic constants and confirms Proposition~\ref{prop:quantum}: the equivalence slack grows to the maximum of the three, the price-versus-separation band widens exactly as $|\blocktime^{\mathrm{alg}}-\blocktime^{\mathrm{econ}}|$, and unifying the three recovers exact coincidence with zero band (Figure~\ref{fig:val_quantum}).
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_5_quantum.png}
+    \caption{\textbf{Necessity of a common quantum (Proposition~\ref{prop:quantum}).}
+    (\textbf{A})~Predicted equivalence slack versus the largest of the three split constants across trials; the slack tracks the maximum, and is minimal only when all three coincide.
+    (\textbf{B})~Price-versus-separation band width against the algorithmic--economic split $|\blocktime^{\mathrm{alg}}-\blocktime^{\mathrm{econ}}|$; the band grows linearly and vanishes at zero split.
+    (\textbf{C})~Measured closure gap and clearing-deviation profit per trial, each staying within its own threshold, showing where the equivalence survives and where it degrades.
+    (\textbf{D})~Three-dimensional surface of equivalence slack over the (algorithmic, economic) multiplier plane at fixed physical floor; the unique minimum lies on the diagonal where the two are equal.}\label{fig:val_quantum}
+\end{figure*}
+
+\subsection{Forced speed and comparative-advantage sorting}
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_2_forced_speed.png}
+    \caption{\textbf{Forced optimal speed (Theorem~\ref{thm:forcedspeed}, Def.~\ref{def:optspeed}).}
+    (\textbf{A})~Yield ratio as a function of traversal speed for several energy weights $\lambda$; each curve is single-peaked, and the peak is the section-optimal speed $v^\star$.
+    (\textbf{B})~$v^\star$ against $\lambda$: at $\lambda=0$ it sits at the capability ceiling, and it decreases monotonically as energy cost binds, becoming an interior optimum---the signature of the strictly convex energy term.
+    (\textbf{C})~Decomposition of the denominator into block-second and energy--wear components across speed, showing the trade-off whose balance point is $v^\star$.
+    (\textbf{D})~Three-dimensional surface of the yield ratio over the (speed, $\lambda$) plane; the ridge of maxima traces $v^\star(\lambda)$ from the ceiling down into the interior.}\label{fig:val_forced_speed}
+\end{figure*}
+
+Experiment~2 sweeps traversal speed and energy weight for a fixed section and vehicle. The yield ratio is single-peaked in speed at every $\lambda$ (Figure~\ref{fig:val_forced_speed}), the peak $v^\star$ sits at the capability ceiling when energy is free and moves strictly into the interior as $\lambda$ grows, and each peak is verified a local maximum---exactly the content of Theorem~\ref{thm:forcedspeed} and the role of strict convexity in Def.~\ref{def:optspeed}. Experiment~3 instantiates the Nuremberg--Berlin corridor of Section~\ref{sec:example} and computes per-section yield densities for a high-capability and a regional vehicle. On the two $300$~km/h new-build sections the high-capability vehicle strictly dominates; on the two speed-limited sections neither has an advantage and the densities coincide. The fleet thus sorts itself onto sections by comparative advantage in block-seconds with no assignment rule imposed, confirming Theorem~\ref{thm:sorting} (Figure~\ref{fig:val_sorting}).
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_3_sorting.png}
+    \caption{\textbf{Comparative-advantage sorting on the Nuremberg--Berlin corridor (Theorem~\ref{thm:sorting}).}
+    (\textbf{A})~Per-section yield density of the high-capability and regional vehicles; the high-capability vehicle dominates on the $300$~km/h sections and ties on the speed-limited ones.
+    (\textbf{B})~Block-seconds consumed per section by each vehicle class; the gap on the fast sections is what the density advantage rests on.
+    (\textbf{C})~Density advantage $D_H-D_R$ per section against the section speed limit, crossing to zero exactly where the civil limit falls to the regional ceiling.
+    (\textbf{D})~Three-dimensional surface of yield density over the (section speed limit, vehicle capability) plane; the winning vehicle is the higher point above each section, and the two surfaces meet where capability ceases to help.}\label{fig:val_sorting}
+\end{figure*}
+
+\subsection{Liveness under target-relative descent}
+
+\begin{figure*}[!htbp]
+    \centering
+    \includegraphics[width=\textwidth]{figures/panel_4_liveness.png}
+    \caption{\textbf{Liveness under greedy target-ward routing (Theorem~\ref{thm:liveness}, Remark~\ref{rem:target_relative}).}
+    (\textbf{A})~Residual distance of each item against round; every trajectory is monotone non-increasing and reaches zero within a finite number of rounds.
+    (\textbf{B})~Total undrained buffer pressure across the network against round, decaying to zero as all buffers drain.
+    (\textbf{C})~Number of items settled against round, rising to the full population.
+    (\textbf{D})~Three-dimensional surface of residual distance over the (item, round) plane; the surface descends everywhere to the zero floor, visualising simultaneous draining of all buffers on a directed, target-descendable corridor.}\label{fig:val_liveness}
+\end{figure*}
+
+Experiment~4 simulates greedy target-ward routing (Def.~\ref{def:routing}) on a directed corridor with a feeder branch. The corridor is not universally gradient-connected---it is one-way---but it is target-descendable, so Remark~\ref{rem:target_relative} applies. Every item's residual distance is monotone non-increasing and reaches zero within a finite number of rounds, and the total undrained pressure decays to zero (Figure~\ref{fig:val_liveness}). This corroborates Theorem~\ref{thm:liveness} under precisely the weaker hypothesis identified in Remark~\ref{rem:target_relative}, and confirms that the directedness of realistic corridors is compatible with the liveness guarantee.
+
+\subsection{Summary of validation}
+
+All five experiments pass against exact brute-force references: the equivalence and its quantum-coincidence necessity (Experiments~1,~5), forced optimal speed with an interior optimum (Experiment~2), comparative-advantage sorting on the illustrative corridor (Experiment~3), and liveness under target-relative descent (Experiment~4). The experiments also sharpened one hypothesis: liveness needs only target-descendability, not universal gradient-connectedness (Remark~\ref{rem:target_relative}), a refinement the directed test corridors made concrete. The numerical study is corroborative---it exhibits the proved behaviour on concrete instances---and carries no empirical claim beyond the idealized model.
+
 \section{Discussion}
 
 \subsection{What the model is and is not}
@@ -622,7 +698,7 @@ Each ingredient is individually classical: occupancy as the scarce rail resource
 
 \section{Conclusion}
 
-We studied an idealized rail network in which the schedulable resource is the block-second, stations are buffers, sections are processors, and the objective is useful target-ward displacement per unit block-time---network transport yield. On this object we proved a single organizing result: yield-optimality, deterministic closure, and market clearing are one fixed point, coinciding because a single quantum $\blocktime$ serves at once as the physical resolution floor, the algorithmic separation threshold, and the minimum market lot, with the clearing price of every section equal to its separation cost. From this equivalence we derived, as theorems rather than assumptions, that vehicles run at forced section-optimal speeds and sort onto sections by comparative advantage in block-seconds, and that a purely local, target-ward routing rule drains every buffer in finite time because the price a stranded item raises is identical to the yield that summons a vehicle to move it.
+We studied an idealized rail network in which the schedulable resource is the block-second, stations are buffers, sections are processors, and the objective is useful target-ward displacement per unit block-time---network transport yield. On this object we proved a single organizing result: yield-optimality, deterministic closure, and market clearing are one fixed point, coinciding because a single quantum $\blocktime$ serves at once as the physical resolution floor, the algorithmic separation threshold, and the minimum market lot, with the clearing price of every section equal to its separation cost. From this equivalence we derived, as theorems rather than assumptions, that vehicles run at forced section-optimal speeds and sort onto sections by comparative advantage in block-seconds, and that a purely local, target-ward routing rule drains every buffer in finite time because the price a stranded item raises is identical to the yield that summons a vehicle to move it. A numerical study (Section~\ref{sec:validation}) corroborated each result against exact brute-force references and sharpened the liveness hypothesis to target-descendability, which directed corridors satisfy.
 
 The results are theorems about a specific formal object under stated hypotheses. Their value is internal: they establish that this object is coherent and that its physical, algorithmic, and economic descriptions are the same fixed point. Nothing is claimed about, or for, any system beyond the idealized one in which the theorems hold.
 
