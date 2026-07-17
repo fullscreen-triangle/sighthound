@@ -14,6 +14,9 @@
     "@deck.gl/react": "^8.9.0",
     "@react-three/drei": "^9.80.0",
     "@react-three/fiber": "^8.13.0",
+    "@turf/turf": "^7.3.5",
+    "@types/three": "^0.185.1",
+    "cesium": "^1.143.0",
     "eslint": "^8.35.0",
     "eslint-config-next": "^13.2.1",
     "framer-motion": "^10.0.1",
@@ -24,9 +27,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-globe": "5.0.2",
+    "react-map-gl": "^8.1.1",
     "satellite.js": "7.0.1",
     "three": "^0.184.0",
-    "turf": "^6.5.0",
     "typescript": "^6.0.3"
   },
   "devDependencies": {
