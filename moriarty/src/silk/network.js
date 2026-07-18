@@ -94,7 +94,7 @@ export function residualDistance(fromId, toId) {
 //
 // Returns [{ dep, arriveId, arriveName, cls, price, time, progressKm, remainingKm }]
 // sorted by progressKm descending (most target-ward first).
-export function nextHops(currentId, targetId, { permissive = false } = {}) {
+export function nextHops(currentId, targetId, { permissive = false, minSegmentKm = 0 } = {}) {
   if (!currentId || !targetId || currentId === targetId) return [];
   const here = residualDistance(currentId, targetId);
 
@@ -103,6 +103,7 @@ export function nextHops(currentId, targetId, { permissive = false } = {}) {
     .map((d) => {
       const remaining = residualDistance(d.to, targetId);
       const progress = here - remaining; // target-ward reduction (km)
+      const segmentKm = residualDistance(d.from, d.to); // physical hop length
       return {
         dep: d,
         arriveId: d.to,
@@ -112,12 +113,15 @@ export function nextHops(currentId, targetId, { permissive = false } = {}) {
         tone: CLASSES[d.cls]?.tone ?? "mid",
         price: d.price,
         time: d.dep,
+        segmentKm,
         progressKm: progress,
         remainingKm: remaining,
       };
     })
     // directional filter: only hops that actually move toward the target
     .filter((h) => (permissive ? h.progressKm > 0.001 : h.progressKm > 1.0))
+    // min-segment constraint (paper: "shortest a segment can be")
+    .filter((h) => h.segmentKm >= minSegmentKm)
     .sort((a, b) => b.progressKm - a.progressKm);
 
   return hops;
@@ -186,7 +190,7 @@ function registerDynamic(nextStop) {
 // Fetch live next-hops toward a target from the Silk API route.
 // Returns { ok, source, hops } where hops match the fake nextHops() shape.
 // On any failure returns { ok:false } so the caller can fall back to demo data.
-export async function nextHopsLive(currentId, targetId, { permissive = false } = {}) {
+export async function nextHopsLive(currentId, targetId, { permissive = false, minSegmentKm = 0 } = {}) {
   const cur = resolveStation(currentId);
   const tgt = resolveStation(targetId);
   if (!cur || !tgt || !cur.ibnr) return { ok: false, hops: [] };
@@ -214,6 +218,9 @@ export async function nextHopsLive(currentId, targetId, { permissive = false } =
     const threshold = permissive ? 0.1 : 1.0;
     if (progress <= threshold) continue;
 
+    const segmentKm = haversineKm(cur.coord, dest.coord);
+    if (segmentKm < minSegmentKm) continue; // min-segment constraint
+
     // de-duplicate: keep the earliest departure per (nextStop, class)
     const dedupeKey = `${dest.id}|${d.cls}`;
     if (seen.has(dedupeKey)) continue;
@@ -232,6 +239,7 @@ export async function nextHopsLive(currentId, targetId, { permissive = false } =
       delayMin: d.delayMin,
       platform: d.platform,
       direction: d.direction,
+      segmentKm,
       progressKm: progress,
       remainingKm: remaining,
     });
