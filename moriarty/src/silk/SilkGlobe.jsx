@@ -1,26 +1,29 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import DeckGL from "@deck.gl/react";
-import { TileLayer } from "@deck.gl/geo-layers";
-import { BitmapLayer, ScatterplotLayer, PathLayer } from "@deck.gl/layers";
+import { Map as MapGL } from "react-map-gl/mapbox";
+import "mapbox-gl/dist/mapbox-gl.css";
+import { ScatterplotLayer, PathLayer } from "@deck.gl/layers";
 
-// Silk's map surface: a dark, pitched deck.gl map with a glowing position dot.
-// No Mapbox token required — the basemap is CARTO's free dark raster tiles,
-// drawn through a deck.gl TileLayer, and everything else is deck.gl layers.
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+
+// Silk's map surface: a Mapbox basemap with a glowing deck.gl position dot,
+// starting at street level (zoom ~18). deck.gl renders the glow / hops / trail
+// as overlay layers on top of the Mapbox tiles.
 //
 // Props:
-//   position   [lat, lon]           the glowing dot (user / current station)
-//   target     [lat, lon] | null    destination marker (coral)
-//   hops       [{coord:[lat,lon], tone}] candidate next-hop endpoints
-//   trail      [[lat,lon], ...]      travelled path
-//   pitch, zoom                      view tuning
-//   interactive                      allow pan/zoom
+//   position   [lat, lon]                 the glowing dot (user / current station)
+//   target     [lat, lon] | null          destination marker (coral)
+//   hops       [{coord:[lat,lon], tone}]  candidate next-hop endpoints
+//   trail      [[lat,lon], ...]           travelled path
+//   pitch, zoom                           view tuning (zoom defaults to 18)
+//   interactive                           allow pan/zoom
 export default function SilkGlobe({
   position,
   target = null,
   hops = [],
   trail = [],
   pitch = 55,
-  zoom = 5.4,
+  zoom = 18,
   interactive = true,
   onReady = null,
 }) {
@@ -39,7 +42,7 @@ export default function SilkGlobe({
     return () => cancelAnimationFrame(raf.current);
   }, []);
 
-  const viewState = useMemo(
+  const initialViewState = useMemo(
     () => ({
       longitude: position ? position[1] : 11.5,
       latitude: position ? position[0] : 50.5,
@@ -47,7 +50,7 @@ export default function SilkGlobe({
       pitch,
       bearing: 0,
     }),
-    // recenter only when position identity changes, not every frame
+    // recenter only when the target position identity changes
     [position && position[0], position && position[1], zoom, pitch]
   );
 
@@ -56,44 +59,22 @@ export default function SilkGlobe({
   const layers = useMemo(() => {
     const L = [];
 
-    // 1. dark basemap (no token) — CARTO dark_all raster tiles
-    L.push(
-      new TileLayer({
-        id: "silk-basemap",
-        data: "https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-        minZoom: 0,
-        maxZoom: 19,
-        tileSize: 256,
-        renderSubLayers: (props) => {
-          const { boundingBox } = props.tile;
-          return new BitmapLayer(props, {
-            data: null,
-            image: props.data,
-            bounds: [
-              boundingBox[0][0], boundingBox[0][1],
-              boundingBox[1][0], boundingBox[1][1],
-            ],
-          });
-        },
-      })
-    );
-
-    // 2. travelled trail (soft cyan)
+    // travelled trail (soft cyan)
     if (trail.length > 1) {
       L.push(
         new PathLayer({
           id: "silk-trail",
           data: [{ path: trail.map(([lat, lon]) => [lon, lat]) }],
           getPath: (d) => d.path,
-          getColor: [90, 200, 250, 180],
-          getWidth: 3,
+          getColor: [90, 200, 250, 200],
+          getWidth: 4,
           widthUnits: "pixels",
           widthMinPixels: 2,
         })
       );
     }
 
-    // 3. candidate hop rays (from position to each hop endpoint)
+    // candidate hop rays
     if (position && hops.length) {
       L.push(
         new PathLayer({
@@ -109,10 +90,10 @@ export default function SilkGlobe({
             })),
           getPath: (d) => d.path,
           getColor: (d) =>
-            d.tone === "fast" ? [80, 150, 255, 150] :
-            d.tone === "slow" ? [130, 150, 170, 120] :
-            [230, 160, 60, 140],
-          getWidth: 2,
+            d.tone === "fast" ? [80, 150, 255, 170] :
+            d.tone === "slow" ? [150, 170, 190, 150] :
+            [230, 160, 60, 160],
+          getWidth: 3,
           widthUnits: "pixels",
           widthMinPixels: 1.5,
         })
@@ -122,39 +103,39 @@ export default function SilkGlobe({
           id: "silk-hop-dots",
           data: hops.filter((h) => h.coord),
           getPosition: (h) => [h.coord[1], h.coord[0]],
-          getRadius: 5,
+          getRadius: 6,
           radiusUnits: "pixels",
           getFillColor: (h) =>
-            h.tone === "fast" ? [80, 150, 255, 230] :
-            h.tone === "slow" ? [150, 170, 190, 220] :
-            [230, 160, 60, 230],
+            h.tone === "fast" ? [80, 150, 255, 235] :
+            h.tone === "slow" ? [150, 170, 190, 225] :
+            [230, 160, 60, 235],
           stroked: true,
-          getLineColor: [255, 255, 255, 200],
+          getLineColor: [255, 255, 255, 210],
           lineWidthUnits: "pixels",
-          getLineWidth: 1,
+          getLineWidth: 1.5,
         })
       );
     }
 
-    // 4. destination marker (coral halo)
+    // destination marker (coral halo)
     if (target) {
       L.push(
         new ScatterplotLayer({
           id: "silk-target",
           data: [{ p: [target[1], target[0]] }],
           getPosition: (d) => d.p,
-          getRadius: 9,
+          getRadius: 10,
           radiusUnits: "pixels",
-          getFillColor: [232, 113, 10, 240],
+          getFillColor: [232, 113, 10, 245],
           stroked: true,
-          getLineColor: [255, 255, 255, 230],
+          getLineColor: [255, 255, 255, 235],
           lineWidthUnits: "pixels",
           getLineWidth: 2,
         })
       );
     }
 
-    // 5. glowing position dot — layered halos that pulse
+    // glowing position dot — pulsing layered halos
     if (position) {
       const p = [position[1], position[0]];
       L.push(
@@ -162,9 +143,9 @@ export default function SilkGlobe({
           id: "silk-glow-outer",
           data: [{ p }],
           getPosition: (d) => d.p,
-          getRadius: 26 + 10 * pulse,
+          getRadius: 30 + 12 * pulse,
           radiusUnits: "pixels",
-          getFillColor: [90, 200, 250, Math.round(40 + 30 * pulse)],
+          getFillColor: [90, 200, 250, Math.round(45 + 35 * pulse)],
         })
       );
       L.push(
@@ -172,9 +153,9 @@ export default function SilkGlobe({
           id: "silk-glow-mid",
           data: [{ p }],
           getPosition: (d) => d.p,
-          getRadius: 14 + 4 * pulse,
+          getRadius: 16 + 5 * pulse,
           radiusUnits: "pixels",
-          getFillColor: [120, 220, 255, 130],
+          getFillColor: [120, 220, 255, 150],
         })
       );
       L.push(
@@ -182,11 +163,11 @@ export default function SilkGlobe({
           id: "silk-glow-core",
           data: [{ p }],
           getPosition: (d) => d.p,
-          getRadius: 6,
+          getRadius: 7,
           radiusUnits: "pixels",
-          getFillColor: [220, 250, 255, 255],
+          getFillColor: [230, 250, 255, 255],
           stroked: true,
-          getLineColor: [120, 220, 255, 220],
+          getLineColor: [120, 220, 255, 230],
           lineWidthUnits: "pixels",
           getLineWidth: 2,
         })
@@ -197,15 +178,18 @@ export default function SilkGlobe({
   }, [position, target, hops, trail, pulse]);
 
   return (
-    <div style={{ position: "absolute", inset: 0, background: "#0b0f17" }}>
-      <DeckGL
-        initialViewState={viewState}
-        viewState={interactive ? undefined : viewState}
-        controller={interactive}
-        layers={layers}
-        onLoad={onReady || undefined}
-        style={{ background: "#0b0f17" }}
+    <DeckGL
+      initialViewState={initialViewState}
+      controller={interactive}
+      layers={layers}
+      onLoad={onReady || undefined}
+      style={{ position: "absolute", inset: 0 }}
+    >
+      <MapGL
+        reuseMaps
+        mapboxAccessToken={MAPBOX_TOKEN}
+        mapStyle="mapbox://styles/mapbox/dark-v11"
       />
-    </div>
+    </DeckGL>
   );
 }

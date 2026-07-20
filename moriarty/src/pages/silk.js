@@ -180,15 +180,20 @@ export default function Silk() {
 
       {/* full-bleed map surface */}
       <div style={{ position: "fixed", inset: 0, background: "#0b0f17", overflow: "hidden" }}>
-        <SilkGlobe
-          position={posCoord}
-          target={targetCoord}
-          hops={stage === "journey" && leg === "vehicle" ? hopEndpoints : []}
-          trail={trailCoords}
-          pitch={stage === "home" ? 50 : 55}
-          zoom={stage === "home" ? 4.6 : 5.6}
-          interactive={stage === "home" || stage === "journey"}
-        />
+        {/* map sits at the base layer (z-index 0); all overlays paint above it
+            and set their own pointer-events, so map panning never steals a click
+            meant for the search/Q&A/buttons. */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+          <SilkGlobe
+            position={posCoord}
+            target={targetCoord}
+            hops={stage === "journey" && leg === "vehicle" ? hopEndpoints : []}
+            trail={trailCoords}
+            pitch={stage === "home" ? 45 : 55}
+            zoom={18}
+            interactive={stage === "home" || stage === "journey"}
+          />
+        </div>
 
         {/* ---------- top bar / search affordance ---------- */}
         <TopBar
