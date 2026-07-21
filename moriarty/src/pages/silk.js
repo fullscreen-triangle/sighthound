@@ -402,7 +402,7 @@ function JourneyOverlay({
     return (
       <BottomSheet>
         <div style={{ textAlign: "center" }}>
-          <div style={{ fontSize: 15, color: "#7fd0ff" }}>You've arrived</div>
+          <div style={{ fontSize: 15, color: "#7fd0ff" }}>You&apos;ve arrived</div>
           <div style={{ fontSize: 24, fontWeight: 800, color: "#f2fbff", margin: "4px 0 14px" }}>
             {targetName}
           </div>
@@ -422,7 +422,7 @@ function JourneyOverlay({
         <div style={{ fontSize: 13.5, color: "#b7d8ee", marginBottom: 14 }}>
           Head to the platform, then Silk shows your next moves toward {targetName}.
         </div>
-        <button onClick={onStartVehicle} style={darkBtn}>I'm at the station →</button>
+        <button onClick={onStartVehicle} style={darkBtn}>I&apos;m at the station →</button>
       </BottomSheet>
     );
   }

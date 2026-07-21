@@ -37,6 +37,7 @@
     "@types/leaflet": "^1.9.8",
     "@types/node": "^18.19.130",
     "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
     "autoprefixer": "^10.4.13",
     "eslint-plugin-react": "^7.32.0",
     "postcss": "^8.4.21",

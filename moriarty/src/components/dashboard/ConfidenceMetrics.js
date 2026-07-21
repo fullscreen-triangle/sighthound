@@ -359,7 +359,7 @@ export default function ConfidenceMetrics() {
               />
             </div>
             <div className="text-xs text-gray-600 mt-2 leading-relaxed">
-              <strong>Typicality of evidence.</strong> Sum of winner's signature probabilities.
+              <strong>Typicality of evidence.</strong> Sum of winner&apos;s signature probabilities.
             </div>
             <div className="text-xs font-mono text-red-600 mt-2">Σ σ(Ω*)(c)</div>
           </div>

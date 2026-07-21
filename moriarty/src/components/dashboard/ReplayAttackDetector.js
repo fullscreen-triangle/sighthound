@@ -260,7 +260,7 @@ export default function ReplayAttackDetector() {
                 : 'bg-gray-200 text-gray-400 cursor-not-allowed'
             }`}
           >
-            Replay at E'=E+δ
+            Replay at E&apos;=E+δ
           </button>
         </div>
 

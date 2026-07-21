@@ -1,10 +1,14 @@
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 
 const Globe = dynamic(() => import('react-globe.gl').then(m => m.default), {
   ssr: false,
   loading: () => <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', background: '#000' }}>Loading...</div>,
 });
+
+// Stable particle color accessor (module-level constant — not a hook, so it is
+// safe to pass in JSX after conditional early returns).
+const particlesColorAccessor = () => 'palegreen';
 
 const satellite = typeof window !== 'undefined' ? require('satellite.js') : null;
 
@@ -121,7 +125,7 @@ export default function GlobeVisualization() {
           particleLat="lat"
           particleLng="lng"
           particleAltitude="alt"
-          particlesColor={useCallback(() => 'palegreen', [])}
+          particlesColor={particlesColorAccessor}
           onGlobeReady={() => {
             if (globeEl.current) {
               try {

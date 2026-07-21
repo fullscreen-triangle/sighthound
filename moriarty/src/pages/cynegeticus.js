@@ -775,7 +775,7 @@ fwdc closure analysis
               {activeTab === "console" && (
                 <div className="text-gray-300">
                   {results.logs.length === 0 ? (
-                    <div className="text-gray-500">// Click "Compile & Execute" to run code</div>
+                    <div className="text-gray-500">{'// Click "Compile & Execute" to run code'}</div>
                   ) : (
                     results.logs.map((log, i) => (
                       <div key={i} className="mb-1 whitespace-pre-wrap">
@@ -841,7 +841,7 @@ fwdc closure analysis
                     </div>
                   ) : (
                     <div className="text-gray-500 flex items-center justify-center h-full">
-                      // Compile to view accuracy trends
+                      {'// Compile to view accuracy trends'}
                     </div>
                   )}
                 </div>
@@ -853,7 +853,7 @@ fwdc closure analysis
                     <MapComponent position={results.position} satellites={results.satellites} provider={mapProvider} />
                   ) : (
                     <div className="text-gray-500 flex items-center justify-center h-full">
-                      // Compile to view position on map
+                      {'// Compile to view position on map'}
                     </div>
                   )}
                 </div>
