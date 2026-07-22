@@ -178,8 +178,11 @@ export default function Silk() {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
 
-      {/* full-bleed map surface */}
-      <div style={{ position: "fixed", inset: 0, background: "#0b0f17", overflow: "hidden" }}>
+      {/* Mobile-app emulation: on desktop, Silk lives inside a centered phone
+          frame; on an actual phone it fills the screen. The frame is the
+          positioning context for all overlays (they use absolute inset). */}
+      <div className="silk-stage">
+        <div className="silk-frame">
         {/* map sits at the base layer (z-index 0); all overlays paint above it
             and set their own pointer-events, so map panning never steals a click
             meant for the search/Q&A/buttons. */}
@@ -244,7 +247,51 @@ export default function Silk() {
             currentId={currentId}
           />
         )}
+        </div>
       </div>
+
+      <style jsx>{`
+        /* Desktop: dark stage with a centered phone frame (mobile mockup).
+           Sits below the navbar (top offset) so nav links stay visible. */
+        .silk-stage {
+          position: fixed;
+          top: 96px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: #05070c;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 24px;
+          z-index: 5;
+        }
+        .silk-frame {
+          position: relative;
+          width: 390px;
+          height: 844px;
+          max-height: calc(100vh - 48px);
+          background: #0b0f17;
+          border-radius: 40px;
+          overflow: hidden;
+          box-shadow: 0 20px 70px rgba(0, 0, 0, 0.6),
+            0 0 0 10px #11151c, 0 0 0 12px #05070c;
+        }
+        /* Actual phones (and small viewports): fill the screen, no frame. */
+        @media (max-width: 640px) {
+          .silk-stage {
+            top: 0;
+            padding: 0;
+          }
+          .silk-frame {
+            width: 100%;
+            height: 100%;
+            max-height: 100vh;
+            border-radius: 0;
+            box-shadow: none;
+          }
+        }
+      `}</style>
     </>
   );
 }

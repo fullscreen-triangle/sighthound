@@ -3,20 +3,14 @@ import Script from "next/script";
 
 export default function Document() {
   return (
-    <Html lang="en">
+    <Html lang="en" className="dark">
       <Head />
       <body>
         <Script id="theme-switcher" strategy="beforeInteractive">
         {`
- if (
-  localStorage.getItem('theme') === 'dark' ||
-  (!('theme' in localStorage) &&
-    window.matchMedia('(prefers-color-scheme: dark)').matches)
-) {
+  // Site is permanently dark: always apply the dark class, no toggle.
   document.documentElement.classList.add('dark');
-} else {
-  document.documentElement.classList.remove('dark');
-}
+  try { localStorage.setItem('theme', 'dark'); } catch (e) {}
   `}
         </Script>
         <Main />
