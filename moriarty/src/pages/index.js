@@ -4,7 +4,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import TransitionEffect from "@/components/TransitionEffect";
 
-const GlbViewer = dynamic(() => import("@/components/GlbViewer"), {
+const GlbViewer = dynamic(() => import("@/components/GLBViewer"), {
   ssr: false,
   loading: () => null,
 });
